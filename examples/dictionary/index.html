@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cat Content</title>
+    <style>
+        #cat {
+            float: right;
+        }
+
+        h1,
+        h2 {
+            font-family: sans-serif;
+        }
+
+        h1 {
+            font-size: 64px;
+            margin: 0;
+            color: #ccc;
+        }
+
+        h1 span.phon {
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        p.etym {
+            background-color: #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <img alt="a cute cat in a basket" id="cat" src="cutecat.png">
+    <h1>Cat <span class="phon">| kat |</span></h1>
+    <h2>noun</h2>
+    <p>a small domesticated carnivorous mammal with soft fur, a short snout, and retractile claws. It is widely kept as a pet or for catching mice, and many breeds have been developed.</p>
+    <p class="etym">Felis catus, family Felidae (cat family); probably domesticated in ancient Egypt from the local race of wildcat, and held in great reverence there. The cat family also includes the ocelot, serval, margay, lynx, and the big cats.</p>
+    <p>Learn more about cats on <a href="http://en.wikipedia.org/wiki/Cat"> Wikipedia</a>.</p>
+
+    <script>
+        var cat = document.getElementById("cat");
+
+        cat.addEventListener("click", function (e) {
+            e.target.style.width = "100%";
+        });
+    </script>
+</body>
+
+</html>
