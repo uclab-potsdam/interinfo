@@ -6,13 +6,39 @@
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
+section{
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-/* add your magic here */
+section:hover, section:focus {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 20px rgb(47, 12, 188);
+}
+
+section{
+    background-color: rgb(214, 145, 75);
+    box-shadow: 5px 5px 15px rgb(188, 12, 12);
+}
+
+section{
+opacity: 5;
+padding: 20;
+transition: all 1s ease;
+}
+h1, h2 {
+    text-align: center;
+    color: rgb(255, 0, 0);
+    transition: 0.3s;
+}
 
 </style>
-
 </head>
 <body>
+    
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
         <header>
