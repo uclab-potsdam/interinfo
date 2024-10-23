@@ -6,45 +6,62 @@
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
-    h1, h2 {font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;} 
-    h1 {
-        font: size 66px;
-        margin: 0;
-        color: lightcoral;
-    }
-h1 span.phon {
+
+body{ 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    background-color:rgb(255, 255, 255);
+    text-align: left;
+
+}
+
+
+h1{ 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 24px;
-    font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-style:normal;
+    text-align: center;
+    background-color: darkgreen;
+    margin: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
-body{
-    background-color: cadetblue;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: medium;
-}
-
-section{
+section {
     opacity: .5;
-    padding: 20px;
+    padding: 30px;
     transition: all 1s ease;
-    width: 500%;
-    margin:auto
-}
-
-:link {
-    color: indigo;
+    width: 500px;
+    margin: auto;
 
 }
-:visited {
-    color: brown;
-}
-section:hover {
+
+section:hover{
     opacity: 1;
-    background-color: rgb(232, 214, 255) ;
-    background-blend-mode: hard-light;
-    transform: scale(80px); 
+    background-color:rgba(225, 188, 162, 0.273);
+    transform: scale(1.0);
+
 }
-/*  */
+
+A:link {
+    color: darkgreen;
+}
+
+A:hover {
+    color:darksalmon;
+}
+
+A:visited {
+    color: darksalmon;
+}
+
+img { 
+   height: auto; 
+   width: 100%; 
+}
+
+
 
 </style>
 
