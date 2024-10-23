@@ -6,16 +6,53 @@
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
-header {text-align: center}
-main  {
-font-family: trebuchet;
-font-size: 18px;
-color: #000000;
-background-color: #fff7ec;
-padding: 10px;
+header {
+    text-align: center;
+    font-size: 26px;
 }
-h2 {text-align: center}
-h3 {text-align: center}
+body  {
+font-family: trebuchet; 
+font-size: 18px;
+color: #512A3D;
+background-color: #FDEBC4;
+padding: 20px;
+}
+h2, h3 {text-align: center;}
+
+section {
+    opacity: .5;
+    padding: 65px;
+    transition: all 1s ease;
+    width: 500px;
+    margin: auto;
+}
+
+section:hover {
+    opacity: 1;
+    font-size: 18px;
+    color: #FDEBC4;
+    background-color: #512A3D;
+    transform: scale(1.05);
+}
+pre {
+    margin-left: -160px;
+}
+
+img {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+}
+
+:link {
+    color: #fed681;
+}
+
+:visited {
+    color: #ffae00;
+}
 /* add your magic here */
 
 </style>
