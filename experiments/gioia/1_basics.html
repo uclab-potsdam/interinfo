@@ -6,45 +6,59 @@
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
-    h1, h2 {font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;} 
-    h1 {
-        font: size 66px;
-        margin: 0;
-        color: lightcoral;
-    }
-h1 span.phon {
+
+h1, h2 {font-family: serif;}
+h1 {
+    font-size: 50px;
+    padding: 50px;
+    margin: auto;
+}
+h2 {
     font-size: 24px;
-    font-weight: bold;
+}
+body {
+    font-family: serif;
+    font-size: 17px;
+    padding: 50px;
+    background-color: lightcoral;
+    color: white;
+    
 }
 
-body{
-    background-color: cadetblue;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: medium;
+:link {
+    color:lightgoldenrodyellow;
+}
+
+:visited{
+    color:rgb(221, 221, 148);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 section{
     opacity: .5;
-    padding: 20px;
+    padding: 40px;
     transition: all 1s ease;
-    width: 500%;
-    margin:auto
+    width: 900px;
+    margin: auto;
 }
 
-:link {
-    color: indigo;
-
-}
-:visited {
-    color: brown;
-}
 section:hover {
     opacity: 1;
-    background-color: rgb(232, 214, 255) ;
-    background-blend-mode: hard-light;
-    transform: scale(80px); 
+    background-color:white;
+    transform: scale(1.1);
+    color: black;
+    
+    :link{
+        color: lightcoral;
+    }
+    :visited{
+        color:rgb(199, 102, 102);
+    }
 }
-/*  */
 
 </style>
 
