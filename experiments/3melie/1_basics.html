@@ -27,6 +27,7 @@ section{
     transition: all 1s ease;
     width: 70%;
     margin: auto;
+    border-radius: 10%;
 }
 
 section:hover {
@@ -34,12 +35,22 @@ section:hover {
     background-color: rgb(247, 247, 212);
     transform: scale(1.05);
     color: rgb(80, 70, 55);
-    
+    border-radius: 0%;
+    border-style:double;
+    border-width: thick;
+    transition-duration: 0.5s;
 }
+
+h1{
+        font-variant: small-caps;
+        color: rgb(255, 213, 77);
+        text-align: center;
+    }
 
     h2{
         font-variant: small-caps;
     }
+
 
     img{
         max-width: 100%;
@@ -74,6 +85,7 @@ section:hover {
 <body>
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
+        <h1><u>The box model</u></h1>
         <section>
         <header>
             <h2><u>The box model</u></h2>
