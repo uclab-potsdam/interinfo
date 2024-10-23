@@ -12,6 +12,7 @@ h1 {
     font-size: 50px;
     padding: 50px;
     margin: auto;
+    text-align: center;
 }
 h2 {
     font-size: 24px;
@@ -19,17 +20,22 @@ h2 {
 body {
     font-family: serif;
     font-size: 17px;
+    text-align: left;
     padding: 50px;
     background-color: lightcoral;
     color: white;
     
 }
 
-:link {
+A:link {
     color:lightgoldenrodyellow;
 }
 
-:visited{
+A:hover {
+    color:rgb(221, 221, 148);
+}
+
+A:visited{
     color:rgb(221, 221, 148);
 }
 
@@ -49,13 +55,16 @@ section{
 section:hover {
     opacity: 1;
     background-color:white;
-    transform: scale(1.1);
+    transform: scale(1.05);
     color: black;
     
-    :link{
+    A:link{
         color: lightcoral;
     }
-    :visited{
+    A:hover {
+        color:rgb(199, 102, 102);
+    }
+    A:visited{
         color:rgb(199, 102, 102);
     }
 }
