@@ -13,12 +13,32 @@ body {
     background-color: hsl(0, 0%, 75%);
 }
 
-section {
-    opacity: .5;
-    color: green; 
+:link {
+    color: green;
 }
 
+:visited {
+    color: darkgreen;
+}
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+section {
+    opacity: .5;
+    padding: 20px;
+    transition: all 1s ease;
+    width: 500px;
+    margin: auto;
+}
+
+section:hover {
+    opacity: 1;
+    background-color: white;
+    transform: scale(1.1);
+}
 
 </style>
 
