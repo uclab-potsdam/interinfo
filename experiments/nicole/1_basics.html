@@ -15,13 +15,6 @@ body {
     font-size: 20px;
 }
 
-.square {
-  height: 65px;
-  width: 65px;
-  border-radius: 5px;
-  background-color:#eae2d3;
-  
-}
 
 section {
 
@@ -31,13 +24,25 @@ section {
     margin: auto;
 
 }
-.square:hover {
-    
-    transform: rotate(180);
-    background: #eae2d3;
-    color: #1b1d1d;
-    padding: 30px;
-    
+
+
+.box {
+  display: block;
+  width: 65px;
+  height: 65px;
+  background-color: #eae2d3;
+  transition:
+    width 2s,
+    height 2s,
+    background-color 2s,
+    rotate 2s;
+}
+
+.box:hover {
+  background-color: #1b1d1d;
+  width: 80px;
+  height: 80px;
+  rotate: 180deg;
 }
 
 
@@ -98,7 +103,7 @@ section {
         </div>
         <section aria-labelledby="block_and_inline_boxes"> 
             <h2 id="block_and_inline_boxes"> 
-                <a href="#block_and_inline_boxes">Block and inline boxes</a> <div class="square"></div>
+                <a href="#block_and_inline_boxes">Block and inline boxes</a> 
             </h2>
             <div class="section-content">
                 <p>
