@@ -18,6 +18,7 @@ body {
 .square {
   height: 65px;
   width: 65px;
+  border-radius: 35px;
   background-color:#eae2d3;
   
 }
@@ -26,15 +27,13 @@ section {
 
     opacity: .5;
     padding: 20px;
-    transition: all 1s ease;
     width: 400px;
     margin: auto;
 
 }
 .square:hover {
-    opacity: 1;
-    transform: scale(1.1);
-    border-radius: 35px;
+    
+    rotate: 180;
     background: #eae2d3;
     color: #1b1d1d;
     padding: 30px;
@@ -99,7 +98,7 @@ section {
         </div>
         <section aria-labelledby="block_and_inline_boxes"> 
             <h2 id="block_and_inline_boxes"> 
-                <a href="#block_and_inline_boxes">Block and inline boxes</a> <div class="square"></div>
+                <div class="square"></div> <a href="#block_and_inline_boxes">Block and inline boxes</a>
             </h2>
             <div class="section-content">
                 <p>
