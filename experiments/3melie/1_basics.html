@@ -22,11 +22,12 @@ body:hover {
 }
 
 section{
-    opacity: 1;
+    opacity: .2;
     padding: 20px;
     transition: all 1s ease;
     width: 70%;
     margin: auto;
+    border-radius: 10%;
 }
 
 section:hover {
@@ -34,37 +35,44 @@ section:hover {
     background-color: rgb(247, 247, 212);
     transform: scale(1.05);
     color: rgb(80, 70, 55);
-    
+    border-radius: 0%;
+    border-style:double;
+    border-width: thick;
+    transition-duration: 0.5s;
 }
+
+h1{
+        font-variant: small-caps;
+        color: rgb(255, 213, 77);
+        text-align: center;
+    }
 
     h2{
         font-variant: small-caps;
     }
 
+
     img{
         max-width: 100%;
         height: auto;
-        opacity: .5;
     }
 
-    img:hover{
-        opacity: 1;
+    :link{
+        color: rgb(80, 70, 55);
+        font-variant: small-caps;
+        font-size: larger;
     }
 
-    a:link{
+    :visited{
         color: rgb(80, 70, 55);
     }
 
-    a:visited{
-        color: rgb(80, 70, 55);
-    }
-
-    a:link:hover{
+    :link:hover{
         opacity: 1;
         color: rgb(225, 172, 0);
     }
 
-    a:visited:hover{
+    :visited:hover{
         opacity: 0;
         color:rgb(247, 247, 212)
     }
@@ -74,6 +82,7 @@ section:hover {
 <body>
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
+        <h1><u>The box model</u></h1>
         <section>
         <header>
             <h2><u>The box model</u></h2>
