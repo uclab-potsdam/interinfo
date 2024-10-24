@@ -15,6 +15,12 @@ body {
     font-size: 20px;
 }
 
+.square {
+  height: 65px;
+  width: 65px;
+  background-color:#eae2d3;
+  
+}
 
 section {
 
@@ -25,7 +31,7 @@ section {
     margin: auto;
 
 }
-section:hover {
+.square:hover {
     opacity: 1;
     transform: scale(1.1);
     border-radius: 35px;
@@ -35,12 +41,7 @@ section:hover {
     
 }
 
-.square {
-  height: 65px;
-  width: 65px;
-  background-color:#eae2d3;
-  
-}
+
 
 </style>
 
@@ -97,8 +98,8 @@ section:hover {
             </figure>
         </div>
         <section aria-labelledby="block_and_inline_boxes"> 
-            <h2 id="block_and_inline_boxes"> <div class="square"></div>
-                <a href="#block_and_inline_boxes">Block and inline boxes</a>
+            <h2 id="block_and_inline_boxes"> 
+                <a href="#block_and_inline_boxes">Block and inline boxes</a> <div class="square"></div>
             </h2>
             <div class="section-content">
                 <p>
