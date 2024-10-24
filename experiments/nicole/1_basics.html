@@ -45,6 +45,11 @@ section {
   rotate: 180deg;
 }
 
+.box:hover ~ section {
+    opacity: 1;
+    font-size: 40px;
+}
+
 
 
 </style>
@@ -103,7 +108,7 @@ section {
         </div>
         <section aria-labelledby="block_and_inline_boxes"> 
             <h2 id="block_and_inline_boxes"> 
-                <a href="#block_and_inline_boxes">Block and inline boxes</a> <div class="box"></div>
+                <a href="#block_and_inline_boxes">Block and inline boxes</a> <div class="box" style=display: inline-block></div>
             </h2>
             <div class="section-content">
                 <p>
