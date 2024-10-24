@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Roobert';
+    src: url('http://127.0.0.1:5500/assets/fonts/RoobertTRIAL-Regular.ttf'); /* imported a beautiful font */
+}
+
+body {
+    font-family: Roobert, sans-serif;    
+    background-color: #E2EDEC;
+}
+
+div{
+    display: block;
+    unicode-bidi: isolate;
+}
+
+.main_section{
+    width: 100%;
+    background-color: rgba(239, 242, 255, 0);
+    padding: 100px 1.88em 50px;
+}
+
+.container{
+    width: 100%;
+    max-width: 100em;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.main_grid{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 0px;
+}
+
+.sticky_menu_wrapper{
+    z-index: 0;
+    height: 400px;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding: 0 24px 0 0;
+    display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 182px;
+    overflow: scroll;
+}
+
+.sticky_menu_item{
+    color: #696969;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+a{
+    color: #696969;
+    background-color: transparent;
+}
+
+a:hover{
+    color: #0CAEB5; /* hover effect for the navigation */
+}
+
+.content_wrapper{
+    background-color: #fff;
+    border: 1px solid rgba(105, 105, 105, .1);
+    border-radius: 20px;
+    margin-left: 10px;
+    padding: 24px 40px;
+    overflow: visible;
+}

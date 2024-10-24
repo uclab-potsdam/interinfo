@@ -7,18 +7,88 @@
 
 <style>
 
-    body{
-        background-color: rgb(67, 102, 126);
+body {
+    background-color: rgb(80, 70, 55);
+    transition: background-color 0.5s ease;
+    color: rgb(80, 70, 55);
+    width: auto; 
+    height: auto;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body:hover {
+    background-color: rgb(255, 213, 77);
+    color: rgb(80, 70, 55);
+}
+
+section{
+    opacity: 1;
+    padding: 20px;
+    transition: all 1s ease;
+    width: 70%;
+    margin: auto;
+    border-radius: 10%;
+}
+
+section:hover {
+    opacity: 1;
+    background-color: rgb(247, 247, 212);
+    transform: scale(1.05);
+    color: rgb(80, 70, 55);
+    border-radius: 0%;
+    border-style:double;
+    border-width: thick;
+    transition-duration: 0.5s;
+}
+
+h1{
+        font-variant: small-caps;
+        color: rgb(255, 213, 77);
+        text-align: center;
     }
 
+    h2{
+        font-variant: small-caps;
+    }
+
+
+    img{
+        max-width: 100%;
+        height: auto;
+        opacity: .5;
+    }
+
+    img:hover{
+        opacity: 1;
+    }
+
+    a:link{
+        color: rgb(80, 70, 55);
+    }
+
+    a:visited{
+        color: rgb(80, 70, 55);
+    }
+
+    a:link:hover{
+        opacity: 1;
+        color: rgb(225, 172, 0);
+    }
+
+    a:visited:hover{
+        opacity: 0;
+        color:rgb(247, 247, 212)
+    }
 </style>
 
 </head>
 <body>
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
+        <h1><u>The box model</u></h1>
+        <section>
         <header>
-            <h1>The box model</h1>
+            <h2><u>The box model</u></h2>
         </header>
         <div class="section-content">          
             <p>
@@ -65,6 +135,7 @@
                 </table>
             </figure>
         </div>
+        </section>
         <section aria-labelledby="block_and_inline_boxes">
             <h2 id="block_and_inline_boxes">
                 <a href="#block_and_inline_boxes">Block and inline boxes</a>
