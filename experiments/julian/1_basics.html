@@ -7,16 +7,22 @@
 
 <style>
 
-img {max-width: 80%;
-    padding: 20px;
+/* used padding, margins and maximum width for all items in order to make website fit nicely and be responsive to window resizing */
+
+img {
+    max-width: 80%;
     height: auto;
     margin: auto;
 }
 
 header {
     opacity: 1;
-    padding: 50px;
+    padding: 20px;
     max-width: 80%;
+    background-color: rgb(7, 95, 19);
+    color: aliceblue;
+    border-style: double;
+    border-width: thick;
     height: auto;
     margin: auto;
 }
@@ -29,22 +35,6 @@ li {
 }
 
 p {
-    opacity: 1;
-    padding: 10px;
-    max-width: 80%;
-    height: auto;
-    margin: auto;
-}
-
-th {
-    opacity: 1;
-    padding: 10px;
-    max-width: 80%;
-    height: auto;
-    margin: auto;
-}
-
-td {
     opacity: 1;
     padding: 10px;
     max-width: 80%;
@@ -92,6 +82,23 @@ h4 {
     margin: auto;
 }
 
+/* added padding to tables for aesthetic reasons */
+
+th {
+    opacity: 1;
+    padding: 10px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+td {
+    opacity: 1;
+    padding: 10px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
 table {
     opacity: 1;
     padding: 20px;
@@ -107,7 +114,7 @@ a:link {
 
 /* visited link */
 a:visited {
-  color:rgb(118, 101, 241)
+  color:rgb(160, 150, 233)
 }
 
 /* mouse over link */
@@ -127,10 +134,12 @@ body {
     background-color: rgb(23, 27, 47);
 }
 
+/* section hover transition with border and scale */
+
 section {
     opacity: 1;
     padding: 20px;
-    transition: all 1s ease;
+    transition: all 0.5s ease;
     max-width: 80%;
     height: auto;
     margin: auto;
@@ -140,6 +149,9 @@ section:hover {
     opacity: 1;
     padding: 20px;
     background-color: rgb(7, 95, 19);
+    color: aliceblue;
+    border-style: double;
+    border-width: thick;
     transform: scale(1.05);
     max-width: 80%;
     height: auto;
@@ -155,7 +167,10 @@ section:hover {
         <header>
             <h1>The box model</h1>
         </header>
-        <div class="section-content">          
+
+       <!-- removed the  <div class="section-content"> so that this section would conform to the formatting of the remainder of the article-->
+
+        <section aria-labelledby="block_and_inline_boxes">
             <p>
                 Everything in CSS has a box around it, and understanding these boxes is key to being able to create more
                 complex layouts with CSS, or to align items with other items. In this lesson, we will take a look at the
@@ -199,8 +214,6 @@ section:hover {
                     </tbody>
                 </table>
             </figure>
-        </div>
-        <section aria-labelledby="block_and_inline_boxes">
             <h2 id="block_and_inline_boxes">
                 <a href="#block_and_inline_boxes">Block and inline boxes</a>
             </h2>
