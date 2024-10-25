@@ -8,13 +8,15 @@
 <style>
 
 body {
-    font-family: sans-serif;
+    font-family: Helvetica;
 }
 
 h1 {
-    font-family: monospace;
-    font-size: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 70px;
     font-weight: 200;
+    margin: auto;
+    margin-bottom: 30px;
 }
 h2 {
     font-family: monospace;
@@ -26,24 +28,48 @@ section {
     padding-left: 20px;
     border: 1px solid rgb(203, 203, 203);
     border-radius: 10px;
-    margin: 20px;
+    margin: auto;
     opacity: .5;
     transition: all .5s ease;
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px
 }
 
 section:hover{
     opacity: 1;
     transform: scale(1.01);
-    background-color: #fafafa;
-    border: 1px solid #ffffff;
+    background-color: #eeeeee;
+    border: 1px solid #f2f2f2;
+    box-shadow: 3px 3px 15px #f2f2f2;
 }
 
-a {
+:link {
     color: black;
 }
 
-a:hover{
-    color: #29d190;
+:visited{
+    color: #777777;
+}
+
+p {
+    font-size: 1em;
+    margin: 0px 60px 16px 60px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    transition: all .5s ease;
+}
+
+img:hover {
+    transform: scale(1.01);
+}
+
+.section-content{
+    margin: auto;
+    max-width: 700px;
 }
 
 </style>

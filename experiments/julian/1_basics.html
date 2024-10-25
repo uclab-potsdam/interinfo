@@ -7,9 +7,104 @@
 
 <style>
 
+/* used padding, margins and maximum width for all items in order to make website fit nicely and be responsive to window resizing */
+
+img {
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+header {
+    opacity: 1;
+    padding: 20px;
+    max-width: 80%;
+    background-color: rgb(7, 95, 19);
+    color: aliceblue;
+    border-style: double;
+    border-width: thick;
+    height: auto;
+    margin: auto;
+}
+
+li {
+    opacity: 1;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+p {
+    opacity: 1;
+    padding: 10px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
 h1 {
     color: rgb(6, 255, 31)
     ;
+    opacity: 1;
+    padding: 20px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+h2 {
+    color: rgb(6, 255, 31)
+    ;
+    opacity: 1;
+    padding: 20px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+h3 {
+    color: rgb(6, 255, 31)
+    ;
+    opacity: 1;
+    padding: 20px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+h4 {
+    color: rgb(6, 255, 31)
+    ;
+    opacity: 1;
+    padding: 20px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+/* added padding to tables for aesthetic reasons */
+
+th {
+    opacity: 1;
+    padding: 10px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+td {
+    opacity: 1;
+    padding: 10px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
+}
+table {
+    opacity: 1;
+    padding: 20px;
+    max-width: 80%;
+    height: auto;
+    margin: auto;
 }
 
 /* unvisited link */
@@ -19,7 +114,7 @@ a:link {
 
 /* visited link */
 a:visited {
-  color:rgb(0, 145, 15)
+  color:rgb(160, 150, 233)
 }
 
 /* mouse over link */
@@ -29,26 +124,38 @@ a:hover {
 
 /* selected link */
 a:active {
-  color: rgb(250, 0, 125);
+  color: hotpink;
 }
+
 body {
     font-family: sans-serif;
     font-size: 16px;
     color: aliceblue;
-    background-color: hsl(231, 100%, 17%);
+    background-color: rgb(23, 27, 47);
 }
+
+/* section hover transition with border and scale */
 
 section {
     opacity: 1;
     padding: 20px;
-    transition: all 1s ease;
-    width: 400px;
+    transition: all 0.5s ease;
+    max-width: 80%;
+    height: auto;
     margin: auto;
 }
+
 section:hover {
     opacity: 1;
-    background-color: rgb(68, 102, 255);
-    transform: scale(1.1);
+    padding: 20px;
+    background-color: rgb(7, 95, 19);
+    color: aliceblue;
+    border-style: double;
+    border-width: thick;
+    transform: scale(1.05);
+    max-width: 80%;
+    height: auto;
+    margin: auto;
 }
 
 </style>
@@ -60,7 +167,10 @@ section:hover {
         <header>
             <h1>The box model</h1>
         </header>
-        <div class="section-content">          
+
+       <!-- removed the  <div class="section-content"> so that this section would conform to the formatting of the remainder of the article-->
+
+        <section aria-labelledby="block_and_inline_boxes">
             <p>
                 Everything in CSS has a box around it, and understanding these boxes is key to being able to create more
                 complex layouts with CSS, or to align items with other items. In this lesson, we will take a look at the
@@ -104,8 +214,6 @@ section:hover {
                     </tbody>
                 </table>
             </figure>
-        </div>
-        <section aria-labelledby="block_and_inline_boxes">
             <h2 id="block_and_inline_boxes">
                 <a href="#block_and_inline_boxes">Block and inline boxes</a>
             </h2>
@@ -278,20 +386,17 @@ section:hover {
                 </p>
                 <ul>
                     <li>
-                        <p>A paragraph with a border added in CSS. The browser renders this as a block box. The
-                            paragraph starts on a new line and extends the entire available width.</p>
+                        A paragraph with a border added in CSS. The browser renders this as a block box. The
+                            paragraph starts on a new line and extends the entire available width.
                     </li>
                     <li>
-                        <p>
                             A list, which is laid out using
                             <code>display: flex</code>
                             . This establishes flex layout for the children of the container, which are flex items. The
                             list itself is a block box and — like the paragraph — expands to the full container width
                             and breaks onto a new line.
-                        </p>
                     </li>
                     <li>
-                        <p>
                             A block-level paragraph, inside which are two
                             <code>&lt;span&gt;</code>
                             elements. These elements would normally be
@@ -299,7 +404,6 @@ section:hover {
                             , however, one of the elements has a class of "block" which gets set to
                             <code>display: block</code>
                             .
-                        </p>
                     </li>
                 </ul>
                 <iframe width="100%" height="1100" src="https://mdn.github.io/css-examples/learn/box-model/block.html"
@@ -311,28 +415,22 @@ section:hover {
                 </p>
                 <ul>
                     <li>
-                        <p>
                             The
                             <code>&lt;span&gt;</code>
                             elements in the first paragraph are inline by default and so do not force line breaks.
-                        </p>
                     </li>
                     <li>
-                        <p>
                             The
                             <code>&lt;ul&gt;</code>
                             element that is set to
                             <code>display: inline-flex</code>
                             creates an inline box containing some flex items.
-                        </p>
                     </li>
                     <li>
-                        <p>
                             The two paragraphs are both set to
                             <code>display: inline</code>
                             . The inline flex container and paragraphs all run together on one line rather than breaking
                             onto new lines (as they would do if they were displaying as block-level elements).
-                        </p>
                     </li>
                 </ul>
                 <p>
@@ -462,27 +560,23 @@ section:hover {
                     box (see the image below).
                 </p>
                 <p>If we assume that a box has the following CSS:</p>
-                <div class="code-example">
-                    <div class="example-header">
-                        <span class="language-name">css</span>
-                    </div>
-                    <pre class="brush: css notranslate">
-                                        <code>.box {
-                                          width: 350px;
-                                          height: 150px;
-                                          margin: 10px;
-                                          padding: 25px;
-                                          border: 5px solid black;
-                                        }
-                                        </code>
-                                    </pre>
-                </div>
                 <p>
-                    The
-                    <em>actual</em>
-                    space taken up by the box will be 410px wide (350 + 25 + 25 + 5 + 5) and 210px high (150 + 25 + 25 +
-                    5 + 5).
-                </p>
+                    <pre class="brush: css notranslate">
+                        <code>.box {
+                        width: 350px;
+                        height: 150px;
+                        margin: 10px;
+                        padding: 25px;
+                        border: 5px solid black;
+                        }
+                        </code>
+                        </pre> 
+                     <p>
+                          The
+                          <em>actual</em>
+                           space taken up by the box will be 410px wide (350 + 25 + 25 + 5 + 5) and 210px high (150 + 25 + 25 +
+                            5 + 5).
+                     </p>
                 <p>
                     <img src="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/standard-box-model.png"
                         alt="Showing the size of the box when the standard box model is being used." width="500"
@@ -510,36 +604,25 @@ section:hover {
                     To turn on the alternative model for an element, set
                     <code>box-sizing: border-box</code>
                     on it:
-                </p>
-                <div class="code-example">
-                    <div class="example-header">
-                        <span class="language-name">css</span>
-                    </div>
                     <pre class="brush: css notranslate">
-                                        <code>.box {
-                                          box-sizing: border-box;
-                                        }
-                                        </code>
-                                    </pre>
-                </div>
+                    <code>.box {
+                    box-sizing: border-box;
+                    }
+                    </code>
+                    </pre>
                 <p>If we assume the box has the same CSS as above:</p>
-                <div class="code-example">
-                    <div class="example-header">
-                        <span class="language-name">css</span>
-                    </div>
                     <pre class="brush: css notranslate">
-                                        <code>.box {
-                                          width: 350px;
-                                          inline-size: 350px;
-                                          height: 150px;
-                                          block-size: 150px;
-                                          margin: 10px;
-                                          padding: 25px;
-                                          border: 5px solid black;
-                                        }
-                                        </code>
-                                    </pre>
-                </div>
+                    <code>.box {
+                    width: 350px;
+                    inline-size: 350px;
+                    height: 150px;
+                    block-size: 150px;
+                    margin: 10px;
+                    padding: 25px;
+                    border: 5px solid black;
+                    }
+                    </code>
+                    </pre>
                 <p>
                     Now, the
                     <em>actual</em>
@@ -558,23 +641,18 @@ section:hover {
                     <code>&lt;html&gt;</code>
                     element and set all other elements to inherit that value:
                 </p>
-                <div class="code-example">
-                    <div class="example-header">
-                        <span class="language-name">css</span>
-                    </div>
                     <pre class="brush: css notranslate">
-                                        <code>html {
-                                          box-sizing: border-box;
-                                        }
+                    <code>html {
+                    box-sizing: border-box;
+                    }
 
-                                        *,
-                                        *::before,
-                                        *::after {
-                                          box-sizing: inherit;
-                                        }
-                                        </code>
-                                    </pre>
-                </div>
+                    *,
+                    *::before,
+                    *::after {
+                    box-sizing: inherit;
+                    }
+                    </code>
+                    </pre>
                 <p>
                     To understand the underlying idea, you can read
                     <a href="https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/"

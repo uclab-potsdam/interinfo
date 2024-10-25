@@ -8,24 +8,49 @@
 <style>
 
 body {
-    background-color:antiquewhite;
-    font-family: Cambria;
-    font-weight: 100;
+    background-color: #1b1d1d;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #eae2d3;
+    font-weight: 65;
+    font-size: 20px;
 }
+
 
 section {
+
     opacity: .5;
     padding: 20px;
-    transition: all 1s ease;
     width: 400px;
     margin: auto;
-}
-section:hover {
-    opacity: 1;
-    background-color: white;
-    transform: scale(1.1);
 
 }
+
+
+.box {
+  display: block;
+  width: 65px;
+  height: 65px;
+  background-color: #eae2d3;
+  transition:
+    width 2s,
+    height 2s,
+    background-color 2s,
+    rotate 2s;
+}
+
+.box:hover {
+  background-color: #1b1d1d;
+  width: 80px;
+  height: 80px;
+  rotate: 180deg;
+}
+
+.box:hover ~ section {
+    opacity: 1;
+    font-size: 40px;
+}
+
+
 
 </style>
 
@@ -81,9 +106,9 @@ section:hover {
                 </table>
             </figure>
         </div>
-        <section aria-labelledby="block_and_inline_boxes">
-            <h2 id="block_and_inline_boxes">
-                <a href="#block_and_inline_boxes">Block and inline boxes</a>
+        <section aria-labelledby="block_and_inline_boxes"> 
+            <h2 id="block_and_inline_boxes"> 
+                <a href="#block_and_inline_boxes">Block and inline boxes</a> <div class="box" style=display: inline-block></div>
             </h2>
             <div class="section-content">
                 <p>
