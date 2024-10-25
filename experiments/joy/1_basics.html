@@ -68,6 +68,12 @@
             transition-timing-function: ease-out;
             cursor: crosshair;
         }
+
+        /* Q 無法顯示 */
+        section:hover h2 {
+        color: blueviolet !important; 
+        }
+        
         p{
             margin: 0px;
             padding: 10px 20px;
@@ -75,6 +81,30 @@
         ul{
             margin: 10px;
         }
+
+        .table-container table {
+        border: 5px solid white; /* border of whole table */
+        border-collapse: separate; /* using separate to support border-radius */
+        border-spacing: 5px;
+        }
+
+        .table-container th{
+        border-radius: 20px 0px 0px 20px;
+        padding: 8px 12px;
+        transition: background-color 0.3s ease;
+        }
+
+        .table-container td{
+        border-radius: 0px 20px 20px 0px;
+        padding: 8px 12px;
+        transition: background-color 0.3s ease;
+        }
+
+        .table-container tr:hover {
+        padding: 8px 12px;
+        background-color: rgba(0, 0, 0, 0.05);
+        }
+
     </style>
 
 </head>
