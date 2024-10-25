@@ -4,28 +4,151 @@
 <meta charset="UTF-8">
 <title>The box model - Interactive Information</title>
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 <style>
 
-/* this is where your magic goes */
+body {
+        color: aliceblue;
+        background: #252839;
+        font-family: Inter;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        margin: 0;
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 200px;
+        background-color: #100e1b;
+        margin: 0;
+    }
+
+    .main-container {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        max-width: 1200px;
+        gap: 20px;
+        margin: 0px;
+        margin-left: 210px;
+        margin-bottom: 50px;
+    }
+
+    .Title {
+        position: relative;
+        font-size: 2.5em;
+        color: #252839;
+        -webkit-text-stroke: 0.1v #383d52;
+        text-transform: uppercase;
+        white-space: nowrap;
+    }
+
+    .Title::before {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        color: #a3ca14;
+        -webkit-text-stroke: 0px #383d52;
+        border-right: 2px solid #a3ca14;
+        overflow: hidden;
+        animation: animate 10s linear infinite;
+    }
+
+    @keyframes animate {
+        0%, 10%, 100% {
+            width: 0;
+        }
+        70%, 90% {
+            width: 100%;
+        }
+    }
+
+    .Box-model-photo {
+        max-width: 320px;
+        max-height: 300px;
+        border: 2.5px solid #fff;
+        border-radius: 10px;
+        flex-shrink: 0;
+    }
+
+    .text-box {
+        color: white;
+        max-width: 600px;
+    }
+
+    .text-box h1 {
+        font-size: 42px;
+        margin-bottom: 10px;
+    }
+
+    .text-box p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .Button-Container {
+        align-items: center;
+        display: flex; 
+        align-items: center;
+        width: 80%;
+        max-width: 1200px;
+        gap: 20px;
+        margin: 20px;
+        margin-bottom: 100px;
+    }
+
+    .Learn-more-Button {
+        background-color: #a3ca14;
+        padding-top: 10px;
+        padding-left: 100px;
+        padding-bottom: 10px;
+        padding-right: 100px;
+        margin-left: auto;
+        border-radius: 10px;
+        border-style: hidden;
+        font-weight: bold;
+        color: #100e1b;
+        margin-right: 245px;
+    }
+
+    .Learn-more-Button:hover {
+        opacity: 90%;
+    }
+
+    a {
+        color: #a3ca14;
+        transition: 1s;
+
+    }
+
+    a:hover {
+         font-size: 25px;
+         color: #eeff00;
+    }
 
 </style>
-
 </head>
+
 <body>
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
-        <header>
-            <h1>The box model</h1>
-        </header>
-        <div class="section-content">          
-            <p>
-                Everything in CSS has a box around it, and understanding these boxes is key to being able to create more
-                complex layouts with CSS, or to align items with other items. In this lesson, we will take a look at the
-                CSS
-                <em>Box Model</em>
-                . You'll get an understanding of how it works and the terminology that relates to it.
-            </p>
+        <div class="main-container">
+            <img class="Box-model-photo" src="https://cssbattle.dev/blog/images/2023/css-intuitively-box-model.jpg" alt="Box Model Image">
+            <div class="text-box">
+                <h1 data-text="The Box Model" class="Title">The Box Model</h1>
+                <p>Everything in CSS has a box around it, and understanding these boxes is key to being able to create more
+                    complex layouts with CSS, or to align items with other items. In this lesson, we will take a look at the
+                    CSS <em>Box Model</em>. You'll get an understanding of how it works and the terminology that relates to it.</p>
+            </div>
+        </div>
+        <div class="Button-Container">
+            <button class="Learn-more-Button"> Learn more &#8595;</button>
+        </div> 
             <figure class="table-container">
                 <table>
                     <tbody>
@@ -63,9 +186,11 @@
                 </table>
             </figure>
         </div>
+        <br>
+        <br>
         <section aria-labelledby="block_and_inline_boxes">
             <h2 id="block_and_inline_boxes">
-                <a href="#block_and_inline_boxes">Block and inline boxes</a>
+                <a href="#block_and_inline_boxes"> Block and inline boxes</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -89,6 +214,7 @@
                 </p>
             </div>
         </section>
+        <br>
         <section aria-labelledby="outer_display_type">
             <h2 id="outer_display_type">
                 <a href="#outer_display_type">Outer display type</a>
@@ -170,6 +296,7 @@
                 </p>
             </div>
         </section>
+        <br>
         <section aria-labelledby="inner_display_type">
             <h2 id="inner_display_type">
                 <a href="#inner_display_type">Inner display type</a>
@@ -224,6 +351,7 @@
                 </div>
             </div>
         </section>
+        <br>
         <section aria-labelledby="examples_of_different_display_types">
             <h2 id="examples_of_different_display_types">
                 <a href="#examples_of_different_display_types">Examples of different display types</a>
@@ -316,6 +444,7 @@
                 </p>
             </div>
         </section>
+        <br>
         <section aria-labelledby="what_is_the_css_box_model">
             <h2 id="what_is_the_css_box_model">
                 <a href="#what_is_the_css_box_model">What is the CSS box model?</a>
@@ -392,6 +521,7 @@
                 </p>
             </div>
         </section>
+        <br>
         <section aria-labelledby="the_standard_css_box_model">
             <h3 id="the_standard_css_box_model">
                 <a href="#the_standard_css_box_model">The standard CSS box model</a>
@@ -456,6 +586,7 @@
                 </div>
             </div>
         </section>
+        <br>
         <section aria-labelledby="the_alternative_css_box_model">
             <h3 id="the_alternative_css_box_model">
                 <a href="#the_alternative_css_box_model">The alternative CSS box model</a>
@@ -541,6 +672,7 @@
                 </p>
             </div>
         </section>
+        <br>
         <section aria-labelledby="playing_with_box_models">
             <h2 id="playing_with_box_models">
                 <a href="#playing_with_box_models">Playing with box models</a>
@@ -602,6 +734,7 @@
                 </p>
             </div>
         </section>
+        <br>
         <section aria-labelledby="margins_padding_and_borders">
             <h2 id="margins_padding_and_borders">
                 <a href="#margins_padding_and_borders">Margins, padding, and borders</a>
@@ -910,6 +1043,7 @@
                     loading="lazy"></iframe>
             </div>
         </section>
+        <br>
         <section aria-labelledby="the_box_model_and_inline_boxes">
             <h2 id="the_box_model_and_inline_boxes">
                 <a href="#the_box_model_and_inline_boxes">The box model and inline boxes</a>
@@ -944,6 +1078,7 @@
                     loading="lazy"></iframe>
             </div>
         </section>
+        <br>
         <section aria-labelledby="using_display_inline-block">
             <h2 id="using_display_inline-block">
                 <a href="#using_display_inline-block">Using display: inline-block</a>
@@ -1046,6 +1181,9 @@
                     loading="lazy"></iframe>
             </div>
         </section>
+        <br>
+        <br>
+        <br>
         <section aria-labelledby="test_your_skills!">
             <h2 id="test_your_skills!">
                 <a href="#test_your_skills!">Test your skills!</a>
@@ -1097,6 +1235,12 @@
             </div>
         </section>
     </article>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </main>
 </body>
 </html>
