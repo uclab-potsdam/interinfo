@@ -9,10 +9,38 @@
 
 /* add your magic here */
 body {
-    font-family: monospace; 
+    font-family: "Courier New", monospace ; 
     font-style: oblique;
-    color: rgb(0, 139, 9);
+    color: rgb(0, 0, 0);
 }
+
+section {
+    opacity: 5;
+    padding: 20px;
+    transition: all;    
+    width: 500px;
+    margin: auto;
+}
+
+section:hover {
+
+    opacity: 0,5;
+    background-color: #8b86ef;
+    transform: scale(1.1);
+}
+
+
+
+
+   header  {
+    background-color: #8b86ef;
+    padding: 8px 80;
+    position: relative;
+    width: auto;
+    top: 0;
+    left:0;
+}
+
 
 </style>
 
@@ -604,7 +632,7 @@ body {
                 </p>
                 <p>
                     <img src="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model/box-model-devtools.png"
-                        alt="Inspecting the box model of an element using Firefox DevTools" width="1150" height="683"
+                        alt="Inspecting the box model of an element using Firefox DevTools" width="680" height="340"
                         loading="lazy">
                 </p>
             </div>
