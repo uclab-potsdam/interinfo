@@ -6,8 +6,61 @@
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
+.main-content{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight:300;
+    margin: 10%;
+}
+header{
+    text-align: center;
+    font-size: 250%;
+    color: black;
+    border: 10px solid black;
+    border-radius: 40px;
+    margin: 10%;
+}
+header:hover,
+header:focus{
+    color: white;
+    background-color: black
+ 
 
-/* this is where your magic goes */
+
+}
+
+h1{
+    font-weight: 650;
+}
+.block{
+    color: red;
+    font-weight: 650;
+}
+
+h2{
+    flex: 1;
+    text-align: center;
+    font-size: 200%;
+    background-color: white;
+    border: 5px solid black;
+    border-radius: 100px;
+    padding: 20px;
+    margin: 5%;  
+} 
+.section-content{
+    font-size: 200%;
+}
+code:hover,
+code:focus{
+    color: lightblue;
+}
+h3{
+    text-align: center;
+    font-size: 150%;
+    padding: 5%;
+
+
+    
+
 
 </style>
 
@@ -16,7 +69,8 @@
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
         <header>
-            <h1>The box model</h1>
+            <h1>the <span
+                class="block">BLOCK MODEL</span></h1>
         </header>
         <div class="section-content">          
             <p>
@@ -70,20 +124,20 @@
             <div class="section-content">
                 <p>
                     In CSS we have several types of boxes that generally fit into the categories of
-                    <strong>block boxes</strong>
+                    <code>block boxes</code>
                     and
-                    <strong>inline boxes</strong>
+                    <code>inline boxes</code>
                     . The type refers to how the box behaves in terms of page flow and in relation to other boxes on the
                     page. Boxes have an
-                    <strong>inner display type</strong>
+                    <code>inner display type</code>
                     and an
-                    <strong>outer display type</strong>
+                    <code>outer display type</code>
                     .
                 </p>
                 <p>
                     In general, you can set various values for the display type using the
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">
-                        <code>display</code>
+                        display
                     </a>
                     property, which can have various values.
                 </p>
@@ -104,11 +158,11 @@
                     <li>
                         The
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">
-                            <code>width</code>
+                            width
                         </a>
                         and
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height">
-                            <code>height</code>
+                            height
                         </a>
                         properties are respected.
                     </li>
@@ -116,7 +170,7 @@
                     <li>
                         If
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">
-                            <code>width</code>
+                            width
                         </a>
                         is not specified, the box will extend in the inline direction to fill the space available in its
                         container. In most cases, the box will become as wide as its container, filling up 100% of the
@@ -142,11 +196,11 @@
                     <li>
                         The
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">
-                            <code>width</code>
+                            width
                         </a>
                         and
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height">
-                            <code>height</code>
+                            height
                         </a>
                         properties will not apply.
                     </li>
@@ -203,11 +257,11 @@
                 <p>
                     When you move on to learn about CSS Layout in more detail, you will encounter
                     <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">
-                        <code>flex</code>
+                        flex
                     </a>
                     , and various other inner values that your boxes can have, for example
                     <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids">
-                        <code>grid</code>
+                        grid
                     </a>
                     .
                 </p>
@@ -340,47 +394,47 @@
                 <p>Making up a block box in CSS we have the:</p>
                 <ul>
                     <li>
-                        <strong>Content box</strong>
+                        <code>Content box</code>
                         : The area where your content is displayed; size it using properties like
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inline-size">
-                            <code>inline-size</code>
+                            inline-size
                         </a>
                         and
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/block-size">
-                            <code>block-size</code>
+                            block-size
                         </a>
                         or
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">
-                            <code>width</code>
+                            width
                         </a>
                         and
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/height">
-                            <code>height</code>
+                            height
                         </a>
                         .
                     </li>
                     <li>
-                        <strong>Padding box</strong>
+                        <code>Padding box</code>
                         : The padding sits around the content as white space; size it using
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">
-                            <code>padding</code>
+                            padding
                         </a>
                         and related properties.
                     </li>
                     <li>
-                        <strong>Border box</strong>
+                        <code>Border box</code>
                         : The border box wraps the content and any padding; size it using
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">
-                            <code>border</code>
+                            border
                         </a>
                         and related properties.
                     </li>
                     <li>
-                        <strong>Margin box</strong>
+                        <code>Margin box</code>
                         : The margin is the outermost layer, wrapping the content, padding, and border as whitespace
                         between this box and other elements; size it using
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">
-                            <code>margin</code>
+                            margin
                         </a>
                         and related properties.
                     </li>
@@ -610,18 +664,18 @@
                 <p>
                     You've already seen the
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">
-                        <code>margin</code>
+                        margin
                     </a>
                     ,
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">
-                        <code>padding</code>
+                        padding
                     </a>
                     , and
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">
-                        <code>border</code>
+                        border
                     </a>
                     properties at work in the example above. The properties used in that example are
-                    <strong>shorthands</strong>
+                    <code>shorthands</code>
                     and allow us to set all four sides of the box at once. These shorthands also have equivalent
                     longhand properties, which allow control over the different sides of the box individually.
                 </p>
@@ -640,29 +694,29 @@
                 <p>
                     We can control all margins of an element at once using the
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin">
-                        <code>margin</code>
+                        margin
                     </a>
                     property, or each side individually using the equivalent longhand properties:
                 </p>
                 <ul>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top">
-                            <code>margin-top</code>
+                            margin-top
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right">
-                            <code>margin-right</code>
+                            margin-right
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom">
-                            <code>margin-bottom</code>
+                            margin-bottom
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left">
-                            <code>margin-left</code>
+                           margin-left</code>
                         </a>
                     </li>
                 </ul>
@@ -743,7 +797,7 @@
                 <p>
                     You can set the width, style, or color of all four borders at once using the
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border">
-                        <code>border</code>
+                        border
                     </a>
                     property.
                 </p>
@@ -751,22 +805,22 @@
                 <ul>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-top">
-                            <code>border-top</code>
+                            border-top
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-right">
-                            <code>border-right</code>
+                            border-right
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom">
-                            <code>border-bottom</code>
+                            border-bottom
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-left">
-                            <code>border-left</code>
+                            border-left
                         </a>
                     </li>
                 </ul>
@@ -774,17 +828,17 @@
                 <ul>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-width">
-                            <code>border-width</code>
+                            border-width
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-style">
-                            <code>border-style</code>
+                           border-style
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-color">
-                            <code>border-color</code>
+                            border-color
                         </a>
                     </li>
                 </ul>
@@ -793,62 +847,62 @@
                 <ul>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-width">
-                            <code>border-top-width</code>
+                            border-top-width
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-style">
-                            <code>border-top-style</code>
+                            border-top-style
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-top-color">
-                            <code>border-top-color</code>
+                            border-top-color
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-width">
-                            <code>border-right-width</code>
+                            border-right-width
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-style">
-                            <code>border-right-style</code>
+                            border-right-style
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-right-color">
-                            <code>border-right-color</code>
+                            border-right-color
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-width">
-                            <code>border-bottom-width</code>
+                            border-bottom-width
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-style">
-                            <code>border-bottom-style</code>
+                            border-bottom-style
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom-color">
-                            <code>border-bottom-color</code>
+                            border-bottom-color
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-width">
-                            <code>border-left-width</code>
+                            border-left-width
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-style">
-                            <code>border-left-style</code>
+                            border-left-style
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-left-color">
-                            <code>border-left-color</code>
+                            border-left-color
                         </a>
                     </li>
                 </ul>
@@ -870,7 +924,7 @@
                 <p>
                     The
                     <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding">
-                        <code>padding</code>
+                        padding
                     </a>
                     property controls the padding on all sides of an element. To control each side individually, use
                     these longhand properties:
@@ -878,22 +932,22 @@
                 <ul>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top">
-                            <code>padding-top</code>
+                            padding-top
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right">
-                            <code>padding-right</code>
+                           padding-right
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom">
-                            <code>padding-bottom</code>
+                            padding-bottom
                         </a>
                     </li>
                     <li>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left">
-                            <code>padding-left</code>
+                            padding-left
                         </a>
                     </li>
                 </ul>
