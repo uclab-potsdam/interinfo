@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors in motion - Interactive Information</title>
+
+<style>
+
+body {
+    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
+    min-height: 100vh;
+}
+
+div {
+    position: absolute;
+    box-shadow: 10px 20px 20px gray;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#square {
+    background-color: hsl(275, 58%, 62%); 
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: hsla(162, 63%, 57%, 66%);
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+}
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+
+<script>
+    const body = document.body; // Reference to the body element
+    const square = document.getElementById('square'); // Reference to the square div
+    const circle = document.getElementById('circle'); // Reference to the circle div
+
+    // Event listener for mouse movement
+    body.addEventListener('mousemove', (event) => {
+        const { clientX, clientY } = event; // Get mouse coordinates
+
+        // Normalize mouse position to a range of 0 to 1
+        const xRatio = clientX / window.innerWidth;
+        const yRatio = clientY / window.innerHeight;
+
+        // Calculate new colors based on mouse position
+        const bgColor = `linear-gradient(120deg, hsl(${xRatio * 360}, 70%, 85%), hsl(${(1 - xRatio) * 360}, 70%, 70%))`;
+        const squareColor = `hsl(${(xRatio * 360 + 240) % 360}, 70%, 50%)`;
+        const circleColor = `hsl(${(yRatio * 360 + 120) % 360}, 70%, 50%)`;
+
+        // Apply the new colors
+        body.style.background = bgColor; // Update body background
+        square.style.backgroundColor = squareColor; // Update square color
+        circle.style.backgroundColor = circleColor; // Update circle color
+
+        // Add a subtle scale effect based on mouse position
+        const scaleFactor = 1 + 0.1 * Math.sin(xRatio * Math.PI);
+        square.style.transform = `scale(${scaleFactor})`; // Scale square
+        circle.style.transform = `scale(${scaleFactor})`; // Scale circle
+    });
+
+    // Reset colors when mouse leaves the body
+    body.addEventListener('mouseleave', () => {
+        body.style.background = 'linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196))'; // Reset background
+        square.style.backgroundColor = 'hsl(275, 58%, 62%)'; // Reset square color
+        circle.style.backgroundColor = 'hsla(162, 63%, 57%, 66%)'; // Reset circle color
+        square.style.transform = 'scale(1)'; // Reset square scale
+        circle.style.transform = 'scale(1)'; // Reset circle scale
+    });
+</script>
+
+</body>
+</html>
