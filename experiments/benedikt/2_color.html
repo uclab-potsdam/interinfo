@@ -48,12 +48,19 @@ document.addEventListener('mousemove', (e) => {
     const x = e.clientX;
     const y = e.clientY;
 
-    const displacement = ( e.clientY / window.innerWidth) * 30;
+    const displacement = ( e.clientY / window.innerWidth) * 50;
     const divs = document.getElementsByTagName('div');
 
-    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px 10px grey `;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    const offsetX = (centerX - x) * 0.04;
+    const offsetY = (centerY - y) * 0.04;
+
+    for (let div of divs) div.style.boxShadow = `${offsetX}px ${offsetY}px 30px #898989 `;
     
     document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgb(244, 239, 188), rgb(${y}, 159, 196) `;    
+    
     
 });
 
