@@ -7,17 +7,17 @@
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(188, 244, 240), rgb(196, 48, 92), rgb(255, 236, 159));
+    background: linear-gradient(120deg, rgb(238, 35, 130), rgb(193, 108, 216), rgb(91, 23, 174));
     min-height: 100vh;
 }
 
 div {
     position: absolute;
-    box-shadow: 10px 20px 20px gray;
+    box-shadow: 10px 20px 20px rgb(79, 44, 70);
 }
 
 #square {
-    background-color: hsl(275, 58%, 62%); 
+    background-color: hsl(294, 100%, 91%); 
     width: calc(20vw + 10vh);
     height: calc(20vw + 10vh);
     top: 30vh;
@@ -25,7 +25,7 @@ div {
 }
 
 #circle {
-    background-color: hsla(162, 63%, 57%, 66%);
+    background-color: hsla(319, 81%, 54%, 0.778);
     width: calc(20vw + 16vh);
     height: calc(20vw + 16vh);
     border-radius: calc( 10vw + 8vh);
@@ -48,7 +48,12 @@ document.addEventListener('mousemove', (e) => {
     //console.log(e.clientX, e.clientY);
 
     const angle = (e.clientX / window.innerWidth) * 360;
-    document.body.style.background = `linear-gradient(${angle}deg, rgb(188, 244, 240), rgb(196, 48, 92), rgb(255, 236, 159))`;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(238, 35, 130), rgb(193, 108, 216), rgb(91, 23, 174))`;
+
+    const displacement = ( e.clientY / window.innerHeight) * 30;
+    const blur = (e.clientY / window.innerHeight) * 50;
+    const divs = document.getElementsByTagName('div');
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(79, 44, 70)`;
     
 
 });
