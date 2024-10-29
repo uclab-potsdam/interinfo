@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>The box model - Interactive Information</title>
+<!-- a semi-hidden greeting with emoji favicon for the viewer -->
+<title>Hello! 👋</title>
+<link rel="icon" type="image/png" href="box.png">
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
@@ -42,6 +44,9 @@ p {
     margin: auto;
 }
 
+/* unique change to h1: centered text to differentiate it from other headings */
+/* h1 font: Papyrus (causes delight and surprise in the viewer/reader/visitor) */
+
 h1 {
     color: rgb(6, 255, 31)
     ;
@@ -50,6 +55,9 @@ h1 {
     max-width: 80%;
     height: auto;
     margin: auto;
+    text-align: center;
+    font-family: "Papyrus";
+    font-size: 40px;
 }
 
 h2 {
@@ -127,8 +135,10 @@ a:active {
   color: hotpink;
 }
 
+/* comic sans causes delight and surprise in the viewer/reader/visitor */
+
 body {
-    font-family: sans-serif;
+    font-family: "comic sans MS";
     font-size: 16px;
     color: aliceblue;
     background-color: rgb(23, 27, 47);
@@ -165,7 +175,7 @@ section:hover {
 <main id="content" class="main-content  ">
     <article class="main-page-content" lang="en-US">
         <header>
-            <h1>The box model</h1>
+            <h1>THE BOX MODEL</h1>
         </header>
 
        <!-- removed the  <div class="section-content"> so that this section would conform to the formatting of the remainder of the article-->
