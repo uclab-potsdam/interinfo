@@ -2,30 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colors in motion - Interactive Information</title>
 
 <style>
-
 
 body {
     background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
     min-height: 100vh;
 }
-
-.hover-box {
-            width: 200px;
-            height: 200px;
-            background-color: lightcyan; /* Starting color */
-            transition: background 0.3s; /* Change to background for gradient */
-            position: absolute;
-            top: 30vh;
-            left: 30vw;
-            box-shadow: 10px 20px 20px gray;
-        }
-        .hover-box:hover {
-            background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196)); /* Gradient on hover */
-        }
 
 div {
     position: absolute;
@@ -60,7 +44,7 @@ div {
 
 document.addEventListener('mousemove', (e) => {
     
-    // use e.clientX and e.clientY to get current mouse pointer position
+   console.log(e.clientX, e.clientY) // use e.clientX and e.clientY to get current mouse pointer position
 
 });
 
