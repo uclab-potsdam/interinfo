@@ -16,6 +16,7 @@ div{
 .main_section{
     width: 100%;
     background-color: rgba(239, 242, 255, 0);
+    padding: 100px 1.88em 50px;
 }
 
 .container{
