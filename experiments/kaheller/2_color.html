@@ -50,7 +50,7 @@ document.addEventListener('mousemove', (e) => {
    document.body.style.background = `linear-gradient(${angle}deg, rgb(214 239 233), rgb(48 159 196))`;
    const displacement = (e.clientY/window.innerHeight) *30;
    const divs = document.getElementsByTagName('div')
-   for (let divs of divs) div.style.boxShadow = `${displacement}px 5px gray`;
+   for (let div of divs) div.style.boxShadow = `${displacement}px  ${displacement}px ${blur}px blue`;
 
 
 });
