@@ -45,7 +45,10 @@ div {
 document.addEventListener('mousemove', (e) => {
     
     // use e.clientX and e.clientY to get current mouse pointer position
-    console.log(e.clientX, e.clientY);
+    //console.log(e.clientX, e.clientY);
+
+    const angle = (e.clientX / window.innerWidth) * 360;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 188), rgb(48 159 196))`;
     
 
 });
