@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors in motion - Interactive Information</title>
+
+<style>
+
+body {
+    background: linear-gradient(120deg, rgb(255, 254, 246), rgb(81, 81, 81));
+    min-height: 100vh;
+}
+
+div {
+    position: absolute;
+    box-shadow: 10px 20px 20px gray;
+}
+
+#square {
+    background-color: hsla(61, 100%, 50%, 0.925); 
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: hsla(0, 88%, 47%, 0.747);
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+}
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+<script>
+
+document.addEventListener('mousemove', (e) => {
+    
+    // use e.clientX and e.clientY to get current mouse pointer position
+
+const angle = (e.clientX / window.innerWidth) * 360;
+document.body.style.background = `linear-gradient(${angle}deg, rgb(255, 254, 246), rgb(81, 81, 81))`;
+const displacement = ( e.clientY / window.innerHeight) * 30;
+const blurr = ( e.clientY / window.innerHeight) * 20;
+const divs = document.getElementsByTagName('div');
+for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blurr}px black`;
+});
+
+</script>
+
+</body>
+</html>
