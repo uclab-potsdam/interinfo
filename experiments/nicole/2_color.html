@@ -51,7 +51,7 @@ document.addEventListener('mousemove', (e) => {
     document.body.style.background = `linear-gradient(${angle}deg, rgb(238, 35, 130), rgb(193, 108, 216), rgb(91, 23, 174))`;
 
     const displacement = ( e.clientY / window.innerHeight) * 30;
-    const blur = (e.clientY / window.innerHeight) * 20;
+    const blur = (e.clientY / window.innerHeight) * 50;
     const divs = document.getElementsByTagName('div');
     for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(79, 44, 70)`;
     
