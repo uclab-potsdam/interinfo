@@ -13,11 +13,12 @@ body {
 
 div {
     position: absolute;
-    box-shadow: 10px 20px 20px gray;
+    opacity: .66;
+    box-shadow: 10px 20px 20px rgb(220, 224, 217);
 }
 
 #square {
-    background-color: hsl(275, 58%, 62%); 
+    background-color: rgb(22, 66, 91); 
     width: calc(20vw + 10vh);
     height: calc(20vw + 10vh);
     top: 30vh;
@@ -25,7 +26,7 @@ div {
 }
 
 #circle {
-    background-color: hsla(162, 63%, 57%, 66%);
+    background-color: rgb(168, 130, 221);
     width: calc(20vw + 16vh);
     height: calc(20vw + 16vh);
     border-radius: calc( 10vw + 8vh);
@@ -47,12 +48,12 @@ document.addEventListener('mousemove', (e) => {
    console.log(e.clientX, e.clientY);
 
    const angle = (e.clientX/window.innerWidth) *360;
-   document.body.style.background = `linear-gradient(${angle}deg, rgb(107 15 26), rgb(49 8 13)) `;
+   document.body.style.background = `linear-gradient(${angle}deg, rgb(119 78 36), rgb(49 8 13)) `;
    
    const displacement = (e.clientY/window.innerHeight) *30;
    const blur = (e.clientY/window.innerHeight) *20;
    const divs = document.getElementsByTagName('div') ;
-   for (let div of divs) div.style.boxShadow = `${displacement}px  ${displacement}px ${blur}px blue`;
+   for (let div of divs) div.style.boxShadow = `${displacement}px  ${displacement}px ${blur}px rgb(220 224 217)`;
 
 
 });

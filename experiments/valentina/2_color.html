@@ -7,9 +7,9 @@
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
-    min-height: 100vh;
-}
+ background: radial-gradient(rgb(244, 239, 188), rgb(48, 159, 196));
+ min-height: 100vh;
+} 
 
 div {
     position: absolute;
@@ -45,16 +45,16 @@ div {
 document.addEventListener('mousemove', (e) => {
     
     // use e.clientX and e.clientY to get current mouse pointer position
+   // console.log(e.clientX, e.clientY)
 
-  //console.log(e.clientX, e.clientY);
-
-  const angle = (e.clientX / window.innerWidth)*360; 
-  document.body.style.background = `linear-gradient(${angle}deg, rgb(244 236 188), rgb(48 159 196))`;
-
-  const displacement = (e.clientY / window.innerHeight) * 30;
-  const blur = (e.clientY / window.innerHeight) * 20;
-  const divs = document.getElementByTagName('div');
-  for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px black`;
+    const angle = ( e.clientX / window.innerWidth) * 360;
+    const x = e.clientX
+    const y = e.clientY
+    document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgb(244 239 188), rgb(48 159 196)) `;
+    
+    const displacement = (e.clientY / window.innerHeight) * 30;
+    const divs = document.getElementsByTagName(`div`);
+    for (let div of divs)div.style.boxShadow = `${displacement}px ${displacement}px 5px darkblue`;
 
 
 });
@@ -63,3 +63,4 @@ document.addEventListener('mousemove', (e) => {
 
 </body>
 </html>
+
