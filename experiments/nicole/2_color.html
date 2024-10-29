@@ -44,11 +44,19 @@ div {
 
 document.addEventListener('mousemove', (e) => {
     
-    // use e.clientX and e.clientY to get current mouse pointer position
-    
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
+    // Normalize mouse position to a 0-1 range
+    const x = e.clientX / width;
+    const y = e.clientY / height;
 
+    // Map normalized position to hue values
+    const hue1 = Math.round(x * 360); // For first color
+    const hue2 = Math.round(y * 360); // For second color
 
+    // Update the background gradient
+    document.body.style.background = `linear-gradient(120deg, hsl(${hue1}, 70%, 70%), hsl(${hue2}, 70%, 70%))`;
 });
 
 </script>
