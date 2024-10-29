@@ -1,27 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>The box model - Interactive Information</title>
-<!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
+    
+    <meta charset="UTF-8">
+    <title>The box model - Interactive Information</title>
+    <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+        body{
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: normal;
+            font-size: 15px;
+            background-color: hsl(0, 0%, 100%);
+            line-height: 1.2;
+            letter-spacing: 0.2pt;
+            margin: 30px;
 
-<style>
+        }
+        tbody{
+            text-align: left;
+        }
+        tr{
+            text-align: top;
+        }
+        td{
+            padding: 10px;
+        }
+        header{
+            font: 'Playfair Display';
+            /* text-shadow: 2px 2px 20px #888888; */
+            color:darkcyan;
+            font-size: 22px;
+            margin-bottom: -10px;
+        }
+        h2{
+            font-size: 20px;
+            margin: 5px 10px;
+        }
+        a{
+            font: 'Times New Roman', Times, serif;
+            color: darkcyan;
+            text-decoration: none;
+            z-index: 100;
+        }
+        code{
+            font-family: monospace;
+            font-weight: normal;
+            letter-spacing: -0.5pt;
+            padding: 2px 5px;
+            font-size: 13px;
+            background-color: rgb(225, 225, 225);
+            color: darkcyan;
+        }
+        section{
+            border-radius: 20px;
+            padding: 15px;
+            margin: 30px 20px;
+            background-color: white;
+            transition: transform 1s;
+        }
+        section:hover{
+            box-shadow: 2px 2px 20px #d8d8d8;
+            transform: scale(1.05);
+            transition: 0.2s;
+            transition-delay: 0.05s;
+            transition-timing-function: ease-out;
+            cursor: crosshair;
+        }
 
-    body {
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: bold;
-        font-size: 15px;
-        background-color: hsl(0, 0%, 100%);
-    }
-    a {
-        color:green;
-    }
+        /* Q 無法顯示 */
+        section:hover h2 {
+        color: blueviolet !important; 
+        }
+        
+        p{
+            margin: 0px;
+            padding: 10px 20px;
+        }
+        ul{
+            margin: 10px;
+        }
 
-</style>
+        .table-container table {
+        border: 5px solid white; /* border of whole table */
+        border-collapse: separate; /* using separate to support border-radius */
+        border-spacing: 5px;
+        }
+
+        .table-container th{
+        border-radius: 20px 0px 0px 20px;
+        padding: 8px 12px;
+        transition: background-color 0.3s ease;
+        }
+
+        .table-container td{
+        border-radius: 0px 20px 20px 0px;
+        padding: 8px 12px;
+        transition: background-color 0.3s ease;
+        }
+
+        .table-container tr:hover {
+        padding: 8px 12px;
+        background-color: rgba(0, 0, 0, 0.05);
+        }
+
+    </style>
 
 </head>
 <body>
-<main id="content" class="main-content  ">
+<main id="content" class="main-content">
     <article class="main-page-content" lang="en-US">
         <header>
             <h1>The box model</h1>
