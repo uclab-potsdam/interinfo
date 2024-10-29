@@ -46,9 +46,11 @@ document.addEventListener('mousemove', (e) => {
     
    console.log(e.clientX, e.clientY);
 
-   const angle = (e.clientX; window.innerWidth) *360;
-   document.body.style.background = `linear-gradient(${angle} deg , rgb (244 239 188) rgb (48 159 196))`;
-   // use e.clientX and e.clientY to get cur
+   const angle = (e.clientX/window.innerWidth) *360;
+   document.body.style.background = `linear-gradient(${angle}deg, rgb(214 239 233), rgb(48 159 196))`;
+   const displacement = (e.clientY/window.innerHeight) *30;
+   const divs = document.getElementsByTagName('div')
+   for (let divs of divs) div.style.boxShadow = `${displacement}px 5px gray`;
 
 
 });
