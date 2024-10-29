@@ -7,17 +7,17 @@
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(181, 237, 255), rgb(232, 174, 232), rgb(196, 213, 255), rgb(181, 212, 247));
+    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
     min-height: 100vh;
 }
 
 div {
     position: absolute;
-    box-shadow: 10px 20px 20px rgb(255, 255, 255);
+    box-shadow: 10px 20px 20px gray;
 }
 
 #square {
-    background-color: hsl(275, 72%, 82%); 
+    background-color: hsl(275, 58%, 62%); 
     width: calc(20vw + 10vh);
     height: calc(20vw + 10vh);
     top: 30vh;
@@ -25,7 +25,7 @@ div {
 }
 
 #circle {
-    background-color: hsla(161, 81%, 85%, 0.66);
+    background-color: hsla(162, 63%, 57%, 66%);
     width: calc(20vw + 16vh);
     height: calc(20vw + 16vh);
     border-radius: calc( 10vw + 8vh);
@@ -44,15 +44,20 @@ div {
 
 document.addEventListener('mousemove', (e) => {
     
-    //use e.clientX and e.clientY to get current mouse pointer position
+    // use e.clientX and e.clientY to get current mouse pointer position
+    // console.log(e.clientX, e.clientY);
+
+    // 滑鼠移動會改變背景漸層色
     const angle = (e.clientX / window.innerWidth) * 360;
-    document.body.style.background = `linear-gradient(${angle}deg, rgb(181, 237, 255), rgb(232, 174, 232), rgb(196, 213, 255), rgb(181, 212, 247))`;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(244, 239, 188), rgb(48, 159, 196))`;
+    
     const displacement = (e.clientY / window.innerHeight) * 30;
     const blur = (e.clientY / window.innerHeight) * 20;
-    const divs = document.getElementsByTagName(`div`);
-    for(let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(255, 255, 255)`;
-    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
+    const divs = document.getElementsByTagName('div');
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px black`;
+
 });
+
 
 </script>
 
