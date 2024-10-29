@@ -5,45 +5,45 @@
 <title>The box model - Interactive Information</title>
 
 <style>
-:root {
---text: hsl(0, 0%, 10%);
---box: hsl(0, 0%, 80%);
---bg: hsl(0, 0%, 90%);
-}
-@media (prefers-color-scheme: dark) {
-:root {
---text: hsl(0, 0%, 90%);
---box: hsl(0, 0%, 20%);
---bg: hsl(0, 0%, 10%);
-}
-}
-body {
-background-color: var(--bg);
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
-}
-div {
-background-color: var(--box);
-width: calc( 30vh + 30vw );
-height: calc( 30vh + 30vw );
-border-radius: calc( 15vh + 15vw );
-}
-p {
-color: var(--text);
-font-size: calc( 8vh + 8vw );
-line-height: 1em;
-text-align: center;
-font-family: monospace;
-}
-</style>
-</head>
-<body>
-<div>
-<p>hello world</p>
-</div>
+
+    :root {
+        --text: hsl(0, 0%, 10%);
+        --box: hsl(0, 0%, 80%);
+        --bg: hsl(0, 0%, 90%);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+    :root {
+        --text: hsl(0, 0%, 90%);
+        --box: hsl(0, 0%, 20%);
+        --bg: hsl(0, 0%, 10%);
+    }
+    }
+    
+    body {
+        background-color: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+        margin: 0; 
+    }
+    
+    div {
+        background-color: var(--box);
+        width: calc( 30vh + 30vw );
+        height: calc( 30vh + 30vw );
+        border-radius: calc( 15vh + 15vw );
+    }
+    
+    p {
+        color: var(--text);
+        font-size: calc( 8vh + 8vw );
+        line-height: 1em;
+        text-align: center;
+        font-family: monospace;
+    }
+    </style>
 
 </head>
 <body>
