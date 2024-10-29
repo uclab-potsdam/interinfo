@@ -44,17 +44,18 @@ div {
 
 document.addEventListener('mousemove', (e) => {
     
-   console.log(e.clientX, e.clientY);
+    // use e.clientX and e.clientY to get current mouse pointer position
+    // console.log(e.clientX, e.clientY);
 
-   const angle = (e.clientX/window.innerWidth) *360;
-   document.body.style.background = `linear-gradient(${angle}deg, rgb(107 15 26), rgb(49 8 13)) `;
+    const angle = (e.clientX / window.innerWidth) * 360;
+    document.body.style.background = `linear-gradient(${angle}deg,rgb(244 220 340), rgb(300 20 28))`;
    
-   const displacement = (e.clientY/window.innerHeight) *30;
-   const blur = (e.clientY/window.innerHeight) *20;
-   const divs = document.getElementsByTagName('div') ;
-   for (let div of divs) div.style.boxShadow = `${displacement}px  ${displacement}px ${blur}px blue`;
+    const displacement = (e.clientY / window.innerHeight) * 30;
+    const blur = (e.clientY / window.innerHeight) * 20;
+    const divs = document.getElementsByTagName('div');
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px red`;
 
-
+    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
 });
 
 </script>
