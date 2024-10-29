@@ -7,7 +7,7 @@
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(8, 7, 0), rgb(186, 211, 219), rgb(200, 3, 200));
+    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
     min-height: 100vh;
 }
 
@@ -44,9 +44,12 @@ div {
 
 document.addEventListener('mousemove', (e) => {
     
-    //use e.clientX and e.clientY to get current mouse pointer position
-    const angle = (e.clientX / window.innerWidth) * 360;
-    document.body.style.background = `linear-gradient(${angle}deg,  rgb(8, 7, 0), rgb(186, 211, 219), rgb(200, 3, 200))`;
+   console.log(e.clientX, e.clientY);
+
+   const angle = (e.clientX; window.innerWidth) *360;
+   document.body.style.background = `linear-gradient(${angle} deg , rgb (244 239 188) rgb (48 159 196))`;
+   // use e.clientX and e.clientY to get cur
+
 
 });
 
