@@ -7,17 +7,17 @@
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(245, 231, 143), rgb(253, 69, 69), rgb(249, 77, 157));
+    background: linear-gradient(120deg, rgb(238, 35, 130), rgb(193, 108, 216), rgb(91, 23, 174));
     min-height: 100vh;
 }
 
 div {
     position: absolute;
-    box-shadow: 10px 20px 20px rgb(0, 0, 0);
+    box-shadow: 10px 20px 20px rgb(79, 43, 70);
 }
 
 #square {
-    background-color: hsl(309, 76%, 5%); 
+    background-color: hsl(306, 100%, 87%); 
     width: calc(20vw + 10vh);
     height: calc(20vw + 10vh);
     top: 30vh;
@@ -48,7 +48,11 @@ document.addEventListener('mousemove', (e) => {
     //console.log(e.clientX, e.clientY);
 
     const angle = (e.clientX / window.innerWidth) * 360;
-    document.body.style.background = `linear-gradient(${angle}deg, rgb(245, 231, 143), rgb(253, 69, 69), rgb(249, 77, 157))`;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(238, 35, 130), rgb(193, 108, 216), rgb(91, 23, 174))`;
+
+    const displacement = ( e.clientY / window.innerHeight) * 30;
+    const divs = document.getElementsByTagName('div');
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px 5px gray`;
     
 
 });
