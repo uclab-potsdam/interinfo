@@ -13,7 +13,7 @@ body {
 
 div {
     position: absolute;
-    box-shadow: 10px 20px 20px rgb(50, 24, 43);
+    box-shadow: 10px 20px 20px rgb(79, 44, 70);
 }
 
 #square {
@@ -53,7 +53,7 @@ document.addEventListener('mousemove', (e) => {
     const displacement = ( e.clientY / window.innerHeight) * 30;
     const blur = (e.clientY / window.innerHeight) * 20;
     const divs = document.getElementsByTagName('div');
-    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px 5px rgb(50, 24, 43)`;
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(79, 44, 70)`;
     
 
 });
