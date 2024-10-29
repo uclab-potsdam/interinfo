@@ -3,13 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <title>The box model - Interactive Information</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 body {
-font-family: "Rubik";
+    width: 800px;
+    box-sizing: border-box;
+    position: static;
+    text-align: left;
+    font-family: "Inter";
+    color:#313131;
+    background-color:white;
+    padding: 50px 20px 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+a:not(.title) {   
+    color: #5e9eff;
+    transition: color 200ms;
+    text-decoration: underline;
+}
+
+.title {
+    color: #313131;
+    transition: color 200ms;
+    text-decoration: none;
+}
+
+.title:visited {
+    color: #313131;
+    transition: color 200ms;
+    text-decoration: none;
+}
+
+.title:hover {
+    color: #313131;
+    transition: color 200ms;
+    text-decoration: underline;
+}
+
+.title:visited:hover {
+    color: #313131;
+    transition: color 200ms;
+    text-decoration: underline;
+}
+
+a:visited:not(.title) {
+    color: #ff68ff;
+    transition: color 200ms;
+    text-decoration: underline;
+}
+
+a:hover:not(.title) {  
+   color:  #5e9eff;
+   text-decoration:none;
+}
+
+a:hover:visited:not(.title) {  
+   color:  #ff68ff;
+   text-decoration:none;
+}
+
+code {
+    font-family: monospace;
+    font-size: 14px;
+    background: #efefef;
+    border-radius: 4px;
+    padding: .20rem .15rem;
+}
+
+table th, table td {
+    padding: .30rem .150rem;
+    border-radius: 5px;
+    background: #efefef;
+    border: 15px solid #efefef;   
+}
+
+table th:hover, table td:hover {
+    background: #e5e5e5;
+    border: 15px solid #e5e5e5;   
 }
 
 </style>
@@ -68,7 +152,7 @@ font-family: "Rubik";
         </div>
         <section aria-labelledby="block_and_inline_boxes">
             <h2 id="block_and_inline_boxes">
-                <a href="#block_and_inline_boxes">Block and inline boxes</a>
+                <a class="title" href="#block_and_inline_boxes">Block and inline boxes</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -85,7 +169,7 @@ font-family: "Rubik";
                 </p>
                 <p>
                     In general, you can set various values for the display type using the
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">
+                    <a class="test" href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">
                         <code>display</code>
                     </a>
                     property, which can have various values.
@@ -93,8 +177,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="outer_display_type">
-            <h2 id="outer_display_type">
-                <a href="#outer_display_type">Outer display type</a>
+            <h2  id="outer_display_type">
+                <a class="title" href="#outer_display_type">Outer display type</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -175,7 +259,7 @@ font-family: "Rubik";
         </section>
         <section aria-labelledby="inner_display_type">
             <h2 id="inner_display_type">
-                <a href="#inner_display_type">Inner display type</a>
+                <a class="title" href="#inner_display_type">Inner display type</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -228,8 +312,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="examples_of_different_display_types">
-            <h2 id="examples_of_different_display_types">
-                <a href="#examples_of_different_display_types">Examples of different display types</a>
+            <h2  id="examples_of_different_display_types">
+                <a class="title" href="#examples_of_different_display_types">Examples of different display types</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -321,7 +405,7 @@ font-family: "Rubik";
         </section>
         <section aria-labelledby="what_is_the_css_box_model">
             <h2 id="what_is_the_css_box_model">
-                <a href="#what_is_the_css_box_model">What is the CSS box model?</a>
+                <a class="title" class="title" href="#what_is_the_css_box_model">What is the CSS box model?</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -337,7 +421,7 @@ font-family: "Rubik";
         </section>
         <section aria-labelledby="parts_of_a_box">
             <h3 id="parts_of_a_box">
-                <a href="#parts_of_a_box">Parts of a box</a>
+                <a class="title" href="#parts_of_a_box">Parts of a box</a>
             </h3>
             <div class="section-content">
                 <p>Making up a block box in CSS we have the:</p>
@@ -397,7 +481,7 @@ font-family: "Rubik";
         </section>
         <section aria-labelledby="the_standard_css_box_model">
             <h3 id="the_standard_css_box_model">
-                <a href="#the_standard_css_box_model">The standard CSS box model</a>
+                <a class="title" href="#the_standard_css_box_model">The standard CSS box model</a>
             </h3>
             <div class="section-content">
                 <p>
@@ -428,7 +512,7 @@ font-family: "Rubik";
                         <span class="language-name">css</span>
                     </div>
                     <pre class="brush: css notranslate">
-                                        <code>.box {
+                                        <code class="code">.box {
                                           width: 350px;
                                           height: 150px;
                                           margin: 10px;
@@ -460,8 +544,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="the_alternative_css_box_model">
-            <h3 id="the_alternative_css_box_model">
-                <a href="#the_alternative_css_box_model">The alternative CSS box model</a>
+            <h3  id="the_alternative_css_box_model">
+                <a class="title" href="#the_alternative_css_box_model">The alternative CSS box model</a>
             </h3>
             <div class="section-content">
                 <p>In the alternative box model, any width is the width of the visible box on the page. The content area
@@ -545,8 +629,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="playing_with_box_models">
-            <h2 id="playing_with_box_models">
-                <a href="#playing_with_box_models">Playing with box models</a>
+            <h2  id="playing_with_box_models">
+                <a class="title" href="#playing_with_box_models">Playing with box models</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -585,8 +669,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="use_browser_devtools_to_view_the_box_model">
-            <h3 id="use_browser_devtools_to_view_the_box_model">
-                <a href="#use_browser_devtools_to_view_the_box_model">Use browser DevTools to view the box model</a>
+            <h3  id="use_browser_devtools_to_view_the_box_model">
+                <a class="title" href="#use_browser_devtools_to_view_the_box_model">Use browser DevTools to view the box model</a>
             </h3>
             <div class="section-content">
                 <p>
@@ -606,8 +690,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="margins_padding_and_borders">
-            <h2 id="margins_padding_and_borders">
-                <a href="#margins_padding_and_borders">Margins, padding, and borders</a>
+            <h2  id="margins_padding_and_borders">
+                <a class="title" href="#margins_padding_and_borders">Margins, padding, and borders</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -632,8 +716,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="margin">
-            <h3 id="margin">
-                <a href="#margin">Margin</a>
+            <h3  id="margin">
+                <a class="title" href="#margin">Margin</a>
             </h3>
             <div class="section-content">
                 <p>The margin is an invisible space around your box. It pushes other elements away from the box. Margins
@@ -724,8 +808,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="borders">
-            <h3 id="borders">
-                <a href="#borders">Borders</a>
+            <h3  id="borders">
+                <a class="title" href="#borders">Borders</a>
             </h3>
             <div class="section-content">
                 <p>
@@ -863,8 +947,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="padding">
-            <h3 id="padding">
-                <a href="#padding">Padding</a>
+            <h3  id="padding">
+                <a class="title" href="#padding">Padding</a>
             </h3>
             <div class="section-content">
                 <p>The padding sits between the border and the content area and is used to push the content away from
@@ -914,8 +998,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="the_box_model_and_inline_boxes">
-            <h2 id="the_box_model_and_inline_boxes">
-                <a href="#the_box_model_and_inline_boxes">The box model and inline boxes</a>
+            <h2  id="the_box_model_and_inline_boxes">
+                <a class="title" href="#the_box_model_and_inline_boxes">The box model and inline boxes</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -948,8 +1032,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="using_display_inline-block">
-            <h2 id="using_display_inline-block">
-                <a href="#using_display_inline-block">Using display: inline-block</a>
+            <h2  id="using_display_inline-block">
+                <a class="title" href="#using_display_inline-block">Using display: inline-block</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -1050,8 +1134,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="test_your_skills!">
-            <h2 id="test_your_skills!">
-                <a href="#test_your_skills!">Test your skills!</a>
+            <h2  id="test_your_skills!">
+                <a class="title" href="#test_your_skills!">Test your skills!</a>
             </h2>
             <div class="section-content">
                 <p>
@@ -1064,8 +1148,8 @@ font-family: "Rubik";
             </div>
         </section>
         <section aria-labelledby="summary">
-            <h2 id="summary">
-                <a href="#summary">Summary</a>
+            <h2  id="summary">
+                <a class="title" href="#summary">Summary</a>
             </h2>
             <div class="section-content">
                 <p>That's most of what you need to understand about the box model. You may want to return to this lesson

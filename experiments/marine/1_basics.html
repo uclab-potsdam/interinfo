@@ -5,27 +5,61 @@
 <title>The box model - Interactive Information</title>
 <!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
+
+
+
+
+
 <style>
 
 body {
-
-
+    font-family: sans-serif; /* changer la police*/
+    font-size: 15px;
+    background-color: hsl(55, 38%, 94%); 
 }
 
 section {
-
-opacity: .5; 
-padding: 20px; 
-transition: all 1s ease;
-width: 500px
+transition: background-color 0.3s ease, transform 0.3s ease; /* how will the animation take place*/
+text-align: center; /* so the text is centered*/
+background-color: hsl(55, 14%, 83%); /*to make the section pop from the back ground*/
+margin: auto; /* to center the section on the page*/
+border-radius: 15px; /* to round the edges*/
+padding: 20px;  /* so the text doesn't touch the edge of its frame*/
+width: 600px; /* to define the size occupied by each section*/
+list-style-position: inside; /* so the dots of the list stays next to the first word of the text when centered*/
+margin-bottom: 50px; /* spacing each section bloc by 100px*/
+filter: blur(5px); /* blur effect*/
 }
 
-section:hover {
 
-
+section:hover { /* new look after transition*/
+    transform: scale(1.05);
+filter: blur(0px); /* blur effect removal*/
+border: 3px solid #000000; /* to put a black bodred around it*/
 }
+
+a:hover {
+text-decoration:underline; /* so link underline when hovered */
+}
+
+a {
+    color: blue; /* link unvisited yet */
+    text-decoration:wavy;
+}
+
+a:visited {
+    color: purple; /* link visited */
+}
+
 
 </style>
+
+
+
+
+
+
+
 
 </head>
 <body>
@@ -49,7 +83,7 @@ section:hover {
                             <th scope="row">Prerequisites:</th>
                             <td>
                                 <a
-                                    href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/Installing_basic_software">Basic
+                                    href="https://youtu.be/dQw4w9WgXcQ?si=kbnjeJnuIxJAIXPY">Basic
                                     software installed</a>
                                 , basic knowledge of
 
