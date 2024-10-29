@@ -7,13 +7,13 @@
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
+    background: linear-gradient(120deg, rgb(128, 56, 70), rgb(50, 196, 67));
     min-height: 100vh;
 }
 
 div {
     position: absolute;
-    box-shadow: 10px 20px 20px gray;
+    box-shadow: 0px 0px 20px gray;
 }
 
 #square {
@@ -33,6 +33,7 @@ div {
     left: 40vw;
 }
 
+
 </style>
 </head>
 <body>
@@ -45,6 +46,14 @@ div {
 document.addEventListener('mousemove', (e) => {
     
     // use e.clientX and e.clientY to get current mouse pointer position
+    // console.log(e.clientX, e.clientY);
+
+    const angle = (e.clientX / window.innerWidth) * 360;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(128, 56, 70), rgb(50, 196, 67), rgb(128, 30, 130), rgb(40, 70, 200)) `;
+    const displacement = (e.clientY /window.innerHeight) * 300;
+    const blur = (e.clientY /window.innerHeight) * 200;
+    const divs = document.getElementsByTagName('div');
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px lightblue`;   
 
 });
 
