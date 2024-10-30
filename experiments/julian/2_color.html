@@ -51,12 +51,12 @@ document.addEventListener('mousemove', (e) => {
 const angle = (e.clientX / window.innerWidth) * 360;
 document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 0), rgb(48 159 0))`;
 
-const spread = (e.clientY / window.innerHeight) * 40;
-const blur = (e.clientY / window.innerHeight) * 15;
+const spread = (e.clientY / window.innerHeight) * 20;
+const blur = (e.clientY / window.innerHeight) * 50;
 const divs = document.getElementsByTagName("div");
-// Center shadow with increased spread
+// translucent center shadow with spread
 for (let div of divs) {
-    div.style.boxShadow = `0 0 ${blur}px ${spread}px hsla(330, 100%, 71%, 80%)`; 
+    div.style.boxShadow = `0 0 ${blur}px ${spread}px hsla(330, 100%, 71%, 95%)`; 
   }
 
 });
