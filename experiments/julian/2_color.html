@@ -46,18 +46,40 @@ document.addEventListener('mousemove', (e) => {
     
     // use e.clientX and e.clientY to get current mouse pointer position
 
-// console.log(e.clientX, e.clientY);
+console.log(e.clientX, e.clientY);
 
-const angle = (e.clientX / window.innerWidth) * 360;
-document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 0), rgb(48 159 0))`;
+  // Calculate the relationship between the cursor and the center of the screen
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  const dx = e.clientX - centerX;
+  const dy = e.clientY - centerY;
+  
+  // Use atan2 to calculate the angle in degrees, add 90 degrees so that cursor is centered in "light source" rather than center of gradient
+  const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 180 + 90;
 
-const spread = (e.clientY / window.innerHeight) * 20;
-const blur = (e.clientY / window.innerHeight) * 50;
+  // Use sqrt to calculate distance from the cursor to the center of the screen
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  // switched the order of the colours in order to have cursor in center of "light source"
+document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 188), rgb(48 159 196))`;
+
+// Normalize the distance as a proportion of the maximum possible distance from center to corner
+const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+  const distanceRatio = distance / maxDistance;
+
+  // Scale blur and spread based on distance from center
+  const blur = distanceRatio * 20;
+  const spread = distanceRatio * 30;
+
+// Invert xOffset and yOffset to cast shadow in the opposite direction of cursor position by using negative sign before double bracket
+const xOffset = -((e.clientX - window.innerWidth / 2) / (window.innerWidth / 2)) * 50;
+const yOffset = -((e.clientY - window.innerHeight / 2) / (window.innerHeight / 2)) * 50;
+  
 const divs = document.getElementsByTagName("div");
-// translucent center shadow with spread
-for (let div of divs) {
-    div.style.boxShadow = `0 0 ${blur}px ${spread}px hsla(330, 100%, 71%, 95%)`; 
-  }
+
+// translucent centered shadow, circling object based on mouse movement, with blur and spread
+for (let div of divs)
+    div.style.boxShadow = `${xOffset}px ${yOffset}px ${blur}px ${spread}px hsla(0, 0%, 0%, 50%)`; 
 
 });
 
