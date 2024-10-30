@@ -64,9 +64,9 @@ document.body.style.background = `radial-gradient(circle at ${e.clientX}px ${e.c
 const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
   const distanceRatio = distance / maxDistance;
 
-  // Scale blur and spread based on distance from center. Numbers (in this case, 0) define size of blur and spread, are just an aesthetic choice 
-  const blur = distanceRatio * 0;
-  const spread = distanceRatio * 0;
+  // Scale blur and spread based on distance from center. Numbers define size of blur and spread, are just an aesthetic choice 
+  const blur = distanceRatio * 8;
+  const spread = distanceRatio * 8;
 
 // define x and y offset to cast shadows in 360 degrees relative to cursor position (both relative to proximity to center and angle to center). Invert xOffset and yOffset to cast shadow in the opposite direction of cursor position/light source by using negative sign before double bracket. * 40 here is also aesthetic
   const xOffset = -((dx / centerX) * 40);
@@ -74,7 +74,7 @@ const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
   
 const divs = document.getElementsByTagName("div");
 
-// translucent centered shadow, circling object based on mouse movement, with option to add blur and spread by adjusting 0 values above
+// translucent centered shadow, circling object based on mouse movement, with blur and spread 
 for (let div of divs)
     div.style.boxShadow = `${xOffset}px ${yOffset}px ${blur}px ${spread}px hsla(0, 0%, 0%, 25%)`; 
 
