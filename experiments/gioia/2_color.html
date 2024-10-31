@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colors in motion - Interactive Information</title>
 
 <style>
@@ -33,11 +34,15 @@ div {
     left: 40vw;
 }
 
+bg1 {
+    background-color: lightblue;
+}
+
 </style>
 </head>
 <body>
 
-<div id="square"> </div>
+<div id="square"></div>
 <div id="circle"> </div>
 
 <script>
@@ -54,9 +59,27 @@ document.addEventListener('mousemove', (e) => {
     const divs = document.getElementsByTagName('div');
     for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(48 159 196)`;
 
-    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 50%, 50%)`;
-    document.getElementById("circle").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
+    const square = document.getElementById("square");
+    square.style.transition = "background-color 0.3s";
 
+    square.addEventListener("mouseover", () => {
+        square.style.backgroundColor = "lightblue";
+    })
+
+    square.addEventListener("mouseout", () => {
+        square.style.backgroundColor = "hsl(275, 58%, 62%)";
+    })
+
+    const circle = document.getElementById("circle");
+    circle.style.transition = "background-color 0.3s";
+
+    circle.addEventListener("mouseover", () => {
+        circle.style.backgroundColor = "lightblue";
+    })
+
+    circle.addEventListener("mouseout", () => {
+        circle.style.backgroundColor = "hsla(162, 63%, 57%, 66%)";
+    })
 });
 
 </script>
