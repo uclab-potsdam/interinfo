@@ -50,13 +50,13 @@ document.addEventListener('mousemove', (e) => {
     const angle = (e.clientX / window.innerWidth) * 360;
     document.body.style.background = `linear-gradient(${angle}deg,rgb(244 220 340), rgb(300 20 28))`;
    
-    const displacement = (e.clientY / window.innerHeight) * 30;
-    const blur = (e.clientY / window.innerHeight) * 20;
+    const displacement = (e.clientY / window.innerHeight) * 200;
+    const blur = (e.clientY / window.innerHeight) * 40;
     const divs = document.getElementsByTagName('div');
     for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px red`;
 
-    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
-    document.getElementById("circle").style.backgroundColor = `hsl(${angle}, 20%, 43%)`;
+    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 24%, 78%)`;
+    document.getElementById("circle").style.backgroundColor = `hsl(${angle}, 47%, 70%)`;
 });
 
 </script>
