@@ -22,6 +22,7 @@ div {
     height: calc(20vw + 10vh);
     top: 30vh;
     left: 30vw;
+    box-shadow: 5px 10px 10px hsla(275, 58%, 20%, 50%);
 }
 
 #circle {
@@ -48,12 +49,11 @@ document.addEventListener('mousemove', (e) => {
     // console.log ( e.clientX, e.clientY)
 
     const angle= ( e.clientX / window.innerWidth) * 360;
-    const x= e.clientX
-    const y= e.clientY
-    const displacement= ( e.clientY / window.innerWidth) * 30
+    const displacement= ( e.clientY / window.innerWidth) * 30;
+    const blur= (e.clientY/window.innerWidth)* 60;
     const divs = document.getElementsByTagName ('div')
     for ( let div of divs) div.style.boxShadow = ` ${displacement}px ${displacement}px 5px gray`;
-    
+
 });
 
 
