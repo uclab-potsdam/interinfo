@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assigning colors - Interactive Information</title>
+
+<style>
+
+:root {
+    --text-color: mistyrose;
+}
+
+body {
+    background-color: lightgray;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0; 
+}
+
+div {
+    background-color: hsl(162 43% 58%);
+    border: 5px purple dotted;
+    outline: 10px red dashed;
+    outline-offset: 20px;
+
+    width: 200px;
+    height: 200px;
+}
+
+p {
+    color: var(--text-color);
+    font-size: 45px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+p::selection {
+  color: white;
+  background-color: orange;
+}
+
+h1 {
+    color: var(--text-color);
+    position: absolute;
+    top: 0;
+    font-family: sans-serif;
+}
+
+</style>
+</head>
+<body>
+    <h1>A little example to practice color...</h1>
+<div>
+<p>Hello world!</p>
+</div>
+
+</body>
+</html>

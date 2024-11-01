@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colors in motion - Interactive Information</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* 灰白色背景 */
+            min-height: 100vh;
+            overflow: hidden; /* 防止滾動條出現 */
+            position: relative; /* 使子元素可以絕對定位 */
+        }
+
+        div {
+            position: absolute;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px); /* 磨砂質感 */
+        }
+
+        #square {
+            background-color: rgba(0, 0, 0, 0.7); /* 半透明黑色 */
+            width: calc(20vw + 10vh);
+            height: calc(20vw + 10vh);
+            top: 30vh;
+            left: 30vw;
+        }
+
+        #circle {
+            background-color: rgba(255, 255, 255, 0.7); /* 半透明白色 */
+            width: calc(20vw + 16vh);
+            height: calc(20vw + 16vh);
+            border-radius: calc(10vw + 8vh);
+            top: 40vh;
+            left: 40vw;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: white;
+            border-radius: 5px;
+            padding: 5px;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* 使畫布不影響滑鼠事件 */
+        }
+    </style>
+</head>
+<body>
+
+<div id="square"></div>
+<div id="circle"></div>
+<div class="tooltip" id="tooltip"></div>
+<canvas id="trailCanvas"></canvas>
+
+<script>
+    const tooltip = document.getElementById('tooltip');
+    const square = document.getElementById('square');
+    const circle = document.getElementById('circle');
+    const canvas = document.getElementById('trailCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const messages = {
+        square: ["Hallo!", "Wie geht's?", "Guten Morgen!", "Guten Tag!"],
+        circle: ["Tschüss!", "Gute Nacht!", "Bis später!", "Viel Glück!"]
+    };
+
+    const colors = ["#ffbe0b", "#fb5607", "#ff006e", "#8338ec", "#3a86ff"];
+    let colorChangeInterval;
+    let hoverTimer;
+
+    // 設置畫布大小
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    function startColorChange() {
+        let colorIndex = 0;
+        tooltip.style.display = 'block'; // 確保工具提示顯示
+        colorChangeInterval = setInterval(() => {
+            tooltip.style.backgroundColor = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length; // 循環顏色
+        }, 1000); // 每秒更換一次顏色
+    }
+
+    function stopColorChange() {
+        clearInterval(colorChangeInterval);
+        tooltip.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // 隨機顏色
+    }
+
+    function showTooltip(message, e) {
+        tooltip.innerText = message;
+        positionTooltip(e);
+        tooltip.style.display = 'block'; // 立即顯示工具提示
+    }
+
+    function randomMessage(type) {
+        const messagesArray = messages[type];
+        return messagesArray[Math.floor(Math.random() * messagesArray.length)];
+    }
+
+    square.addEventListener('mouseenter', (e) => {
+        showTooltip(randomMessage('square'), e);
+        hoverTimer = setTimeout(startColorChange, 2000); // 2秒後開始顏色變化
+    });
+
+    circle.addEventListener('mouseenter', (e) => {
+        showTooltip(randomMessage('circle'), e);
+        hoverTimer = setTimeout(startColorChange, 2000); // 2秒後開始顏色變化
+    });
+
+    square.addEventListener('mousemove', positionTooltip);
+    circle.addEventListener('mousemove', positionTooltip);
+
+    square.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+        clearTimeout(hoverTimer);
+        stopColorChange();
+    });
+
+    circle.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+        clearTimeout(hoverTimer);
+        stopColorChange();
+    });
+
+    function positionTooltip(e) {
+        tooltip.style.left = e.pageX + 10 + 'px'; // 在滑鼠右側顯示
+        tooltip.style.top = e.pageY + 10 + 'px';  // 在滑鼠下方顯示
+    }
+
+    let lastMouseX, lastMouseY;
+
+    document.addEventListener('mousemove', (e) => {
+        // 檢查滑鼠是否在 square 或 circle 的區域內
+        if (!square.contains(e.target) && !circle.contains(e.target)) {
+            ctx.strokeStyle = colors[Math.floor(Math.random() * colors.length)]; // 隨機顏色
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            if (lastMouseX !== undefined && lastMouseY !== undefined) {
+                ctx.moveTo(lastMouseX, lastMouseY);
+            }
+            ctx.lineTo(e.pageX, e.pageY);
+            ctx.stroke();
+            lastMouseX = e.pageX;
+            lastMouseY = e.pageY;
+        } else {
+            // 重置 lastMouseX 和 lastMouseY
+            lastMouseX = undefined;
+            lastMouseY = undefined;
+        }
+    });
+</script>
+
+</body>
+</html>
