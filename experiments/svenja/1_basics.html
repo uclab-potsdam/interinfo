@@ -3,31 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>The box model - Interactive Information</title>
-<!-- Source: https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model -->
 
 <style>
 
-h1{font-family:serif;
-font: size 100px;
-color: rgb(0, 54, 47);}
-
-padding{scroll-behavior: smooth;}
-
-body{background-color: lavenderblush;
-display: flex;
-justify-content: center;
-height: 100vh;
-margin: 0}
-
-div{background-color: blanchedalmond;
-border: 5px purple dotted;
-outline: 10px lavender;
-outline-offset: 20px;
-widht: 200px;
-height: 200px;}
-
-
-</style>
+    :root {
+        --text: hsl(0, 0%, 10%);
+        --box: hsl(0, 0%, 80%);
+        --bg: hsl(0, 0%, 90%);
+    }
+    
+    @media (prefers-color-scheme: dark) {
+    :root {
+        --text: hsl(0, 0%, 90%);
+        --box: hsl(0, 0%, 20%);
+        --bg: hsl(0, 0%, 10%);
+    }
+    }
+    
+    body {
+        background-color: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+        margin: 0; 
+    }
+    
+    div {
+        background-color: var(--box);
+        width: calc( 30vh + 30vw );
+        height: calc( 30vh + 30vw );
+        border-radius: calc( 15vh + 15vw );
+    }
+    
+    p {
+        color: var(--text);
+        font-size: calc( 8vh + 8vw );
+        line-height: 1em;
+        text-align: center;
+        font-family: monospace;
+    }
+    </style>
 
 </head>
 <body>
