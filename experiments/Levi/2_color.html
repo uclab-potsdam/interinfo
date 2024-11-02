@@ -42,19 +42,24 @@ div {
 
 <script>
 
-document.addEventListener('mousemove', (e) => {
-    
-    // use e.clientX and e.clientY to get current mouse pointer position
+    document.addEventListener('mousemove', (e) => {
+        
+        // use e.clientX and e.clientY to get current mouse pointer position
 
-const angle = (e.clientX / window.innerWidth) * 360;
-document.body.style.background = `linear-gradient(${angle}deg, rgb(255, 254, 246), rgb(81, 81, 81))`;
-const displacement = ( e.clientY / window.innerHeight) * 30;
-const blurr = ( e.clientY / window.innerHeight) * 20;
-const divs = document.getElementsByTagName('div');
-for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blurr}px black`;
+        let xPercentage = e.clientX / window.innerWidth;
+        let yPercentage = e.clientY / window.innerHeight;
 
-document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
-});
+        const angle = xPercentage * 360;
+        const displacement = yPercentage * 30;
+        const blurr = yPercentage * 20;
+
+        const divs = document.getElementsByTagName('div');
+
+        document.body.style.background = `linear-gradient(${angle}deg, rgb(255, 254, 246), rgb(81, 81, 81))`;
+        document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
+        document.getElementById("circle").style.backgroundColor = `hsla(0, 0%, 19%, ${1-yPercentage})`;
+        for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blurr}px black`;
+    });
 
 </script>
 
