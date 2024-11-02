@@ -75,7 +75,7 @@ document.addEventListener('mousemove', (e) => {
     const normalizedDistance = distance / maxDistance;
 
     // 設定陰影的位移量、模糊度和透明度
-    const displacement = normalizedDistance * 50;        // 位移強度
+    const displacement = 1 - normalizedDistance * 50;        // 位移強度
     const blur = normalizedDistance * 60;                // 模糊強度
     const opacity = 1 - normalizedDistance;              // 距離越遠透明度越高，越近透明度越低
 
