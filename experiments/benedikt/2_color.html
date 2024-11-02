@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Colors in motion - Interactive Information</title>
-
 <style>
 
 body {
-    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
+    background: linear-gradient( rgb(244, 239, 188), rgb(48, 159, 196));
     min-height: 100vh;
 }
 
@@ -43,14 +42,26 @@ div {
 <script>
 
 document.addEventListener('mousemove', (e) => {
-    
     // use e.clientX and e.clientY to get current mouse pointer position
+    const angle = ( e.clientX / window.innerWidth) * 360;
 
-// console.log(e.clientX, e.clientY)
+    const x = e.clientX;
+    const y = e.clientY;
 
-const angle = (e.clientX / window.innerWidth) * 360;
-document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 188), rgb(48 159 196))`;
+    const displacement = ( e.clientY / window.innerWidth) * 50;
+    const divs = document.getElementsByTagName('div');
 
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    const offsetX = (centerX - x) * 0.04;
+    const offsetY = (centerY - y) * 0.04;
+
+    for (let div of divs) div.style.boxShadow = `${offsetX}px ${offsetY}px 30px #898989 `;
+    
+    document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgb(244, 239, 188), rgb(${y}, 159, 196) `;    
+    
+    
 });
 
 </script>

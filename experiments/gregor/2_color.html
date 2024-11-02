@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors in motion - Interactive Information</title>
+
+<style>
+
+body {
+    background: #EA99B0;
+    min-height: 100vh;
+}
+
+div {
+    position: absolute;
+}
+
+#square {
+    background-color: hsl(347, 64%, 49%); 
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    border-radius: calc( 0vw + 0vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: hsla(233, 89%, 60%, 50%);
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+}
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+<script>
+
+document.addEventListener('mousemove', (e) => {
+    
+    // gradient effect for the background
+
+    const angle = (e.clientX / window.innerWidth) * 360;
+
+    document.body.style.background = `radial-gradient(#A689FA, #EA99B0 ${angle}%)`;
+
+    //  changing the borderRadius to shift between circle and square using seperate degrees
+
+    const circleRadius = 5 / (e.clientX / window.innerWidth);
+    const squareRadius = (e.clientX / window.innerWidth) * 360;
+
+    document.getElementById("circle").style.borderRadius = `${circleRadius}px`;
+    document.getElementById("square").style.borderRadius = `${squareRadius}px`;
+
+    // different boxShadow effects & colors for both objects
+
+    const displacement = (e.clientY / window.innerHeight) * 40;
+    const blur = (e.clientY / window.innerHeight) * 50;
+
+    document.getElementById("circle").style.boxShadow = `${displacement}px ${displacement}px ${blur}px hsla(255, 92%, 28%, 25%)`;
+    document.getElementById("square").style.boxShadow = `-${displacement}px -${displacement}px ${blur}px hsla(347, 64%, 36%, 50%)`;
+
+});
+
+</script>
+
+</body>
+</html>
