@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors in motion - Interactive Information</title>
+
+<style>
+
+body {
+ background: radial-gradient(rgb(244, 239, 188), rgb(48, 159, 196));
+ min-height: 100vh;
+} 
+
+div {
+    position: absolute;
+    box-shadow: 10px 20px 20px gray;
+}
+
+#square {
+    background-color: hsl(275, 58%, 62%); 
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: hsla(162, 63%, 57%, 66%);
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+}
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+<script>
+    document.addEventListener('mousemove', (e) => {
+        // Background color change based on mouse position
+        const angle = ( e.clientX / window.innerWidth) * 360;
+        const x = e.clientX
+        const y = e.clientY
+        
+        const hue = 180 + (e.clientX / window.innerWidth) * 60;
+        const saturation = 80 + (e.clientY / window.innerHeight) * 20;
+        document.body.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, hsl(${hue}, ${saturation}%, 70%), hsl(${hue + 30}, 60%, 75%))`;
+
+        const displacement = (e.clientY / window.innerHeight) * 30;
+        const divs = document.getElementsByTagName(`div`);
+        for (let div of divs)div.style.boxShadow = `${displacement}px ${displacement}px 5px darkblue`;
+    });
+
+
+    function darkenOnHover(element, hue, lightness) {
+    element.addEventListener('mouseover', () => {
+        element.style.backgroundColor = `hsl(${hue}, 58%, ${lightness - 20}%)`; // Darkens by 20%
+    });
+    element.addEventListener('mouseout', () => {
+        element.style.backgroundColor = `hsl(${hue}, 58%, ${lightness}%)`; // Resets to original lightness
+    });
+}
+
+const square = document.getElementById('square');
+darkenOnHover(square, 275, 62);
+
+const circle = document.getElementById('circle');
+darkenOnHover(circle, 162, 57);
+
+
+</script>
+
+</body>
+</html>
+

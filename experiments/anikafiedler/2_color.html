@@ -7,7 +7,7 @@
 <style>
 
 body {
-    background: linear-gradient(-120deg, rgb(244, 239, 188), rgb(48, 159, 196));
+    background: linear-gradient(120deg,salmon, sandybrown);
     min-height: 100vh;
 }
 
@@ -17,32 +17,31 @@ div {
 }
 
 #square {
-    background-color: rgba(0, 7, 25, 10);
+    background-color: hsl(275, 58%, 62%); 
     width: calc(20vw + 10vh);
     height: calc(20vw + 10vh);
     top: 30vh;
     left: 30vw;
-    transition: 2s;
-}
-
-#square:hover {
-    transform: scale(0.5) translate(-20px, -20px);
+    border: 2px mediumpurple dotted;
+    outline: 5px mistyrose dashed;
+    outline-offset: 20px;
 }
 
 #circle {
-    background-color: rgb(214, 255, 90);
-    opacity: 80%;
+    background-color: hsla(162, 63%, 57%, 66%);
     width: calc(20vw + 16vh);
     height: calc(20vw + 16vh);
     border-radius: calc( 10vw + 8vh);
     top: 40vh;
     left: 40vw;
-    transition: 2s;
-    
 }
 
-#circle:hover {
-    transform: scale(0.5) translate(20px, 20px);
+h1 {
+    color: color-mix(in hsl, hsl(0, 91%, 57%), hsl(29, 94%, 49%) );
+    text-shadow: .1em .1em .2em rgb(0, 0, 0);
+    font-family: sans-serif;
+    font-size: 10vh;
+    text-align: center;
 }
 
 </style>
@@ -51,24 +50,27 @@ div {
 
 <div id="square"> </div>
 <div id="circle"> </div>
-
+<h1>Heading</h1>
 <script>
 
 document.addEventListener('mousemove', (e) => {
     
     // use e.clientX and e.clientY to get current mouse pointer position
-    console.log(e.clientX, e.clientY)
+    
+    console. log(e.clientX, e.clientY)
+
     const angle = ( e.clientX / window.innerWidth) * 360;
-    document.body.style.background = `linear-gradient(${angle}deg, rgb(0, 0, 0) 15%, rgb(1, 67, 128), rgb(52, 134, 119))`;
+    document.body.style.background = `linear-gradient(${angle}deg, salmon, sandybrown)`;
 
     const displacement = ( e.clientY / window.innerHeight) * 30;
     const blur = ( e.clientY / window.innerHeight) * 20;
     const divs = document.getElementsByTagName('div');
     for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px black`;
 
+    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
+    
 });
 
-//254 239 188   48 159 196//
 </script>
 
 </body>

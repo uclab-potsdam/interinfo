@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Colors in motion - Interactive Information</title>
+
 <style>
 
 body {
-    background: linear-gradient( rgb(244, 239, 188), rgb(48, 159, 196));
+    background: linear-gradient(120deg, rgb(244, 239, 188), rgb(48, 159, 196));
     min-height: 100vh;
 }
 
@@ -42,26 +43,20 @@ div {
 <script>
 
 document.addEventListener('mousemove', (e) => {
+    
     // use e.clientX and e.clientY to get current mouse pointer position
-    const angle = ( e.clientX / window.innerWidth) * 360;
+    // console.log(e.clientX, e.clientY);
 
-    const x = e.clientX;
-    const y = e.clientY;
-
-    const displacement = ( e.clientY / window.innerWidth) * 50;
+    const angle = (e.clientX / window.innerWidth) * 360;
+    document.body.style.background = `linear-gradient(${angle}deg,rgb(244 220 340), rgb(300 20 28))`;
+   
+    const displacement = (e.clientY / window.innerHeight) * 200;
+    const blur = (e.clientY / window.innerHeight) * 40;
     const divs = document.getElementsByTagName('div');
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px red`;
 
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    
-    const offsetX = (centerX - x) * 0.04;
-    const offsetY = (centerY - y) * 0.04;
-
-    for (let div of divs) div.style.boxShadow = `${offsetX}px ${offsetY}px 30px #898989 `;
-    
-    document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgb(244, 239, 188), rgb(${y}, 159, 196) `;    
-    
-    
+    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 24%, 78%)`;
+    document.getElementById("circle").style.backgroundColor = `hsl(${angle}, 47%, 70%)`;
 });
 
 </script>
