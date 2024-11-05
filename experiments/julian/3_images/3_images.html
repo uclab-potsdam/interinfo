@@ -2,68 +2,122 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Images of a haunted solar system - Interactive Information</title>
+<title>🪐👻 Images of a Haunted Solar System - Interactive Information</title>
 
 <style>
 
+body {
+    background-image: url('./images/stars.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container for the planets */
+.planet-row {
+    display: flex;                /* Aligns items in a row */
+    gap: 20px;                    /* Space between each figure */
+    overflow-x: auto;             /* Allows horizontal scrolling on small screens */
+    padding: 10px;
+}
+
+figure {
+    text-align: center;
+    margin: 0;
+    
+}
+
 img {
-    width: 100px;
+    height: 100px;              /* Fixed height for all images */
+    width: auto;                /* Auto width to maintain aspect ratio */
+    transition: height 1s, filter 1s; /* Smooth transition for height and filter */
+    filter: blur(5px) grayscale(100);          /* Initial blur effect */
 }
 
 img:hover {
-    width: 400px;
-    transition: all 1s;
-    filter: invert(1) sepia(1);
+    height: 300px;              /* Enlarge on hover */
+    filter: blur(0) grayscale(0);            /* Remove blur on hover */
+    content: url('./images/ghost.png');
 }
+
+/* Caption styling */
+figcaption {
+            color: white;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            margin-top: 8px;
+            transition: opacity 1s; /* Smooth transition for caption opacity */
+        }
+
+        /* Hide the original caption and show "Boo" on hover */
+        figure:hover figcaption {
+            opacity: 0; /* Fade out original caption */
+        }
+
+        figure:hover::after {
+            content: "Boo!"; /* Show "Boo" when hovering */
+            color: white; /* Caption color */
+            font-family: Helvetica, sans-serif;
+            font-size: 120px;
+            position: absolute;
+            bottom: 0; /* Position the caption at the bottom */
+            left: 50%; /* Center the caption */
+            transform: translateX(-50%); /* Center alignment */
+            opacity: 1; /* Make it visible */
+            transition: opacity 1s; /* Smooth transition for the new caption */
+        }
 
 </style>
 </head>
 <body>
 
-    
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
-    <figcaption>Mercury</figcaption>
-</figure>
+<div class="planet-row">
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
-    <figcaption>Venus</figcaption>
-</figure>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
-    <figcaption>Earth</figcaption>
-</figure>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
-    <figcaption>Mars</figcaption>
-</figure>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
-    <figcaption>Jupiter</figcaption>
-</figure>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
-    <figcaption>Saturn</figcaption>
-</figure>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
-    <figcaption>Uranus</figcaption>
-</figure>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
-    <figcaption>Neptune</figcaption>
-</figure>
-
-<script>
-
-</script>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
+</div>
 
 </body>
 </html>
