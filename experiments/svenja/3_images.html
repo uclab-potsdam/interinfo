@@ -5,15 +5,19 @@
 <title>Images of a haunted solar system - Interactive Information</title>
 
 
-
 <style>
+
+
+body {
+    background-image: url(../../examples/images/stars.jpg);
+    display: flex;
+}
+
+
+h1{position:unset;color:aliceblue; font-size: 400%;font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;}
 
 figcaption{color: aliceblue;font-size: 300%;font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;}
 body {
-background-image: url("stars.jpg");
-background-position: center;
-background-repeat: repeat;
-background-attachment: fixed;
 display:flex;
 justify-content: center;
 align-items: center;
@@ -21,25 +25,23 @@ height: 100vh;
 margin: 0;
 }
 
-figure:nth-of-type(3)
-{size: 10px;}
+figure{height:10vh;}
 
 img:hover{filter:brightness(130%);
 height:400px;}
 
 img{
 transition:all 1s;
-height: 10vh;
+height: 100%;
 transform: scale(1);}
+
 
 </style>
 
 </header>
 <body>
-    <h1> 
-        Planet System
-        </h1>
-        
+    <h1>Planet System</h1>
+
 <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
     <figcaption>Mercury</figcaption>
