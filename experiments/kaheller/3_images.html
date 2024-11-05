@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Images of a Haunted Solar System - Interactive Information</title>
+    <style>
+        /* Stil für die Miniaturbilder */
+        img {
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Stil für das Vollbild-Overlay */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: visibility 0s, opacity 0.4s ease, transform 0.4s ease;
+            z-index: 1000;
+        }
+        .fullscreen-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            transition: transform 0.4s ease;
+        }
+
+        /* Sichtbarkeit für Vollbildmodus aktivieren */
+        .fullscreen-overlay.show {
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Schließen-Button im Vollbildmodus */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            z-index: 1100;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Images of a Haunted Solar System</h1>
+
+    <!-- Planetenbilder mit Beschriftungen -->
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury" onclick="openFullscreen(this)">
+        <figcaption>Mercury</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus" onclick="openFullscreen(this)">
+        <figcaption>Venus</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth" onclick="openFullscreen(this)">
+        <figcaption>Earth</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars" onclick="openFullscreen(this)">
+        <figcaption>Mars</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter" onclick="openFullscreen(this)">
+        <figcaption>Jupiter</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn" onclick="openFullscreen(this)">
+        <figcaption>Saturn</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus" onclick="openFullscreen(this)">
+        <figcaption>Uranus</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune" onclick="openFullscreen(this)">
+        <figcaption>Neptune</figcaption>
+    </figure>
+
+    <!-- Vollbild-Overlay -->
+    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen()">
+        <span class="close-btn" onclick="closeFullscreen()">&#10006;</span>
+        <img id="fullscreenImage" src="" alt="Vollbild Bild">
+    </div>
+
+    <script>
+        function openFullscreen(element) {
+            // Das Bild im Vollbildüberlagerungs-Container anzeigen
+            const overlay = document.getElementById("fullscreenOverlay");
+            const fullscreenImg = document.getElementById("fullscreenImage");
+            fullscreenImg.src = element.src;
+            overlay.classList.add("show");
+        }
+
+        function closeFullscreen() {
+            // Vollbildmodus schließen
+            const overlay = document.getElementById("fullscreenOverlay");
+            overlay.classList.remove("show");
+        }
+    </script>
+
+</body>
+</html>
