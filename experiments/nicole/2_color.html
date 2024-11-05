@@ -17,7 +17,7 @@ div {
 }
 
 #square {
-    background-color: hsl(294, 100%, 91%); 
+    background-color: hsl(294, 100%, 87%); 
     width: calc(20vw + 10vh);
     height: calc(20vw + 10vh);
     top: 30vh;
@@ -54,6 +54,8 @@ document.addEventListener('mousemove', (e) => {
     const blur = (e.clientY / window.innerHeight) * 50;
     const divs = document.getElementsByTagName('div');
     for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(79, 44, 70)`;
+
+    document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
     
 
 });
