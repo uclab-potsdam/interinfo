@@ -6,15 +6,34 @@
 
 <style>
 
-img {
-    width: 200px;
-    transition: all 1s;
-    filter: hue-rotate(180deg) contrast(200%);
+body {
+    background-image: url(../../examples/images/stars.jpg);
+    display: flex;
+}
+
+* {
+    transition: all 5s;
+}
+
+figure {
+    position: absolute;
+}
+
+figure:nth-of-type(3) {
+    border: 1px red solid;
+}
+
+figcaption {
+    color: white;
+    text-align: center;
+}
+
+img {    
+    width: 5vw;    
 }
 
 img:hover {
     filter: none;
-    width: 400px;    
 }
 
 </style>
@@ -63,6 +82,23 @@ img:hover {
 </figure>
 
 <script>
+
+const positionPlanets = function() {
+    const planets = document.getElementsByTagName("figure");
+
+    for (const planet of planets) {
+        const x = Math.random()*95;
+        const y = Math.random()*95;
+        planet.style.left = x+"vw";
+        planet.style.top = y+"vh";
+    };
+}
+
+positionPlanets();
+
+setInterval(positionPlanets, 5000);
+
+
 
 </script>
 
