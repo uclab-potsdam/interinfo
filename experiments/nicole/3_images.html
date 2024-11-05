@@ -5,7 +5,6 @@
 <title>Images of a haunted solar system - Interactive Information</title>
 
 <style>
-
 body {
     background-image: url(file:///C:/Users/nicol/OneDrive/Desktop/Interinfo/examples/images/stars.jpg);
     background-size: cover;
@@ -18,48 +17,56 @@ body {
 
 .container {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 600px;
+    height: 600px;
 }
 
 img {
-    width: 100px;
+    width: 150px; /* Size of the images */
     position: absolute;
     top: 50%;
     left: 50%;
-    transform-origin: 50% 150px; /* Adjust the radius as necessary */
+    transform-origin: 0 0; /* Adjust the origin to the center */
+    transition: all 1s;
+    filter: grayscale(1);
 }
 
 #mercury {
-    transform: rotate(0deg) translate(-50%, -50%);
+    transform: rotate(0deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #venus {
-    transform: rotate(45deg) translate(-50%, -50%);
+    transform: rotate(45deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #earth {
-    transform: rotate(90deg) translate(-50%, -50%);
+    transform: rotate(90deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #mars {
-    transform: rotate(135deg) translate(-50%, -50%);
+    transform: rotate(135deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #jupiter {
-    transform: rotate(180deg) translate(-50%, -50%);
+    transform: rotate(180deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #saturn {
-    transform: rotate(225deg) translate(-50%, -50%);
+    transform: rotate(225deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #uranus {
-    transform: rotate(270deg) translate(-50%, -50%);
+    transform: rotate(270deg) translate(0, -300px) translate(-50%, -50%);
 }
 
 #neptune {
-    transform: rotate(315deg) translate(-50%, -50%);
+    transform: rotate(315deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+img:hover {
+    
+    filter: grayscale(0);
+    transform: scale(2);
 }
 
 figcaption {
