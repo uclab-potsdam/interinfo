@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+<style>
+
+body {
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: black;
+    font-size: 50px;
+    cursor:url(cursor.svg),auto;
+}
+
+img {
+    width: 200px;
+    filter: grayscale(100%) blur(5px);
+    border-radius: 100px;
+}
+
+
+figure:hover{
+    color: white;
+    background-image: url(starfield.png);
+    transition: all 1s;
+    
+}
+
+figure:hover img{
+    transition: all 1s;
+    width: 400px;
+    filter: unset;
+}
+
+</style>
+</head>
+<body>
+  <div>
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+            <figcaption>Mercury</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+            <figcaption>Venus</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+            <figcaption>Earth</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+            <figcaption>Mars</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+            <figcaption>Jupiter</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+            <figcaption>Saturn</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+            <figcaption>Uranus</figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+            <figcaption>Neptune</figcaption>
+        </figure>
+  </div>
+
+<script>
+    document.addEventListener('mousemove', (e) => {
+        
+    });
+
+</script>
+
+</body>
+</html>
