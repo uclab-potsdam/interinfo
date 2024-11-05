@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors in motion - Interactive Information</title>
+
+<style>
+
+body {
+    background: linear-gradient(120deg, rgb(26, 72, 11), rgb(82, 160, 49), rgb(238, 215, 63), rgb(25, 53, 196));
+    min-height: 150vh;
+}
+
+div {
+    position:absolute;
+    box-shadow: 10px 20px 20px rgb(156, 197, 54);
+}
+
+#square {
+    background-color: hsl(0, 0%, 0%); 
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+    border: 5px rgb(255, 255, 255) double;
+}
+
+#circle {
+    background-color: hsla(0, 0%, 0%, 0.66);
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+    border: 5px rgb(255, 255, 255) double;
+}
+
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+<script>
+
+document.addEventListener('mousemove', (e) => {
+    
+    // use e.clientX and e.clientY to get current mouse pointer position
+
+//console.log (e.clientX, e.clientY); 
+   const angle =(e.clientX / window.innerWidth) *380;
+   document.body.style.background =`linear-gradient(${angle}deg, rgb(255, 0, 0), rgb(0, 0, 255), rgb(0, 255, 0), rgb(0, 0, 0))`;
+
+   //const displacement = (e.clientY / window.innerHeight) *30;
+   //const blur = (e.clientY / window.innerHeight) *20;
+   //const divs = document.getElementsByTagName('div');
+   //for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px`;
+   
+
+   document.getElementById("square").style.boxShadow = `15px 15px 15px hsl(${angle} 90% 50%)`;
+   document.getElementById("circle").style.boxShadow = `15px 15px 15px hsl(${angle} 90% 50%)`;
+ 
+});
+
+</script>
+
+</body>
+</html>
