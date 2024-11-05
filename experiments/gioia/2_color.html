@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colors in motion - Interactive Information</title>
 
 <style>
@@ -33,11 +34,15 @@ div {
     left: 40vw;
 }
 
+bg1 {
+    background-color: lightblue;
+}
+
 </style>
 </head>
 <body>
 
-<div id="square"> </div>
+<div id="square"></div>
 <div id="circle"> </div>
 
 <script>
@@ -45,16 +50,36 @@ div {
 document.addEventListener('mousemove', (e) => {
     
     // use e.clientX and e.clientY to get current mouse pointer position
-    //console.log(e.clientX, e.clientY);
 
-    const angle = (e.clientX/window.innerWidth)*360;
-    document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 188), rgb(48 159 196))`;
+    const angle = ( e.clientX / window.innerWidth) * 180;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(244 239 188), rgb(48 159 196)) `;
 
-    const displacement = (e.clientY/window.innerHeight)*30;
-    const blur = (e.clientY/window.innerHeight)*20;
+    const displacement = ( e.clientY / window.innerHeight) * 30;
+    const blur = ( e.clientY / window.innerHeight) * 10;
     const divs = document.getElementsByTagName('div');
-    for(let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px gray`;
+    for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px rgb(48 159 196)`;
 
+    const square = document.getElementById("square");
+    square.style.transition = "background-color 0.3s";
+
+    square.addEventListener("mouseover", () => {
+        square.style.backgroundColor = "lightblue";
+    })
+
+    square.addEventListener("mouseout", () => {
+        square.style.backgroundColor = "hsl(275, 58%, 62%)";
+    })
+
+    const circle = document.getElementById("circle");
+    circle.style.transition = "background-color 0.3s";
+
+    circle.addEventListener("mouseover", () => {
+        circle.style.backgroundColor = "lightblue";
+    })
+
+    circle.addEventListener("mouseout", () => {
+        circle.style.backgroundColor = "hsla(162, 63%, 57%, 66%)";
+    })
 });
 
 </script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Colors in motion - Interactive Information</title>
+<h1>Near & Far</h1>
+<style>
+
+body {
+    background: linear-gradient(120deg, rgb(244, 188, 230), rgb(48, 159, 196));
+    min-height: 100vh;
+}
+
+div {
+    position: absolute;
+    box-shadow: 10px 20px 20px gray;
+}
+
+h1{
+    text-align: center;
+    color:aliceblue;
+    font-weight: 300;
+}
+
+#square {
+    background-color: rgb(244, 188, 230); 
+    width: calc(10vw + 10vh);
+    height: calc(10vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: rgb(48, 159, 196);
+    width: calc(10vw + 16vh);
+    height: calc(10vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+}
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+<script>
+
+document.addEventListener('mousemove', (e) => {
+    
+    // use e.clientX and e.clientY to get current mouse pointer position
+    // console.log(e.clientX, e.clientY);
+
+    // 滑鼠移動會改變背景漸層色
+    const angle = (e.clientX / window.innerWidth) * 360;
+    document.body.style.background = `linear-gradient(${angle}deg, rgb(244, 188, 230), rgb(48, 159, 196))`;
+    
+    // const displacement = (e.clientY / window.innerHeight) * 30;
+    // const blur = (e.clientY / window.innerHeight) * 20;
+    // const divs = document.getElementsByTagName('div');
+    // for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px black`;
+
+    document.addEventListener('mousemove', (e) => {
+    const divs = document.getElementsByTagName('div');
+
+    // 計算滑鼠到視窗中心的距離
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
+
+    // 正規化距離，將距離轉換為 0 到 1 的比例
+    const maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+    const normalizedDistance = distance / maxDistance;
+
+    // 設定陰影的位移量、模糊度和透明度
+    const displacement = 1 - normalizedDistance * 50;        // 位移強度
+    const blur = normalizedDistance * 60;                // 模糊強度
+    const opacity = 1 - normalizedDistance;              // 距離越遠透明度越高，越近透明度越低
+
+    // 計算陰影的 x 和 y 偏移量
+    const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+    const offsetX = Math.cos(angle) * displacement;
+    const offsetY = Math.sin(angle) * displacement;
+
+    // 取得 square 和 circle 元素
+    const square = document.getElementById('square');
+    const circle = document.getElementById('circle');
+
+    // 只改變 square 的透明度
+    square.style.boxShadow = `${offsetX}px ${offsetY}px ${blur}px rgba(0, 0, 0, ${opacity})`;
+    square.style.opacity = opacity; // 改變方形的透明度
+
+    // 保持 circle 的透明度不變
+    circle.style.boxShadow = `${offsetX}px ${offsetY}px ${blur}px rgba(0, 0, 0, 1)`; // 1 為不透明
+    circle.style.opacity = 1; // 保持圓形的透明度為不透明
+    });
+
+    
+
+});
+
+
+</script>
+
+</body>
+</html>
