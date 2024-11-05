@@ -22,11 +22,13 @@ body {
 }
 
 img {
-    width: 150px; /* Increase the size of the images */
+    width: 150px; /* Size of the images */
     position: absolute;
     top: 50%;
     left: 50%;
     transform-origin: 0 0; /* Adjust the origin to the center */
+    transition: transform 0.5s, width 0.5s; /* Transition for smooth animation */
+    filter: grayscale(1);
 }
 
 #mercury {
@@ -59,6 +61,12 @@ img {
 
 #neptune {
     transform: rotate(315deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+img:hover {
+    transform: translate(-50%, -50%) scale(1.5); /* Move to center and increase size */
+    z-index: 1; /* Bring to front */
+    filter: grayscale(0)
 }
 
 figcaption {
