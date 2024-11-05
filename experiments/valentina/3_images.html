@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+<style>
+body {
+    background: radial-gradient(yellow, black);
+    min-height: 400vh;
+    color: white;
+    font-family: Copperplate, fantasy;
+}
+figure {
+    position: absolute;
+    z-index: 1;
+    filter: grayscale(0.8) brightness(0.6) contrast(1.4) hue-rotate(100deg) saturate(2);
+    mix-blend-mode: difference
+
+}
+
+img {
+    width: 100px;
+}
+
+figure:hover {
+    transform: scale(2.3);
+    z-index: 2;
+    filter: none;
+    mix-blend-mode: none
+}
+*{
+    transition: transform 1s, filter 1s;
+}
+
+</style>
+</head>
+<body>
+
+    
+    <figure style="top: 15%; left: 5%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure>
+    
+    <figure style="top: 75%; left: 7%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
+    
+    <figure style="top: 40%; left: 20%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
+    
+    <figure style="top: 60%; left: 38%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
+    
+    <figure style="top: 20%; left: 50%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
+    
+    <figure style="top: 70%; left: 62%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
+    
+    <figure style="top: 50%; left: 80%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
+    
+    <figure style="top: 10%; left: 90%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
+
+
+</script>
+
+</body>
+</html>
+
+
+ 
