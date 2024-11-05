@@ -41,23 +41,37 @@ div {
 <div id="circle"> </div>
 
 <script>
+    document.addEventListener('mousemove', (e) => {
+        // Background color change based on mouse position
+        const angle = ( e.clientX / window.innerWidth) * 360;
+        const x = e.clientX
+        const y = e.clientY
+        
+        const hue = 180 + (e.clientX / window.innerWidth) * 60;
+        const saturation = 80 + (e.clientY / window.innerHeight) * 20;
+        document.body.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, hsl(${hue}, ${saturation}%, 70%), hsl(${hue + 30}, 60%, 75%))`;
 
-document.addEventListener('mousemove', (e) => {
-    
-    // use e.clientX and e.clientY to get current mouse pointer position
-   // console.log(e.clientX, e.clientY)
-
-    const angle = ( e.clientX / window.innerWidth) * 360;
-    const x = e.clientX
-    const y = e.clientY
-    document.body.style.background = `radial-gradient(circle at ${x}px ${y}px, rgb(244 239 188), rgb(48 159 196)) `;
-    
-    const displacement = (e.clientY / window.innerHeight) * 30;
-    const divs = document.getElementsByTagName(`div`);
-    for (let div of divs)div.style.boxShadow = `${displacement}px ${displacement}px 5px darkblue`;
+        const displacement = (e.clientY / window.innerHeight) * 30;
+        const divs = document.getElementsByTagName(`div`);
+        for (let div of divs)div.style.boxShadow = `${displacement}px ${displacement}px 5px darkblue`;
+    });
 
 
-});
+    function darkenOnHover(element, hue, lightness) {
+    element.addEventListener('mouseover', () => {
+        element.style.backgroundColor = `hsl(${hue}, 58%, ${lightness - 20}%)`; // Darkens by 20%
+    });
+    element.addEventListener('mouseout', () => {
+        element.style.backgroundColor = `hsl(${hue}, 58%, ${lightness}%)`; // Resets to original lightness
+    });
+}
+
+const square = document.getElementById('square');
+darkenOnHover(square, 275, 62);
+
+const circle = document.getElementById('circle');
+darkenOnHover(circle, 162, 57);
+
 
 </script>
 
