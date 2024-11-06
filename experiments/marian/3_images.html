@@ -6,24 +6,37 @@
 
 <style>
 
-img {
-    height: 120px;
-}
-
 body {
-    background-color: black;
+    background-image: url(../../examples/images/stars.jpg);
+    display: flex;
 }
 
-figcaption {
-    font-family: sans-serif;
-    color: white;
-    font-weight: bolder;
+* {
+    transition: all 5s;
 }
 
 figure {
-    width: 40vw;
+    position: absolute;
+    mix-blend-mode: difference;
+    width: 15vw;
+}
+
+figure:nth-of-type(3) {
+    border: 1px red solid;
+}
+
+figure figcaption {
+    color: white;
     text-align: center;
-    margin-bottom: 15vh;
+    font-family: sans-serif;
+}
+
+img {    
+    width: 100%;
+}
+
+img:hover {
+    filter: none;
 }
 
 </style>
@@ -72,6 +85,25 @@ figure {
 </figure>
 
 <script>
+
+const positionPlanets = function() {
+    const planets = document.getElementsByTagName("figure");
+
+    for (const planet of planets) {
+        const x = Math.random()*90;
+        const y = Math.random()*90;
+        const w = 5+Math.random()*20;
+        planet.style.left = x+"vw";
+        planet.style.top = y+"vh";
+        planet.style.width = w+"vw";
+    };
+}
+
+positionPlanets();
+
+setInterval(positionPlanets, 5000);
+
+
 
 </script>
 

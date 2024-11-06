@@ -6,30 +6,61 @@
 
 <style>
 
-img {
-    height: 120px;
-}
+body{
+    background-image: url(../../examples/images/stars.jpg);
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
 
-body {
-    background-color: black;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 
-figcaption {
-    font-family: sans-serif;
-    color: white;
-    font-weight: bolder;
 }
 
 figure {
-    width: 40vw;
+    color: black;
     text-align: center;
-    margin-bottom: 15vh;
+    font-size: 18px;
+    font-family: serif;
+    transition: color 0.3s ease, font-size 0.3s ease;
 }
+
+figure:hover{
+    color:white;
+    font-size: 32px;
+}
+
+img {
+    width: 200px;
+    height: auto;
+    transition: all 1s;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    font-size: 18px;
+    color: white;
+
+}
+
+img:hover {
+    filter: none;
+    width: 400px;
+
+    border: 4px white solid;
+    border-radius: 50%;
+    padding: 10px;
+
+    transform: rotate(360deg);
+
+}
+
+
 
 </style>
 </head>
 <body>
-
     
 <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">

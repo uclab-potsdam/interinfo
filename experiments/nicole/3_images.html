@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+<style>
+body {
+    background-image: url(file:///C:/Users/nicol/OneDrive/Desktop/Interinfo/examples/images/stars.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+}
+
+img {
+    width: 150px; /* Size of the images */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0; /* Adjust the origin to the center */
+    transition: all 1s;
+    filter: grayscale(1);
+}
+
+#mercury {
+    transform: rotate(0deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#venus {
+    transform: rotate(45deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#earth {
+    transform: rotate(90deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#mars {
+    transform: rotate(135deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#jupiter {
+    transform: rotate(180deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#saturn {
+    transform: rotate(225deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#uranus {
+    transform: rotate(270deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+#neptune {
+    transform: rotate(315deg) translate(0, -300px) translate(-50%, -50%);
+}
+
+img:hover {
+    
+    filter: grayscale(0);
+    transform: scale(2);
+}
+
+figcaption {
+    display: none;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <figure>
+        <img id="mercury" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure>
+
+    <figure>
+        <img id="venus" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
+
+    <figure>
+        <img id="earth" src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
+
+    <figure>
+        <img id="mars" src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
+
+    <figure>
+        <img id="jupiter" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
+
+    <figure>
+        <img id="saturn" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
+
+    <figure>
+        <img id="uranus" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
+
+    <figure>
+        <img id="neptune" src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
+</div>
+
+</body>
+</html>

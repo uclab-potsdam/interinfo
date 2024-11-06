@@ -6,31 +6,55 @@
 
 <style>
 
-img {
-    height: 120px;
-}
-
 body {
-    background-color: black;
+    background-image: url(stars.jpg);
+    color: white;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-wrap: wrap;
 }
 
-figcaption {
-    font-family: sans-serif;
-    color: white;
-    font-weight: bolder;
+* {
+    transition: all ease 5s;
 }
 
 figure {
-    width: 40vw;
+    position: absolute;
+    mix-blend-mode: screen;
+    margin: 20px;
+}
+
+figure:hover {
+    transform: scale(1.5);
+}
+
+img {
+    width: 100%;
+    mix-blend-mode: screen;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+
+figure:hover img {
+    filter: grayscale(0%);
+}
+
+figcaption {
+    margin-top: 8px;
     text-align: center;
-    margin-bottom: 15vh;
+    font-size: 1em;
+    color: white;
 }
 
 </style>
 </head>
 <body>
 
-    
 <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
     <figcaption>Mercury</figcaption>
@@ -73,7 +97,26 @@ figure {
 
 <script>
 
-</script>
-
-</body>
-</html>
+    const positionPlanets = function() {
+        const planets = document.getElementsByTagName("figure");
+    
+        for (const planet of planets) {
+            const x = Math.random()*90;
+            const y = Math.random()*90;
+            const w = 5+Math.random()*20;
+            planet.style.left = x+"vw";
+            planet.style.top = y+"vh";
+            planet.style.width = w+"vw";
+        };
+    }
+    
+    positionPlanets();
+    
+    setInterval(positionPlanets, 5000);
+    
+    
+    
+    </script>
+    
+    </body>
+    </html>
