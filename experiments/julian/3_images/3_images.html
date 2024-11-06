@@ -23,21 +23,19 @@ body {
 .planet-row {
     display: flex;                /* Aligns items in a row */
     gap: 20px;                    /* Space between each figure */
-    overflow-x: auto;             /* Allows horizontal scrolling on small screens */
     padding: 10px;
 }
 
 figure {
     text-align: center;
     margin: 0;
-    
 }
 
 img {
     height: 100px;              /* Fixed height for all images */
     width: auto;                /* Auto width to maintain aspect ratio */
-    transition: height 1s, filter 1s; /* Smooth transition for height and filter */
-    filter: blur(5px) grayscale(100);          /* Initial blur effect */
+    transition: height .2s, filter .2s; /* Smooth transition for height and filter */
+    filter: blur(3px) grayscale(100);          /* Initial blur effect */
 }
 
 img:hover {
@@ -52,17 +50,11 @@ figcaption {
             font-family: Helvetica, sans-serif;
             font-size: 16px;
             margin-top: 8px;
-            transition: opacity 1s; /* Smooth transition for caption opacity */
-        }
-
-        /* Hide the original caption and show "Boo" on hover */
-        figure:hover figcaption {
-            opacity: 0; /* Fade out original caption */
         }
 
         figure:hover::after {
             content: "Boo!"; /* Show "Boo" when hovering */
-            color: white; /* Caption color */
+            color: red; /* Caption color */
             font-family: Helvetica, sans-serif;
             font-size: 120px;
             position: absolute;
