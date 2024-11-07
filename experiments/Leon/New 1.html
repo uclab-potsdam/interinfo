@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> Colors in Motion - Lichtenberg Inspired</title>
+
+<style>
+body {
+    background: radial-gradient(circle, rgba(244, 239, 188, 0.9), rgba(48, 159, 196, 0.9));
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+div {
+    position: absolute;
+    box-shadow: 10px 20px 20px gray;
+}
+
+#square {
+    background-color: hsl(275, 58%, 62%);
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: hsla(162, 63%, 57%, 66%);
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc(10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+}
+
+/* Lichtenberg-inspired pattern overlay */
+#lichtenberg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at center, transparent, transparent 20%, rgba(0, 0, 0, 0.2) 21%, transparent 22%) center center / 3% 3%;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+}
+
+</style>
+</head>
+<body>
+
+<div id="square"></div>
+<div id="circle"></div>
+<div id="lichtenberg-overlay"></div>
+
+<script>
+document.addEventListener('mousemove', (e) => {
+    // Get the cursor's X and Y positions
+    const cursorX = e.clientX;
+    const cursorY = e.clientY;
+
+    // Set background gradient centered on the cursor
+    document.body.style.background = `radial-gradient(circle at ${cursorX}px ${cursorY}px, rgba(244, 239, 188, 0.9), rgba(48, 159, 196, 0.9))`;
+
+    // Calculate center of the screen
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    // Calculate distance between cursor and center
+    const dx = cursorX - centerX;
+    const dy = cursorY - centerY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // Determine maximum distance possible
+    const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+    const distanceRatio = distance / maxDistance;
+
+    // Calculate blur and spread based on distance
+    const blur = distanceRatio * 8;
+    const spread = distanceRatio * 8;
+
+    // Calculate shadow offsets to give 3D effect
+    const xOffset = -((dx / centerX) * 40);
+    const yOffset = -((dy / centerY) * 40);
+
+    // Apply shadow effect to all divs
+    const divs = document.getElementsByTagName("div");
+    for (let div of divs) {
+        div.style.boxShadow = `${xOffset}px ${yOffset}px ${blur}px ${spread}px hsla(0, 0%, 0%, 25%)`;
+    }
+});
+</script>
+
+</body>
+</html>

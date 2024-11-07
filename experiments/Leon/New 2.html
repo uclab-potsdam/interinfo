@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title> Colors in motion - Interactive Information</title>
+
+<style>
+
+body {
+    background: radial-gradient(circle, rgb(244, 239, 188), rgb(48, 159, 196));
+    min-height: 100vh;
+}
+
+div {
+    position: absolute;
+    box-shadow: 10px 20px 20px gray;
+}
+
+#square {
+    background-color: hsl(275, 58%, 62%); 
+    width: calc(20vw + 10vh);
+    height: calc(20vw + 10vh);
+    top: 30vh;
+    left: 30vw;
+}
+
+#circle {
+    background-color: repeating-linear-gradient(135deg,
+    width: calc(20vw + 16vh);
+    height: calc(20vw + 16vh);
+    border-radius: calc( 10vw + 8vh);
+    top: 40vh;
+    left: 40vw;
+    transition: box-shadow 0.3s;
+}
+
+
+</style>
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+<script>
+
+document.addEventListener('mousemove', (e) => {
+    
+    // use e.clientX and e.clientY to get current mouse pointer position
+
+console.log(e.clientX, e.clientY);
+
+// Set a radial gradient centered on the cursor. Reversed the order of the colours in order to have cursor in center of "light source"
+document.body.style.background = `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, rgb(244, 239, 188), rgb(48, 159, 196))`;
+
+  // Calculate and define the relationship between the cursor and the center of the screen: Divide height and width of screen by 2 to find the x and y positions of the middle point. Use this to define center x and y. Subtract that from position of cursor to define the difference (dx and dy)
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  const dx = e.clientX - centerX;
+  const dy = e.clientY - centerY;
+
+  // Use sqrt and to calculate the square root of squared d values. This makes values positive and uses pythagorean theorem to find the distance from the cursor to the center of the screen without factoring in negative (down or left) values.
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+// Define distance ratio as a proportion of the maximum possible distance from center to corner
+const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+  const distanceRatio = distance / maxDistance;
+
+  // Scale blur and spread based on distance from center. Numbers define size of blur and spread, are just an aesthetic choice 
+  const blur = distanceRatio * 8;
+  const spread = distanceRatio * 30;
+
+// define x and y offset to cast shadows in 360 degrees relative to cursor position (both relative to proximity to center and angle to center). Invert xOffset and yOffset to cast shadow in the opposite direction of cursor position/light source by using negative sign before double bracket. * 40 here is also aesthetic
+  const xOffset = -((dx / centerX) * 80);
+  const yOffset = -((dy / centerY) * 80);
+  
+const divs = document.getElementsByTagName("div");
+
+// translucent centered shadow, circling object based on mouse movement, with blur and spread 
+for (let div of divs)
+    div.style.boxShadow = `${xOffset}px ${yOffset}px ${blur}px ${spread}px hsla(0, 0%, 0%, 25%)`; 
+
+});
+
+</script>
+
+</body>
+</html>

@@ -8,9 +8,11 @@
 
 body {
     text-align: center;
+    color: unset;
     font-family:Arial, Helvetica, sans-serif;
     background-color: black;
     font-size: 50px;
+    letter-spacing: 400px;
     cursor:url(cursor.svg),auto;
 }
 
@@ -24,7 +26,9 @@ img {
 figure:hover{
     color: white;
     background-image: url(starfield.png);
-    transition: all 1s;
+    transition: all 1s ease-in-out;
+    letter-spacing: normal;
+    text-align: center;
     
 }
 
@@ -33,6 +37,9 @@ figure:hover img{
     width: 400px;
     filter: unset;
 }
+
+
+
 
 </style>
 </head>

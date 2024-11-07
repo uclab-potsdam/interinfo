@@ -6,7 +6,8 @@
 
 <style>
 body {
-    background-image: url(stars.jpg);
+    background: radial-gradient(yellow, black);
+    min-height: 400vh;
     color: white;
     font-family: Copperplate, fantasy;
 }
@@ -14,7 +15,7 @@ figure {
     position: absolute;
     z-index: 1;
     filter: grayscale(0.8) brightness(0.6) contrast(1.4) hue-rotate(100deg) saturate(2);
-    mix-blend-mode: difference;
+    mix-blend-mode: difference
 
 }
 
@@ -23,9 +24,10 @@ img {
 }
 
 figure:hover {
-    transform: scale(3);
+    transform: scale(2.3);
     z-index: 2;
     filter: none;
+    mix-blend-mode: none
 }
 *{
     transition: transform 1s, filter 1s;
@@ -36,7 +38,7 @@ figure:hover {
 <body>
 
     
-    <figure style="top: 10%; left: 3%;">
+    <figure style="top: 15%; left: 5%;">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
         <figcaption>Mercury</figcaption>
     </figure>
@@ -75,8 +77,12 @@ figure:hover {
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
         <figcaption>Neptune</figcaption>
     </figure>
-    
-    </body>
-    </html>
+
+
+</script>
+
+</body>
+</html>
+
 
  
