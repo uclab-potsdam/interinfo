@@ -7,84 +7,185 @@
 <style>
 
 body {
-    background-image: url("stars.jpg") center repeat fixed;
-    background-position: center;
-    background-repeat: repeat;
-    background-attachment: fixed;
+            margin: 0;
+            overflow: hidden;
+            background-image: url('https://cdn.pixabay.com/photo/2015/09/18/17/03/space-942667_960_720.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            cursor: none; 
+            background-color: black;
+        }
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+    
+        figure {
+            height: 10vh;
+            position: absolute;
+            text-align: center;
+        }
 
-figure {
-    height: 10vh;
-}
-figcaption {
-color: white;
-text-align: center;
-}
+        figure img {
+            width: 100px;
+            border-radius: 50%;
+            transition: all 1s;
+        }
 
-img {
-    width: 100px;
+    
+        figure:hover img {
+            filter: invert(1) sepia(100%) brightness(0.75);
+        }
 
-}
+        figcaption {
+            color: white;
+        }
 
-img { transition: all 1s;}
-img:hover {
-    filter: invert(1) sepia(100%) brightness(.75);
-}
+    
+        .cursor {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            animation: glow 1s infinite alternate;
+        }
 
-</style>
+    
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.9);
+            }
+        }
+
+    
+        .trail {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: fadeTrail 0.6s forwards;
+        }
+
+    
+        @keyframes fadeTrail {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2) translate(50px, 50px);
+            }
+        }
+
+        
+        @keyframes float {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(100px) translateY(100px);
+            }
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+        }
+
+        
+        .planet {
+            animation: float 10s infinite ease-in-out;
+        }
+
+       
+        #mercury { top: 10%; left: 10%; animation-duration: 12s; }
+        #venus { top: 20%; left: 30%; animation-duration: 15s; }
+        #earth { top: 25%; left: 50%; animation-duration: 18s; }
+        #mars { top: 40%; left: 70%; animation-duration: 14s; }
+        #jupiter { top: 60%; left: 20%; animation-duration: 20s; }
+        #saturn { top: 70%; left: 40%; animation-duration: 25s; }
+        #uranus { top: 50%; left: 80%; animation-duration: 22s; }
+        #neptune { top: 80%; left: 10%; animation-duration: 30s; }
+
+    </style>
 </head>
 <body>
 
     
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
-    <figcaption>Mercury</figcaption>
-</figure>
+    <div class="cursor"></div>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
-    <figcaption>Venus</figcaption>
-</figure>
+   
+    <figure id="mercury" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
-    <figcaption>Earth</figcaption>
-</figure>
+    <figure id="venus" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
-    <figcaption>Mars</figcaption>
-</figure>
+    <figure id="earth" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
-    <figcaption>Jupiter</figcaption>
-</figure>
+    <figure id="mars" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
-    <figcaption>Saturn</figcaption>
-</figure>
+    <figure id="jupiter" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
-    <figcaption>Uranus</figcaption>
-</figure>
+    <figure id="saturn" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
-    <figcaption>Neptune</figcaption>
-</figure>
+    <figure id="uranus" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
 
-<script>
+    <figure id="neptune" class="planet">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
 
-</script>
+    <script>
+        
+        const cursor = document.querySelector('.cursor');
+
+        
+        document.addEventListener('mousemove', (e) => {
+            // Update the position of the custom cursor
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+
+        
+            const trail = document.createElement('div');
+            trail.classList.add('trail');
+            trail.style.left = `${e.pageX}px`;
+            trail.style.top = `${e.pageY}px`;
+
+        
+            document.body.appendChild(trail);
+            setTimeout(() => {
+                trail.remove();
+            }, 600); // After 600ms, remove the trail element
+        });
+        
+    </script>
 
 
 </body>
