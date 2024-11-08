@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+<title>Solar System Gallery - Spooky Edition</title>
+<style>
+  body {
+    background-image: url('Background image.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+  }
+
+  
+
+  .planet__item {
+    position: absolute;
+    transition: box-shadow 0.5s;
+    overflow: hidden;
+  }
+
+  /* Positioning the planets based on distance */
+  .planet__item[data-planet="mercury"] { top: 20%; left: 5%; }
+  .planet__item[data-planet="venus"] { top: 40%; left: 15%; }
+  .planet__item[data-planet="earth"] { top: 30%; left: 30%; }
+  .planet__item[data-planet="mars"] { top: 50%; left: 45%; }
+  .planet__item[data-planet="jupiter"] { top: 10%; left: 60%; }
+  .planet__item[data-planet="saturn"] { top: 60%; left: 75%; }
+  .planet__item[data-planet="uranus"] { top: 35%; left: 80%; }
+  .planet__item[data-planet="neptune"] { top: 20%; left: 90%; }
+
+  
+
+  
+
+  .ripped-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: none;
+    object-fit: contain; /* Ensure the planet fits inside the container */
+  }
+
+  /* Blood drop animation for planet name */
+  .planet__item:hover .blood-drip {
+    visibility: visible;
+    animation: bloodDripAnimation 2.4s forwards;
+  }
+
+  .planet__item:hover .ripped-image {
+  filter: grayscale(100%) brightness(0.8) sepia(1) hue-rotate(-50deg) saturate(3) opacity(0.9);
+}
+
+  @keyframes bloodDripAnimation {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+  }
+
+
+
+  .ripped-border-container {
+    display: inline-block;
+    padding: 20px;
+    position: relative;
+    z-index: 1; /* Ensure blood-drip can be layered correctly */
+    border-radius: 100px;
+    width: 60px; /* Set a specific width */
+    height: 60px; /* Set a specific height */
+  }
+
+  .ripped-border-container::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: url('outline2.webp'); /* Use an image of a torn paper edge */
+    z-index: -2; /* Ensure background stays behind the content */
+    border-radius: 10px;
+    background-size: cover;
+  }
+
+  .blood-drip {
+    position: absolute;
+    bottom: -10px; /* Align with the bottom edge of outline2 */
+    left: 20%;
+    transform: translateX(-50%); /* Center it horizontally */
+    z-index: 0; /* Adjust to make sure it's above the container but below other important elements */
+    visibility: hidden;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'blood crow';
+    color: rgb(216, 11, 11);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+
+</style>
+</head>
+<body>
+
+<!-- Mercury -->
+<div class="planet__item" data-planet="mercury">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Mercury" class="ripped-image">
+    <div class="blood-drip">Mercury</div>
+  </div>
+</div>
+
+<!-- Venus -->
+<div class="planet__item" data-planet="venus">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Venus" class="ripped-image">
+    <div class="blood-drip">Venus</div>
+  </div>
+</div>
+
+<!-- Earth -->
+<div class="planet__item" data-planet="earth">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Earth" class="ripped-image">
+    <div class="blood-drip">Earth</div>
+  </div>
+</div>
+
+<!-- Mars -->
+<div class="planet__item" data-planet="mars">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Mars" class="ripped-image">
+    <div class="blood-drip">Mars</div>
+  </div>
+</div>
+
+<!-- Jupiter -->
+<div class="planet__item" data-planet="jupiter">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Jupiter" class="ripped-image">
+    <div class="blood-drip">Jupiter</div>
+  </div>
+</div>
+
+<!-- Saturn -->
+<div class="planet__item" data-planet="saturn">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Saturn" class="ripped-image">
+    <div class="blood-drip">Saturn</div>
+  </div>
+</div>
+
+<!-- Uranus -->
+<div class="planet__item" data-planet="uranus">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Uranus" class="ripped-image">
+    <div class="blood-drip">Uranus</div>
+  </div>
+</div>
+
+<!-- Neptune -->
+<div class="planet__item" data-planet="neptune">
+  <div class="ripped-border-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Neptune" class="ripped-image">
+    <div class="blood-drip">Neptune</div>
+  </div>
+</div>
+
+</body>
+</html>
