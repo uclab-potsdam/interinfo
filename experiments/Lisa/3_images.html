@@ -6,34 +6,20 @@
 
 <style>
 img {
-    width: 100px;
+    width: 150px;
+    transition:cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s;
+    filter: hue-rotate(90deg)
 }
 body{
     background-image: url("../../examples/images/stars.jpg");
     background-size:contain;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    transition: all 250ms ease;
+    justify-content:first baseline;
+    align-items:last baseline;
+    height: 50vh;
+    transition: all 100ms ease;
+    display: flex;
      }
-     img {
-        transition: all 1s;
-     }
-     figure:nth-of-type(1){
-        width: 50px;
-        margin-left: 900px;
-        display: flex;
-        align-items: center;
-        border-width: 1px;
-        border-style: double;
-        border-color: rgb(red, green, blue);
-        padding-left: 20px;
-        padding-right: 85px;
-        padding-top: 10px;
-        padding-bottom: 15px;
-     }
-
+    
     
 </style> 
 </head>
