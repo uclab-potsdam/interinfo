@@ -6,19 +6,49 @@
 
 <style>
 
+.column {
+  float: left;
+  width: 40%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 img {
-    height: 120px;
+    height: 20vh;
+    transition: all 2s;
+}
+
+img.active {
+   height: 80vh;
+}
+
+#saturn.active {
+    height: 50vh;
+}
+
+text {
+    opacity: 0%;
+    transition: all 2s;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+text.active {
+    opacity: 75%;
 }
 
 body {
     background-color: black;
-}
-
-figcaption {
     font-family: sans-serif;
     color: white;
     font-weight: bolder;
 }
+
 
 figure {
     width: 40vw;
@@ -26,53 +56,323 @@ figure {
     margin-bottom: 15vh;
 }
 
+h1 {
+    font-family: sans-serif;
+    font-weight:bolder;
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+p {
+    font-family: sans-serif;
+    font-weight: lighter;
+    text-align: center;
+    margin-bottom: 15vh;
+    font-style: italic;
+    opacity: 30%;
+}
+
 </style>
 </head>
 <body>
 
-    
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
-    <figcaption>Mercury</figcaption>
-</figure>
+<h1>Ever wanted to know more about the unseteling <br> places of our solar system...?</h1>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
-    <figcaption>Venus</figcaption>
-</figure>
+<p>Just scroll through the page and click on a planet to reveal some information about it.<br>
+have fun and let me know if you learned something new!</p>
+ 
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
-    <figcaption>Earth</figcaption>
-</figure>
+<planet class="row">
+    <figure class="column">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure> 
+    <text class="column">
+        <b>Mercury</b> is the closest planet to the Sun, making it one of the<br>
+        most extreme environments in our solar system. On its sunlit<br>
+        side, temperatures soar to about 400°C, while the side facing<br>
+        away from the Sun can plunge to -180°C.<br>
+        With almost no atmosphere, Mercury cannot distribute heat,<br> 
+        resulting in dramatic temperature differences across its surface.<br><br>
+        This lack of atmosphere means that Mercury can't retain<br>
+        water, which would evaporate almost instantly, ruling out<br>
+        the possibility of life. An atmosphere would also shield the<br>
+        surface from incoming meteoroids, but without one, Mercury<br>
+        is heavily cratered from impacts over millions of years.<br>
+        As Mercury cooled rapidly after its formation, its crust<br>
+        contracted, creating large ridges and cliffs across its<br>
+        surface.<br><br>
+        Mercury's rocky, cratered, and canyon-filled landscape gives<br>
+        it a resemblance to our Moon. With such extreme<br>
+        temperatures, no breathable air, and no water, Mercury<br>
+        remains one of the least hospitable places for life in the<br>
+        solar system.<br><br>
+        It's a reminder of the stark and varied environments planets<br>
+        can have so close to a star.
+    </text>
+</planet>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
-    <figcaption>Mars</figcaption>
-</figure>
+<planet class="row">
+    <figure class="column">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
-    <figcaption>Jupiter</figcaption>
-</figure>
+    <text class="column">
+        <b>Venus</b> is the second planet from the Sun and has an<br>
+        incredibly dense, carbon dioxide-rich atmosphere that drives<br>
+        surface temperatures over 460°C — even hotter than Mercury,<br>
+        despite being further from the Sun.<br><br>
+        Unlike most planets, Venus has no moons. Some scientists<br>
+        hypothesize that it may have once had a moon that was pulled<br>
+        away by the Sun’s strong gravitational forces. Venus’s thick<br>
+        clouds make it impossible to see the planet’s surface<br>
+        directly. These clouds trap heat, creating an intensely<br>
+        volcanic environment, revealed only by radar from<br>
+        specialized satellites.<br><br>
+        Further adding to Venus’s hostile conditions is a heavy<br>
+        atmosphere that creates crushing air pressure, equivalent to<br>
+        being nearly a kilometer underwater on Earth, alongside<br>
+        sulfuric acid rain that would destroy most organic materials.<br>
+        Long ago, Venus was thought to hold the potential for life,<br>
+        so the discovery of its scorching, inhospitable surface came<br>
+        as a major disappointment for scientists. Today, Venus stands<br>
+        as a stark reminder of the powerful effects of a runaway<br>
+        greenhouse effect.
+</text>
+</planet>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
-    <figcaption>Saturn</figcaption>
-</figure>
+<planet class="row">
+    <figure class="column">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
-    <figcaption>Uranus</figcaption>
-</figure>
+    <text class="column">
+        <b>Earth</b> is the third planet from the Sun and the only one<br>
+        known to support intelligent life. Positioned in the Sun’s<br>
+        “habitable zone,” Earth’s temperatures are ideal for<br>
+        sustaining liquid water, a key ingredient for life.<br><br>
+        But the distance from the Sun is only part of the story.<br>
+        Earth’s atmosphere, with its balanced mix of gases, not only<br>
+        provides breathable air but also serves as a protective<br>
+        shield from meteoroids and harmful solar radiation. Our<br>
+        planet has undergone significant transformations, from its<br>
+        fiery, collision-filled beginnings to the formation of our<br>
+        Moon, through dramatic shifts in climate, including ice ages<br>
+        and floods, all of which have shaped its diverse ecosystems.<br><br>
+        As urban light pollution dims our view of the night sky, the<br>
+        stars shine most brightly in remote areas. Additionally, the<br>
+        growing number of satellites orbiting Earth contributes<br>
+        artificial light, threatening to outnumber the natural stars<br>
+        we see. Earth remains a fragile paradise — beautiful yet<br>
+        vulnerable to its inhabitants’ impacts.
+    </text>
+</planet>
 
-<figure>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
-    <figcaption>Neptune</figcaption>
-</figure>
+<planet class="row">
+    <figure class="column">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
+
+    <text class="column">
+        <b>Mars</b> is the fourth planet from the Sun and one of the most<br>
+        intriguing destinations in our solar system. Known as the<br>
+        "Red Planet" for its rusty, iron-rich surface, Mars has<br>
+        fascinated scientists and explorers alike for centuries. Its<br>
+        thin atmosphere, primarily made of carbon dioxide, provides<br>
+        little insulation, leading to surface temperatures that range<br>
+        from a frigid -125°C at the poles to around 20°C in summer at<br>
+        the equator.<br><br>
+        Mars hosts some of the solar system's most remarkable<br>
+        landscapes, including Olympus Mons, the largest volcano, and<br>
+        Valles Marineris, a canyon system that stretches over 4,000<br>
+        kilometers. These vast geological features point to a time<br>
+        when Mars had intense volcanic activity and flowing water.<br>
+        Evidence from satellites and rovers indicates that ancient<br>
+        Mars likely had lakes, rivers, and even oceans, though today,<br>
+        most of its water is locked in polar ice caps or as frozen<br>
+        ground water.<br><br>
+        Mars's thin atmosphere cannot support human life, and with<br>
+        only a fraction of Earth's atmospheric pressure, any water on<br>
+        the surface quickly evaporates or freezes. Dust storms<br>
+        frequently sweep across the planet, sometimes enveloping it<br>
+        for months at a time, adding to the harsh conditions.<br><br>
+        Despite these challenges, Mars remains a prime candidate for<br>
+        future exploration and even human colonization. Its proximity<br>
+        to Earth and evidence of past water make Mars one of the best<br>
+        places to search for signs of ancient microbial life. The red<br>
+        sands of Mars may hold secrets about the history of our<br>
+        solar system — and perhaps clues to the potential for life<br>
+        beyond Earth.
+    </text>
+</planet>
+
+<planet class="row">
+    <figure class="column">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
+
+    <text class="column">
+        <b>Jupiter</b> is the largest planet in our solar system and has<br>
+        a complex and dynamic atmosphere, filled with thick clouds<br>
+        and powerful storms. One of its most famous features is the<br>
+        Great Red Spot, a massive storm that’s been raging for<br>
+        centuries and is larger than Earth itself. Jupiter’s<br>
+        atmosphere is mainly composed of hydrogen and helium, much<br>
+        like a star, but it lacks the mass to ignite nuclear fusion.<br><br>
+        Surrounding Jupiter are over 80 known moons, the most<br>
+        notable being the four largest — Io, Europa, Ganymede, and<br>
+        Callisto, also called the Galilean moons. Io is known for<br>
+        its extreme volcanic activity, with hundreds of active<br>
+        volcanoes making it the most volcanically active body in the<br>
+        solar system. Europa, on the other hand, has a thick ice<br>
+        crust, and scientists believe a salty ocean may exist<br>
+        beneath, making it one of the most promising places to<br>
+        search for extraterrestrial life. Ganymede is the largest<br>
+        moon in the solar system, even bigger than Mercury, and has<br>
+        its own magnetic field. Callisto, heavily cratered and<br>
+        ancient, reveals a record of solar system history. Together,<br>
+        Jupiter and its moons form a fascinating mini-system that<br>
+        offers insights into planetary formation and the potential<br>
+        for life.
+</text>
+</planet>
+
+<planet class="row">
+    <figure class="column">
+        <img id="saturn" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
+
+    <text class="column">
+        <b>Saturn</b> is the second-largest planet in our solar system,<br>
+        known for its stunning ring system, which is composed of ice<br>
+        and rock particles that range in size from tiny grains to<br>
+        massive boulders. These rings, although beautiful, are<br>
+        incredibly thin compared to the planet's size and are<br>
+        divided into several sections with gaps between them,<br>
+        possibly shaped by the gravitational influences of Saturn’s<br>
+        moons.<br><br>
+
+        It is safe to assume that Saturn's beautiful rings were<br>
+        created by a moon that once existed before it was torn apart<br>
+        by the planet's strong tidal forces.<br><br>
+
+        Saturn's atmosphere is similar to Jupiter's, mainly composed<br>
+        of hydrogen and helium, but with fewer violent storms. Its<br>
+        largest moon, Titan, is a world of particular interest<br>
+        because it has a dense atmosphere and lakes of liquid<br>
+        methane and ethane. Beneath Titan's icy surface, scientists<br>
+        suspect there might be a liquid water ocean, raising<br>
+        questions about its potential to support life. Other moons<br>
+        of Saturn, like Enceladus, eject icy plumes that suggest the<br>
+        presence of a subsurface ocean, making Saturn's system one<br>
+        of the most intriguing in our solar neighborhood.
+    </text>
+</planet>
+
+<planet class="row">
+    <figure class="column">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
+
+    <text class="column">
+       <b>Uranus</b>  is the first planet that was not known since<br>
+        ancient times, as it’s invisible to the naked eye. Only 200<br>
+        years ago, our technology allowed us to discover the 7th<br>
+        (and 8th) planet in our solar system.<br><br>
+
+        Uranus is unique among the planets due to its extreme tilt;<br>
+        it rotates on its side, likely due to a massive collision in<br>
+        its early history. This tilt results in unusual seasonal<br>
+        variations, with each pole experiencing 42 years of<br>
+        continuous sunlight followed by 42 years of darkness.<br>
+        Uranus’s atmosphere consists of hydrogen, helium, and a<br>
+        larger percentage of methane, which gives the planet its<br>
+        characteristic blue-green color.<br><br>
+
+        The planet is also surrounded by a faint set of rings and<br>
+        has 27 known moons, many named after characters from<br>
+        Shakespearean plays. Though not as active as other planets,<br>
+        Uranus holds secrets about the early solar system and the<br>
+        formation of ice giants. Its remote location and cold<br>
+        atmosphere make it one of the least explored planets, though<br>
+        future missions may unlock more of its mysteries.<br><br>
+
+        As of now, Uranus has only been visited once by Voyager 2.<br>
+        The twin satellites Voyager 1 and 2 were sent to explore the<br>
+        gas planets of our solar system. While Voyager 1<br>
+        investigated Jupiter, Saturn, and their moons, Voyager 2<br>
+        continued its journey for some more years. Finally, in the<br>
+        80s, it reached the outer, lonely planets we hardly ever see<br>
+        from Earth…
+</text>
+</planet>
+
+<planet class="row">
+    <figure class="column">
+        <iimg src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
+
+    <text class="column">
+        <b>Neptune</b> is the most distant planet in our solar system<br>
+        and is known for its deep blue color, caused by methane in<br>
+        its atmosphere. It has the fastest winds recorded in the<br>
+        solar system, with speeds reaching over 2,000 kilometers per<br>
+        hour. Neptune's atmosphere is highly dynamic, featuring<br>
+        large storms similar to Jupiter’s, including the Great Dark<br>
+        Spot, which appeared and vanished over a few years,<br>
+        showcasing Neptune's violent climate.<br><br>
+
+        Neptune’s discovery was the first of its kind. The planet<br>
+        was first hypothesized mathematically before actually being<br>
+        seen. Astronomers had tried to find out more about Uranus’s<br>
+        path around the Sun when they noticed that it was behaving<br>
+        rather oddly. The only explanation was another planet.<br>
+        Mathematically, they determined the size and path of the<br>
+        mystery planet before contacting observatories. Only<br>
+        professional, large instruments confirmed Neptune’s<br>
+        existence.<br><br>
+
+        Neptune’s largest moon, Triton, orbits in the opposite<br>
+        direction of Neptune's rotation, suggesting it may have been<br>
+        captured from the Kuiper Belt. Triton has geysers that spew<br>
+        icy particles, indicating possible subsurface activity.<br>
+        Neptune’s extreme distance from the Sun makes it the coldest<br>
+        planet, with temperatures that plunge to hundreds of degrees<br>
+        below freezing. Despite its remoteness, Neptune offers a<br>
+        window into the outer edges of the solar system and the<br>
+        fascinating processes that occur in these cold, distant<br>
+        realms.<br><br>
+
+        When Voyager 2 passed Neptune, it took a famous picture<br>
+        titled “Pale Blue Dot.” It shows only a few pixels-sized<br>
+        dot, barely visible. This pale blue dot is Earth, where all<br>
+        our lives, all of history, and evolution took place. Truly<br>
+        unsettling.
+    </text>
+</planet>
+
 
 <script>
-
+document.querySelectorAll("img").forEach(
+    img => img.addEventListener("click",
+        event => {
+           document.querySelectorAll("img").forEach(other_img => {
+               if(other_img != img)
+                   other_img.classList.remove("active")
+                   other_img.parentElement.parentElement.lastElementChild.classList.remove("active");
+           })
+           img.classList.toggle("active");
+           img.parentElement.parentElement.lastElementChild.classList.toggle("active");
+        }
+    )
+);
 </script>
 
 </body>
