@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+<style>
+
+body {
+    background-image: url(stars.jpg);
+    color: white;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+* {
+    transition: all ease 5s;
+}
+
+figure {
+    position: absolute;
+    mix-blend-mode: screen;
+    margin: 20px;
+}
+
+figure:hover {
+    transform: scale(1.5);
+}
+
+img {
+    width: 100%;
+    mix-blend-mode: screen;
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+
+figure:hover img {
+    filter: grayscale(0%);
+}
+
+figcaption {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 1em;
+    color: white;
+}
+
+</style>
+</head>
+<body>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+    <figcaption>Mercury</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+    <figcaption>Venus</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+    <figcaption>Earth</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+    <figcaption>Mars</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+    <figcaption>Jupiter</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+    <figcaption>Saturn</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+    <figcaption>Uranus</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+    <figcaption>Neptune</figcaption>
+</figure>
+
+<script>
+
+    const positionPlanets = function() {
+        const planets = document.getElementsByTagName("figure");
+    
+        for (const planet of planets) {
+            const x = Math.random()*90;
+            const y = Math.random()*90;
+            const w = 5+Math.random()*20;
+            planet.style.left = x+"vw";
+            planet.style.top = y+"vh";
+            planet.style.width = w+"vw";
+        };
+    }
+    
+    positionPlanets();
+    
+    setInterval(positionPlanets, 5000);
+    
+    
+    
+    </script>
+    
+    </body>
+    </html>
