@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+
+body {
+    background-color: black;
+    background-image: url(images/stars.jpg);
+    margin: 0;
+    padding: 0;
+    color: rgb(255, 253, 253);
+}
+
+p {
+    color: rgb(255, 253, 253);
+}
+
+h2 {
+    font-family: sans-serif;
+}
+
+
+.Title {
+    font-size: 40px;
+    font-family: Nosifer;
+    color:#ff7f00;
+    position: absolute;
+    top: 20px;  
+    left: 50%;
+    transform: translateX(-50%);  
+    text-align: center;
+    text-wrap: nowrap;
+    margin-bottom: 100px;
+}
+
+.Title:hover {
+    
+    color: #ffa500;
+}
+
+
+.Title2 {
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-top: 80px;
+    position: absolute;
+    top: 60px;  
+    left: 50%;
+    transform: translateX(-50%);  
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+
+.planets-container {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    display: flex;              
+    justify-content: flex-start; 
+    align-items: flex-end;      
+    gap: 20px;                  
+    flex-wrap: nowrap;          
+    padding: 20px;
+    width: 100%;                
+    height: 400px;              
+    overflow-x: auto;           
+}
+
+
+figure {
+    display: flex;              
+    flex-direction: column;     
+    justify-content: center;    
+    align-items: center;       
+    text-align: center;      
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+img {
+    transition: all 2s;
+    width: 100px;
+    display: block;  
+    animation: rotate 10s linear infinite; 
+}       
+
+img:hover { 
+    filter: invert(1) contrast(200%) saturate(1) brightness(.75);
+    width: 300px;
+}
+
+
+.Merkur {
+    width: 70px;
+}
+
+.Merkur:hover {
+    filter: sepia(100%) saturate(500%) hue-rotate(-50deg) contrast(200%) brightness(0.8);
+}
+
+.Mars {
+    width: 70px;
+}
+
+.Mars:hover {
+    filter: hue-rotate(180deg) saturate(150%);
+}
+
+.Earth {
+    width: 70px;
+}
+
+
+.Venus {
+    width: 70px;
+}
+
+.Venus:hover {
+    filter: opacity(20%);
+}
+
+.Jupiter {
+    width: 70px;
+}
+.Jupiter:hover {
+    filter: saturate(200%) contrast(150%) hue-rotate(-60deg) blur(6px);
+}
+
+.Saturn {
+    width: 100px;
+}
+
+.Saturn:hover {
+    filter: invert(1) contrast(200%) saturate(14) hue-rotate(-50deg) brightness(.75);
+}
+
+.Neptune {
+    width: 70px;
+}
+
+.Uranus {
+    width: 70px;
+}
+
+.Neptune:hover {
+    filter: invert(1) contrast(200%) saturate(1) blur(10px) brightness(.75);
+}
+
+figcaption {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    transition: color 0.3s ease, font-size 0.3s ease;
+}
+
+figure:hover figcaption {
+    color: rgb(255, 165, 0);  
+    font-size: 18px;         
+}
+
+
+.feedback-form {
+    margin-top: 50px;
+    text-align: center;
+    color: white;
+}
+
+.feedback-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px; 
+}
+
+.radio-group label {
+    font-size: 16px;
+    margin: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff7f00; 
+}
+
+.radio-group {
+    font-family: sans-serif;
+}
+</style>
+</head>
+
+<body>
+
+    <p class="Title">Halloween Costume Contest!</p>
+    <p class="Title2">Hover over a planet to reveal it's halloween costume!</p>
+
+    <br>
+    <br>
+    <br>
+
+    <!-- Container Planeten -->
+    <div class="planets-container">
+
+        <figure id="merkur">
+            <img class="Merkur" src="images/Mercury.png" alt="Planet Mercury">
+            <figcaption>Mercury</figcaption>
+        </figure>
+
+        <figure id="venus">
+            <img class="Venus" src="images/Venus.png" alt="Planet Venus">
+            <figcaption>Venus</figcaption>
+        </figure>
+
+        <figure id="earth">
+            <img class="Earth" src="images/Earth.png" alt="Planet Earth">
+            <figcaption>Earth</figcaption>
+        </figure>
+
+        <figure id="mars">
+            <img class="Mars" src="images/Mars.png" alt="Planet Mars">
+            <figcaption>Mars</figcaption>
+        </figure>
+
+        <figure id="jupiter">
+            <img class="Jupiter" src="images/Jupiter.png" alt="Planet Jupiter">
+            <figcaption>Jupiter</figcaption>
+        </figure>
+
+        <figure id="saturn">
+            <img class="Saturn" src="images/Saturn.png" alt="Planet Saturn">
+            <figcaption>Saturn</figcaption>
+        </figure>
+
+        <figure id="uranus">
+            <img class="Uranus" src="images/Uranus.png" alt="Planet Uranus">
+            <figcaption>Uranus</figcaption>
+        </figure>
+
+        <figure id="neptune">
+            <img class="Neptune" src="images/Neptune.png" alt="Planet Neptune">
+            <figcaption>Neptune</figcaption>
+        </figure>
+    </div>
+
+    <!-- Feedback-Formular-->
+    <div class="feedback-form">
+        <h2>Which planet would you give candy to? </h2>
+        <div class="radio-group">
+            <label><input type="radio" name="planet" id="merkur-radio"> Mercury</label>
+            <label><input type="radio" name="planet" id="venus-radio"> Venus</label>
+            <label><input type="radio" name="planet" id="earth-radio"> Earth</label>
+            <label><input type="radio" name="planet" id="mars-radio"> Mars</label>
+            <label><input type="radio" name="planet" id="jupiter-radio"> Jupiter</label>
+            <label><input type="radio" name="planet" id="saturn-radio"> Saturn</label>
+            <label><input type="radio" name="planet" id="uranus-radio"> Uranus</label>
+            <label><input type="radio" name="planet" id="neptune-radio"> Neptune</label>
+        </div>
+        <br>
+        <button onclick="submitFeedback()">Submit</button>
+    </div>
+
+    <script>
+        
+        const planetNames = {
+            merkur: "Mercury",
+            venus: "Venus",
+            earth: "Earth",
+            mars: "Mars",
+            jupiter: "Jupiter",
+            saturn: "Saturn",
+            uranus: "Uranus",
+            neptune: "Neptune"
+        };
+    
+        const costumeNames = {
+            merkur: "\"Bathbomb\"",
+            venus: "\"Mrs.Invisible\"",
+            earth: "\"climatechange\"",
+            mars: "\"smurf\"",
+            jupiter: "\"cotton-candy\"",
+            saturn: "\"UFO\"",
+            uranus: "\"ghost\"",
+            neptune: "\"prEteNDiNg-tO-Be-SuN\""
+        };
+    
+       
+        const planets = document.querySelectorAll('figure');
+    
+        planets.forEach(planet => {
+            const planetId = planet.id;
+            const figcaption = planet.querySelector('figcaption');
+            
+            figcaption.textContent = planetNames[planetId];
+    
+            planet.addEventListener('mouseenter', () => {
+                figcaption.textContent = costumeNames[planetId];
+            });
+    
+            planet.addEventListener('mouseleave', () => {
+                figcaption.textContent = planetNames[planetId];
+            });
+        });
+
+        function submitFeedback() {
+            const selectedPlanet = document.querySelector('input[name="planet"]:checked');
+            
+            // Wenn keine Auswahl 
+            if (!selectedPlanet) {
+                alert("Please select a planet before submitting!");
+            } else {
+                const planetName = selectedPlanet.parentElement.textContent.trim();
+                //Dankeschön-Nachricht
+                alert("Thank you for your vote! You selected: " + planetName);
+            }
+        }
+    </script>
+
+</body>
+</html>
