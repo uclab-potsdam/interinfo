@@ -1,97 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Images of a haunted solar system - Interactive Information</title>
+    <meta charset="UTF-8">
+    <title>Images of a haunted solar system - Interactive Information</title>
 
-<style>
+    <style>
+        body {
+            text-align: center;
+            color: unset;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: black;
+            font-size: 50px;
+            letter-spacing: 400px;
+            cursor: url(cursor.svg), auto;
+        }
 
-body {
-    text-align: center;
-    color: unset;
-    font-family:Arial, Helvetica, sans-serif;
-    background-color: black;
-    font-size: 50px;
-    letter-spacing: 400px;
-    cursor:url(cursor.svg),auto;
-}
+        img.planet {
+            width: 200px;
+            filter: grayscale(100%) blur(5px);
+            border-radius: 100px;
+        }
+        
+        figure{
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+            display:inline-block;
+            transition: transform 1s;
+            margin: 0;
+        }
 
-img {
-    width: 200px;
-    filter: grayscale(100%) blur(5px);
-    border-radius: 100px;
-}
+        figure:hover {
+            color: white;
+             
+            transition: all 1s;
+            letter-spacing: normal;
+            text-align: center;
+
+        }
+
+        figure:hover img.planet {
+            width: 400px;
+            filter: unset;
+            position: relative;
+            transition: all 1s ease-in-out;
+        }
+
+        figure:hover img.starfield{
+            display: unset;
+        
+        }
 
 
-figure:hover{
-    color: white;
-    background-image: url(starfield.png);
-    transition: all 1s ease-in-out;
-    letter-spacing: normal;
-    text-align: center;
-    
-}
+        .starfield{
+            display: none;
 
-figure:hover img{
-    transition: all 1s;
-    width: 400px;
-    filter: unset;
-}
+        }
+
+        .starfield{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 110%;
+            height: 110%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: transform 0.2s ease;
+            object-fit: cover;
+        }
 
 
-
-
-</style>
+        figcaption{
+            z-index: 1;
+            position: relative;
+        }
+    </style>
 </head>
+
 <body>
-  <div>
+    <div>
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg"
+                alt="Planet Mercury">    
             <figcaption>Mercury</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg"
+                alt="Planet Venus">
             <figcaption>Venus</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg"
+                alt="Planet Earth">
             <figcaption>Earth</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
             <figcaption>Mars</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
             <figcaption>Jupiter</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg"
+                alt="Planet Saturn">
             <figcaption>Saturn</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
             <figcaption>Uranus</figcaption>
         </figure>
 
         <figure>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+            <img class="starfield" src="starfield.png">
+            <img class="planet" src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
             <figcaption>Neptune</figcaption>
         </figure>
-  </div>
+    </div>
 
-<script>
-    document.addEventListener('mousemove', (e) => {
-        
-    });
+    <script>
+    
+        document.querySelectorAll("figure").forEach(figure => {
+            const starfield = figure.querySelector(".starfield");
 
-</script>
+            // Add a mousemove event listener to create the parallax effect
+            figure.addEventListener("mousemove", (e) => {
+                const rect = figure.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                // Adjust the starfield position slightly based on mouse position
+                const moveAmount = 150;
+                starfield.style.transform = `translate(calc(-50% + ${x * moveAmount}px), calc(-50% + ${y * moveAmount}px))`;
+            });
+
+            // starfield position reset
+            figure.addEventListener("mouseleave", () => {
+                starfield.style.transform = "translate(-50%, -50%)";
+            });
+        });
+    </script>
 
 </body>
+
 </html>
