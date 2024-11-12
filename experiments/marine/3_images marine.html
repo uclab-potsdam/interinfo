@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+
+<style>
+
+* {
+    background-color: black;
+}
+
+
+
+h1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    text-align: center;
+    padding-top: 30px;
+}
+/* Style de la div container */
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+img {
+    width: 150px;
+    height: auto;
+    filter: saturate(180%);
+    mix-blend-mode: screen; /* Option pour essayer d'autres modes comme screen */
+    transition: 0.5s;
+}
+
+#Mercury { position: absolute; top: 10vh; left: 10vw;}
+#Venus {position: absolute; top: 20%; left: 30%;}
+#Earth { position: absolute; top: 20%; left: 30%;}
+#Mars {position: absolute; top: 40%; left: 60%;}
+#Saturn {position: absolute; top: 60%; left: 40%;}
+#Jupiter {position: absolute; top: 50%; left: 20%;}
+#Uranus {position: absolute; top: 10%; left:70%}
+#Neptune {position: absolute;top: 55%; left: 10;}
+
+
+/* Initialement, la légende est cachée */
+figcaption {
+    opacity: 0;
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: opacity 0.3s ease; /* Transition fluide */
+}
+
+/* Lorsqu'on survole l'image, on affiche la légende */
+img:hover + figcaption {
+    opacity: 1;
+}
+
+img:hover{
+    transform: scale(1.2);
+}
+
+
+
+</style>
+</head>
+<body>
+
+    <H1> Clic on the planets to change their color ! </H1>
+
+    
+<div class="container"> 
+    <figure id="Mercury">
+        <img class= "TooWhite" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure>
+
+    <figure id="Venus">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
+
+    <figure id="Earth">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
+
+    <figure id="Mars" >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
+
+    <figure id="Jupiter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
+
+    <figure id="Saturn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
+
+    <figure id="Uranus" >
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
+
+    <figure id="Neptune">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
+</div>
+
+<script>
+
+// Variable globale pour stocker l'angle de hue-rotate
+let hueAngle = 0;
+
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', () => {
+        // Incrémenter de 10 degrés à chaque clic
+        hueAngle += 90;
+
+        // Appliquer la nouvelle valeur à l'image
+        img.style.filter = `hue-rotate(${hueAngle}deg)`;
+    });
+});
+
+// Appliquer ou enlever la classe 'clicked' au clic sur l'image
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', () => {
+        img.classList.toggle('clicked'); // Toggle la classe 'clicked' à chaque clic
+    });
+});
+
+
+</script>
+
+</body>
+</html>
