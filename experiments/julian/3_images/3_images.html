@@ -8,9 +8,9 @@
 
 body {
     background-image: url('./images/stars.jpg');
-    background-size: cover;          /* Ensures background covers the viewport */
+    background-size: cover;          /* Ensures background covers the viewport - i had problems with pixellated white bars when using original code*/
     background-repeat: no-repeat;
-    min-height: 100vh;               /* Ensures background covers entire viewport */
+    min-height: 100vh;               /* Ensures background covers entire viewport - is this also neccessary? */
     margin: 0;                       /* Removes default body margin */
     display: flex;
 }
@@ -33,13 +33,13 @@ figure {
     width: 15vw;
     display: flex;
     flex-direction: column;          /* Stack image and caption vertically */
-    align-items: center;             /* Center align items */
+    align-items: center;             /* Center align image and caption */
 }
 
 img {
     height: 100px;
     width: auto;              
-    transition: height .2s, /* Smooth hover transition  */
+    transition: height .2s,         /* Smooth hover transition  */
 }
 
 /* Enlarge and replace image on hover */
@@ -100,6 +100,8 @@ figcaption {
 </div>
 
 <script>
+
+/* marians code to make planets move around randomly and then pause in place*/
 
     const positionPlanets = function() {
         const planets = document.getElementsByTagName("figure");

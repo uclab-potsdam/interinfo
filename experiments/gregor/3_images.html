@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<!-- Adding a different favicon (Icon next to the web page title in the browser) -->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+    background: #000;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    width: 100vw;
+    font-family: "Inter";
+    color:#fff;
+    text-align: center;
+}
+
+#who {
+    text-decoration: underline;
+}
+
+img {
+    height: calc(5vw + 5vh);
+}
+
+#beachball {
+    margin-bottom: 10vh;
+}
+
+#planet {
+    width: 100vw;
+    display: inline-grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(1vw, auto);
+    grid-gap: 1vw;
+    justify-items: center;
+}
+
+figure {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#mercury, #venus, #earth, #jupiter, #saturn, #uranus, #neptune, #beachball {
+    animation: spin 0.5s infinite linear;
+    transform-origin: 51% 51%;
+    margin-bottom: 5vh;
+    transition: all 0.5s;
+}
+
+#mars {
+    animation: spin 0.7s infinite linear;
+    transform-origin: 51% 51%;
+    margin-bottom: 5vh;
+}
+
+#mercury:hover, #venus:hover, #earth:hover, #mars:hover, #jupiter:hover, #saturn:hover, #uranus:hover, #neptune:hover, #fake:hover {
+    filter: grayscale(1);
+    animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+    from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
+
+}
+</style>
+
+<script>
+
+function SelectedMercury() {
+    document.getElementById('mercury').style.opacity= '0';
+}
+
+function SelectedVenus() {
+    document.getElementById('venus').style.opacity= '0';
+}
+
+function SelectedEarth() {
+    document.getElementById('earth').style.opacity= '0';
+}
+
+function SelectedMars() {
+    document.getElementById('mars').style.filter = 'hue-rotate(90deg)';
+}
+
+function SelectedJupiter() {
+    document.getElementById('jupiter').style.opacity= '0';
+}
+
+function SelectedSaturn() {
+    document.getElementById('saturn').style.opacity= '0';
+}
+
+function SelectedUranus() {
+    document.getElementById('uranus').style.opacity= '0';
+}
+
+function SelectedNeptune() {
+    document.getElementById('neptune').style.opacity= '0';
+}
+
+</script>    
+</head>
+<body>
+    
+    <header>
+        <h1> Who is the outlier?</h1>
+        <p>The Beachball is playing Simon Says, who isn't playing along?</p>
+        <img id="beachball" src="beachball.svg" alt="Apple beachball" title="Beachball">
+ 
+    </header>
+ 
+<container id="planet">
+<figure>
+    <img id="mercury" onclick="SelectedMercury()" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury" title="Select Mercury">
+</figure>
+
+<figure>
+    <img  id="venus" onclick="SelectedVenus()" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus" title="Select Venus">
+</figure>
+
+<figure>
+    <img id="earth" onclick="SelectedEarth()" src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth" title="Select Earth">
+</figure>
+
+<figure>
+    <img id="mars" onclick="SelectedMars()" src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars" title="Select Mars">
+</figure>
+
+<figure>
+    <img id="jupiter" onclick="SelectedJupiter()" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter" title="Select Jupiter">
+</figure>
+
+<figure>
+    <img id="saturn" onclick="SelectedSaturn()" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn" title="Select Saturn">
+</figure>
+
+<figure>
+    <img id="uranus" onclick="SelectedUranus()" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus" title="Select Uranus">
+</figure>
+
+<figure>
+    <img id="neptune" onclick="SelectedNeptune()" src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune" title="Select Neptune">
+</figure>
+</container>
+
+<script>
+
+</script>
+
+</body>
+</html>
