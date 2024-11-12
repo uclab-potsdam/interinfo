@@ -8,26 +8,49 @@
 
 /* *{ border:1px solid #fff !important;} */
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* 阻止滾動 */
+}
+
 body{
     background-color: black; 
     background-image: url(../../examples/images/stars.jpg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh;
+    font-size: 12px;
 }
 
 .container{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    padding: 50px;
 }
 
 img {
-    width: 200px;
+    width: 80px;
     transition: all 1s;
+    border-radius: 50%;
 }
 
-img:hover{
-    width: 400px;
-    /* filter: invert(1) sepia(100%) brightness(.75); */
+figure:hover img{
+    transform: scale(1.5);
+    filter: invert(1) sepia(100%) brightness(.75);
+    color: none;
+    border-radius: 50%;
 }
+
+figure:hover img.Saturn {
+    transform: scale(2);
+}
+
 figure{
     position: relative;
     display: inline-block;
@@ -44,8 +67,9 @@ figcaption{
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    
 }
+
+
 
 /* Light Mode 設置 */
 
