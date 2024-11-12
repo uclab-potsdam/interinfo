@@ -67,7 +67,7 @@ body {
             position: absolute;
             width: 10px;
             height: 10px;
-            background-color: #fff;
+            background-color: #ffffff;
             border-radius: 50%;
             opacity: 0;
             pointer-events: none;
@@ -168,7 +168,7 @@ body {
 
         
         document.addEventListener('mousemove', (e) => {
-            // Update the position of the custom cursor
+    
             cursor.style.left = `${e.pageX}px`;
             cursor.style.top = `${e.pageY}px`;
 
@@ -182,7 +182,7 @@ body {
             document.body.appendChild(trail);
             setTimeout(() => {
                 trail.remove();
-            }, 600); // After 600ms, remove the trail element
+            }, 600);
         });
         
     </script>
