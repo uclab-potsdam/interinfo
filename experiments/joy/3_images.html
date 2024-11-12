@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+<style>
+
+/* *{ border:1px solid #fff !important;} */
+
+body{
+    background-color: black; 
+    background-image: url(../../examples/images/stars.jpg);
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+img {
+    width: 200px;
+    transition: all 1s;
+}
+
+img:hover{
+    width: 400px;
+    /* filter: invert(1) sepia(100%) brightness(.75); */
+}
+figure{
+    position: relative;
+    display: inline-block;
+    color: transparent;
+    transition: 0.5s ease-in;
+}
+figure:hover{
+    color: whitesmoke;
+}
+
+figcaption{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    
+}
+
+/* Light Mode 設置 */
+
+    /* @media (prefers-color-scheme: light) {
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        img {
+            filter: none; /* 確保圖片在亮色模式下不受濾鏡影響 */
+        }
+    } */
+
+/* Dark Mode 設置 */
+
+    /* @media (prefers-color-scheme: dark) {
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        img {
+            filter: brightness(0.8) contrast(1.2); /* 適合暗色模式的濾鏡效果 */
+        }
+    } */
+
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <figcaption>Mercury</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <figcaption>Venus</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <figcaption>Earth</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <figcaption>Mars</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <figcaption>Jupiter</figcaption>
+    </figure>
+
+    <figure>
+        <img class="Saturn" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <figcaption>Saturn</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <figcaption>Uranus</figcaption>
+    </figure>
+
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <figcaption>Neptune</figcaption>
+    </figure>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>

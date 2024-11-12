@@ -8,62 +8,50 @@
 
 body {
     background-image: url('./images/stars.jpg');
-    background-size: cover;
+    background-size: cover;          /* Ensures background covers the viewport - i had problems with pixellated white bars when using original code*/
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    min-height: 100vh;               /* Ensures background covers entire viewport - is this also neccessary? */
+    margin: 0;                       /* Removes default body margin */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
 }
 
-/* Container for the planets */
-.planet-row {
-    display: flex;                /* Aligns items in a row */
-    gap: 20px;                    /* Space between each figure */
-    padding: 10px;
+h1 {
+    font-family: Helvetica, sans-serif;
+    font-size: 2em;
+    margin: 20px 0;
+    text-align: center;
+    color: white;
+}
+
+* {
+    transition: all 3s;
 }
 
 figure {
-    text-align: center;
-    margin: 0;
+    position: absolute;
+    mix-blend-mode: difference;
+    width: 15vw;
+    display: flex;
+    flex-direction: column;          /* Stack image and caption vertically */
+    align-items: center;             /* Center align image and caption */
 }
 
 img {
-    height: 100px;              /* Fixed height for all images */
-    width: auto;                /* Auto width to maintain aspect ratio */
-    transition: height .2s, filter .2s; /* Smooth transition for height and filter */
-    filter: blur(3px) grayscale(100);          /* Initial blur effect */
+    height: 100px;
+    width: auto;              
+    transition: height .2s,         /* Smooth hover transition  */
 }
 
+/* Enlarge and replace image on hover */
 img:hover {
-    height: 300px;              /* Enlarge on hover */
-    filter: blur(0) grayscale(0);            /* Remove blur on hover */
+    height: 400px;              
     content: url('./images/ghost.png');
 }
 
-/* Caption styling */
 figcaption {
-            color: white;
-            font-family: Helvetica, sans-serif;
-            font-size: 16px;
-            margin-top: 8px;
-        }
-
-        figure:hover::after {
-            content: "Boo!"; /* Show "Boo" when hovering */
-            color: red; /* Caption color */
-            font-family: Helvetica, sans-serif;
-            font-size: 120px;
-            position: absolute;
-            bottom: 0; /* Position the caption at the bottom */
-            left: 50%; /* Center the caption */
-            transform: translateX(-50%); /* Center alignment */
-            opacity: 1; /* Make it visible */
-            transition: opacity 1s; /* Smooth transition for the new caption */
-        }
+    color: white;
+    font-family: Helvetica, sans-serif;
+}
 
 </style>
 </head>
@@ -110,6 +98,31 @@ figcaption {
         <figcaption>Neptune</figcaption>
     </figure>
 </div>
+
+<script>
+
+/* marians code to make planets move around randomly and then pause in place*/
+
+    const positionPlanets = function() {
+        const planets = document.getElementsByTagName("figure");
+    
+        for (const planet of planets) {
+            const x = Math.random()*90;
+            const y = Math.random()*90;
+            const w = 5+Math.random()*20;
+            planet.style.left = x+"vw";
+            planet.style.top = y+"vh";
+            planet.style.width = w+"vw";
+        };
+    }
+    
+    positionPlanets();
+    
+    setInterval(positionPlanets, 4000);
+    
+    
+    
+    </script>
 
 </body>
 </html>
