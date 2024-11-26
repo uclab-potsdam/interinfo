@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Grids in Action</title>
+  <style>
+    /* General styles */
+    body {
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url('./images/indiegroundblog_80sgrids_15.jpg.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #00FF00; /* Neon green text */
+      text-align: center;
+    }
+
+    header h1, header p, .controls label {
+      color: #00FF00;
+      text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: normal; /* Remove bold */
+    }
+
+    /* Sliders section styling */
+    .sliders {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-shadow: 0px 0px 10px black;
+    }
+
+    .controls label {
+      margin-bottom: 5px;
+    }
+
+    input[type="range"] {
+      width: 150px;
+      background-color: black;
+      border: 1px solid #00FF00;
+      color: #00FF00;
+    }
+
+    /* Grid container */
+    .grid-demo-container {
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 40px; /* Space for resizing */
+    }
+
+    .grid-demo {
+      display: grid;
+      gap: 10px;
+      padding: 10px;
+      margin: 0 20px;
+      border: 2px solid #00FF00;
+      background-color: black;
+      width: 100%;
+      position: relative;
+      min-width: 400px; /* Minimum width */
+      min-height: 200px; /* Minimum height */
+      transition: all 0.2s ease; /* Smooth resizing */
+    }
+
+    .grid-item {
+      background-color: #00FF00;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      transition: transform 0.2s, background-color 0.2s;
+      border: 2px solid #00FF00;
+    }
+
+    .grid-item:hover {
+      background-color: #00cc00;
+      transform: scale(1.1);
+    }
+
+    /* Responsive grid columns */
+    .grid-demo {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    /* Resize handle */
+    .resize-handle {
+      width: 15px;
+      height: 15px;
+      background-color: #00FF00;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: se-resize;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Responsive Grids in Action</h1>
+      <p>Resize the simulated browser width and height or hover over grid items to explore the magic of CSS grids!</p>
+    </header>
+    <div class="sliders">
+      <div class="controls">
+        <label for="screen-width">Width:</label>
+        <input type="range" id="screen-width" min="300" max="1200" value="800">
+      </div>
+      <div class="controls">
+        <label for="screen-height">Height:</label>
+        <input type="range" id="screen-height" min="200" max="800" value="400">
+      </div>
+    </div>
+
+    <!-- First Grid (resizable via controls) -->
+    <div class="grid-demo-container">
+      <div class="grid-demo" id="grid-container-1">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+      </div>
+    </div>
+
+    <!-- Second Grid (resizable via resize handle) -->
+    <div class="grid-demo-container">
+      <div class="grid-demo" id="grid-container-2">
+        <div class="grid-item">A</div>
+        <div class="grid-item">B</div>
+        <div class="grid-item">C</div>
+        <div class="grid-item">D</div>
+        <div class="grid-item">E</div>
+        <div class="grid-item">F</div>
+        <div class="grid-item">G</div>
+        <div class="grid-item">H</div>
+        <!-- Resize handle for second grid -->
+        <div class="resize-handle" id="resize-handle-2"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const widthSlider = document.getElementById('screen-width');
+    const heightSlider = document.getElementById('screen-height');
+    const gridContainer1 = document.getElementById('grid-container-1');
+    const gridContainer2 = document.getElementById('grid-container-2');
+    const resizeHandle2 = document.getElementById('resize-handle-2');
+
+    let isResizing2 = false;
+
+    // Update grid dimensions dynamically via sliders (First grid only)
+    function updateGridDimensions() {
+      const width = widthSlider.value;
+      const height = heightSlider.value;
+
+      gridContainer1.style.width = `${width}px`;
+      gridContainer1.style.height = `${height}px`;
+
+      // Also update second grid to match the first grid's size
+      gridContainer2.style.width = `${width}px`;
+      gridContainer2.style.height = `${height}px`;
+    }
+
+    // Initialize and update on slider change
+    [widthSlider, heightSlider].forEach(slider => slider.addEventListener('input', updateGridDimensions));
+    updateGridDimensions();
+
+    // Enable resizing of the second grid container via the resize handle
+    resizeHandle2.addEventListener('mousedown', (e) => {
+      isResizing2 = true;
+      document.body.style.cursor = 'se-resize';
+    });
+
+    // Handle resizing of the second grid on mousemove
+    document.addEventListener('mousemove', (e) => {
+      if (isResizing2) {
+        const newWidth = e.clientX - gridContainer2.getBoundingClientRect().left;
+        const newHeight = e.clientY - gridContainer2.getBoundingClientRect().top;
+
+        // Ensure the second grid doesn't get smaller than the minimum size
+        const minWidth = 400; // Minimum width
+        const minHeight = 200; // Minimum height
+        gridContainer2.style.width = `${Math.max(newWidth, minWidth)}px`;
+        gridContainer2.style.height = `${Math.max(newHeight, minHeight)}px`;
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isResizing2 = false;
+      document.body.style.cursor = 'default';
+    });
+  </script>
+</body>
+</html>

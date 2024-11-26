@@ -1,0 +1,14 @@
+
+/* inline */
+a, em {
+    background-color: hsl(70, 75%, 50%);
+}
+
+/* block */
+h1, h2, p, footer {
+    background-color:  hsl(200, 75%, 80%); 
+}
+
+img {
+    max-width: 200px;
+}
