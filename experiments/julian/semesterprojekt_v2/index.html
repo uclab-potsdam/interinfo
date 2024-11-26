@@ -76,6 +76,8 @@
       min-width: 400px; /* Minimum width */
       min-height: 200px; /* Minimum height */
       transition: all 0.2s ease; /* Smooth resizing */
+      grid-template-columns: repeat(4, 1fr); /* Ensure 4 columns */
+      grid-template-rows: repeat(2, 1fr); /* Ensure 2 rows */
     }
 
     .grid-item {
@@ -93,11 +95,6 @@
     .grid-item:hover {
       background-color: #00cc00;
       transform: scale(1.1);
-    }
-
-    /* Responsive grid columns */
-    .grid-demo {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     /* Resize handle */
@@ -176,9 +173,7 @@
       gridContainer1.style.width = `${width}px`;
       gridContainer1.style.height = `${height}px`;
 
-      // Also update second grid to match the first grid's size
-      gridContainer2.style.width = `${width}px`;
-      gridContainer2.style.height = `${height}px`;
+      // The second grid is not controlled by the sliders anymore, so don't adjust it
     }
 
     // Initialize and update on slider change
