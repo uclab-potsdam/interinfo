@@ -1,0 +1,64 @@
+body {
+    color: black;
+    background-color: white;
+    font-size: 12px;
+}
+
+img {
+    width: 200px;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        color: white;
+        background-color: black;
+    }
+}
+
+/* no serifs for screen */
+@media screen {
+    body {
+        font-family: sans-serif;
+    }
+}
+
+@media print {
+    body {
+        font-family: serif;        
+    }
+}
+    
+/* set up flexbox */
+section {
+    display: flex;
+    gap: 5px;
+}
+
+/* distinguish between portrait and landscape */
+@media (orientation: portrait) {
+    section {
+        flex-direction: column;
+    }
+}
+
+@media (orientation: landscape) {
+    section {
+        flex-direction: row;
+    }
+}
+
+/* distinguish different window sizes */
+@media (min-width: 800px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+/* likely to be a smart phone browser */
+@media (max-width: 1000px) and (orientation: portrait) and (min-resolution: 250dpi) {
+    body {
+        font-size: 21px;
+        background-color: lightgray;
+    }
+}
