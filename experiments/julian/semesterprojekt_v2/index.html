@@ -107,13 +107,22 @@
       right: 0;
       cursor: se-resize;
     }
+
+    /* Style for the Lorem Ipsum paragraph */
+    .lorem-ipsum {
+      color: #00FF00;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black;
+      margin: 20px 0;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>Responsive Grids in Action</h1>
-      <p>Resize the simulated browser width and height or hover over grid items to explore the magic of CSS grids!</p>
+      <p>Resize the simulated browser width and height using the controls below <br>or hover over grid items to explore the magic of CSS grids!</p>
     </header>
     <div class="sliders">
       <div class="controls">
@@ -139,6 +148,11 @@
         <div class="grid-item">8</div>
       </div>
     </div>
+
+    <!-- Lorem Ipsum Paragraph -->
+    <p class="lorem-ipsum">
+      In this example you can use the handle in the bottom right hand corner of the grid to resize it!
+    </p>
 
     <!-- Second Grid (resizable via resize handle) -->
     <div class="grid-demo-container">
