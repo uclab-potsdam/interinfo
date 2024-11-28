@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content Reveal Experiment</title>
+
+  <!-- Add favicon -->
+  <link rel="icon" href="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" type="image/svg">
+  
   <style>
    
     body {
@@ -20,18 +24,26 @@
 
     /* Change color of hyperlinks */
 a {
-  color: yellow; /* Normal state color */
+  color: lightgreen; /* Normal state color */
   text-decoration: none; /* Remove underline */
 }
 
+/* Remove transition effect for hyperlinks */
+a {
+  color: lightgreen; /* Normal state color */
+  text-decoration: none; /* Remove underline */
+  transition: none; /* Disable transition */
+}
+
+
 /* Change color when hovering over the link */
 a:hover {
-  color: lightgreen; /* Hover state color */
+  color: hotpink; /* Hover state color */
 }
 
 /* Change color of visited links */
 a:visited {
-  color:rgb(50, 205, 55); /* Visited state color */
+  color: hotpink; /* Visited state color */
 }
     
 /* headline customization */
