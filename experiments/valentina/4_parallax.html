@@ -21,7 +21,7 @@
       text-align: center;
       padding: 1.5rem;
       position: sticky;
-      top: 0; /* Keep the header fixed during scrolling */
+      top: 0;
       z-index: 10;
     }
 
@@ -38,21 +38,57 @@
    #parallax > div {
     position: absolute;
    }
-   #square {
-    transform: translateZ(0px) scale(2);
+   #square1 {
+    transform: translateZ(0px) scale(1.5);
     width: calc( 5vw + 5vh );
     height: calc( 5vw + 5vh );
-    top: 75vh; left: 50%;
-    background-color: #009688;
+    top: 75vh; left: 15%;
+    background-color: #1b96cf;
    }
-   #circle {
-    transform: translateZ(-1px) scale(3);
+   #circle1 {
+    transform: translateZ(-1px) scale(2.5);
     width: calc( 6vw + 6vh );
     height: calc( 6vw + 6vh );
     border-radius: calc( 3vw + 3vh );
-    top: 50vh; left: 40vw;
+    top: 50vh; left: 0%;
+    background-color: #ffc107;
+    opacity: 60%;
+   }
+
+   #square2 {
+    transform: translateZ(0px) scale(1.5);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    top: 20vh; left: 70%;
+    background-color: #7153eb;
+   }
+   #circle2 {
+    transform: translateZ(-1px) scale(2.5);
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 15vh; left: 80%;
+    background-color: #1b96cf;
+    opacity: 60%;
+   }
+
+   #square3 {
+    transform: translateZ(0px) scale(1.5);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    bottom: 15vh; left: 60%;
     background-color: #ffc107;
    }
+   #circle3 {
+    transform: translateZ(-1px) scale(2.5);
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    bottom: 5vh; left: 45%;
+    background-color: #7153eb;
+    opacity: 60%;
+   }
+
 
     /* Footer styling */
     footer {
@@ -72,16 +108,20 @@
     <p>Explore the beauty of scalable vector graphics with parallax effects</p>
   </header>
   <div id="parallax">
-    <div id="circle"></div>
-    <div id="square"></div>
+    <footer>
+      <p>© 2024 Virtual Museum of SVG Art | Designed by Valentina Lafchieva</p>
+    </footer>
+    <div id="circle1"></div>
+    <div id="square1"></div>
+    <div id="circle2"></div>
+    <div id="square2"></div>
+    <div id="circle3"></div>
+    <div id="square3"></div>
    </div>
-  <footer>
-    <p>© 2024 Virtual Museum of SVG Art | Designed by Valentina Lafchieva</p>
-  </footer>
+
 
   <script>
   </script>
 </body>
 
 </html>
-
