@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Parallax - Scrollytelling - Interactive Information</title>
+<style>
+body { 
+    height: 1000vh;
+    padding: 0; margin: 0; 
+    scroll-behavior: smooth;
+}
+
+#header {
+    width: 100%; height: 100px;
+    left: 0; top: 0vh;
+    position: absolute;   
+    background-color: black;  
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    color: blue;
+    font-size: large;
+}
+
+
+#parallax {    
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scroll-behavior: smooth;
+}
+
+#parallax > div {
+  position: absolute;  
+}
+
+#square {
+    transform: translateZ(0px) scale(2);
+    width: calc( 30vw + 30vh );
+    height: calc( 20vw + 5vh );
+    top: 100vh; left: 50%;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: double;
+    border-color: rgb(167, 16, 16);
+   
+    
+}
+
+#circle {
+    transform: translateZ(-1px) scale(3);    
+    width: calc(20vw + 100vh);
+    height: calc( 40vw + 1.5em );
+    top: 100vh;
+    background-color: rgb(78, 69, 69);
+
+    
+}
+
+#footer {    
+    width: 100%; height: 100px;
+    left: 0; top: 1000vh;
+    position: absolute;   
+    background-color: black;
+}
+
+</style>
+</head>
+<body>
+
+
+ <h1>Buttons</h1>
+
+<div id="header"></div> 
+
+<div id="parallax">
+    <div id="circle"></div>  
+    <div id="square"></div>
+</div>
+
+<div id="footer"></div>  
+
+
+<script>
+
+</script>
+
+
+</body>
+</html>
