@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Parallax - Scrollytelling - Interactive Information</title>
+<style>
+
+    
+body { 
+    padding: 0; margin: 0; 
+    scroll-behavior: smooth;
+    background-color: rgb(250, 239, 224);
+}   
+
+#parallax {    
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scroll-behavior: smooth;
+}
+
+#parallax > div {
+  position: absolute;  
+}
+
+#square {
+    transform: translateZ(0px) scale(2);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    top: 75vh; left: 50%;
+    border-radius: 20px;
+    background-color: rgb(114, 145, 223);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(249, 232, 0);
+    font-size: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 20px;
+    text-align: center;
+}
+
+#circle {
+    transform: translateZ(-1px) scale(3);    
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 50vh; left: 40vw;
+    background-color: rgb(214, 207, 26);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 50px;
+}
+
+#triangle { 
+    transform: translateZ(-2px) scale(5);  
+    width: 0;
+    height: 0;
+    font-size: 170px;
+    color:  rgb(240, 162, 161);
+    xborder-left: 50px solid transparent;
+    xborder-right: 50px solid transparent;
+    xborder-bottom: 100px solid rgb(240, 162, 161);
+
+}
+
+#footer {    
+    width: 100%; height: 100px;
+    left: 0; top: 200vh;    
+    background-color: black;
+}
+
+.text {
+    text-shadow: none;
+}
+
+</style>
+</head>
+<body>
+
+<div id="parallax">
+    <div id="footer"></div>  
+    <div id="circle">😎</div> 
+    <div id="square">
+        <span class="text"> Das ist ein Text ohne Schatten.</span>
+    </div>
+    <div id="triangle">⏶</div>   
+
+<!--Die <span class"text" gibt den Text und im CSS teil bekommt der Text keinen Schatten-->
+</div>
+
+<script>
+
+    document.addEventListener('mousemove', (e) => {
+        
+        // use e.clientX and e.clientY to get current mouse pointer position
+        
+        console. log(e.clientX, e.clientY)
+     
+        const displacement = ( e.clientY / window.innerHeight) * 30;
+        const blur = ( e.clientY / window.innerHeight) * 20;
+        const divs = document.getElementsByTagName('div');
+        for (let div of divs) div.style.boxShadow = `${displacement}px ${displacement}px ${blur}px black`;
+        for (let div of divs) div.style.textShadow = `${displacement}px ${displacement}px ${blur}px black`;
+        document.getElementById("square").style.backgroundColor = `hsl(${angle}, 58%, 62%)`;
+        
+    });
+    
+    </script>
+    
+</body>
+</html>
