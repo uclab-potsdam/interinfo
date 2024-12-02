@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reveal - Scrollytelling - Interactive Information</title>
+<style>
+body { 
+    font-size: calc( 2vw + 2vh );
+    line-height: 1.5em;
+    width: calc( 80vw);
+    margin: auto;
+    overflow-x: hidden; /* 防止水平溢出 */
+}
+
+* { 
+    transition: all 0.5s ease-in-out; /* 縮短過渡時間 */
+}
+
+p, h2 {
+    opacity: 0; /* 初始隱藏 */
+    transform: translateY(20px); /* 向下移動 */
+    color: transparent;
+    text-shadow: 0 0 .25em lightgray;
+}
+
+p.visible, h2.visible {
+    opacity: 1; /* 完全可見 */
+    transform: translateY(0); /* 恢復原位 */
+    color: black;
+    text-shadow: none;
+}
+
+.square-img {
+    width:  7.5em; /* 方塊形狀 */
+    height:  7.5em; /* 方塊形狀 */
+    float: right;
+    padding-left: 1em;
+    opacity: 0; /* 初始隱藏 */
+    transform: translateX(20px); /* 向右移動 */
+}
+
+.square-img.visible {
+    opacity: 1; /* 完全可見 */
+    transform: translateX(0); /* 恢復原位 */
+}
+
+</style>
+</head>
+<body>
+
+<h1>Lorem Ipsum</h1>
+
+<main>
+    <section>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <section>
+        <h2>Foo</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <section>
+        <h2>Bar</h2>
+        <img class="square-img" src="earth.jpeg" alt="Earth Image">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+</main>
+<script>
+
+const elements = document.querySelectorAll('p, h2, .square-img');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // 停止觀察已顯示的元素
+        }
+    });
+}, { threshold: 0.1 }); // 調整閾值以提前顯示
+
+elements.forEach(el => observer.observe(el));
+
+</script>
+</body>
+</html>
