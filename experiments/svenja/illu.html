@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Illustration - Scrollytelling - Interactive Information</title>
+  <style>
+
+#parallax {    
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scroll-behavior: smooth;
+}
+
+#square {
+    transform: translateZ(0px) scale(2);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    top: 75vh; left: 50%;
+    background-color: rgb(90, 0, 0);
+}
+
+#circle {
+    transform: translateZ(-1px) scale(3);    
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 50vh; left: 40vw;
+    background-color: rgb(255, 206, 242);
+}
+
+    body {
+      height: 500vh; 
+      margin: 0; padding: 0;
+      background-color: lightgray;
+    }
+    #svg-container {
+      position: fixed;      
+      width: 100%;
+      margin: 0 auto;
+    }
+    g {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+   .revealed { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<div id="svg-container"></div>
+
+<script>
+
+// load svg and add to page
+fetch("illu.svg")
+  .then(res => res.ok ? res.text() : Promise.reject(`Failed to load SVG: ${res.statusText}`))
+  .then(svg => {
+    const el = document.getElementById("svg-container");
+    el.innerHTML = svg;
+    setup(el.querySelector("svg"));
+  });
+
+  // sort and reveal elements based on inkscape:label
+  function setup(svg) {
+
+    // get elements with inkscape:label attribute
+    const elements = [...svg.querySelectorAll('g')];
+    
+    // sort elements by id
+    const sorted = elements.sort((a, b) => a.getAttribute('inkscape:label') - b.getAttribute('inkscape:label'));
+
+    window.addEventListener('scroll', () => {
+
+      // progress
+      const p = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+      // threshold
+      const revealIndex = Math.floor(p * sorted.length);
+
+      // go through all elements and toggle revealed
+      sorted.forEach((el, index) => {
+        if (index <= revealIndex) el.classList.add('revealed');
+        else  el.classList.remove('revealed');        
+      });
+    });
+  }
+
+</script>
+
+</body>
+</html>
