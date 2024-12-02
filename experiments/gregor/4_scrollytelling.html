@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Testing Parallax</title>
+<style>
+
+html {
+	background-color: #0c0310;
+	-ms-overflow-style: none;
+	scrollbar-width: none;  
+}
+
+.html::-webkit-scrollbar {
+  display: none;
+}
+
+
+.keyart, .keyart_layer {
+	height: 1000px;
+}
+
+.keyart {
+	position: relative;
+	z-index: 1;
+}
+
+.keyart_layer {
+	background-position: bottom center;
+	background-size: contain;
+	background-repeat: repeat-x;
+	width: 101%;
+	position: absolute;
+}
+
+.keyart_layer.parallax {
+	position: fixed;
+}
+   	#keyart-0 {
+		background-image: url('../parallax/1.png');
+		background-color: #607cfb;
+	}
+	#keyart-1 {
+		background-image: url('../parallax/2.png');
+	}
+	#keyart-2 {
+		background-image: url('../parallax/3.png');
+	}
+	#keyart-3 {
+		background-image: url('../parallax/4.png');
+	}
+	#keyart-4 {
+		background-image: url('../parallax/5.png');
+	}
+	#keyart-5 {
+		background-image: url('../parallax/6.png');
+		opacity: 10%;
+	}
+	#keyart-6 {
+		background-image: url('../parallax/7.png');
+	}
+	#keyart-7 {
+		background-image: url('../parallax/8.png');
+	}
+
+#text {
+	background-color: #0c0310;
+    width: 100%;
+	height: 100%;
+	z-index:  2;
+	position: absolute;
+	text-align: center;
+}
+
+button {
+	color: white;
+	background-color: #7563fb; 
+    border: none;
+	border-radius: 15px;
+    padding: 20px 42px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+	font-style: italic;
+	margin-top: 600px;
+	transition: all 0.2s;
+}
+
+button:hover {
+	cursor: pointer;
+	background-color: #9a77f6; 
+}
+
+
+</style>
+</head>
+<body>
+    <div id="page">
+    <div class="keyart" id="parallax">
+        <div class="keyart_layer parallax" id="keyart-0" data-speed="2" style="transform: translate3d(0px, 0px, 0px)"></div>
+        <div class="keyart_layer parallax" id="keyart-1" data-speed="5" style="transform: translate3d(0px, 0px, 0px)"></div>
+        <div class="keyart_layer parallax" id="keyart-2" data-speed="11" style="transform: translate3d(0px, 0px, 0px)"></div>
+        <div class="keyart_layer parallax" id="keyart-3" data-speed="16" style="transform: translate3d(0px, 0px, 0px)"></div>
+        <div class="keyart_layer parallax" id="keyart-4" data-speed="26" style="transform: translate3d(0px, 0px, 0px)"></div>
+        <div class="keyart_layer parallax" id="keyart-5" data-speed="36" style="transform: translate3d(0px, 0px, 0px)"></div> 
+		<div class="keyart_layer parallax" id="keyart-6" data-speed="49" style="transform: translate3d(0px, 0px, 0px)"></div>
+        <div class="keyart_layer" id="keyart-7" data-speed="100"></div>
+    </div>
+
+    <div id="text">
+		<a href="https://youtu.be/_LFls-ucUfQ">
+		<button> Drive away </button>
+	    </a>
+    </div>
+
+</body>
+
+<script>
+
+function castParallax() {
+
+var opThresh = 350;
+var opFactor = 750;
+
+window.addEventListener("scroll", function(event){
+
+    var top = this.pageYOffset;
+
+    var layers = document.getElementsByClassName("parallax");
+    var layer, speed, yPos;
+    for (var i = 0; i < layers.length; i++) {
+        layer = layers[i];
+        speed = layer.getAttribute('data-speed');
+        var yPos = -(top * speed / 100);
+        layer.setAttribute('style', 'transform: translate3d(0px, ' + yPos + 'px, 0px)');
+
+    }
+});
+
+}
+
+function castSmoothScroll() {
+$.srSmoothscroll({
+    step: 80,
+    speed: 300,
+    ease: 'linear'
+});
+}
+
+function startSite() {
+    castParallax();
+    castSmoothScroll();
+}
+
+document.body.onload = startSite();
+</script>
+</html>
