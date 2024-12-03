@@ -110,15 +110,7 @@
 <h3 class="wave-text">I just wanna tell you how I'm feeling</h3>
 <h3 class="wave-text">Gotta make you understand</h3>
 
-<script>
-// Adjust video frame along scrolling progress
-const video = document.getElementById('video');
-document.addEventListener('scroll', () => {
-    video.removeAttribute("autoplay");
-    const pct = window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-    video.currentTime = video.duration * pct;
-});
-</script>
+
 
 </body>
 </html>
