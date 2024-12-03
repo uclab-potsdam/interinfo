@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Audio - Media - Interactive Information</title>
+<style>
+body { 
+    padding: 0; margin: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    height: 100vh;    
+}
+</style>
+</head>
+<body>
+
+<audio id="audio" autoplay controls>
+    <source src="https://fhpcloud.fh-potsdam.de/s/4TTaswgxPNxkCak/download/audio.mp4" type="video/mp4" />
+</audio>
+
+<script>
+const audio = document.getElementById('audio');
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        event.preventDefault(); // this prevents scrolling when spacebar press
+        if (audio.paused) audio.play();
+        else audio.pause();        
+    }
+});
+</script>
+</body>
+</html>
