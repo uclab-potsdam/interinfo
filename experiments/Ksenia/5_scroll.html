@@ -130,33 +130,25 @@
 
 
 <script>
-
-// adjust video frame along scrolling progress
-const video = document.getElementById('video');
-
-document.addEventListener('scroll', () => {
-    video.removeAttribute("autoplay");
-
-    // scrolling progress
-    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
-
-    video.currentTime = video.duration * pct;
-});
-
-
-// select all h3 elements
-const headers = document.querySelectorAll('h3');
-const start = 100;  // start position for first line
-const end = 950;    // end position for last line
-
-const step = (end - start) / (headers.length - 1); // space between headers
-
-// vertically distribute the elements
-headers.forEach((header, index) => {
-    const topPosition = start + (index * step);
-    header.style.top = `${topPosition}vh`; // set top position
-});
-
-</script>
-</body>
-</html>
+    // Adjust video frame along scrolling progress
+    const video = document.getElementById('video');
+    document.addEventListener('scroll', () => {
+        video.removeAttribute("autoplay");
+        const pct = window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+        video.currentTime = video.duration * pct;
+    });
+    
+    // Distribute h3 headers vertically
+    const headers = document.querySelectorAll('h3');
+    const start = 30; // Start position (vh)
+    const end = 90; // End position (vh)
+    const step = (end - start) / (headers.length - 1);
+    
+    headers.forEach((header, index) => {
+        const topPosition = start + (index * step);
+        header.style.top = `${topPosition}vh`; // Set vertical position
+    });
+    </script>
+    
+    </body>
+    </html>
