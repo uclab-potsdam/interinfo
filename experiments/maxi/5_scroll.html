@@ -4,10 +4,18 @@
 <meta charset="UTF-8">
 <title>Scroll - Media - Interactive Information</title>
 <style>
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
 body {
     margin: 0;
-    height: 1000vh; /* Make the page scrollable */
-    background-color: black;
+    height: 100vh;
+    width: 1000vw; /* Make the page scrollable */
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
     font-family: sans-serif;
 }
 
@@ -27,7 +35,8 @@ video {
     display: block;
 }
 
-h1, h2, h3 { 
+h1, h2, h3 {
+    scroll-snap-align: start;
     color: white;  
     position: absolute;  
     z-index: 1;
@@ -118,7 +127,8 @@ document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
 
     // scrolling progress
-    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+    const bar = document.getElementById('progress-bar'); // progress bar
+    const pct = (window.scrollX / (document.documentElement.scrollWidth - document.documentElement.clientWidth));
 
     video.currentTime = video.duration * pct;
 });
@@ -131,10 +141,10 @@ const end = 950;    // end position for last line
 
 const step = (end - start) / (headers.length - 1); // space between headers
 
-// vertically distribute the elements
+// horizontally distribute the elements
 headers.forEach((header, index) => {
-    const topPosition = start + (index * step);
-    header.style.top = `${topPosition}vh`; // set top position
+    const leftPosition = start + (index * step);
+    header.style.left = `${leftPosition}vw`; // set left position
 });
 
 </script>

@@ -118,6 +118,7 @@ document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
 
     // scrolling progress
+    const bar = document.getElementById('progress-bar'); // progress bar
     const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
 
     video.currentTime = video.duration * pct;

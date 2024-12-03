@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    height: 1000vh; /* Make the page scrollable */
+    background-color: black;
+    font-family: sans-serif;
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+h1, h2, h3 { 
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+}
+
+h1 { font-size: 3em; top: 35vh; }
+h2 { font-size: 2.5em; top: 50vh; }
+h3 { font-size: 2em; }
+
+h3:nth-of-type(1) { top: 150vh; }
+h3:nth-of-type(2) { top: 200vh; }
+h3:nth-of-type(3) { top: 300vh; }
+
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
+</div>
+
+
+<h1>Never Gonna Give You Up</h1>
+<h2>Rick Astley</h2>
+
+<h3>We're no strangers to love</h3>
+<h3>You know the rules and so do I</h3>
+<h3>A full commitment's what I'm thinking of...</h3>
+
+<script>
+
+// adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // scrolling progress
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+    video.currentTime = video.duration * pct;
+});
+
+</script>
+</body>
+</html>
