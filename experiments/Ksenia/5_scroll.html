@@ -71,6 +71,7 @@
 <h1>Never Gonna Give You Up</h1>
 <h2>Rick Astley</h2>
 
+<!-- Lyrics -->
 <h3>We're no strangers to love</h3>
 <h3>You know the rules and so do I</h3>
 <h3>A full commitment's what I'm thinking of</h3>
@@ -83,72 +84,27 @@
 <h3>Never gonna make you cry</h3>
 <h3>Never gonna say goodbye</h3>
 <h3>Never gonna tell a lie and hurt you</h3>
-<h3>We've known each other for so long</h3>
-<h3>Your heart's been aching but you're too shy to say it</h3>
-<h3>Inside we both know what's been going on</h3>
-<h3>We know the game and we're gonna play it</h3>
-<h3>And if you ask me how I'm feeling</h3>
-<h3>Don't tell me you're too blind to see</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give, never gonna give</h3>
-<h3>(Give you up)</h3>
-<h3>(Ooh) Never gonna give, never gonna give</h3>
-<h3>(Give you up)</h3>
-<h3>We've known each other for so long</h3>
-<h3>Your heart's been aching but you're too shy to say it</h3>
-<h3>Inside we both know what's been going on</h3>
-<h3>We know the game and we're gonna play it</h3>
-<h3>I just wanna tell you how I'm feeling</h3>
-<h3>Gotta make you understand</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-
 
 <script>
-    // Adjust video frame along scrolling progress
-    const video = document.getElementById('video');
-    document.addEventListener('scroll', () => {
-        video.removeAttribute("autoplay");
-        const pct = window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
-        video.currentTime = video.duration * pct;
-    });
-    
-    // Distribute h3 headers vertically
-    const headers = document.querySelectorAll('h3');
-    const start = 30; // Start position (vh)
-    const end = 90; // End position (vh)
-    const step = (end - start) / (headers.length - 1);
-    
-    headers.forEach((header, index) => {
-        const topPosition = start + (index * step);
-        header.style.top = `${topPosition}vh`; // Set vertical position
-    });
-    </script>
-    
-    </body>
-    </html>
+// Adjust video frame along scrolling progress
+const video = document.getElementById('video');
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+    const pct = window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+    video.currentTime = video.duration * pct;
+});
+
+// Distribute h3 headers vertically
+const headers = document.querySelectorAll('h3');
+const start = 30; // Start position (vh)
+const end = 90; // End position (vh)
+const step = (end - start) / (headers.length - 1);
+
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`; // Set vertical position
+});
+</script>
+
+</body>
+</html>
