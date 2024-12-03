@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+    body {
+        margin: 0;
+        height: 1000vh; /* Make the page scrollable */
+        background-color: black;
+        font-family: sans-serif;
+        position: relative;
+    }
+
+    .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px; /* Space between videos */
+        position: fixed; /* Keep videos fixed at the center */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0; /* Ensure videos are behind text */
+    }
+
+    video {
+        width: 45%; /* Adjust video size */
+        max-width: 500px;
+        display: block;
+        border-radius: 10px; /* Optional: Rounded corners for aesthetics */
+    }
+
+    .grayscale {
+        filter: grayscale(100%);
+    }
+
+    h1, h2, h3 { 
+        color: white;  
+        position: absolute;  
+        text-align: center;
+        width: 100%;
+        z-index: 1; /* Text should appear over videos */
+    }
+
+    h1 { font-size: 3em; top: 10vh; }
+    h2 { font-size: 2.5em; top: 20vh; }
+
+    h3 {
+        font-size: 2em;
+        position: absolute;
+    }
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <!-- Video 1 -->
+    <video id="video" autoplay loop muted playsinline>
+        <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Video 2 (Black and White) -->
+    <video autoplay loop muted playsinline class="grayscale">
+        <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<h1>Never Gonna Give You Up</h1>
+<h2>Rick Astley</h2>
+
+<!-- Lyrics -->
+<h3>We're no strangers to love</h3>
+<h3>You know the rules and so do I</h3>
+<h3>A
