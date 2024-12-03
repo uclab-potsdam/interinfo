@@ -9,27 +9,32 @@ body {
     height: 1000vh; /* Make the page scrollable */
     background-color: black;
     font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .video-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    z-index: 0;
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
 }
 
 video {
-    margin: auto;
-    width: 100%;
-    max-width: 1000px;
-    display: block;
-}
+    width: 48%;
+           max-width: 500px;
+           display: block;
+        }
+
+        .grayscale {
+            filter: grayscale(100%);
+        }
+
 
 h1, h2, h3 { 
     color: white;  
-    position: absolute;  
+    position: relative;  
     z-index: 1;
     text-align: center;
     width: 100%;
@@ -45,6 +50,7 @@ h3 { font-size: 2em; }
 
 <div class="video-container">
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
+    <video autoplay loop muted class="grayscale"> src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video></video>
 </div>
 
 
