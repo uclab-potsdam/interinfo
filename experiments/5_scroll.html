@@ -17,6 +17,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    z-index: 0;
 }
 
 video {
@@ -26,10 +27,17 @@ video {
     display: block;
 }
 
-h1, h2, h3 { color: white; text-align: center;}
-h3 { position: absolute; left: 50%; transform: translateX(-50%);  }
+h1, h2, h3 { 
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+}
 
-h3 {font-size: 2em;}
+h1 { font-size: 3em; top: 35vh; }
+h2 { font-size: 2.5em; top: 50vh; }
+h3 { font-size: 2em; }
 
 </style>
 </head>
@@ -105,7 +113,6 @@ h3 {font-size: 2em;}
 
 // adjust video frame along scrolling progress
 const video = document.getElementById('video');
-video.load();
 
 document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
@@ -125,12 +132,12 @@ const end = 950;    // end position for last line
 
 const step = (end - start) / (headers.length - 1); // space between headers
 
+// vertically distribute the elements
 headers.forEach((header, index) => {
     const topPosition = start + (index * step);
     header.style.top = `${topPosition}vh`; // set top position
 });
 
 </script>
-
 </body>
 </html>
