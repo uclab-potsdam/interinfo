@@ -9,15 +9,18 @@ body {
     height: 1000vh; /* Make the page scrollable */
     background-color: black;
     font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .video-container {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 15vh;
+    left: 0%;
     width: 100%;
     z-index: 0;
+    scroll-behavior: auto;
 }
 
 video {
@@ -37,13 +40,21 @@ h1, h2, h3 {
 
 h1 { font-size: 3em; top: 35vh; }
 h2 { font-size: 2.5em; top: 50vh; }
-h3 { font-size: 2em; }
+h3 { 
+    font-size: 2em; 
+    filter: blur(3px);
+    transition: ease 0.6s;
+}
+
+h3.visible {
+    filter: blur(0px);
+}
 
 </style>
 </head>
 <body>
 
-<div class="video-container">
+<div class="video-container" id="container">
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
 </div>
 
@@ -114,14 +125,49 @@ h3 { font-size: 2em; }
 // adjust video frame along scrolling progress
 const video = document.getElementById('video');
 
+const container = document.getElementById('container');
+
+const textElements = document.querySelectorAll('h3');
+
 document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
 
     // scrolling progress
+    const bar = document.getElementById('progress-bar'); // progress bar
     const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
 
     video.currentTime = video.duration * pct;
+
+    const scale = 1 + pct*2;
+
+    document.querySelector('.video-container').style.transform = `scale(${scale})`;
+
+
+    textElements.forEach(text => {
+        const rect = text.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    const topPercent = (rect.top / windowHeight) * 100;
+    const bottomPercent = (rect.bottom / windowHeight) * 100;
+
+    if (topPercent <= 60 && bottomPercent >= 50) {
+        text.style.filter = 'blur(0px)';
+        text.style.transform = 'scale(1.5)';
+        text.style.color = 'yellow';
+    } else {
+        text.style.filter = 'blur(3px)';
+        text.style.transform = 'scale(1)';
+        text.style.color = 'white';
+    }
+    })
+
+    
+    
 });
+
+
+
+
 
 
 // select all h3 elements

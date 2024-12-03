@@ -11,6 +11,16 @@ body {
     font-family: sans-serif;
 }
 
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: #3498db;
+    z-index: 1;
+}
+
 .video-container {
     position: fixed;
     top: 50%;
@@ -39,9 +49,12 @@ h1 { font-size: 3em; top: 35vh; }
 h2 { font-size: 2.5em; top: 50vh; }
 h3 { font-size: 2em; }
 
+
 </style>
 </head>
 <body>
+
+<div id="progress-bar"></div>
 
 <div class="video-container">
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
@@ -111,6 +124,12 @@ h3 { font-size: 2em; }
 
 <script>
 
+document.addEventListener('scroll', () => {    
+    const bar = document.getElementById('progress-bar'); // progress bar
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+    bar.style.width = (pct*100)+"%";
+});
+
 // adjust video frame along scrolling progress
 const video = document.getElementById('video');
 
@@ -118,9 +137,12 @@ document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
 
     // scrolling progress
+    const bar = document.getElementById('progress-bar'); // progress bar
     const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
 
     video.currentTime = video.duration * pct;
+
+
 });
 
 
@@ -135,6 +157,7 @@ const step = (end - start) / (headers.length - 1); // space between headers
 headers.forEach((header, index) => {
     const topPosition = start + (index * step);
     header.style.top = `${topPosition}vh`; // set top position
+
 });
 
 </script>
