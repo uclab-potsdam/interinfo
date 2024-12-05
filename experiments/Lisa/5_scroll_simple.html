@@ -24,9 +24,8 @@ height: 100vh;
 
 <script>
 const video = document.getElementById('video');
-
 document.addEventListener('keydown', (event) => {
-    if (event.code==="Space"); {
+    if (event.code==='Space'); {
         event.preventDefault(); //this prevents scrolling when spacebar press
     if (video.paused) video.play();
     else video.pause();
