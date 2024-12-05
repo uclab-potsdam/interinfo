@@ -9,6 +9,17 @@ body {
     height: 1000vh; /* Make the page scrollable */
     background-color: black;
     font-family: sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll due to sparkles */
+}
+
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: #3498db;
+    z-index: 1;
 }
 
 .video-container {
@@ -30,27 +41,43 @@ video {
 h1, h2, h3 { 
     color: white;  
     position: absolute;  
-    z-index: 1;
     text-align: center;
     width: 100%;
 }
 
-h1 { font-size: 3em; top: 35vh; }
-h2 { font-size: 2.5em; top: 50vh; }
-h3 { font-size: 2em; }
+h1 { font-size: 3em; top: 35vh; z-index: 1; }
+h2 { font-size: 2.5em; top: 50vh; z-index: 1; }
+h3 { font-size: 2em; z-index: 1; }
 
+/* Sparkle effect */
+.sparkle {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(255,255,0,1) 0%, rgba(255,0,0,0.5) 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    100% { transform: scale(2) translateY(-50px); opacity: 0; }
+}
 </style>
 </head>
 <body>
+
+<div id="progress-bar"></div>
 
 <div class="video-container">
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/2ye4f8Cw4SwMA49/download/Albus%20Dumbledore%20.mp4" muted playsinline></video>
 </div>
 
-
 <h1>Albus Dumbledore | The Grand Sorcerer</h1>
 <h2></h2>
 
+<!-- h3 elements -->
 <h3>He will be under the finest Headmaster that  Hogwarts has ever seen.</h3>
 <h3>Every day..</h3>
 <h3>Albus Dumbledore.</h3>
@@ -92,36 +119,57 @@ h3 { font-size: 2em; }
 <h3>You simly ask: Is the thing right?</h3>
 <h3>You meant a great deal to him.</h3>
 
-
 <script>
-
-// adjust video frame along scrolling progress
 const video = document.getElementById('video');
+const headers = document.querySelectorAll('h3');
 
-document.addEventListener('scroll', () => {
-    video.removeAttribute("autoplay");
-
-    // scrolling progress
+document.addEventListener('scroll', () => {    
     const bar = document.getElementById('progress-bar'); // progress bar
     const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
-
-    video.currentTime = video.duration * pct;
+    bar.style.width = (pct*100)+"%";
 });
 
+// Adjust text positions dynamically
+const start = 100;  // start position for the first line
+const end = 900;    // end position for the last line
+const step = (end - start) / (headers.length - 1);
 
-// select all h3 elements
-const headers = document.querySelectorAll('h3');
-const start = 100;  // start position for first line
-const end = 950;    // end position for last line
-
-const step = (end - start) / (headers.length - 1); // space between headers
-
-// vertically distribute the elements
 headers.forEach((header, index) => {
     const topPosition = start + (index * step);
-    header.style.top = `${topPosition}vh`; // set top position
+    header.style.top = `${topPosition}vh`; // distribute text vertically
 });
 
+
+// Function to create sparkles
+function createSparkle(x, y) {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.left = `${x}px`;
+    sparkle.style.top = `${y}px`;
+    document.body.appendChild(sparkle);
+    sparkle.addEventListener('animationend', () => sparkle.remove());
+}
+
+// Handle scroll events
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+    video.currentTime = video.duration * pct;
+
+    headers.forEach((header) => {
+        const rect = header.getBoundingClientRect();
+        if (rect.top > 0 && rect.top < window.innerHeight && Math.random() > 0.9) {
+            createSparkle(
+                rect.left + rect.width / 2 + Math.random() * 50 - 25, // randomize x
+                rect.top + Math.random() * 20 // randomize y
+            );
+        }
+    });
+});
 </script>
 </body>
 </html>
+
+
+
+
