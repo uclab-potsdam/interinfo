@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    height: 1000vh; /* Make the page scrollable */
+    background-color: black;
+    font-family: sans-serif;
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+h1, h2, h3 { 
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+}
+
+h1 { font-size: 3em; top: 35vh; }
+h2 { font-size: 2.5em; top: 50vh; }
+h3 { font-size: 2em; }
+
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/2ye4f8Cw4SwMA49/download/Albus%20Dumbledore%20.mp4" muted playsinline></video>
+</div>
+
+
+<h1>Albus Dumbledore | The Grand Sorcerer</h1>
+<h2></h2>
+
+<h3>He will be under the finest Headmaster that  Hogwarts has ever seen.</h3>
+<h3>Every day..</h3>
+<h3>Albus Dumbledore.</h3>
+<h3>..every hour, this very minute perhaps..</h3>
+<h3>I've got Dumbledore!</h3>
+<h3>..dark forces attempt to penetrate this castle's walls.</h3>
+<h3>Who's the one wizard Voldemort always feared?</h3>
+<h3>You are the only wizard who is his equal.</h3>
+<h3>Dumbledore!</h3>
+<h3>I need you to fight him.</h3>
+<h3>Soon we must all face the choice between what is right and what is easy.</h3>
+<h3>I can't.</h3>
+<h3>Well, then you have chosen your side.</h3>
+<h3>But you know happiness can be  found even in the darkest of times..</h3>
+<h3>..when only one remembers to turn on the light.</h3>
+<h3>Did you love her?</h3>
+<h3>Not as well as I should have done.</h3>
+<h3>Regret is my constant companion. Do not let it become yours.</h3>
+<h3>I know how you feel, Harry.</h3>
+<h3>No, you don't.</h3>
+<h3>Severus...please.</h3>
+<h3>You and Grindelwald were as close as brothers.</h3>
+<h3>Oh, we were closer than brothers.</h3>
+<h3>There is a legend in your family that phoenix will come to any member..</h3>
+<h3>..who is in dire need.</h3>
+<h3>It is your birthright.</h3>
+<h3>It was foolish of you to come here tonight, Tom.</h3>
+<h3>But you can't deny. Dumbledore has got a style.</h3>
+<h3>Dumbledore is the great wizard, only a fool would question it.</h3>
+<h3>What makes Albus Dumbledore..</h3>
+<h3>..so fond of you?</h3>
+<h3>Albus Dumbledore is the greatest sorcerer in the world!</h3>
+<h3>He'll never be gone. Not as long as those who remain are loyal to him!</h3>
+<h3>Severus. Severus is all I need.</h3>
+<h3>I'm fine.</h3>
+<h3>Never insult Albus Dumbledore infront of me.</h3>
+<h3>Do you know why I admire you, Newt?</h3>
+<h3>You do not seek power.</h3>
+<h3>You simly ask: Is the thing right?</h3>
+<h3>You meant a great deal to him.</h3>
+
+
+<script>
+
+// adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // scrolling progress
+    const bar = document.getElementById('progress-bar'); // progress bar
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+    video.currentTime = video.duration * pct;
+});
+
+
+// select all h3 elements
+const headers = document.querySelectorAll('h3');
+const start = 100;  // start position for first line
+const end = 950;    // end position for last line
+
+const step = (end - start) / (headers.length - 1); // space between headers
+
+// vertically distribute the elements
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`; // set top position
+});
+
+</script>
+</body>
+</html>
