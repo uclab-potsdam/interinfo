@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    height: 1000vh; /* Make the page scrollable */
+    background-color: black;
+    font-family: sans-serif;
+}
+
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    overflow: hidden; /* Ensures the video doesn't overflow */
+}
+
+video {
+    width: 100vw; /* Make the video fill the full width */
+    height: 100vh; /* Make the video fill the full height */
+    object-fit: cover; /* Ensures that the video covers the entire container */
+    display: block;
+    z-index: 1;
+}
+
+.album-cover {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13vw; /* Adjust album cover size */
+    height: auto;
+    z-index: 2;
+}
+
+.album-cover.left {
+    left: 0;
+}
+
+.album-cover.right {
+    right: 0;
+}
+
+h1, h2, h3 { 
+    color: white;  
+    position: absolute;  
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+}
+
+h1 { font-size: 3em; top: 35vh; }
+h2 { font-size: 2.5em; top: 50vh; }
+h3 { font-size: 2em; }
+
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <img class="album-cover left" src="https://fhpcloud.fh-potsdam.de/s/BcrNBRpZbycWX3B/download/cover%20lucki%20sunset.png" alt="Album Cover Left">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/tkso5xcpALbJpDQ/download/LUCKI-SUNSET.mp4" muted playsinline></video>
+    <img class="album-cover right" src="https://fhpcloud.fh-potsdam.de/s/BcrNBRpZbycWX3B/download/cover%20lucki%20sunset.png" alt="Album Cover Right">
+</div>
+
+<h1>Woah, yeah, ayy, uh</h1>
+<h2>Can't sip Sprite with the Hi-Tech, ayy</h2>
+
+<h3>Can't sip Sprite with the Hi-Tech</h3>
+<h3>Ayy, woah, huh</h3>
+<h3>Ayy, ayy, ayy, ayy</h3>
+<h3>Must be a X on my chest</h3>
+<h3>Ayy, woah, ayy, woah</h3>
+<h3>Ayy, ayy, ayy, woah</h3>
+
+<h3>Can't sip Sprite with the Hi-Tech, ayy</h3>
+<h3>That shit too pure to digest, ayy</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>This pure X loosen my chest, ayy</h3>
+<h3>I should've died but not yet, ayy</h3>
+<h3>I ain't even finished my project, ayy</h3>
+<h3>Shoulder to cry, I'm not it, ayy</h3>
+<h3>I don't even think I'm high yet</h3>
+<h3>Ayy, woah, ayy, woah, ayy</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>Too much X lock my chest, ayy</h3>
+<h3>L.A. ho take my breath, ayy</h3>
+<h3>Leave with her, fake my death</h3>
+<h3>No seal, no deal my motto</h3>
+<h3>No high, no thrill, it's all gone</h3>
+<h3>Xan' flights, I'm switchin' timezone</h3>
+<h3>Do drugs, don't know what I know</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>I don't even greet no dumb bitch</h3>
+<h3>Look easy to me, too fun bitch</h3>
+<h3>That's easy to me, I done this</h3>
+<h3>'Tech bleed in the cream, no Sunkist</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>Do you see a X on my chest? Ayy</h3>
+<h3>Let's die now, fuck a sunset, ayy</h3>
+<h3>Let's die now, fuck a sunset</h3>
+<h3>Ayy, woah, uh, ayy, woah</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>Do you see a X on my chest? Ayy</h3>
+<h3>Let's die now, fuck a sunset</h3>
+<h3>Ayy, woah, woah, ayy</h3>
+<h3>Let's die now, fuck a sunset, ayy</h3>
+<h3>Let's die now, fuck a sunset, ayy</h3>
+<h3>Let's die now, fuck a sunset</h3>
+<h3>Ayy, woah, ayy, woah, ayy</h3>
+<h3>Must be a X on my chest, ayy</h3>
+<h3>Must be a X on my chest</h3>
+
+<script>
+// adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // scrolling progress
+    const bar = document.getElementById('progress-bar'); // progress bar
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+    video.currentTime = video.duration * pct;
+});
+
+// select all h3 elements
+const headers = document.querySelectorAll('h3');
+const start = 100;  // start position for first line
+const end = 950;    // end position for last line
+
+const step = (end - start) / (headers.length - 1); // space between headers
+
+// vertically distribute the elements
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`; // set top position
+});
+</script>
+</body>
+</html>

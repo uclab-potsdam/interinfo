@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    height: 1000vh; /* Make the page scrollable */
+    background-image: url('image.png'); /* Ersetze dies durch die URL deines Sternenhimmel-Bildes */
+        background-size: cover;
+        background-repeat: no-repeat;
+    font-family: 'Comic Sans MS', sans-serif; /* A more casual font */
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+h1, h2, h3 { 
+    color: rgb(252, 183, 46);  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    animation: sway 3s infinite; /* Add sway animation */
+}
+
+@keyframes sway {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+h1 { font-size: 3em; top: 35vh; }
+h2 { font-size: 2.5em; top: 50vh; }
+h3 { font-size: 2em; }
+
+h3:nth-of-type(1) { top: 150vh; }
+h3:nth-of-type(2) { top: 200vh; }
+h3:nth-of-type(3) { top: 300vh; }
+
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/CjtENCG7iYXZmYT/download/102%20BOYZ%20x%20BHZ%20-%20Bier%20%5BProd.%20by%20Symtex128%5D%20%28Official%20Video%29.mp4" muted playsinline></video>
+</div>
+
+<h1>102 BOYZ - Bier</h1>
+<h2>Asozial</h2>
+
+<h3>Ey, alle meine Freunde stinken morgens schon nach Bier, ah</h3>
+<h3>Sippe schön im Studio, bin ziemlich deformiert, ah</h3>
+<h3>1-0-2 und BHZ, ich glaub, du hast kapiert, ah</h3>
+<h3>Wieder viel zu hacke, da hilft nur noch Kokain</h3>
+
+<h3>Alle meine Brüder stinken morgens schon nach Bier (bah)</h3>
+<h3>Chapo 1-0-2, ich trinke Bier, auch schon vor vier (ja)</h3>
+<h3>Jetzt schon ratzevoll, doch nix befriedigt meine Gier (bubu, bah)</h3>
+<h3>Trinke nur pur Wodka, 1-0-2 markiert Revier</h3>
+
+<h3>Ich spritze Wodka aus dem Schiebedach</h3>
+<h3>24/7 lang auf Suff mit Jungs, ich liebe das, lass ziehen, Mann</h3>
+<h3>Meine Freunde parfümiert in Biergeruch</h3>
+<h3>Tyskie-Kasten für die Jungs, die ganze Sippe macht sich dumm (ey)</h3>
+
+<h3>Sternburg, magisches Merkur</h3>
+<h3>Deine Gang ein Haufen Opfer, doch denkt, ihr wärt cool (ay, ay)</h3>
+<h3>102 und BHZ, was für Respekt?</h3>
+<h3>Sauf mich in den Schlaf und wach auf in ner Zelle, nicht im Bett</h3>
+
+<h3>Alle meine Freunde stinken morgens schon nach Bier (oh)</h3>
+<h3>Sippe schön im Studio, bin ziemlich deformiert</h3>
+<h3>1-0-2 und BHZ, ich glaub, du hast kapiert (oh)</h3>
+<h3>Wieder viel zu hacke, da hilft nur noch Kokain</h3>
+
+<h3>Alle meine Brüder stinken morgens schon nach Bier (bah)</h3>
+<h3>Chapo 1-0-2, ich trinke Bier, auch schon vor vier (ja)</h3>
+<h3>Jetzt schon ratzevoll, doch nix befriedigt meine Gier (bubu, bah)</h3>
+<h3>Trinke nur pur Wodka, 1-0-2 markiert Revier (ha)</h3>
+
+<script>
+
+// adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // scrolling progress
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+    video.currentTime = video.duration * pct;
+});
+
+// select all h3 elements
+const headers = document.querySelectorAll('h3');
+const start = 100;  // start position for first line
+const end = 950;    // end position for last line
+
+const step = (end - start) / (headers.length - 1); // space between headers
+
+// vertically distribute the elements
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`; // set top position
+});
+
+</script>
+</body>
+</html>

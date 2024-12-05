@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Progress - Scrollytelling - Interactive Information</title>
+<style>
+
+body { 
+    margin: 0;
+    scroll-behavior: smooth;
+    font-size: calc( 1vw + 1vh );
+    line-height: 1.5em;
+    padding: 10px; 
+    text-align: left;
+    width: calc( 45vw);
+    
+}
+
+* { 
+    transition: all 1s;
+    transition-delay: .2s;
+}
+
+p, h2 {
+    color: transparent;
+    text-shadow: 0 0 .25em lightgray;
+}
+
+p.visible, h2.visible {
+    color: black;
+    text-shadow: none;
+    opacity: 1;
+}
+
+#parallax {    
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scroll-behavior: smooth;
+}
+
+#parallax > div {
+  position: absolute;  
+}
+
+#square {
+    transform: translateZ(0px) scale(2);
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc(3vw + 3vh);
+    top: 75vh; left: 90%;
+    background-color: rgb(26, 92, 158);
+}
+
+#circle {
+    transform: translateZ(-1px) scale(3);    
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 50vh; left: 80vw;
+    background-color: rgb(22, 108, 193);
+}
+
+#footer {    
+    width: 100%; height: 100px;
+    left: 0; top: 200vh;    
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.rectangle {
+    background-color: hsl(215, 100%, 73%); 
+    width: 45%;
+    height: 400vh;
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+h1 {
+    font-size: calc(3vw + 3vh);
+    padding: 30px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+    <div id="parallax">
+        <div id="footer"></div>  
+        <div id="circle"></div>  
+        <div id="square"></div>
+    </div>
+
+<div class="rectangle"></div>
+
+<h1>Farbkontraste</h1>
+
+<main>
+    <section>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <section>
+        <h2>Foo</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <section>
+        <h2>Bar</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+<script>
+
+const elements = document.querySelectorAll('p, h2');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: .5 });
+
+elements.forEach(el => observer.observe(el)); 
+
+</script>
+
+</body>
+</html>

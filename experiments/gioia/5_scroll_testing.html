@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    height: 1000vh; /* Macht die Seite scrollbar */
+    background-color: black;
+    font-family: sans-serif;
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+h1, h2 {
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+}
+
+h1 { font-size: 3em; top: 35vh; }
+h2 { font-size: 2.5em; top: 50vh; }
+
+.lyrics {
+    color: white;
+    text-align: center;
+    margin-top: 100vh; /* Abstand nach dem Haupttext */
+    padding: 20px;
+}
+
+.lyrics h3 {
+    margin: 10px 0; /* Abstand zwischen den Zeilen */
+    transition: font-size 0.2s; /* Sanfte Animation für die Schriftgrößenänderung */
+}
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
+</div>
+
+<h1>Never Gonna Give You Up</h1>
+<h2>Rick Astley</h2>
+
+<div class="lyrics">
+    <h3>We're no strangers to love</h3>
+    <h3>You know the rules and so do I</h3>
+    <h3>A full commitment's what I'm thinking of</h3>
+    <h3>You wouldn't get this from any other guy</h3>
+    <h3>I just wanna tell you how I'm feeling</h3>
+    <h3>Gotta make you understand</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>We've known each other for so long</h3>
+    <h3>Your heart's been aching but you're too shy to say it</h3>
+    <h3>Inside we both know what's been going on</h3>
+    <h3>We know the game and we're gonna play it</h3>
+    <h3>And if you ask me how I'm feeling</h3>
+    <h3>Don't tell me you're too blind to see</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give, never gonna give</h3>
+    <h3>(Give you up)</h3>
+    <h3>(Ooh) Never gonna give, never gonna give</h3>
+    <h3>(Give you up)</h3>
+    <h3>We've known each other for so long</h3>
+    <h3>Your heart's been aching but you're too shy to say it</h3>
+    <h3>Inside we both know what's been going on</h3>
+    <h3>We know the game and we're gonna play it</h3>
+    <h3>I just wanna tell you how I'm feeling</h3>
+    <h3>Gotta make you understand</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+</div>
+
+<script>
+// Adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // Scrolling progress
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+    video.currentTime = video.duration * pct;
+
+    // Adjust font size based on scroll position
+    const lyrics = document.querySelectorAll('.lyrics h3');
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const maxFontSize = 4; // Maximale Schriftgröße in em
+    const minFontSize = 1; // Minimale Schriftgröße in em
+
+    lyrics.forEach((element, index) => {
+        // Berechne die relative Scrollposition für jedes Element
+        const elementPosition = (index / lyrics.length) * maxScroll;
+        const distance = Math.abs(scrollY - elementPosition);
+        const fontSize = Math.min(maxFontSize, minFontSize + (distance / maxScroll) * (maxFontSize - minFontSize));
+        element.style.fontSize = `${fontSize}em`;
+    });
+});
+</script>
+</body>
+</html>

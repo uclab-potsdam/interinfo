@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>See Cat Pics</title>
+<style>
+body {
+    margin: 0;
+    height: 2000vh; /* Make the page extra scrollable */
+    background-color: black;
+    font-family: 'Comic Sans MS', cursive; /* The ultimate silly font */
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+#rickroll-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    overflow: hidden;
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+h1, h2, h3 {
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    text-shadow: 0px 0px 20px magenta, 0px 0px 30px cyan;
+    animation: bounce 3s infinite ease-in-out;
+}
+
+h1 { font-size: 5em; top: 20vh; animation: zoom 2s infinite alternate; }
+h2 { font-size: 4em; top: 40vh; animation: spin-text 3s infinite linear; }
+h3 { font-size: 2em; }
+
+.silly-effects {
+    animation: spin 2s infinite linear;
+    font-size: 3em;
+    text-shadow: 0 0 10px red, 0 0 20px yellow, 0 0 30px green;
+    transform: scale(1.2);
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-text {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+button {
+    padding: 20px 40px;
+    font-size: 2em;
+    cursor: pointer;
+    border: 5px dashed yellow;
+    border-radius: 20px;
+    background-color: #ff69b4;
+    color: white;
+    text-shadow: 0 0 10px yellow, 0 0 20px red;
+    transition: transform 0.3s, background-color 0.3s;
+    animation: wobble 2s infinite;
+}
+
+button:hover {
+    transform: scale(1.5) rotate(10deg);
+    background-color: #800080;
+}
+
+@keyframes wobble {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(-15deg);
+    }
+}
+
+#cat-images {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+}
+
+#cat-images h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#cat-images img {
+    width: 200px;
+    height: auto;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px yellow;
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: gold;
+    border-radius: 50%;
+    animation: confetti-fall 3s linear infinite;
+    opacity: 0.8;
+    z-index: 2;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+#flying-emoji {
+    position: fixed;
+    font-size: 5em;
+    z-index: 10;
+    display: none;
+    animation: fly 5s infinite alternate;
+}
+
+@keyframes fly {
+    0% {
+        left: -10%;
+        top: 10%;
+    }
+    100% {
+        left: 110%;
+        top: 80%;
+    }
+}
+</style>
+</head>
+<body>
+<!-- Initial content -->
+<div id="initial-content">
+    <button id="cat-pics-button">See Cat Pics 🐱</button>
+</div>
+
+<!-- Rickroll content -->
+<div id="rickroll-content" class="hidden">
+    <div class="video-container">
+        <video id="video" src="https://fhpcloud.fh-potsdam.de/s/PRq8fdfz8jbFdBT/download/Rick%20Astley%20-%20Never%20Gonna%20Give%20You%20Up%20%28Official%20Music%20Video%29.mp4" autoplay></video>
+    </div>
+    <h1 class="silly-effects">SURPRISE! 🎉</h1>
+    <h2>Rick Astley's Magical Adventure!</h2>
+    <h3>We're no strangers to love...</h3>
+    <h3>You know the rules and so do I 🎵</h3>
+    <h3>A full commitment's what I'm thinking of 🎶</h3>
+    <h3>You wouldn't get this from any other guy 🕺</h3>
+    <h3>I just wanna tell you how I'm feeling 💖</h3>
+    <h3>Gotta make you understand</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>We've known each other for so long</h3>
+    <h3>Your heart's been aching but you're too shy to say it</h3>
+    <h3>Inside we both know what's been going on</h3>
+    <h3>We know the game and we're gonna play it</h3>
+    <h3>And if you ask me how I'm feeling</h3>
+    <h3>Don't tell me you're too blind to see</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give, never gonna give</h3>
+    <h3>(Give you up)</h3>
+    <h3>(Ooh) Never gonna give, never gonna give</h3>
+    <h3>(Give you up)</h3>
+    <h3>We've known each other for so long</h3>
+    <h3>Your heart's been aching but you're too shy to say it</h3>
+    <h3>Inside we both know what's been going on</h3>
+    <h3>We know the game and we're gonna play it</h3>
+    <h3>I just wanna tell you how I'm feeling</h3>
+    <h3>Gotta make you understand</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <h3>Never gonna say goodbye</h3>
+    <h3>Never gonna tell a lie and hurt you</h3>
+    <h3>Never gonna give you up</h3>
+    <h3>Never gonna let you down</h3>
+    <h3>Never gonna run around and desert you</h3>
+    <h3>Never gonna make you cry</h3>
+    <!-- Cat Images Section -->
+<div id="cat-images" class="hidden">
+    <h3>Look, I didn't lie! Here are your cat images:</h3>
+    <h3><img src="/experiments/luca/5_media/amber-kipp-75715CVEJhI-unsplash.jpg" alt="Cute Cat 1"></h3>
+    <h3><img src="/experiments/luca/5_media/mona-magnussen-a7bdqjeG6M4-unsplash.jpg" alt="Cute Cat 2"></h3>
+    <h3><img src="/experiments/luca/5_media/nadi-whatisdelirium-fZ8uf_L52wg-unsplash.jpg" alt="Cute Cat 3"></h3>
+</div>
+</div>
+
+<div id="flying-emoji">🦄</div>
+
+
+
+<script>
+    // Button click to reveal Rickroll
+    document.getElementById('cat-pics-button').addEventListener('click', () => {
+    
+    alert("Are you sure you're ready for the cutest cat pics? 🐱");
+    setTimeout(() => alert("Wait a second... 🤔"), 1000);
+    setTimeout(() => alert("Uh-oh... YOU'VE BEEN RICKROLLED! 😂"), 2000);
+    changeTab();
+    document.getElementById('initial-content').classList.add('hidden');
+    document.getElementById('rickroll-content').classList.remove('hidden');
+    document.getElementById('cat-images').classList.remove('hidden');
+    
+    // Unmute the video and play it
+    const video = document.getElementById('video');
+    video.volume = 1.0;
+    video.play();
+
+    // Add scrolling lyrics effect
+    const headers = document.querySelectorAll('h3');
+    const start = 100;  // Start position for first line
+    const end = 1950;   // Extended end for extra chaos
+    const step = (end - start) / (headers.length - 1);
+
+    headers.forEach((header, index) => {
+        const topPosition = start + (index * step);
+        header.style.top = `${topPosition}vh`; // Set top position
+    });
+
+    document.addEventListener('scroll', () => {
+        const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+        video.currentTime = video.duration * pct;
+    });
+
+    // Add confetti for extra silliness
+    setInterval(() => {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.animationDuration = Math.random() * 5 + 2 + 's'; // Ensure longer display time
+        document.body.appendChild(confetti);
+
+        // Slightly extend confetti lifetime for visibility
+        setTimeout(() => {
+            if (confetti.parentElement) confetti.remove();
+        }, 5000);
+    }, 200); // Add new confetti every 200ms
+
+    // Show the flying unicorn emoji
+    const emoji = document.getElementById('flying-emoji');
+    emoji.style.display = 'block';
+});
+
+    
+    // Function to change tab title and favicon
+    function changeTab() {
+        // Change the tab title
+        document.title = "😂 GOTCHA! - Rickroll Supreme 🎉";
+    
+        // Create a new colorful favicon
+        const favicon = document.createElement('link');
+        favicon.rel = 'icon';
+        favicon.href = 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22 fill=%22magenta%22/><text x=%228%22 y=%2220%22 font-size=%2215%22 fill=%22yellow%22>😂</text></svg>';
+        document.head.appendChild(favicon);
+    
+        setTimeout(() => alert("Your tab has been Rickrolled too! 😂"), 3000);   
+    }
+    </script>
+    
+</body>
+</html>

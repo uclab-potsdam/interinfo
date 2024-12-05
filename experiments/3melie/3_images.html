@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Images of a haunted solar system - Interactive Information</title>
+
+<style>
+/* darkmode colors */
+:root {
+    --bg-color: #000000; 
+    --button-bg: #ffffff;
+    --button-icon-color: #ffffff;
+    --filter: grayscale(1);
+    --text-color: #ffec8c;
+}
+
+/* lightmode colors */
+.light-mode {
+    --bg-color: #f9f9f9; 
+    --button-bg: #000000;
+    --button-icon-color: #000000;
+    --filter: invert(1);
+    --text-color: #ff0000;
+    
+}
+
+.toggle-button {
+    position: absolute;
+    top: 20px;
+    background-color: var(--button-bg);
+    color: var(--button-icon-color);
+    border: none;
+    border-radius: 40%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background-color 1s ease, color 1s ease;
+    cursor:default;
+        }
+
+img {
+    width: 100px;
+    transition: all .5s;
+    height: 10vh;
+    width: auto;
+    border-radius: 50%;
+    transform: scale(1.5);
+    filter: var(--filter); /* greayscale when dark, inverted when light */
+    opacity: 60%;
+    mix-blend-mode:difference;
+    
+}
+
+img:hover{
+    transform: scale(1);
+    opacity: 100%;
+    filter: var(--filter2); /* none when dark, still inverted when light */
+    transition: 2s;
+}
+
+
+figure{
+    opacity: 10%;
+    transition: all 2.5s;
+    color: var(--text-color);
+}
+
+figure:hover{
+    
+    transition: all .5s;
+    opacity: 100%;
+    
+}
+
+
+
+
+body {
+    font-family: monospace;
+    text-align: center;
+    background-color: var(--bg-color); /* changes backgroundcolor */
+    /*background-image: url("stars.jpg");*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    cursor:vertical-text;
+}
+   
+</style>
+</head>
+<body>
+
+    
+<button class="toggle-button" onclick="toggleTheme()">🌞</button><!-- Button to toggle light/dark mode -->
+
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+    <figcaption>Mercury</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+    <figcaption>Venus</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+    <figcaption>Earth</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+    <figcaption>Mars</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+    <figcaption>Jupiter</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+    <figcaption>Saturn</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+    <figcaption>Uranus</figcaption>
+</figure>
+
+<figure>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+    <figcaption>Neptune</figcaption>
+</figure>
+
+<script>
+const positionPlanets = function() {
+    const planets = document.getElementsByTagName("figure");
+
+
+    for (const planet of planets) {
+        const x = Math.random()*90;
+        const w = 5+Math.random()*20;
+        planet.style.left = x+"vw";
+        planet.style.width = w+"vw";
+    };
+}
+
+positionPlanets();
+
+setInterval(positionPlanets, 500);
+
+function toggleTheme() { 
+            document.body.classList.toggle('light-mode');
+            const toggleButton = document.querySelector('.toggle-button');
+            toggleButton.textContent = document.body.classList.contains('light-mode') ? '✨' : '🌞'; //changes emoji
+        }
+
+
+</script>
+
+</body>
+</html>
