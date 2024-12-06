@@ -42,9 +42,42 @@ h1 { font-size: 4em; top: 35vh; }
 h2 { font-size: 3em; top: 50vh; }
 h3 { font-size: 2em; }
 
+nav {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 50px; /* Space between the items */
+    position: fixed;
+    top: 0; /* Stick to the top of the viewport */
+    width: 100%; /* Full width */
+    background-color: black; /* Black background */
+    padding: 50px 0; /* Add top and bottom padding for the black bar */
+    z-index: 2;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav a[aria-current="page"] {
+    font-weight: 900; /* Extra bold */
+}
+
 </style>
 </head>
 <body>
+
+    <nav>
+        <a href="media.html" aria-current="page">Scrolling Dialog</a>
+        <a href="embed.html">Embedded Video</a>
+        <a href="audio.html">Audio</a>
+      </nav>
 
 <div class="video-container">
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/irZofbGameBnmwx/download/Fairdale%20Bikes%20%E2%A7%B8%20Taj%20in%20The%20Woods.mp4" muted playsinline></video>
