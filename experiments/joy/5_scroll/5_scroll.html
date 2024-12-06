@@ -7,7 +7,7 @@
 body {
     margin: 0;
     height: 1000vh; /* 滾動頁面高度 */
-    background: linear-gradient(to bottom, #000, #686868, #ffffff, #000); /* 動態背景 */
+    background: linear-gradient(to bottom, #000, #74a200, #000); /* 動態背景 */
     font-family: sans-serif;
     color: white;
     overflow-x: hidden;
@@ -55,7 +55,7 @@ p{
     left: 0;
     width: 0%;
     height: 5px;
-    background: #ffffff;
+    background: #b7ff00;
     z-index: 1000;
     transition: width 0.1s ease;
 }
@@ -122,21 +122,25 @@ headers.forEach((header, index) => {
 
 // 滾動事件
 document.addEventListener('scroll', () => {
-    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
-    
-    // 根據滾動進度控制影片進度
-    video.currentTime = video.duration * pct;
+    // 計算滾動百分比
+    const pct = window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
 
-    // 根據滾動進度調整音量 (僅當未靜音時)
-    if (!video.muted) {
-        video.volume = Math.min(1, Math.max(0, pct)); // 0 ~ 1 之間
+    // 根據滾動百分比計算影片的時間點
+    const targetTime = video.duration * pct;
+
+    // 同步影片時間，確保影片跟滾動位置一致
+    video.currentTime = targetTime;
+
+    // 如果影片不在播放中，則啟動播放
+    if (video.paused) {
+        video.play();
     }
 
     // 更新滾動進度條
     progressBar.style.width = `${pct * 100}%`;
 
     // 控制歌詞淡入淡出
-    headers.forEach((header, index) => {
+    headers.forEach((header) => {
         const position = header.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
 
