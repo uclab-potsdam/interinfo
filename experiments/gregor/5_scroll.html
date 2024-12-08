@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=GFS+Didot&family=IM+Fell+DW+Pica:ital@0;1&family=Just+Me+Again+Down+Here&display=swap');
+
+body {
+    margin: 0;
+    width: 1000vw; /* Make the page horizontally scrollable */
+    height: 100vh;
+    background-color: black;
+    font-family: "Just Me Again Down Here";
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+img {
+    margin-top: 42vh;
+    margin-left: 5vw;
+    height: 20%;
+    transform: rotate(10deg);
+}
+
+h1, h2 { 
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: left;
+    margin-left: 3vw;
+    width: 100%;
+}
+
+h3 {
+    color: white; 
+    position: fixed;
+    top: 92%;
+    left: 49%;
+    width: 100%;
+
+}
+
+h2:hover {
+    color: #f8d88e; /* cat color :) */
+}
+
+h1 { font-size: 5em; top: 20vh; }
+h2 { font-size: 4em; top: 30vh; }
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/Hom8i3gzkoq3PEX/download/cat%20city.mp4" muted playsinline poster="https://fhpcloud.fh-potsdam.de/s/MyZWm2XKY9PwKgN/download/thumbnail.png"></video>
+</div>
+
+<h1>"Wimmelvideo"</h1>
+<a href = https://youtu.be/NWeyUpqnKuk><h2>↬ cat city </h2></a>
+
+<img src="https://fhpcloud.fh-potsdam.de/s/47mJ6YYLsK9L2Ro/download/find_person.png" title="Find this person in the video">
+
+<!-- video progress on screen -->
+<h3 id="scroll-indicator">Start scrolling!</h3>
+
+
+<script>
+
+// adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+
+    // scrolling progress
+    const pct = (window.scrollX / (document.documentElement.scrollWidth - document.documentElement.clientWidth));
+
+    video.currentTime = video.duration * pct;
+
+    // round video progress
+    const RoundedDuration = Math.round(video.currentTime)
+
+    // write out video progress on screen
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    scrollIndicator.textContent = `${RoundedDuration}%`;
+});
+
+</script>
+</body>
+</html>
