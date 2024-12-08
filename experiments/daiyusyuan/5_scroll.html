@@ -6,9 +6,10 @@
 <style>
 body {
     margin: 0;
-    height: 1000vh; /* Make the page scrollable */
+    height: 200vh; /* 頁面可捲動 */
     background-color: black;
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 
 .video-container {
@@ -17,126 +18,87 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
+    max-width: 1200px; /* 最大寬度 */
     z-index: 0;
 }
 
-video {
-    margin: auto;
+iframe {
     width: 100%;
-    max-width: 1000px;
-    display: block;
+    height: 675px; /* 16:9 aspect ratio for 1200px width */
+    border: none;
 }
 
-h1, h2, h3 { 
-    color: white;  
-    position: absolute;  
+h1, h2, h3 {
+    color: white;
+    position: absolute;
     z-index: 1;
     text-align: center;
     width: 100%;
+    opacity: 0; /* 初始隱藏 */
+    transform: translateY(50px);
+    transition: all 0.8s ease-out; /* 動畫效果 */
 }
 
-h1 { font-size: 3em; top: 35vh; }
-h2 { font-size: 2.5em; top: 50vh; }
-h3 { font-size: 2em; }
+h1 { 
+    font-size: 3em; 
+    top: 10vh; 
+}
 
+h2 { 
+    font-size: 2.5em; 
+    top: 20vh; 
+}
+
+h3 { 
+    font-size: 2em; 
+}
+
+/* 動態調整 h3 標題的間距 */
+h3 {
+    top: 40vh;
+    margin-top: calc(var(--index) * 8vh); /* 動態位移 */
+}
 </style>
 </head>
 <body>
 
 <div class="video-container">
-    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
+    <iframe 
+        src="https://www.youtube.com/embed/lv5R6C3hz54?autoplay=1&controls=1&loop=1&playlist=lv5R6C3hz54" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen>
+    </iframe>
 </div>
 
+<h1>Dynamic Experience</h1>
+<h2>Interactive Content</h2>
 
-<h1>Never Gonna Give You Up</h1>
-<h2>Rick Astley</h2>
-
-<h3>We're no strangers to love</h3>
-<h3>You know the rules and so do I</h3>
-<h3>A full commitment's what I'm thinking of</h3>
-<h3>You wouldn't get this from any other guy</h3>
-<h3>I just wanna tell you how I'm feeling</h3>
-<h3>Gotta make you understand</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>We've known each other for so long</h3>
-<h3>Your heart's been aching but you're too shy to say it</h3>
-<h3>Inside we both know what's been going on</h3>
-<h3>We know the game and we're gonna play it</h3>
-<h3>And if you ask me how I'm feeling</h3>
-<h3>Don't tell me you're too blind to see</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give, never gonna give</h3>
-<h3>(Give you up)</h3>
-<h3>(Ooh) Never gonna give, never gonna give</h3>
-<h3>(Give you up)</h3>
-<h3>We've known each other for so long</h3>
-<h3>Your heart's been aching but you're too shy to say it</h3>
-<h3>Inside we both know what's been going on</h3>
-<h3>We know the game and we're gonna play it</h3>
-<h3>I just wanna tell you how I'm feeling</h3>
-<h3>Gotta make you understand</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-
+<!-- 使用 data-index 動態定位標題 -->
+<h3 style="--index: 0">Scroll down to reveal the magic</h3>
+<h3 style="--index: 1">Bringing stories to life</h3>
+<h3 style="--index: 2">Transforming visuals and text</h3>
+<h3 style="--index: 3">Creating unforgettable moments</h3>
+<h3 style="--index: 4">Let’s start the journey</h3>
 
 <script>
+// 動態顯示文字效果
+const headers = document.querySelectorAll('h1, h2, h3');
 
-// adjust video frame along scrolling progress
-const video = document.getElementById('video');
+// 判斷元素是否進入視窗
+const isInView = (el) => {
+    const rect = el.getBoundingClientRect();
+    return rect.top >= 0 && rect.bottom <= window.innerHeight;
+};
 
+// 滾動事件
 document.addEventListener('scroll', () => {
-    video.removeAttribute("autoplay");
-
-    // scrolling progress
-    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
-
-    video.currentTime = video.duration * pct;
+    headers.forEach(header => {
+        if (isInView(header)) {
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
+        }
+    });
 });
-
-
-// select all h3 elements
-const headers = document.querySelectorAll('h3');
-const start = 100;  // start position for first line
-const end = 950;    // end position for last line
-
-const step = (end - start) / (headers.length - 1); // space between headers
-
-// vertically distribute the elements
-headers.forEach((header, index) => {
-    const topPosition = start + (index * step);
-    header.style.top = `${topPosition}vh`; // set top position
-});
-
 </script>
 </body>
 </html>
