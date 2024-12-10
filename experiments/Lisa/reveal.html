@@ -12,7 +12,6 @@ body {
 }
 
 * { 
-    transition: all 2s;
     transition-delay: .5s;
 }
 
@@ -73,7 +72,7 @@ img.visible {
 
 const elements = document.querySelectorAll('p, h2, img');
 
-const observer = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
     });

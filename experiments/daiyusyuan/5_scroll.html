@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    height: 200vh; /* 頁面可捲動 */
+    background-color: black;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1200px; /* 最大寬度 */
+    z-index: 0;
+}
+
+iframe {
+    width: 100%;
+    height: 675px; /* 16:9 aspect ratio for 1200px width */
+    border: none;
+}
+
+h1, h2, h3 {
+    color: white;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    opacity: 0; /* 初始隱藏 */
+    transform: translateY(50px);
+    transition: all 0.8s ease-out; /* 動畫效果 */
+}
+
+h1 { 
+    font-size: 3em; 
+    top: 10vh; 
+}
+
+h2 { 
+    font-size: 2.5em; 
+    top: 20vh; 
+}
+
+h3 { 
+    font-size: 2em; 
+}
+
+/* 動態調整 h3 標題的間距 */
+h3 {
+    top: 40vh;
+    margin-top: calc(var(--index) * 8vh); /* 動態位移 */
+}
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <iframe 
+        src="https://www.youtube.com/embed/lv5R6C3hz54?autoplay=1&controls=1&loop=1&playlist=lv5R6C3hz54" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen>
+    </iframe>
+</div>
+
+<h1>Dynamic Experience</h1>
+<h2>Interactive Content</h2>
+
+<!-- 使用 data-index 動態定位標題 -->
+<h3 style="--index: 0">Scroll down to reveal the magic</h3>
+<h3 style="--index: 1">Bringing stories to life</h3>
+<h3 style="--index: 2">Transforming visuals and text</h3>
+<h3 style="--index: 3">Creating unforgettable moments</h3>
+<h3 style="--index: 4">Let’s start the journey</h3>
+
+<script>
+// 動態顯示文字效果
+const headers = document.querySelectorAll('h1, h2, h3');
+
+// 判斷元素是否進入視窗
+const isInView = (el) => {
+    const rect = el.getBoundingClientRect();
+    return rect.top >= 0 && rect.bottom <= window.innerHeight;
+};
+
+// 滾動事件
+document.addEventListener('scroll', () => {
+    headers.forEach(header => {
+        if (isInView(header)) {
+            header.style.opacity = '1';
+            header.style.transform = 'translateY(0)';
+        }
+    });
+});
+</script>
+</body>
+</html>

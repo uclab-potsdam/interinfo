@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>🖼️🖌️Colorful Drawing Instrument</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+canvas {
+    display: block;
+    cursor: crosshair;
+}
+.toolbar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.toolbar button, .toolbar select, .toolbar input {
+    margin: 5px;
+}
+.music-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff6f61;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.music-button.playing {
+    background-color: #61d4ff;
+    transform: scale(1.2);
+}
+.music-button:hover {
+    transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <select id="shapeSelector">
+        <option value="circle">Circle</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="triangle">Triangle</option>
+        <option value="star">Star</option>
+        <option value="pattern">Pattern</option>
+    </select>
+    <input type="color" id="colorPicker" value="#ff0000">
+    <input type="checkbox" id="outlineToggle"> Outline
+    <button id="clearCanvas">Clear</button>
+    <button id="undo">Undo</button>
+    <button id="redo">Redo</button>
+</div>
+
+<button class="music-button" id="musicButton">♫</button>
+<audio id="backgroundMusic" src="music.MP3"></audio>
+
+<canvas></canvas>
+
+<script>
+const canvas = document.querySelector('canvas');
+const context = canvas.getContext('2d');
+const musicButton = document.getElementById('musicButton');
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const shapeSelector = document.getElementById('shapeSelector');
+const colorPicker = document.getElementById('colorPicker');
+const outlineToggle = document.getElementById('outlineToggle');
+const clearCanvasButton = document.getElementById('clearCanvas');
+const undoButton = document.getElementById('undo');
+const redoButton = document.getElementById('redo');
+
+let currentShape = 'circle';
+let currentColor = '#ff0000';
+let drawOutline = false;
+let isDrawing = false;
+let startX, startY;
+
+// Store all paths (each path is a group of shapes created in one drag)
+const paths = [];
+let undonePaths = [];
+let currentPath = [];
+
+// Listen for shape changes
+shapeSelector.addEventListener('change', (e) => {
+    currentShape = e.target.value;
+});
+
+// Listen for color changes
+colorPicker.addEventListener('input', (e) => {
+    currentColor = e.target.value;
+});
+
+// Listen for outline toggle
+outlineToggle.addEventListener('change', (e) => {
+    drawOutline = e.target.checked;
+});
+
+// Clear canvas button
+clearCanvasButton.addEventListener('click', () => {
+    paths.length = 0; // Clear all paths
+    undonePaths.length = 0; // Clear undo history
+    redrawCanvas();
+});
+
+// Undo button
+undoButton.addEventListener('click', undo);
+
+// Redo button
+redoButton.addEventListener('click', redo);
+
+// Handle keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'z') {
+        undo();
+    } else if (e.ctrlKey && e.key === 'y') {
+        redo();
+    } else if (e.ctrlKey && e.key === 'e') {
+        paths.length = 0;
+        undonePaths.length = 0;
+        redrawCanvas();
+    }
+});
+
+// Start drawing on mousedown
+canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    currentPath = []; // Start a new path
+});
+
+// Stop drawing on mouseup
+canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+    if (currentPath.length > 0) {
+        paths.push(currentPath); // Save the completed path
+        undonePaths.length = 0; // Clear redo history
+        currentPath = []; // Reset current path
+    }
+});
+
+// Draw shapes while dragging
+canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing) return;
+
+    const endX = e.clientX;
+    const endY = e.clientY;
+
+    // Save the shape being drawn
+    const shape = {
+        type: currentShape,
+        x1: startX,
+        y1: startY,
+        x2: endX,
+        y2: endY,
+        color: currentColor,
+        outline: drawOutline,
+        patternColor: generateRandomColor() // Store fixed pattern color
+    };
+
+    currentPath.push(shape); // Add shape to the current path
+    drawShape(shape);
+    startX = endX;
+    startY = endY;
+});
+
+// Function to redraw the canvas
+function redrawCanvas() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    paths.forEach((path) => path.forEach(drawShape));
+}
+
+// Function to draw a specific shape
+function drawShape(shape) {
+    const { x1, y1, x2, y2, type, color, outline, patternColor } = shape;
+    const size = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2); // Dynamic size
+    const gradient = context.createLinearGradient(x1, y1, x2, y2);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, '#ffffff');
+
+    context.fillStyle = gradient;
+    context.strokeStyle = color;
+    context.lineWidth = 2;
+
+    switch (type) {
+        case 'circle':
+            context.beginPath();
+            context.arc(x1, y1, size / 2, 0, Math.PI * 2);
+            context.closePath();
+            outline ? context.stroke() : context.fill();
+            break;
+        case 'rectangle':
+            if (outline) {
+                context.strokeRect(x1 - size / 2, y1 - size / 2, size, size);
+            } else {
+                context.fillRect(x1 - size / 2, y1 - size / 2, size, size);
+            }
+            break;
+        case 'triangle':
+            context.beginPath();
+            context.moveTo(x1, y1 - size / 2);
+            context.lineTo(x1 - size / 2, y1 + size / 2);
+            context.lineTo(x1 + size / 2, y1 + size / 2);
+            context.closePath();
+            outline ? context.stroke() : context.fill();
+            break;
+        case 'star':
+            drawStar(context, x1, y1, 5, size / 2, size / 4, color, outline);
+            break;
+        case 'pattern':
+            drawPattern(context, x1, y1, size, outline, patternColor);
+            break;
+    }
+}
+
+// Function to draw a star
+function drawStar(ctx, x, y, points, outerRadius, innerRadius, color, outline) {
+    const step = Math.PI / points;
+    ctx.beginPath();
+    for (let i = 0; i < 2 * points; i++) {
+        const angle = i * step;
+        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+        ctx.lineTo(x + radius * Math.cos(angle), y + radius * Math.sin(angle));
+    }
+    ctx.closePath();
+    outline ? ctx.stroke() : ctx.fill();
+}
+
+// Function to draw a random pattern
+function drawPattern(ctx, x, y, size, outline, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3;
+        const px = x + size * Math.cos(angle);
+        const py = y + size * Math.sin(angle);
+        ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    outline ? ctx.stroke() : ctx.fill();
+}
+
+// Undo function
+function undo() {
+    if (paths.length > 0) {
+        undonePaths.push(paths.pop());
+        redrawCanvas();
+    }
+}
+
+// Redo function
+function redo() {
+    if (undonePaths.length > 0) {
+        paths.push(undonePaths.pop());
+        redrawCanvas();
+    }
+}
+
+// Utility function to generate a random color
+function generateRandomColor() {
+    return `hsl(${Math.random() * 360}, 100%, 50%)`;
+}
+
+// Toggle music playback with animation
+musicButton.addEventListener('click', () => {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        musicButton.classList.add('playing');
+    } else {
+        backgroundMusic.pause();
+        musicButton.classList.remove('playing');
+    }
+});
+</script>
+</body>
+</html>

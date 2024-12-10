@@ -1,0 +1,120 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<title>Video - Media - Interactive Information</title> 
+
+
+
+
+
+
+<style> 
+
+body {  
+background-color: black; 
+padding: 0; margin: 0; 
+display: flex; 
+justify-content: center;  
+align-items: center;    
+height: 100vh;     
+} 
+
+.main-container {
+    display: flex; /* Centrer la vidéo si nécessaire */
+    flex-direction: column;
+}
+/* Le conteneur occupe toute la largeur et hauteur possibles */
+.video-container {
+    width: 100vw; /* 100% de la largeur de la fenêtre */
+    height: auto; /* 100% de la hauteur de la fenêtre */
+}
+
+/* La vidéo s'adapte au conteneur tout en respectant ses proportions */
+.video-container video {
+    width: 100%; /* 100% de la largeur du conteneur */
+    height: auto; /* Ajuste la hauteur pour respecter les proportions */
+    max-height: 100%; /* Empêche la vidéo de dépasser la hauteur du conteneur */
+}
+
+.button-container {
+    align-items: center;
+}
+
+button{
+    color: aliceblue;
+    background-color: rgba(252, 147, 0, 0.715);
+    border-radius: 50%;
+    padding: 10px 20px;
+    margin: 10px 10px 10px; /* Espace au-dessus et en-dessous du titre */
+    font-size: 1.5rem; /* Taille du texte */
+    text-align: left; /* Centre le texte */
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: 0.2s;
+    text-align: center;
+}
+
+button:hover {
+    font-weight:bold;
+    scale: 1.1;
+}
+
+
+</style> 
+
+</head> 
+
+
+
+
+
+
+<body> 
+
+<div class=" main-container">
+    <div class=" video-container">
+        <video id="video" controls poster="assets/miniature.jpg"> 
+        <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4"> 
+        <track kind="subtitles" src="subtitles.vtt" srclang="en" default> 
+            Download video as <a href="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4">MP4</a>. 
+        </video> 
+        
+    </div>
+    <div class="button-container">
+        <button onclick="jumpToTime(89)">CHORUS</button>
+    </div>
+</div>
+    
+
+    <script>
+        // Fonction pour avancer la vidéo jusqu'à un certain timecode
+        function jumpToTime(timeInSeconds) {
+            var video = document.getElementById('video');
+            video.currentTime = timeInSeconds; // Définit la position de lecture à 'timeInSeconds'
+            video.play(); // Optionnellement, lancer la lecture après avoir changé la position
+        }
+    </script>
+
+
+
+
+
+
+
+<script> 
+const video = document.getElementById('video'); 
+document.addEventListener('keydown', (event) => { 
+if (event.code === 'Space') { 
+event.preventDefault(); // this prevents scrolling when spacebar press 
+if (video.paused) video.play(); 
+else video.pause();         
+    } 
+}); 
+</script>
+
+
+
+
+
+</body>
+</html>

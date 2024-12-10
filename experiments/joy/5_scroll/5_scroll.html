@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+*{
+    /* border:1px solid #fff !important; */
+}
+body {
+    margin: 0;
+    height: 1000vh; /* 滾動頁面高度 */
+    background: linear-gradient(to bottom, #000, #74a200, #000); /* 動態背景 */
+    font-family: sans-serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+    filter: brightness(0.6); /* 影片暗化，突出文字 */
+}
+
+h1, h2, h3 { 
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    opacity: 0; /* 初始隱藏 */
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+}
+
+h1 { font-size: 2.5em; top: 10vh; }
+h2 { font-size: 2em; top: 20vh; }
+h3 { font-size: 1.5em; }
+
+p{ 
+    font-size: 0.8em;
+    color: grey;
+}
+
+#progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: #b7ff00;
+    z-index: 1000;
+    transition: width 0.1s ease;
+}
+
+#mute-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px; /* 按鈕寬度 */
+    height: 50px; /* 按鈕高度 */
+    border: none;
+    border-radius: 50%; /* 圓形按鈕 */
+    cursor: pointer;
+    background-size: 60%; /* 確保背景圖片填滿按鈕 */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('mute.png'); /* 預設靜音圖示 */
+}
+
+#mute-btn.muted {
+    background-image: url('unmute.png'); /* 解除靜音圖示 */
+}
+
+</style>
+</head>
+<body>
+
+<!-- 滾動進度條 -->
+<div id="progress-bar"></div>
+
+<!-- 影片播放器 -->
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" playsinline autoplay muted></video>
+</div>
+
+<!-- 歌詞文字 -->
+<h1>Never Gonna Give You Up</h1>
+<h2>Rick Astley</h2>
+
+<!-- 互動式靜音按鈕 -->
+<button id="mute-btn" ></button>
+
+<h3>Die Liedtexte passen nicht zusammen,<p>(The lyrics don't match)</p></h3>
+<h3> es tut mir leid.<br><p>(I'm sorry.)</p></h3>
+<h3>Weil das wirklich zu schwer ist,<p>(Because it's really too difficult)</p></h3>
+<h3>genauso wie Deutsch.<p>(just like German)</p></h3>
+<h3>Danke schön.<p>(Thank you :))</p></h3>
+
+<script>
+const video = document.getElementById('video');
+const progressBar = document.getElementById('progress-bar');
+const headers = document.querySelectorAll('h3');
+const muteBtn = document.getElementById('mute-btn');
+
+// 動態分佈歌詞
+const start = 100;
+const end = 950;
+const step = (end - start) / (headers.length - 1);
+
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`;
+});
+
+// 滾動事件
+document.addEventListener('scroll', () => {
+    // 計算滾動百分比
+    const pct = window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+    // 根據滾動百分比計算影片的時間點
+    const targetTime = video.duration * pct;
+
+    // 同步影片時間，確保影片跟滾動位置一致
+    video.currentTime = targetTime;
+
+    // 如果影片不在播放中，則啟動播放
+    if (video.paused) {
+        video.play();
+    }
+
+    // 更新滾動進度條
+    progressBar.style.width = `${pct * 100}%`;
+
+    // 控制歌詞淡入淡出
+    headers.forEach((header) => {
+        const position = header.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (position > 0 && position < windowHeight * 0.8) {
+            header.style.opacity = 1;
+            header.style.transform = 'scale(1.2)';
+        } else {
+            header.style.opacity = 0.2;
+            header.style.transform = 'scale(1)';
+        }
+    });
+});
+
+// 靜音按鈕控制
+muteBtn.addEventListener('click', () => {
+    video.muted = !video.muted; // 切換靜音狀態
+    muteBtn.classList.toggle('muted'); // 切換圖示
+});
+</script>
+</body>
+</html>

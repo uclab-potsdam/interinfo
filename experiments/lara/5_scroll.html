@@ -7,43 +7,51 @@
 body {
     margin: 0;
     height: 1000vh; /* Make the page scrollable */
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     font-family: sans-serif;
+    display: flex;
+    align-items:end;
+    justify-content: center;
 }
 
 .video-container {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
+    top: 25%;
+    left: 0%;
+    width: 50%;
     z-index: 0;
+    scroll-behavior: auto;
+    align-items: center;
 }
 
 video {
     margin: auto;
     width: 100%;
-    max-width: 1000px;
     display: block;
+    position: absolute;
 }
 
 h1, h2, h3 { 
-    color: white;  
+    color:rgb(255, 255, 255);  
     position: absolute;  
-    z-index: 1;
     text-align: center;
     width: 100%;
 }
 
 h1 { font-size: 3em; top: 35vh; }
 h2 { font-size: 2.5em; top: 50vh; }
-h3 { font-size: 2em; }
+h3 { font-size: 1.5em; left: 25%;}
+
+
+h3.visible {
+    size: 50vw;
+}
 
 </style>
 </head>
 <body>
 
-<div class="video-container">
+<div class="video-container" id="container">
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" muted playsinline></video>
 </div>
 
@@ -63,16 +71,10 @@ h3 { font-size: 2em; }
 <h3>Never gonna make you cry</h3>
 <h3>Never gonna say goodbye</h3>
 <h3>Never gonna tell a lie and hurt you</h3>
-<h3>...</h3>
-<h3>...</h3>
-<h3>...</h3>
 <h3>We've known each other for so long</h3>
 <h3>Your heart's been aching but you're too shy to say it</h3>
 <h3>Inside we both know what's been going on</h3>
 <h3>We know the game and we're gonna play it</h3>
-<h3>...</h3>
-<h3>...</h3>
-<h3>...</h3>
 <h3>And if you ask me how I'm feeling</h3>
 <h3>Don't tell me you're too blind to see</h3>
 <h3>Never gonna give you up</h3>
@@ -120,15 +122,41 @@ h3 { font-size: 2em; }
 // adjust video frame along scrolling progress
 const video = document.getElementById('video');
 
+const container = document.getElementById('container');
+
+const textElements = document.querySelectorAll('h3');
+
 document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
 
     // scrolling progress
-    const bar = document.getElementById('progress-bar'); // progress bar
     const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
 
     video.currentTime = video.duration * pct;
+
+    textElements.forEach(text => {
+        const rect = text.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    const topPercent = (rect.top / windowHeight) * 100;
+    const bottomPercent = (rect.bottom / windowHeight) * 100;
+
+    if (topPercent <= 50 && bottomPercent >= 50) {
+        text.style.transform = 'scale(1.5)';
+        text.style.color = 'violet';
+    } else {
+        text.style.transform = 'scale(1)';
+        text.style.color = 'white';
+    }
+    })
+
+    
+    
 });
+
+
+
+
 
 
 // select all h3 elements
