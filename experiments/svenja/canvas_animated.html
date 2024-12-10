@@ -22,6 +22,14 @@ body {
 
     const circles = []; // store circles for animation
 
+    // Funktion für zufällige Farbe
+    function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgb(${r},${g},${b})`;
+    }
+
     // click to add circle
     canvas.addEventListener('click', (event) => {
         addCircle(event.clientX, event.clientY);
@@ -33,9 +41,10 @@ body {
             x: x,
             y: y,
             radius: 20 + Math.random() * 30,
-            color: "black",
+            color: getRandomColor(),  // zufällige Farbe
             dx: Math.random() * 5, // random horizontal speed
             dy: Math.random() * 5, // random vertical speed
+            shape: 'circle' // Form des Objekts, standardmäßig ein Kreis
         };
         circles.push(circle);
     }
@@ -49,22 +58,38 @@ body {
             circle.x += circle.dx;
             circle.y += circle.dy;
 
-            // bounce off walls
+            // bounce off walls and change shape
             if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
                 circle.dx *= -1;
+                changeShape(circle);  // Form ändern, wenn der Rand erreicht wird
             }
             if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
                 circle.dy *= -1;
+                changeShape(circle);  // Form ändern, wenn der Rand erreicht wird
             }
 
-            // draw the circle
+            // draw the shape
             context.beginPath();
-            context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+            if (circle.shape === 'circle') {
+                context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+            } else if (circle.shape === 'square') {
+                context.rect(circle.x - circle.radius, circle.y - circle.radius, circle.radius * 2, circle.radius * 2);
+            }
             context.fillStyle = circle.color;
             context.fill();
         });
         // keep looping the animation
-        requestAnimationFrame(animate); // 
+        requestAnimationFrame(animate); 
+    }
+
+    // Funktion, um die Form zu ändern
+    function changeShape(circle) {
+        // Ändert die Form nach jeder Kollision
+        if (circle.shape === 'circle') {
+            circle.shape = 'square';  // Kreis zu Quadrat
+        } else if (circle.shape === 'square') {
+            circle.shape = 'circle';  // Quadrat zu Kreis
+        }
     }
 
     animate(); // start animation loop
