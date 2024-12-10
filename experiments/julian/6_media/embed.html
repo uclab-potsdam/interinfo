@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Embedded Video - Media - Interactive Information</title>
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        background-color: black;
+        font-family: sans-serif;
+        box-sizing: border-box; /* Ensures padding doesn't affect width/height calculations */
+        color: white;
+        text-align: center; /* Center-align text, and by extension, the video */
+    }
+
+    nav {
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        gap: 50px; /* Space between nav bar items */
+        position: fixed;
+        top: 0; /* Stick to the top of the viewport */
+        width: 100%; /* Full width */
+        background-color: black; /* Black background */
+        padding: 50px 0; /* Add top and bottom padding for nav bar */
+        z-index: 2;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.5em;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    nav a[aria-current="page"] {
+        font-weight: 900; /* Extra bold */
+    }
+
+    video {
+        display: inline-block; /* Centers the element horizontally when combined with text-align */
+        max-width: 75%; /* Make the video responsive */
+        height: auto; /* Maintain aspect ratio */
+        margin-top: 120px; /* Add space below the navigation bar */
+    }
+</style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <a href="media.html">Scrolling Dialog</a>
+    <a href="embed.html" aria-current="page">Embedded Video</a>
+    <a href="audio.html">Audio</a>
+</nav>
+
+<!-- Video Element -->
+<video id="video" controls poster="poster.png">
+    <source src="https://fhpcloud.fh-potsdam.de/s/irZofbGameBnmwx/download/Fairdale%20Bikes%20%E2%A7%B8%20Taj%20in%20The%20Woods.mp4" type="video/mp4">
+    <track kind="subtitles" src="subtitles.vtt" srclang="en" default>
+</video>
+
+</body>
+</html>

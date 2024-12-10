@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Parallax - Scrollytelling - Interactive Information</title>
+<style>
+body { 
+    padding: 0; margin: 0; 
+    scroll-behavior: smooth;
+}
+
+#parallax {    
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scroll-behavior: smooth;
+}
+
+#parallax > div {
+  position: absolute;  
+}
+
+#square {
+    transform: translateZ(0px) scale(2);
+    width: calc( 4vw + 4vh );
+    height: calc( 4vw + 4vh );
+    top: 75vh; left: 7%;
+    background-color: rgb(12, 34, 97);
+}
+
+#square1 {
+    transform: translateZ(0px) scale(2);
+    width: calc( 4vw + 4vh );
+    height: calc( 4vw + 4vh );
+    top: 75vh; left: 27%;
+    background-color: rgb(82, 104, 165);
+}
+
+#square2 {
+    transform: translateZ(0px) scale(2);
+    width: calc( 4vw + 4vh );
+    height: calc( 4vw + 4vh );
+    top: 75vh; left: 47%;
+    background-color: rgb(158, 168, 197);
+}
+
+#square3 {
+    transform: translateZ(0px) scale(2);
+    width: calc( 4vw + 4vh );
+    height: calc( 4vw + 4vh );
+    top: 75vh; left: 67%;
+    background-color: rgb(37, 61, 125);
+}
+
+#square4 {
+    transform: translateZ(0px) scale(2);
+    width: calc( 4vw + 4vh );
+    height: calc( 4vw + 4vh );
+    top: 75vh; left: 87%;
+    background-color: rgb(73, 77, 87);
+}
+
+
+#circle {
+    transform: translateZ(-1px) scale(3);    
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 50vh; left: 40vw;
+    background-color: rgb(69, 184, 255);
+}
+
+#footer {    
+    width: 100%; height: 100px;
+    left: 0; top: 200vh;    
+    background-color: black;
+}
+
+</style>
+</head>
+<body>
+
+<div id="parallax">
+    <div id="footer"></div>  
+    <div id="circle"></div>  
+    <div id="square"></div>
+    <div id="square1"></div>
+    <div id="square2"></div>
+    <div id="square3"></div>
+    <div id="square4"></div>
+    
+</div>
+
+</body>
+</html>

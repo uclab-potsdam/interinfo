@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parallax Web Page</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      height: auto;
+      background-color: black;
+    }
+    .parallax {
+      position: relative;
+      height: 100vh;
+      perspective: 1px;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+    .parallax-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transform: translateZ(0);
+    }
+
+    h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+
+    .sky { 
+        z-index: 1;
+        background-image: url('/img/sky.png'); transform: translateZ(-0.2px) scale(1.2); }
+    .mountains {
+        z-index: 1;
+        background-image: url('/img/22222.png'); transform: translateZ(-0.1px) scale(1.1); }
+    .mountains_2 { 
+        z-index: 2;
+        background-image: url('/img/33333.png'); transform: translateZ(-0.1px) scale(1.1); }
+    .mountains_3 { 
+        z-index: 3;
+        background-image: url('/img/444444.png'); transform: translateZ(-0.1px) scale(1.1); }
+    .mountains_4 {
+        z-index: 0;
+        background-image: url('/img/tree.png'); transform: translateZ(-0.1px) scale(1.1); }
+    .foreground { 
+        z-index: 5;
+        background-image: url('/img/foreground.png'); transform: translateZ(0); }
+    /* Add more layers with custom translateZ() values for depth effect */
+  
+    .dirt { 
+        z-index: 10;
+        position: absolute;
+        height: 100%;
+        top: 100%;
+        width: 100%;
+        background-color: rgb(23, 14, 0);} </style>
+</head>
+<body>
+  <div class="parallax">
+    <div class="parallax-layer sky" data-depth="0.2"></div>
+    <div class="parallax-layer mountains"data-depth="0.4"></div>
+    <div class="parallax-layer mountains_2"data-depth="0.5"></div>
+    <div class="parallax-layer mountains_3"data-depth="0.6"></div>
+    <div class="parallax-layer mountains_4"data-depth="0.8"></div>
+    <div class="parallax-layer foreground"data-depth="1"></div>
+    <!-- Add more layers here -->
+    <div class="parallax-layer dirt"data-depth="1">
+      <h1>This is a simple parallax effect.</h1>
+    </div>
+ 
+  </div>
+</body>
+</html>
+
+<script>
+document.addEventListener('scroll', function() {
+    const layers = document.querySelectorAll('.parallax-layer');
+    const scrollPosition = window.scrollY;
+    layers.forEach((layer, index) => {
+      const depth = parseFloat(layer.getAttribute('data-depth'));
+      const movement = -(scrollPosition * depth);
+      layer.style.transform = `translateY(${movement}px)`;
+    });
+  });
+  </script>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A very long text about circles</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+
+body { 
+    font-size: calc(1.2vw + 1.2vh);
+    line-height: 1.8em;
+    width: calc(80vw);
+    margin: auto;
+    background: #333;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Header Style */
+h1 {
+    text-align: center;
+    color: white;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+/* Parallax Container */
+#parallax {    
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    pointer-events: none; 
+    z-index: -1; 
+}
+
+/* Circles */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+    opacity: 0.6;
+}
+
+/* styling Circles */
+.circle1 { width: 300px; height: 300px; top: 10%; left: 5%; background-color: rgba(252, 73, 73, 0.8); }
+.circle2 { width: 400px; height: 400px; top: 20%; left: 60%; background-color: rgb(0, 208, 255); }
+.circle3 { width: 350px; height: 350px; top: 40%; left: 20%; background-color: rgba(150, 255, 100, 0.7); }
+.circle4 { width: 250px; height: 250px; top: 60%; left: 50%; background-color: rgba(255, 0, 102, 0.9); }
+.circle5 { width: 500px; height: 500px; top: 80%; left: 75%; background-color: rgb(255, 255, 0); }
+.circle6 { width: 300px; height: 300px; top: 110%; left: 10%; background-color: rgba(230, 69, 230, 0.6); }
+.circle7 { width: 350px; height: 350px; top: 130%; left: 40%; background-color: rgba(50, 255, 255, 0.8); }
+.circle8 { width: 200px; height: 200px; top: 150%; left: 70%; background-color: rgba(232, 208, 23, 0.8); }
+.circle9 { width: 300px; height: 300px; top: 170%; left: 30%; background-color: rgba(50, 150, 255, 0.7); }
+.circle10 { width: 400px; height: 400px; top: 190%; left: 10%; background-color: rgba(200, 255, 50, 0.7); }
+.circle11 { width: 100px; height: 100px; top: 5%; left: 40%; background-color: rgba(253, 169, 227, 0.892); }
+.circle12 { width: 240px; height: 240px; top: 10%; left: 50%; background-color: rgba(2, 249, 175, 0.7); }
+.circle14 { width: 200px; height: 200px; top: 40%; left: 3%; background-color: rgba(253, 126, 7, 0.7); }
+
+
+
+/* Footer */
+#footer {    
+    width: 100%; height: 100px;
+    left: 0; top: 220vh;    
+    background-color: #333;
+}
+
+/* Subchapter Headlines */
+h2 {
+    margin-top: 200px;
+    color: #f2f2f2;
+    font-size: calc(1.5vw + 1.5vh);
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.headers {
+    font-size: 1.5em;
+}
+/* Text Reveal Animation */
+p, h2 {
+    opacity: 0;
+    font-size: calc(0.9vw + 0.9vh);
+    font-weight: 400;
+    transform: translateY(50px);
+    transition: opacity 0.8s, transform 0.8s;
+}
+
+p.visible, h2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<h1>A very long text about circles</h1>
+
+<div id="parallax">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>  
+    <div class="circle circle3"></div>
+    <div class="circle circle4"></div>
+    <div class="circle circle5"></div>
+    <div class="circle circle6"></div>
+    <div class="circle circle7"></div>
+    <div class="circle circle8"></div>
+    <div class="circle circle9"></div>
+    <div class="circle circle10"></div>
+    <div class="circle circle11"></div>
+    <div class="circle circle12"></div>
+    <div class="circle circle13"></div>
+    <div class="circle circle14"></div>
+</div>
+
+<main>
+    <section>
+        <h2 class="headers">What Makes Circles Special?</h2>
+        <p>Circles are unique among shapes. Their perfect symmetry has fascinated humanity for centuries. With no edges or corners, they represent wholeness, infinity, and unity. The idea of a circle has been present in various aspects of human history—from ancient art to modern-day technology. Throughout the ages, the circle has stood as a symbol of balance, eternal movement, and cyclical nature.</p>
+        <p>From ancient symbols to modern logos, circles convey meaning in both art and design. They invite focus, draw attention, and symbolize completeness. In many cultures, circles represent unity and inclusiveness, often used to symbolize eternity and a sense of infinite continuity. This explains why the circle is such a central element in so many contexts, from architecture to spirituality.</p>
+        <p>The simple yet powerful nature of circles makes them ubiquitous in daily life. Whether we see them in the form of wheels, coins, or the shape of the sun, circles are essential to our experiences and our understanding of the world around us.</p>
+    </section>
+
+    <section>
+        <h2 class="headers">Circles in Nature</h2>
+        <p>The natural world is full of circles. The ripples in water, tree rings, and even the spherical shape of planets remind us of their ubiquity. Our planet Earth, for example, is a massive circle in space, constantly spinning, creating the day-night cycle that governs our lives. Even in the microscopic world, the structures of cells and molecules often take on circular forms, enabling crucial biological processes.</p>
+        <p>These shapes are not only pleasing to the eye but also represent balance and harmony, qualities that nature strives to achieve in every form. The circle's symmetry is essential in helping plants and animals grow in a way that maximizes efficiency and harmony with the environment. It is this perfect balance and repetition of patterns that nature embraces, using circles to regulate natural processes like the water cycle and the orbit of celestial bodies.</p>
+        <p>Many animals also make use of circular patterns in their behavior. The spiral patterns found in the shells of snails and the growth of plants in the form of spirals reflect the natural forces that govern how things grow. Even the cycle of life and death, from birth to rebirth, follows a similar, continuous loop that mirrors the shape of a circle.</p>
+    </section>
+
+    <section>
+        <h2 class="headers">Circles in Design</h2>
+        <p>Designers rely on circles to create elements that feel harmonious and intuitive. From buttons in user interfaces to architectural domes, their application is endless. Circles help focus attention on important areas, adding a sense of unity and balance. Because they have no sharp edges or corners, circles have a calming and inviting effect, making them ideal for creating welcoming designs.</p>
+        <p>Designers have long recognized the ability of circles to evoke feelings of warmth and inclusiveness. This is why many logos incorporate circular shapes, from famous tech companies to global brands. By using a circle, these brands communicate a sense of completeness, inviting customers to feel part of something larger and more unified.</p>
+        <p>Even in modern architecture, the use of circular elements allows for greater flow and connection. Circular structures like domes and rotundas are symbols of strength and unity, drawing people together in the shared space. The use of circular windows and doorways is a common theme in many designs, creating an inviting environment that encourages openness and collaboration.</p>
+    </section>
+
+    <section>
+        <h2 class="headers">Mathematical Marvels</h2>
+        <p>Circles have been instrumental in mathematical discoveries. From the ancient calculations of pi to the study of spherical geometry, circles offer infinite exploration. In fact, the study of circles and their properties helped pave the way for advancements in calculus, trigonometry, and geometry. Understanding the math behind a circle unlocks a deeper comprehension of the physical world, revealing patterns and relationships that govern everything from planetary motion to the structure of atoms.</p>
+        <p>The constant nature of pi, the ratio of a circle's circumference to its diameter, has intrigued mathematicians for centuries. As we continue to explore the infinite precision of pi, we discover more about how this number governs everything in our universe. This exploration of circles at a mathematical level extends to all corners of science and engineering, reinforcing the profound impact this shape has on our understanding of reality.</p>
+        <p>Indeed, drawing a circle can unlock a world of mathematical exploration, helping to understand everything from planetary motion to the structure of atoms.</p>
+    </section>
+</main>
+
+<script>
+// Parallax Effect on Scroll
+const circles = document.querySelectorAll('.circle');
+
+window.addEventListener('scroll', () => {
+    const scrollOffset = window.scrollY;
+
+    circles.forEach((circle, index) => {
+        const speed = (index + 1) * 0.25; 
+        circle.style.transform = `translateY(${scrollOffset * speed}px)`;
+    });
+});
+
+// Reveal Elements on Scroll
+const elements = document.querySelectorAll('p, h2');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.5 });
+
+elements.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

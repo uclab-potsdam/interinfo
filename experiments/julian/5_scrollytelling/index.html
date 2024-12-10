@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Reveal Experiment</title>
+
+  <!-- Add favicon -->
+  <link rel="icon" href="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" type="image/svg">
+  
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2;
+      padding: 2;
+      line-height: 1.6;
+      background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;  /* Ensure the image covers the entire viewport */
+      background-position: center;  /* Center the image */
+      background-attachment: fixed;  /* Make the background fixed while scrolling */
+      margin: 0;
+    }
+
+    /* Change color of hyperlinks */
+a {
+  color: lightgreen; /* Normal state color */
+}
+
+/* Remove transition effect for hyperlinks */
+a {
+  color: lightgreen; /* Normal state color */
+  transition: none; /* Disable transition */
+}
+
+
+/* Change color when hovering over the link */
+a:hover {
+  color: hotpink; /* Hover state color */
+}
+
+/* Change color of visited links */
+a:visited {
+  color: hotpink; /* Visited state color */
+}
+    
+/* headline customization */
+    h1 {
+      text-align: center; 
+      color: yellow; 
+      margin: 1em 0;
+      position: sticky;  /* Make the headline sticky */
+      top: 0;  /* Sticky at top */
+      background-color: rgba(0, 0, 0, 0.9);  /* Black background with 90% transparency */
+      z-index: 1; /* Ensures it stays on top of other content */
+      padding: 1em;
+    }
+
+    /* made responsive and changed padding */
+    main {
+      padding: 2em;
+      max-width: 50vw;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 3em;
+    }
+
+/* Only animate specific properties - Marians "all" made the responsive resizing weird. */
+  * {
+    transition: color 2s, opacity 1s, transform 2s; 
+    transition-delay: 0.5s;
+    }
+
+    p, h2 {
+      color: transparent;
+      text-shadow: 0 0 0.25em lightgray;
+      opacity: 0;
+    }
+
+    p.visible, h2.visible {
+      color: yellow; 
+      text-shadow: none;
+      opacity: 1;
+    }
+
+    /* Added text justification to make image margins look cleaner */
+    p {
+    text-align: justify; 
+  }
+/* resized image */
+    img {
+  width: 8em;
+  height: 8em;
+  opacity: 0;
+  transform: translateX(2.5em) rotateZ(45deg);
+  transition: all 2s;
+  transition-delay: 0.5s;
+}
+/* Added images coming in from both sides - see HTML classes too */
+img.float-left {
+  float: left;
+  margin-right: 1em;
+  transform: translateX(-2.5em) rotateZ(-45deg);
+}
+
+img.float-right {
+  float: right;
+  margin-left: 1em;
+}
+
+img.visible {
+  opacity: 1;
+  transform: none;
+}
+
+  </style>
+</head>
+<body>
+  <h1>An AI-Generated R2D2 Story</h1>
+  <main>
+    <section>
+      <p>This is a short story about R2D2 that ChatGPT wrote for me. I picked this topic because I found a cool R2D2 graphic by Github user <a href="https://github.com/diachedelic" target="_blank" rel="noopener noreferrer">Diachedelic</a>  that I wanted to use.</p> <!-- _blank opens new tab, noopener noreferrer is a security thing that I think stops the target page from reading info from the referring page? -->
+    </section>
+    <section>
+      <h2>Chapter 1: A New Task</h2>
+      <img src="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" alt="R2D2" class="float-right">  <!-- class left/right alternates -->  
+      <p>Deep in the sands of Tatooine, R2-D2 beeped with determination. His tiny wheels carried him over dunes, his mission clear: deliver a secret message. The binary code stored within him was not just data—it was hope. The searing heat of the twin suns bore down on his metallic frame, but he pressed on, undeterred.</p>
+        <p>
+        As he navigated the rugged terrain, memories of the mission’s importance played in his circuits. He recalled Princess Leia’s urgent tone as she encoded the message: a plea for help, a cry for rebellion. Every grain of sand stuck in his wheels felt like a reminder of the galaxy’s heavy burden, but R2 knew he carried the weight of something greater than himself..
+    </section>
+    <section>
+      <h2>Chapter 2: Encounter with a Jawa</h2>
+      <img src="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" alt="R2D2" class="float-left">   
+      <p>R2 had just begun to relax under the twin suns when a Jawa leapt out of nowhere, chattering excitedly. Before he could react, he was being carted off in a rickety sandcrawler, his circuits fuming. But R2 was no ordinary droid; escape plans were already brewing. </p> 
+      <p>Inside the sandcrawler, surrounded by other discarded and broken machines, R2 scanned his environment. The Jawas poked and prodded him, their curiosity matched only by their greed. He beeped defiantly, swiveling his dome to assess his captors. Slowly but surely, he began to emit subtle interference signals, causing their tools to malfunction. As the sandcrawler rumbled toward its next destination, R2’s resourcefulness and resolve glimmered as brightly as his blue lights. </p>
+    </section>
+    <section>
+      <h2>Chapter 3: Meeting the Farm Boy</h2>
+      <img src="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" alt="R2D2" class="float-right">   
+      <p>Freedom came unexpectedly in the form of a young farm boy named Luke. R2 whirred softly, sensing a kindred spirit. He projected the hologram of a mysterious princess, and Luke's eyes widened. Adventure awaited. </p>
+        <p>Luke examined the little droid with equal parts fascination and skepticism. “What’s this message about?” he muttered, watching as Leia’s hologram played again. R2 emitted a hopeful series of beeps, urging him on. Over the next few hours, Luke found himself confiding in R2—his frustrations with life on the farm, his dreams of something more. Though small, R2 became a quiet ally, nudging Luke toward the call of destiny. The bond between them began to form, and R2 felt that his mission might succeed after all.</p>
+    </section>
+    <section>
+      <h2>Chapter 4: The Great Escape</h2>
+      <img src="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" alt="R2D2" class="float-left">   
+      <p>Amid a cacophony of blaster fire, R2 rolled through the Death Star’s corridors, carrying vital schematics. He dodged stormtroopers, plugged into computer terminals, and guided his friends to safety. “Just another day,” he thought in his mechanical way.</p>
+        <p>The mission was chaos. Alarms blared, and explosions rocked the station, but R2’s focus never wavered. At one point, he had to shut down an entire corridor’s defense system while evading a squad of stormtroopers. When Leia, Han, and Luke regrouped, R2 emitted a triumphant whistle, projecting the schematics that would lead them to safety. His small size and unassuming appearance were his greatest weapons, allowing him to slip through cracks in the Empire’s defenses.</p>
+    </section>
+    <section>
+      <h2>Chapter 5: The Hero We Needed</h2>
+      <img src="https://raw.githubusercontent.com/gist/diachedelic/6ff7b29d285ab3cf70589792173443d2/raw/add9f014471ae731fd4d2e7017a4348c97d5f425/r2d2.svg" alt="R2D2" class="float-right">   
+      <p>Years later, R2’s adventures were legendary. His tiny frame had held secrets that changed the galaxy, and his beeps and chirps were a universal language of loyalty and courage. As stars shimmered above, R2 powered down briefly, dreaming of new horizons. </p>
+    <p>Even after peace had been restored to the galaxy, R2 continued to serve with unwavering dedication. He joined Luke on journeys to rebuild the Jedi Order, helped Leia in diplomatic missions, and even aided Han in repairing the Millennium Falcon. Through it all, he remained a constant—a steadfast companion whose courage inspired everyone around him. For R2, the battle might have ended, but the adventure never would.</p>
+    </section>
+
+  </main>
+
+  <script>
+    // Select all the elements to observe
+    const elements = document.querySelectorAll('p, h2, img');
+
+    // Create the Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Observe each element
+    elements.forEach(el => observer.observe(el));
+
+    
+  </script>
+</body>
+</html>
