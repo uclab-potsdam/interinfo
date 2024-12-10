@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SVG - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg"></svg>
+
+<script>
+const svg = document.querySelector('svg');
+
+// add circle at click location
+svg.addEventListener('click', (event) => {
+    createCircle(event.clientX, event.clientY);
+});
+
+// create a new circle
+function createCircle(x, y) {
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', x);
+    circle.setAttribute('cy', y);
+    circle.setAttribute('r', 10+Math.random()*100, 0, 2 * Math.PI);
+    circle.setAttribute('fill', 'black');        
+    svg.appendChild(circle);
+}
+</script>
+</body>
+</html>
