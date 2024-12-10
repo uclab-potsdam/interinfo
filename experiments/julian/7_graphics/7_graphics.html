@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive SVG</title>
+<style>
+body {
+  margin: 0; padding: 0; background: teal;
+}
+svg {
+  width: 100vw; height: 100vh; cursor: crosshair;
+}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+const svg = document.querySelector('svg');
+let points = [], previewPath, cursorLine;
+
+svg.addEventListener('click', ({ clientX: x, clientY: y }) => {
+  points.push({ x, y });
+  createSVG('circle', { cx: x, cy: y, r: 2, fill: 'LightGoldenRodYellow' });
+  updatePath();
+  if (points.length >= 5) finalizeShape();
+});
+
+svg.addEventListener('mousemove', ({ clientX: x, clientY: y }) => {
+  if (!points.length) return;
+  const { x: x1, y: y1 } = points.at(-1);
+  cursorLine = cursorLine || createSVG('line', { stroke: 'LightGoldenRodYellow', 'stroke-width': 1 });
+  setAttrs(cursorLine, { x1, y1, x2: x, y2: y });
+});
+
+function updatePath() {
+  const d = points.map((p, i) => (i ? `L${p.x},${p.y}` : `M${p.x},${p.y}`)).join(' ');
+  previewPath = previewPath || createSVG('path', { stroke: 'LightGoldenRodYellow', 'stroke-width': 2, fill: 'none' });
+  previewPath.setAttribute('d', d);
+}
+
+function finalizeShape() {
+  createSVG('path', {
+    d: points.map((p, i) => (i ? `L${p.x},${p.y}` : `M${p.x},${p.y}`)).join(' ') + ' Z',
+    fill: randomColor(),
+    stroke: 'LightGoldenRodYellow',
+    'stroke-width': 2,
+  });
+  reset();
+}
+
+function createSVG(tag, attrs) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  setAttrs(el, attrs);
+  svg.appendChild(el);
+  return el;
+}
+
+function setAttrs(el, attrs) {
+  for (const key in attrs) el.setAttribute(key, attrs[key]);
+}
+
+function reset() {
+  points = []; [previewPath, cursorLine].forEach((el) => el?.remove());
+  previewPath = cursorLine = null;
+}
+
+function randomColor() {
+  return `hsl(${Math.random() * 360}, 100%, 75%)`;
+}
+</script>
+</body>
+</html>
