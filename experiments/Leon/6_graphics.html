@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreieck erstellen</title>
+    <style>
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid rgb(255, 230, 0);
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <h1>Build your own pyramid like in the old time</h1>
+<div id="area" style="width:100%; height:100vh; cursor: pointer; background-image: url('dubai\ .jpg');">
+</div>
+
+<script>
+    document.getElementById("area").addEventListener("click", function(event) {
+        const triangle = document.createElement("div");
+        const size = Math.random() * 100 + 30; 
+        triangle.className = "triangle";
+        triangle.style.borderLeftWidth = size / 2 + "px";
+        triangle.style.borderRightWidth = size / 2 + "px";
+        triangle.style.borderBottomWidth = size + "px";
+        triangle.style.left = event.clientX - size / 2 + "px";
+        triangle.style.top = event.clientY - size + "px";
+        document.body.appendChild(triangle);
+    });
+</script>
+
+</body>
+</html>

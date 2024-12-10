@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Instrument</title>
+    <style>
+        :root {
+            --background: #f5f5f5;
+            --background-dark-mode: #2b2b2b;
+            --background-darker: #dddddd;
+            --background-dark-mode-darker: #1f1f1f;
+            --color-1: #7baaf7;
+            --color-2: #7cd3a1;
+            --color-3:#fceb80;
+            --color-4: #e58a7f;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: var(--background);
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: var(--background-dark-mode);
+            }
+        }
+
+        h1 {
+            font-family: Helvetica, sans-serif;
+            position: absolute;
+            top: 3vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            h1 {
+                color: white;
+            }
+        }
+
+        svg {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .color-selector {
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: row;
+            gap: 1vw;
+            border-radius: 2vw;
+            padding: 1.3vw;
+            background-color: rgba(224, 224, 224, 0.4);
+            backdrop-filter: blur(10px);
+    
+        }
+
+        .color {
+            width: 3.5vw;
+            height: 3.5vw;
+            cursor: pointer;
+            border-radius: 0.5vw;
+        }
+
+        .color-1 {
+            background-color: var(--color-1);
+        }
+
+        .color-2 {
+            background-color: var(--color-2);
+        }
+
+        .color-3 {
+            background-color: var(--color-3);
+        }
+
+        .color-4 {
+            background-color: var(--color-4);
+        }
+
+        .reset {
+            position: absolute;
+            top: 90%;
+            left: 93%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5vw;
+            font-family: Helvetica, sans-serif;
+            background-color: var(--background-darker);
+            padding: 1vw;
+            border-radius: 0.5vw;
+            cursor: pointer;
+        }
+
+    
+
+    </style>
+</head>
+<body>
+    <h1>Pick a Color and start Drawing</h1>
+    <svg xmlns="http://www.w3.org/2000/svg"></svg>
+    <div class="color-selector">
+        <div id="1" class="color color-1"></div>
+        <div id="2" class="color color-2"></div>
+        <div id="3" class="color color-3"></div>
+        <div id="4" class="color color-4"></div>
+    </div>
+
+    <div class="reset">Reset</div>
+
+    <script>
+        const svg = document.querySelector('svg');
+        const resetButton = document.querySelector('.reset');
+        const colorButtons = document.querySelectorAll('.color');
+        let isDrawing = false;
+        let currentColor = 'black';
+
+        colorButtons.forEach(button => {
+            button.addEventListener('click', () =>{
+                currentColor = currentColor = getComputedStyle(button).backgroundColor;
+            });
+        });
+
+        svg.addEventListener('mousedown', () => (isDrawing = true));
+        svg.addEventListener('mouseup', () => (isDrawing = false));
+        svg.addEventListener('mousemove', (event) => {
+            if (isDrawing) createCircle(event.clientX, event.clientY);
+        })
+
+        function createCircle(x, y) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', 5+Math.random()*25, 0, 2 * Math.PI);
+        circle.setAttribute('fill', currentColor);
+        circle.setAttribute('cursor', 'pointer');
+        svg.appendChild(circle);
+    }
+
+    resetButton.addEventListener('click', () => {
+        svg.innerHTML = '';
+    });
+    </script>
+
+</body>
+</html>

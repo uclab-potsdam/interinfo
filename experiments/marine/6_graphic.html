@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Canvas - Graphics - Interactive Information</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center; /* Centre horizontalement */
+        align-items: center;    /* Centre verticalement */
+        height: 100vh;          /* Hauteur de la fenêtre */
+        background-color: #f0f0f0; /* Fond de la page */
+    }
+
+    canvas {
+        background-color: aqua;
+        border: 3px solid black;
+        border-radius: 8px;
+    }
+
+
+</style>
+</head>
+<body>
+
+    <div class= canva-wrapper> 
+        <canvas></canvas>
+    </div>
+
+<script>
+const canvas = document.querySelector('canvas');
+const context = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let isDrawing = false; // Indique si la souris est en train de dessiner
+
+// Écouteurs pour gérer le clic prolongé
+canvas.addEventListener('mousedown', (event) => {
+    isDrawing = true;
+    drawCircle(event.clientX, event.clientY); // Dessine immédiatement au point de départ
+});
+
+canvas.addEventListener('mousemove', (event) => {
+    if (isDrawing) {
+        drawCircle(event.clientX, event.clientY); // Dessine des cercles pendant le déplacement
+    }
+});
+
+canvas.addEventListener('mouseup', () => {
+    isDrawing = false; // Arrête de dessiner quand le clic est relâché
+});
+
+// click to draw marks
+canvas.addEventListener('click', (event) => {
+    drawCircle(event.clientX, event.clientY);
+});
+
+// draw circle at a given position
+function drawCircle(x, y) {
+    const circleColor= Math.floor(Math.random()* 360);
+    context.beginPath();
+    context.arc(x, y, 5, 0, 2 * Math.PI);
+    context.fillStyle = `hsl(${circleColor}, 100%, 50%)` ;
+    context.fill();
+}
+
+</script>
+</body>
+</html>
