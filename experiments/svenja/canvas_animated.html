@@ -2,14 +2,53 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Animated Canvas - Graphics - Interactive Information</title>
+<title>Animated Canvas - Christmas Theme</title>
 <style>
-body { 
-    margin: 0; padding: 0;
-}
+    body { 
+        margin: 0; 
+        padding: 0;
+        overflow: hidden;
+        background-color: #001f3d; /* Dunkelblauer Hintergrund für eine festliche Nacht */
+        font-family: 'Arial', sans-serif;
+    }
+
+    canvas {
+        display: block;
+        position: absolute; /* Canvas absolut positioniert, damit es immer oben bleibt */
+        top: 0;
+        left: 0;
+        z-index: 0; /* Canvas ganz unten */
+    }
+
+    /* Stil für die Headline */
+    h1 {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 48px;
+        text-align: center;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+        z-index: 1; /* Headline über dem Canvas */
+        animation: sparkle 1.5s infinite alternate; /* Animation für ein Funkeln */
+    }
+
+    /* Headline Funkeln Animation */
+    @keyframes sparkle {
+        0% {
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+        }
+        100% {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 1);
+        }
+    }
 </style>
 </head>
 <body>
+
+<h1>Happy Birthday tooo meeee</h1>
 
 <canvas></canvas>
 
@@ -20,79 +59,40 @@ body {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const circles = []; // store circles for animation
+    const objects = []; // store objects (Zuckerstangen und Weihnachtsmänner)
+    const snowflakes = []; // Array für Schneeflocken
 
-    // Funktion für zufällige Farbe
-    function getRandomColor() {
-        const r = Math.floor(Math.random() * 256);
-        const g = Math.floor(Math.random() * 256);
-        const b = Math.floor(Math.random() * 256);
+    // Funktion für zufällige Pastellfarbe
+    function getRandomPastelColor() {
+        const r = Math.floor(Math.random() * 75) + 180;  // Wert zwischen 180 und 255
+        const g = Math.floor(Math.random() * 75) + 180;
+        const b = Math.floor(Math.random() * 75) + 180;
         return `rgb(${r},${g},${b})`;
     }
 
-    // click to add circle
-    canvas.addEventListener('click', (event) => {
-        addCircle(event.clientX, event.clientY);
-    });
-
-    // set initial properties of new circle
-    function addCircle(x, y) {
-        const circle = {
-            x: x,
-            y: y,
-            radius: 20 + Math.random() * 30,
-            color: getRandomColor(),  // zufällige Farbe
-            dx: Math.random() * 5, // random horizontal speed
-            dy: Math.random() * 5, // random vertical speed
-            shape: 'circle' // Form des Objekts, standardmäßig ein Kreis
-        };
-        circles.push(circle);
+    // Funktion, um Zuckerstange zu zeichnen
+    function drawCandyCane(x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x + 20, y);  // horizontale Linie
+        context.lineTo(x + 20, y + 80);  // vertikale Linie
+        context.lineWidth = 8;
+        context.strokeStyle = getRandomPastelColor();
+        context.stroke();
+        context.lineWidth = 1;
     }
 
-    // animate the circles
-    function animate() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+    // Funktion, um Weihnachtsmann zu zeichnen
+    function drawSanta(x, y) {
+        // Körper
+        context.fillStyle = 'red';
+        context.fillRect(x - 25, y, 50, 60);
+        
+        // Kopf
+        context.beginPath();
+        context.arc(x, y - 30, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'peachpuff';
+        context.fill();
 
-        circles.forEach((circle) => {
-            // update position
-            circle.x += circle.dx;
-            circle.y += circle.dy;
-
-            // bounce off walls and change shape
-            if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
-                circle.dx *= -1;
-                changeShape(circle);  // Form ändern, wenn der Rand erreicht wird
-            }
-            if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
-                circle.dy *= -1;
-                changeShape(circle);  // Form ändern, wenn der Rand erreicht wird
-            }
-
-            // draw the shape
-            context.beginPath();
-            if (circle.shape === 'circle') {
-                context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
-            } else if (circle.shape === 'square') {
-                context.rect(circle.x - circle.radius, circle.y - circle.radius, circle.radius * 2, circle.radius * 2);
-            }
-            context.fillStyle = circle.color;
-            context.fill();
-        });
-        // keep looping the animation
-        requestAnimationFrame(animate); 
-    }
-
-    // Funktion, um die Form zu ändern
-    function changeShape(circle) {
-        // Ändert die Form nach jeder Kollision
-        if (circle.shape === 'circle') {
-            circle.shape = 'square';  // Kreis zu Quadrat
-        } else if (circle.shape === 'square') {
-            circle.shape = 'circle';  // Quadrat zu Kreis
-        }
-    }
-
-    animate(); // start animation loop
-</script>
-</body>
-</html>
+        // Mütze
+        context.b
