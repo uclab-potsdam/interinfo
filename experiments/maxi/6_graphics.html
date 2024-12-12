@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Animated Canvas - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+</style>
+</head>
+<body>
+
+<canvas></canvas>
+
+<script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const circles = []; // store circles for animation
+
+    // click to add circle
+    canvas.addEventListener('click', (event) => {
+        addCircle(event.clientX, event.clientY);
+    });
+
+    // generate a random color
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    // set initial properties of new circle
+    function addCircle(x, y) {
+        const radius = 20 + Math.random() * 30;
+        const gradient = context.createRadialGradient(x, y, radius * 0.3, x, y, radius);
+        gradient.addColorStop(0, getRandomColor());
+        gradient.addColorStop(1, getRandomColor());
+
+        const circle = {
+            x: x,
+            y: y,
+            radius: radius,
+            gradient: gradient,
+            dx: Math.random() * 5, // random horizontal speed
+            dy: Math.random() * 5, // random vertical speed
+        };
+        circles.push(circle);
+    }
+
+    // animate the circles
+    function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        circles.forEach((circle) => {
+            // update position
+            circle.x += circle.dx;
+            circle.y += circle.dy;
+
+            // bounce off walls
+            if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
+                circle.dx *= -1;
+            }
+            if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
+                circle.dy *= -1;
+            }
+
+            // draw the circle
+            context.beginPath();
+            context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+            context.fillStyle = circle.gradient;
+            context.fill();
+        });
+        // keep looping the animation
+        requestAnimationFrame(animate);
+    }
+
+    animate(); // start animation loop
+</script>
+</body>
+</html>
