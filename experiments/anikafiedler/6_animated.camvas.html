@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Animated Canvas - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+</style>
+</head>
+<body>
+
+<canvas></canvas>
+
+<script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const shapes = []; // store all shapes for animation
+    
+    // Array von drei festen Farben
+    const colors = ['red', 'green', 'blue'];
+
+    // click to add a shape (circle, rectangle, or triangle)
+    canvas.addEventListener('click', (event) => {
+        addShape(event.clientX, event.clientY);
+    });
+
+    // set initial properties for new shapes
+    function addShape(x, y) {
+        const shapeType = Math.random() < 0.33 ? 'circle' : (Math.random() < 0.5 ? 'rectangle' : 'triangle');
+        
+        // Wähle zufällig eine Farbe aus dem Array
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        const shape = {
+            x: x,
+            y: y,
+            color: randomColor, // zufällig ausgewählte Farbe
+            dx: Math.random() * 5, // random horizontal speed
+            dy: Math.random() * 5, // random vertical speed
+            size: 20 + Math.random() * 30, // random size for the shape
+            type: shapeType,
+        };
+        shapes.push(shape);
+    }
+
+    // animate all shapes
+    function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        shapes.forEach((shape) => {
+            // update position
+            shape.x += shape.dx;
+            shape.y += shape.dy;
+
+            // bounce off walls
+            if (shape.x - shape.size < 0 || shape.x + shape.size > canvas.width) {
+                shape.dx *= -1;
+            }
+            if (shape.y - shape.size < 0 || shape.y + shape.size > canvas.height) {
+                shape.dy *= -1;
+            }
+
+            // draw the shape based on its type
+            context.fillStyle = shape.color;
+            if (shape.type === 'circle') {
+                context.beginPath();
+                context.arc(shape.x, shape.y, shape.size, 0, 2 * Math.PI);
+                context.fill();
+            } else if (shape.type === 'rectangle') {
+                context.fillRect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
+            } else if (shape.type === 'triangle') {
+                context.beginPath();
+                context.moveTo(shape.x, shape.y - shape.size / 2);
+                context.lineTo(shape.x - shape.size / 2, shape.y + shape.size / 2);
+                context.lineTo(shape.x + shape.size / 2, shape.y + shape.size / 2);
+                context.closePath();
+                context.fill();
+            }
+        });
+
+        // keep looping the animation
+        requestAnimationFrame(animate);
+    }
+
+    animate(); // start animation loop
+</script>
+</body>
+</html>
+
