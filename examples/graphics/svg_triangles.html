@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SVG - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" ></svg>
+
+<script>
+const svg = document.querySelector('svg');
+
+// add circle at click location
+svg.addEventListener('click', (event) => {
+    createTriangles(event.clientX, event.clientY);
+});
+
+// create triangles
+function createTriangles(x, y) {
+    const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    const d = 5+Math.random()*50;
+    const x1 = x+d;
+    const y1 = y+d;
+    const x2 = x-d;
+    const y2 = y+d;
+    triangle.setAttribute('points', `${x},${y} ${x1},${y1} ${x2},${y2}`);
+    triangle.setAttribute('fill', 'black');        
+    svg.appendChild(triangle);
+}
+
+</script>
+</body>
+</html>
