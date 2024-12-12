@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Editable SVG - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg"></svg>
+
+<script>
+    const svg = document.querySelector('svg');
+
+    let selectedCircle = null; // circle being dragged or resized
+    let offsetX, offsetY; // offsets for dragging
+
+    // add circle at click location
+    svg.addEventListener('click', (event) => {
+        if (event.target.tagName === 'circle') return; // Avoid creating circles on existing ones
+        createCircle(event.clientX, event.clientY);
+    });
+
+    // areate a new circle
+    function createCircle(x, y) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', 10+Math.random()*100, 0, 2 * Math.PI);
+        circle.setAttribute('fill', 'red');
+        circle.setAttribute('cursor', 'pointer');
+        svg.appendChild(circle);
+
+        // Add drag behavior
+        circle.addEventListener('mousedown', (event) => {
+            selectedCircle = circle;
+            offsetX = event.clientX - parseFloat(circle.getAttribute('cx'));
+            offsetY = event.clientY - parseFloat(circle.getAttribute('cy'));
+        });
+    }
+
+    // Adjust size or drag the circle
+    svg.addEventListener('mousemove', (event) => {
+        if (!selectedCircle) return;
+
+        if (event.shiftKey) {
+            // adjust size of circle
+            const cx = parseFloat(selectedCircle.getAttribute('cx'));
+            const cy = parseFloat(selectedCircle.getAttribute('cy'));
+            const dx = event.clientX - cx;
+            const dy = event.clientY - cy;
+            const newRadius = Math.sqrt(dx * dx + dy * dy); // Pythagoras
+            selectedCircle.setAttribute('r', newRadius); 
+        } else {
+            // drag circle
+            const x = event.clientX - offsetX;
+            const y = event.clientY - offsetY;
+            selectedCircle.setAttribute('cx', x);
+            selectedCircle.setAttribute('cy', y);
+        }
+    });
+
+    // Stop dragging or resizing the circle
+    svg.addEventListener('mouseup', () => { selectedCircle = null; });
+    svg.addEventListener('mouseleave', () => { selectedCircle = null; });
+
+</script>
+</body>
+</html>
