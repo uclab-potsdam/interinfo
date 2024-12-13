@@ -53,46 +53,43 @@
 <script>
     const svg = document.querySelector('svg');
     const toggleAnimationButton = document.getElementById('toggleAnimation');
-    let selectedShape = null; // Shape being dragged
+    let draggedShape = null; // Shape being dragged
     let offsetX, offsetY; // Dragging offsets
     let isAnimating = false; // Track whether animation mode is enabled
-    const shapes = []; // Array to store shapes and their properties
+    let shapes = []; // Array to store shapes and their properties
+
+    let dragStartX, dragStartY, dragStartTime;
 
     // Generate a random color hex
     function randomColor() {
-        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        return `#${Math.round(Math.random() * 0xffffff).toString(16)}`;
+    }
+
+    function pointsForTriangle(centerx, centery, size) {
+        return `${centerx},${centery - size / 2} 
+                ${centerx - size / 2},${centery + size / 2} 
+                ${centerx + size / 2},${centery + size / 2}`;
+    }
+
+    function updateShapePosition(shape) {
+        if (shape.element.tagName === 'circle') {
+            shape.element.setAttribute('cx', shape.x);
+            shape.element.setAttribute('cy', shape.y);
+        } else if (shape.element.tagName === 'rect') {
+            shape.element.setAttribute('x', shape.x - shape.size / 2);
+            shape.element.setAttribute('y', shape.y - shape.size / 2);
+        } else if (shape.element.tagName === 'polygon') {
+            shape.element.setAttribute('points', pointsForTriangle(shape.x, shape.y, shape.size));
+        }
     }
 
     // Create a new shape at the given position
     function createShape(x, y) {
-        const shapeType = ['circle', 'rect', 'polygon'][Math.floor(Math.random() * 3)]; // Random shape type
-        const size = 20 + Math.random() * 80; // Random size
-        const color = randomColor();
-        let shape;
+        const shapeType = ['circle', 'rect', 'polygon'][Math.floor(Math.random() * 3)];
+        const size = 20 + Math.random() * 80;
 
-        if (shapeType === 'circle') {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            shape.setAttribute('cx', x);
-            shape.setAttribute('cy', y);
-            shape.setAttribute('r', size / 2);
-        } else if (shapeType === 'rect') {
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            shape.setAttribute('x', x - size / 2);
-            shape.setAttribute('y', y - size / 2);
-            shape.setAttribute('width', size);
-            shape.setAttribute('height', size);
-        } else if (shapeType === 'polygon') {
-            const points = `
-                ${x},${y - size / 2} 
-                ${x - size / 2},${y + size / 2} 
-                ${x + size / 2},${y + size / 2}`;
-            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-            shape.setAttribute('points', points);
-        }
-
-        shape.setAttribute('fill', color);
-        shape.setAttribute('cursor', 'pointer');
-        svg.appendChild(shape);
+        // create visual svg shape
+        let shape = document.createElementNS('http://www.w3.org/2000/svg', shapeType);
 
         // Store shape with additional data
         const shapeData = {
@@ -102,96 +99,97 @@
             size: size,
             dx: Math.random() * 2 - 1, // Random horizontal speed
             dy: Math.random() * 2 - 1, // Random vertical speed
-            color: color,
         };
         shapes.push(shapeData);
 
+        if (shapeType === 'circle') {
+            shape.setAttribute('r', size / 2);
+        } else if (shapeType === 'rect') {
+            shape.setAttribute('width', size);
+            shape.setAttribute('height', size);
+        }
+        shape.setAttribute('fill', randomColor());
+        shape.setAttribute('cursor', 'pointer');
+
+        updateShapePosition(shapeData);
+
+        svg.appendChild(shape);
+
         // Make the shape draggable
         shape.addEventListener('mousedown', (event) => {
-            selectedShape = shapeData;
+            draggedShape = shapeData;
             offsetX = event.clientX - shapeData.x;
             offsetY = event.clientY - shapeData.y;
+
+            dragStartX = event.clientX;
+            dragStartY = event.clientY;
+            dragStartTime = new Date();
         });
 
-        // Change color on click
         shape.addEventListener('click', (event) => {
-            event.stopPropagation(); // Prevent triggering the canvas click event
-            shape.setAttribute('fill', randomColor());
-            shapeData.color = shape.getAttribute('fill'); // Update the stored color
+            event.stopPropagation();
         });
     }
 
     // Handle canvas clicks to create shapes
     svg.addEventListener('click', (event) => {
-        if (event.target === svg) {
-            createShape(event.clientX, event.clientY);
-        }
+        let bounds = event.target.getBoundingClientRect();
+        let x = event.clientX - bounds.left;
+        let y = event.clientY - bounds.top;
+        createShape(x, y);
     });
 
     // Handle right-click to delete all shapes
     svg.addEventListener('contextmenu', (event) => {
         event.preventDefault(); // Prevent the default context menu from appearing
-        svg.innerHTML = ''; // Remove all shapes
-        shapes.length = 0; // Clear the shapes array
+        svg.innerHTML = '';
+        shapes.length = 0;
     });
 
     // Handle dragging
     svg.addEventListener('mousemove', (event) => {
-        if (!selectedShape) return;
+        if (!draggedShape) return;
 
-        selectedShape.x = event.clientX - offsetX;
-        selectedShape.y = event.clientY - offsetY;
-        selectedShape.element.setAttribute('cx', selectedShape.x);
-        selectedShape.element.setAttribute('cy', selectedShape.y);
-
-        // If it's a rect or polygon, update the position accordingly
-        if (selectedShape.element.tagName === 'rect') {
-            selectedShape.element.setAttribute('x', selectedShape.x - selectedShape.size / 2);
-            selectedShape.element.setAttribute('y', selectedShape.y - selectedShape.size / 2);
-        } else if (selectedShape.element.tagName === 'polygon') {
-            const points = `
-                ${selectedShape.x},${selectedShape.y - selectedShape.size / 2} 
-                ${selectedShape.x - selectedShape.size / 2},${selectedShape.y + selectedShape.size / 2} 
-                ${selectedShape.x + selectedShape.size / 2},${selectedShape.y + selectedShape.size / 2}`;
-            selectedShape.element.setAttribute('points', points);
-        }
+        draggedShape.x = event.clientX - offsetX;
+        draggedShape.y = event.clientY - offsetY;
+        updateShapePosition(draggedShape);
     });
 
     // Stop dragging
-    svg.addEventListener('mouseup', () => {
-        selectedShape = null;
-    });
-    svg.addEventListener('mouseleave', () => {
-        selectedShape = null;
+    svg.addEventListener('mouseup', (event) => {
+        draggedShape = null;
+        const distance = Math.sqrt(Math.pow(event.clientX - dragStartX, 2) + Math.pow(event.clientY - dragStartY, 2));
+        const time = new Date() - dragStartTime;
+
+        if(distance > 50 || time > 200) {
+            // mouse interaction was a drag
+        } else {
+            // mouse interaction was a click
+            event.target.setAttribute('fill', randomColor());
+        }
     });
 
-    // Animation function
     function animate() {
         if (!isAnimating) return;
 
+        const borderX = window.innerWidth - svg.getBoundingClientRect().left;
+        const borderY = window.innerHeight - svg.getBoundingClientRect().top;
+
         shapes.forEach((shapeData) => {
             // Only animate if the shape is not being dragged
-            if (selectedShape !== shapeData) {
+            if (draggedShape !== shapeData) {
                 shapeData.x += shapeData.dx;
                 shapeData.y += shapeData.dy;
 
                 // Bounce off the walls
-                if (shapeData.x < 0 || shapeData.x > window.innerWidth) shapeData.dx *= -1;
-                if (shapeData.y < 0 || shapeData.y > window.innerHeight) shapeData.dy *= -1;
+                const shapeLeft = shapeData.x - shapeData.size/2;
+                const shapeRight = shapeData.x + shapeData.size/2;
+                const shapeTop = shapeData.y - shapeData.size/2;
+                const shapeBottom = shapeData.y + shapeData.size/2;
+                if (shapeLeft < 0 || shapeRight > borderX) shapeData.dx *= -1;
+                if (shapeTop < 0 || shapeBottom > borderY) shapeData.dy *= -1;
 
-                // Update shape position
-                shapeData.element.setAttribute('cx', shapeData.x);
-                shapeData.element.setAttribute('cy', shapeData.y);
-                if (shapeData.element.tagName === 'rect') {
-                    shapeData.element.setAttribute('x', shapeData.x - shapeData.size / 2);
-                    shapeData.element.setAttribute('y', shapeData.y - shapeData.size / 2);
-                } else if (shapeData.element.tagName === 'polygon') {
-                    const points = `
-                        ${shapeData.x},${shapeData.y - shapeData.size / 2} 
-                        ${shapeData.x - shapeData.size / 2},${shapeData.y + shapeData.size / 2} 
-                        ${shapeData.x + shapeData.size / 2},${shapeData.y + shapeData.size / 2}`;
-                    shapeData.element.setAttribute('points', points);
-                }
+                updateShapePosition(shapeData);
             }
         });
 
@@ -202,7 +200,7 @@
     toggleAnimationButton.addEventListener('click', () => {
         isAnimating = !isAnimating;
         if (isAnimating) {
-            animate(); // Start animation loop
+            animate();
         }
     });
 </script>
