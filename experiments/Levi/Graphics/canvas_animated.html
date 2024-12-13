@@ -44,7 +44,7 @@
 <body>
 
 <header>
-    Click to let shapes appear! Drag them wherever you want! Click on them to change their color! Right click anywhere on the canvas to delete every shape!
+    Click to let shapes appear! Drag them wherever you want! Click on them to change their color! Right click anywhere on the canvas to delete every shape!<br>The button might even make them move...
 </header>
 
 <svg xmlns="http://www.w3.org/2000/svg"></svg>
@@ -58,7 +58,7 @@
     let isAnimating = false; // Track whether animation mode is enabled
     const shapes = []; // Array to store shapes and their properties
 
-    // Generate a random color in hexadecimal format
+    // Generate a random color hex
     function randomColor() {
         return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
     }
