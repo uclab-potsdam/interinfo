@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Video - Media - Interactive Information</title>
+<style>
+body { 
+    background-color: black;
+    padding: 0; margin: 0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    height: 100vh;
+    scale: 100%;    
+}
+
+video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    z-index: 0;
+}
+
+h1, h2 { 
+    color: white; 
+    position:absolute; 
+    z-index: 1;
+    text-align:center;
+    width: 100%;
+}
+
+h1 { font-size: 3em; top: 5vh; }
+h2 { font-size: 2.5em; top: 80vh; }
+
+</style>
+</head>
+<body>
+
+<video id="video" controls width="800" poster="poster.png">
+    <source src="https://fhpcloud.fh-potsdam.de/s/DpmteQWJCkkWCWA/download/video.mp4" type="video/mp4">
+    <track kind="subtitles" src="subtitles.vtt" srclang="en" default>
+    Download video as <a href="https://fhpcloud.fh-potsdam.de/s/DpmteQWJCkkWCWA/download/video.mp4">MP4</a>.
+</video>
+ 
+<h1>Meowww!</h1>
+<h2>MEOWWWWWWWWW!</h2>
+
+<script>
+const video = document.getElementById('video');
+
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        event.preventDefault(); // this prevents scrolling when spacebar press
+        if (video.paused) video.play();
+        else video.pause();        
+    }
+});
+</script>
+</body>
+</html>
