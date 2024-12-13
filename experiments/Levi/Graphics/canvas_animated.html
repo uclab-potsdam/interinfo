@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Canvas with Shapes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        svg {
+            width: 100vw;
+            height: calc(100vh - 50px);
+            background-color: #f0f0f0;
+            cursor: crosshair;
+        }
+
+        #toggleAnimation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Click to let shapes appear! Drag them wherever you want! Click on them to change their color! Right click anywhere on the canvas to delete every shape!
+</header>
+
+<svg xmlns="http://www.w3.org/2000/svg"></svg>
+<button id="toggleAnimation">Toggle Animation</button>
+
+<script>
+    const svg = document.querySelector('svg');
+    const toggleAnimationButton = document.getElementById('toggleAnimation');
+    let selectedShape = null; // Shape being dragged
+    let offsetX, offsetY; // Dragging offsets
+    let isAnimating = false; // Track whether animation mode is enabled
+    const shapes = []; // Array to store shapes and their properties
+
+    // Generate a random color in hexadecimal format
+    function randomColor() {
+        return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    }
+
+    // Create a new shape at the given position
+    function createShape(x, y) {
+        const shapeType = ['circle', 'rect', 'polygon'][Math.floor(Math.random() * 3)]; // Random shape type
+        const size = 20 + Math.random() * 80; // Random size
+        const color = randomColor();
+        let shape;
+
+        if (shapeType === 'circle') {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            shape.setAttribute('cx', x);
+            shape.setAttribute('cy', y);
+            shape.setAttribute('r', size / 2);
+        } else if (shapeType === 'rect') {
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            shape.setAttribute('x', x - size / 2);
+            shape.setAttribute('y', y - size / 2);
+            shape.setAttribute('width', size);
+            shape.setAttribute('height', size);
+        } else if (shapeType === 'polygon') {
+            const points = `
+                ${x},${y - size / 2} 
+                ${x - size / 2},${y + size / 2} 
+                ${x + size / 2},${y + size / 2}`;
+            shape = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            shape.setAttribute('points', points);
+        }
+
+        shape.setAttribute('fill', color);
+        shape.setAttribute('cursor', 'pointer');
+        svg.appendChild(shape);
+
+        // Store shape with additional data
+        const shapeData = {
+            element: shape,
+            x: x,
+            y: y,
+            size: size,
+            dx: Math.random() * 2 - 1, // Random horizontal speed
+            dy: Math.random() * 2 - 1, // Random vertical speed
+            color: color,
+        };
+        shapes.push(shapeData);
+
+        // Make the shape draggable
+        shape.addEventListener('mousedown', (event) => {
+            selectedShape = shapeData;
+            offsetX = event.clientX - shapeData.x;
+            offsetY = event.clientY - shapeData.y;
+        });
+
+        // Change color on click
+        shape.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent triggering the canvas click event
+            shape.setAttribute('fill', randomColor());
+            shapeData.color = shape.getAttribute('fill'); // Update the stored color
+        });
+    }
+
+    // Handle canvas clicks to create shapes
+    svg.addEventListener('click', (event) => {
+        if (event.target === svg) {
+            createShape(event.clientX, event.clientY);
+        }
+    });
+
+    // Handle right-click to delete all shapes
+    svg.addEventListener('contextmenu', (event) => {
+        event.preventDefault(); // Prevent the default context menu from appearing
+        svg.innerHTML = ''; // Remove all shapes
+        shapes.length = 0; // Clear the shapes array
+    });
+
+    // Handle dragging
+    svg.addEventListener('mousemove', (event) => {
+        if (!selectedShape) return;
+
+        selectedShape.x = event.clientX - offsetX;
+        selectedShape.y = event.clientY - offsetY;
+        selectedShape.element.setAttribute('cx', selectedShape.x);
+        selectedShape.element.setAttribute('cy', selectedShape.y);
+
+        // If it's a rect or polygon, update the position accordingly
+        if (selectedShape.element.tagName === 'rect') {
+            selectedShape.element.setAttribute('x', selectedShape.x - selectedShape.size / 2);
+            selectedShape.element.setAttribute('y', selectedShape.y - selectedShape.size / 2);
+        } else if (selectedShape.element.tagName === 'polygon') {
+            const points = `
+                ${selectedShape.x},${selectedShape.y - selectedShape.size / 2} 
+                ${selectedShape.x - selectedShape.size / 2},${selectedShape.y + selectedShape.size / 2} 
+                ${selectedShape.x + selectedShape.size / 2},${selectedShape.y + selectedShape.size / 2}`;
+            selectedShape.element.setAttribute('points', points);
+        }
+    });
+
+    // Stop dragging
+    svg.addEventListener('mouseup', () => {
+        selectedShape = null;
+    });
+    svg.addEventListener('mouseleave', () => {
+        selectedShape = null;
+    });
+
+    // Animation function
+    function animate() {
+        if (!isAnimating) return;
+
+        shapes.forEach((shapeData) => {
+            // Only animate if the shape is not being dragged
+            if (selectedShape !== shapeData) {
+                shapeData.x += shapeData.dx;
+                shapeData.y += shapeData.dy;
+
+                // Bounce off the walls
+                if (shapeData.x < 0 || shapeData.x > window.innerWidth) shapeData.dx *= -1;
+                if (shapeData.y < 0 || shapeData.y > window.innerHeight) shapeData.dy *= -1;
+
+                // Update shape position
+                shapeData.element.setAttribute('cx', shapeData.x);
+                shapeData.element.setAttribute('cy', shapeData.y);
+                if (shapeData.element.tagName === 'rect') {
+                    shapeData.element.setAttribute('x', shapeData.x - shapeData.size / 2);
+                    shapeData.element.setAttribute('y', shapeData.y - shapeData.size / 2);
+                } else if (shapeData.element.tagName === 'polygon') {
+                    const points = `
+                        ${shapeData.x},${shapeData.y - shapeData.size / 2} 
+                        ${shapeData.x - shapeData.size / 2},${shapeData.y + shapeData.size / 2} 
+                        ${shapeData.x + shapeData.size / 2},${shapeData.y + shapeData.size / 2}`;
+                    shapeData.element.setAttribute('points', points);
+                }
+            }
+        });
+
+        requestAnimationFrame(animate); // Keep looping the animation
+    }
+
+    // Toggle animation mode on button click
+    toggleAnimationButton.addEventListener('click', () => {
+        isAnimating = !isAnimating;
+        if (isAnimating) {
+            animate(); // Start animation loop
+        }
+    });
+</script>
+
+</body>
+</html>
