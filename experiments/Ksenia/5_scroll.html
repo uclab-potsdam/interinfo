@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+    body {
+        margin: 0;
+        height: 1000vh; /* Make the page scrollable */
+        background-color: black;
+        font-family: sans-serif;
+        position: relative;
+    }
+
+    .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+    }
+
+    video {
+        width: 65%; /* Adjust video size */
+        max-width: 500px;
+        display: block;
+        border-radius: 20px; /* Optional: Rounded corners for aesthetics */
+    }
+
+    .grayscale {
+        filter: grayscale(100%);
+    }
+
+    h1, h2, h3 { 
+        color: rgb(179, 54, 246);  
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        z-index: 1; /* Text should appear over videos */
+    }
+
+    h1 { font-size: 3em; top: 10vh; }
+    h2 { font-size: 2.5em; top: 20vh; }
+
+    h3 {
+        color: rgb(84, 221, 194);
+        font-size: 2em;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        animation: wave 2s infinite ease-in-out;
+    }
+
+    @keyframes wave {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        25% {
+            transform: translateY(-10px);
+        }
+        50% {
+            transform: translateY(10px);
+        }
+        75% {
+            transform: translateY(-10px);
+        }
+    }
+
+    /* Staggered Animation for Individual Text Lines */
+    .wave-text {
+        position: absolute;
+    }
+
+    .wave-text:nth-child(1) { animation-delay: 0s; }
+    .wave-text:nth-child(2) { animation-delay: 0.1s; }
+    .wave-text:nth-child(3) { animation-delay: 0.2s; }
+    .wave-text:nth-child(4) { animation-delay: 0.3s; }
+    .wave-text:nth-child(5) { animation-delay: 0.4s; }
+    .wave-text:nth-child(6) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<div class="video-container">
+    <!-- Video 1 -->
+    <video id="video" autoplay loop muted playsinline>
+        <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Video 2 (Black and White) -->
+    <video autoplay loop muted playsinline class="grayscale">
+        <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<h1>Never Gonna Give You Up</h1>
+<h2>Rick Astley</h2>
+
+<!-- Lyrics with Wave Animation -->
+<h3 class="wave-text">We're no strangers to love</h3>
+<h3 class="wave-text">You know the rules and so do I</h3>
+<h3 class="wave-text">A full commitment's what I'm thinking of</h3>
+<h3 class="wave-text">You wouldn't get this from any other guy</h3>
+<h3 class="wave-text">I just wanna tell you how I'm feeling</h3>
+<h3 class="wave-text">Gotta make you understand</h3>
+
+
+
+</body>
+</html>

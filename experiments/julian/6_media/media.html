@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Scroll - Media - Interactive Information</title>
+<style>
+body {
+    margin: 0;
+    padding: 20px;
+    height: 1000vh; /* Make the page scrollable */
+    background-color: black;
+    font-family: sans-serif;
+    box-sizing: border-box; /* Ensures padding doesn't affect width/height calculations */
+}
+
+.video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 40px); /* Account for padding */
+
+    z-index: 0;
+}
+
+video {
+    margin: auto;
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+}
+
+h1, h2, h3 { 
+    color: white;  
+    position: absolute;  
+    z-index: 1;
+    text-align: center;
+    width: calc(100% - 40px); /* Account for padding */
+}
+
+h1 { font-size: 4em; top: 35vh; }
+h2 { font-size: 3em; top: 50vh; }
+h3 { font-size: 2em; }
+
+nav {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 50px; /* Space between the items */
+    position: fixed;
+    top: 0; /* Stick to the top of the viewport */
+    width: 100%; /* Full width */
+    background-color: black; /* Black background */
+    padding: 50px 0; /* Add top and bottom padding for the black bar */
+    z-index: 2;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav a[aria-current="page"] {
+    font-weight: 900; /* Extra bold */
+}
+
+</style>
+</head>
+<body>
+
+    <nav>
+        <a href="media.html" aria-current="page">Scrolling Dialog</a>
+        <a href="embed.html">Embedded Video</a>
+        <a href="audio.html">Audio</a>
+      </nav>
+
+<div class="video-container">
+    <video id="video" src="https://fhpcloud.fh-potsdam.de/s/irZofbGameBnmwx/download/Fairdale%20Bikes%20%E2%A7%B8%20Taj%20in%20The%20Woods.mp4" muted playsinline></video>
+</div>
+
+
+<h1>Taj in the Woods</h1>
+<h2>Fairdale Bikes</h2>
+
+
+<h3>My favorite part about mountain biking</h3>
+<h3>is being in the woods</h3>
+<h3>yet conversations about it always steer toward </h3>
+<h3>the exhilarating parts.</h3> 
+<h3>Going fast and hitting jumps is cool</h3>
+<h3>but sadly these days I spend more time sitting at a desk</h3>
+<h3>than I do trying to get rad on a bicycle.</h3>
+<h3>Unplugging from the screens and the noise of the world</h3>
+<h3>seems more important than ever.</h3>
+<h3>Hopping on my bike and putting a little effort into the pedals</h3>
+<h3>carries me away.</h3>
+<h3>In a little while my legs loosen up</h3>
+<h3>my body starts to remember it can do more</h3>
+<h3>than sit at a desk chair.</h3>
+<h3>Eventually the computer screen</h3>
+<h3>burned into my eyes clears</h3>
+<h3>and when I finally hit the woods</h3>
+<h3>and the noise of the cars fades away</h3>
+<h3>everything calms down</h3>
+<h3>things get simple again.</h3>
+<h3>I start with a good climb</h3>
+<h3>and I quickly stop thinking at all.</h3>
+<h3>There's nothing but breathing and turning the pedals.</h3>
+<h3>I know it's not exactly solving the world's problems</h3>
+<h3>but it helps my brain find room to put them into perspective.</h3>
+<h3>20 minutes later on a plateau deeper in the woods</h3>
+<h3>my only thoughts are simple.</h3>
+<h3>This is such a nice place to be</h3>
+<h3>the trees are beautiful</h3>
+<h3>it's peaceful here.</h3>
+<h3>Eventually I make it to the top of some fun trail.</h3>
+<h3>It feels like a roller coaster starting up</h3>
+<h3>as the momentum builds</h3>
+<h3>and every time without fail I'm reminded</h3>
+<h3>that one of the base joys</h3>
+<h3>at the heart of bike riding</h3>
+<h3>is rolling down a hill.</h3>
+<h3>I don't have to push it or test myself</h3>
+<h3>though of course sometimes I do.</h3>
+<h3>It just feels good to be riding through the trees</h3>
+<h3>it's so grounding to be out here in the woods</h3>
+<h3>and I love that my bike takes me here.</h3>
+
+
+<script>
+
+// adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // scrolling progress
+    const bar = document.getElementById('progress-bar'); // progress bar
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+    video.currentTime = video.duration * pct;
+});
+
+
+// select all h3 elements
+const headers = document.querySelectorAll('h3');
+const start = 100;  // start position for first line
+const end = 950;    // end position for last line
+
+const step = (end - start) / (headers.length - 1); // space between headers
+
+// vertically distribute the elements
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`; // set top position
+});
+
+</script>
+</body>
+</html>

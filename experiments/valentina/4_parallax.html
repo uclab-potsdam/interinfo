@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Museum of SVG Art with Parallax</title>
+  <style>
+    /* Basic page styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f0f8ff;
+      color: #333;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+
+    /* Header styling */
+    header {
+      background: #009688;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    #parallax {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scroll-behavior: smooth;
+   }
+   #parallax > div {
+    position: absolute;
+   }
+   #square1 {
+    transform: translateZ(0px) scale(1.5);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    top: 75vh; left: 15%;
+    background-color: #1b96cf;
+   }
+   #circle1 {
+    transform: translateZ(-1px) scale(2.5);
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 50vh; left: 0%;
+    background-color: #ffc107;
+    opacity: 60%;
+   }
+
+   #square2 {
+    transform: translateZ(0px) scale(1.5);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    top: 20vh; left: 70%;
+    background-color: #7153eb;
+   }
+   #circle2 {
+    transform: translateZ(-1px) scale(2.5);
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    top: 15vh; left: 80%;
+    background-color: #1b96cf;
+    opacity: 60%;
+   }
+
+   #square3 {
+    transform: translateZ(0px) scale(1.5);
+    width: calc( 5vw + 5vh );
+    height: calc( 5vw + 5vh );
+    bottom: 15vh; left: 60%;
+    background-color: #ffc107;
+   }
+   #circle3 {
+    transform: translateZ(-1px) scale(2.5);
+    width: calc( 6vw + 6vh );
+    height: calc( 6vw + 6vh );
+    border-radius: calc( 3vw + 3vh );
+    bottom: 5vh; left: 45%;
+    background-color: #7153eb;
+    opacity: 60%;
+   }
+
+
+    /* Footer styling */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #333;
+      color: white;
+      position: absolute;
+      top: 200vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Virtual Museum of SVG Art</h1>
+    <p>Explore the beauty of scalable vector graphics with parallax effects</p>
+  </header>
+  <div id="parallax">
+    <footer>
+      <p>© 2024 Virtual Museum of SVG Art | Designed by Valentina Lafchieva</p>
+    </footer>
+    <div id="circle1"></div>
+    <div id="square1"></div>
+    <div id="circle2"></div>
+    <div id="square2"></div>
+    <div id="circle3"></div>
+    <div id="square3"></div>
+   </div>
+
+
+  <script>
+  </script>
+</body>
+
+</html>

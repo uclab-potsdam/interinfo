@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>scrollytelling</title>
+<div class="split left">
+    <div class="centered">
+      <h2>1</h2>
+      <p1>text.</p1>
+    </div>
+  </div>
+  
+  <div class="split right">
+    <div class="centered">
+      <h3>scroll</h3>
+      <p2>ᐯ</p2>
+    </div>
+  </div>
+<style>
+
+/* Split the screen in half */
+.split {
+  height: 50%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: #ffffff;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  border-radius: 1000px;
+  background-color: rgb(0, 0, 0);
+}
+#split {
+  transform: translateZ(0px);
+  width: calc( 5vw + 5vh );
+  height: calc( 5vw + 5vh );
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+h2 {
+    color: rgb(255, 255, 255);
+}
+h3 {
+    color: white;
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+p1{
+    color: rgb(255, 255, 255);
+}
+p2 {
+    color: white;
+    font-size: 20px;
+    font: 1.5em sans-serif;
+   
+  
+}
+
+
+</style>
+
+</head>
+<body>
+
+<div id="square"> </div>
+<div id="circle"> </div>
+
+
+<script>
+ 
+</script>
+
+</body>
+</html>
