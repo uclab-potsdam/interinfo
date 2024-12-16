@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Solar System with Information</title>
+
+<style>
+    /* Hintergrund mit Sternenhimmel */
+    body {
+        background-image: url('abstract-geometric-background-shapes-texture.jpg'); /* Ersetze dies durch die URL deines Sternenhimmel-Bildes */
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: white;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;
+        display: flex;
+        justify-content: center;
+        padding: 50px;
+        /* overflow: hidden; */ /* Entfernt diese Zeile */
+    }
+
+    /* Container für die gesamte Planetengruppe */
+    .solar-system {
+        display: flex;
+        flex-direction: column; /* Vertikale Ausrichtung */
+        align-items: center;
+        gap: 40px;
+        /* height: 100vh; */ /* Optional: Festlegen der Höhe für bessere Sichtbarkeit */
+    }
+
+    /* Container für jeden Planeten und die Info */
+    .planet {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    /* Bild-Styling */
+    img.planet-image {
+        width: 120px;
+        transition: transform 0.5s, filter 2s;
+    }
+
+    img.planet-image:hover {
+        transform: scale(1.3); /* Vergrößert das Bild bei Hover */
+    }
+
+    /* Styling für das Informationsfeld */
+    .info {
+        font-size: 14px;
+        text-align: left;
+        width: 150px;
+    }
+
+    /* Raketen-Animation */
+    .rocket {
+        position: absolute;
+        width: 80px;
+        top: 50%; /* Startposition */
+        left: 50%;
+        transform: translate(-50%, -50%) scaleX(-1); /* Start in der Mitte, gespiegelt */
+        animation: fly-wild 5s infinite alternate ease-in-out; /* Endlose Animation */
+    }
+
+    /* Keyframes für wilde, zufällige Bewegung */
+    @keyframes fly-wild {
+        0% {
+            top: 50%; 
+            left: 50%;
+        }
+        20% {
+            top: 40%; 
+            left: 80%;
+        }
+        40% {
+            top: 70%; 
+            left: 30%;
+        }
+        60% {
+            top: 30%; 
+            left: 90%;
+        }
+        80% {
+            top: 80%; 
+            left: 20%;
+        }
+        100% {
+            top: 40%; 
+            left: 50%;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+<div class="solar-system">
+    <!-- Planet mit Bild und Info -->
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
+        <div class="info">
+            <strong>Mercury</strong>
+            <p>Der kleinste Planet und der Sonne am nächsten.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
+        <div class="info">
+            <strong>Venus</strong>
+            <p>Heißer als Merkur mit dichter, giftiger Atmosphäre.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
+        <div class="info">
+            <strong>Earth</strong>
+            <p>Der blaue Planet und unser Zuhause.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
+        <div class="info">
+            <strong>Mars</strong>
+            <p>Der rote Planet mit potenziellen Spuren von Leben.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
+        <div class="info">
+            <strong>Jupiter</strong>
+            <p>Der größte Planet mit einem riesigen Sturm.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
+        <div class="info">
+            <strong>Saturn</strong>
+            <p>Bekannt für seine markanten Ringe.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
+        <div class="info">
+            <strong>Uranus</strong>
+            <p>Ein eisiger Planet, der sich auf der Seite dreht.</p>
+        </div>
+    </div>
+
+    <div class="planet">
+        <img class="planet-image" src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
+        <div class="info">
+            <strong>Neptune</strong>
+            <p>Ein ferner blauer Planet mit starken Winden.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Rakete mit wilder Animation -->
+<img src="rb_63948.png" alt="Flying Rocket" class="rocket"> <!-- Dein eigenes Raketenbild hier einfügen -->
+
+</body>
+</html>

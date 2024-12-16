@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Animated Canvas - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; /* hides scrollbar */
+}
+</style>
+</head>
+<body>
+
+<canvas></canvas>
+
+<script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const shapes = []; // store shapes for animation
+
+    // click to add circle
+    canvas.addEventListener('click', (event) => {
+        addShapes(event.clientX, event.clientY);
+    });
+
+    // set colors
+    function addShapes(x, y) {
+        const colors = ["red", "blue", "green", "purple", "orange", "pink", "yellow", "orange"];
+        const randomColor = () => colors[Math.floor(Math.random() * colors.length)];
+
+        // set initial properties of new circle
+        const circle = {
+            type: "circle",
+            x: x,
+            y: y,
+            radius: 20 + Math.random() * 30,
+            color: randomColor(),
+            dx: Math.random() * 5,
+            dy: Math.random() * 5,
+        };
+
+        // set initial properties of new square
+        const square = {
+            type: "square",
+            x: x,
+            y: y,
+            size: 30 + Math.random() * 30,
+            color: randomColor(),
+            dx: Math.random() * 5,
+            dy: Math.random() * 5,
+        };
+
+        // set initial properties of new star
+        const star = {
+            type: "star",
+            x: x,
+            y: y,
+            size: 20 + Math.random() * 20,
+            color: randomColor(),
+            dx: Math.random() * 5,
+            dy: Math.random() * 5,
+        };
+
+        shapes.push(circle, square, star);
+    }
+
+    // draw star
+    function drawStar(context, x, y, size, color) {
+        context.fillStyle = color;
+        context.beginPath();
+        for (let i = 0; i < 5; i++) {
+            const angle = (Math.PI / 2.5) * i - Math.PI / 2;
+            context.lineTo(x + size * Math.cos(angle), y + size * Math.sin(angle));
+            const nextAngle = angle + Math.PI / 5;
+            context.lineTo(x + (size / 2) * Math.cos(nextAngle), y + (size / 2) * Math.sin(nextAngle));
+        }
+        context.closePath();
+        context.fill();
+    }
+
+    // animate shapes
+    function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        shapes.forEach((shape) => {
+            // update position
+            shape.x += shape.dx;
+            shape.y += shape.dy;
+
+            // bounce off walls
+            if (shape.x - (shape.radius || shape.size) < 0 || shape.x + (shape.radius || shape.size) > canvas.width) {
+                shape.dx *= -1;
+            }
+            if (shape.y - (shape.radius || shape.size) < 0 || shape.y + (shape.radius || shape.size) > canvas.height) {
+                shape.dy *= -1;
+            }
+
+            // draw shapes
+            context.fillStyle = shape.color;
+
+            if (shape.type === "circle") {
+                context.beginPath();
+                context.arc(shape.x, shape.y, shape.radius, 0, 2 * Math.PI);
+                context.fill();
+
+            } else if (shape.type === "square") {
+                context.fillRect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
+
+            } else if (shape.type === "star") {
+                drawStar(context, shape.x, shape.y, shape.size, shape.color);
+            }
+        });
+        // keep looping the animation
+        requestAnimationFrame(animate); //
+    }
+
+    animate(); // start animation loop
+</script>
+
+</body>
+</html>

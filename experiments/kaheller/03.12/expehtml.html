@@ -9,6 +9,7 @@ body {
     height: 1000vh; /* Make the page scrollable */
     background-color: black;
     font-family: sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .video-container {
@@ -31,14 +32,14 @@ h1, h2, h3 {
     color: white;  
     position: absolute;  
     z-index: 1;
-    text-align: center;
+    text-align: left; /* Align text to the left */
     width: 100%;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 h1 { font-size: 3em; top: 35vh; }
 h2 { font-size: 2.5em; top: 50vh; }
 h3 { font-size: 2em; }
-
 </style>
 </head>
 <body>
@@ -47,93 +48,62 @@ h3 { font-size: 2em; }
     <video id="video" src="https://fhpcloud.fh-potsdam.de/s/yLP9KHWCpCCFGW9/download/MP%24unrise%20to%20Sunset%20Time%20Lapse!%20%5B1080p%5D%20%28online-video-cutter.com%29.mp4" muted playsinline></video>
 </div>
 
+<h1>The Dance of Light</h1>
+<h2>A Story of Sunrise and Sunset</h2>
 
-<h1>Never Gonna Give You Up</h1>
-<h2>Rick Astley</h2>
-
-<h3>We're no strangers to love</h3>
-<h3>You know the rules and so do I</h3>
-<h3>A full commitment's what I'm thinking of</h3>
-<h3>You wouldn't get this from any other guy</h3>
-<h3>I just wanna tell you how I'm feeling</h3>
-<h3>Gotta make you understand</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>We've known each other for so long</h3>
-<h3>Your heart's been aching but you're too shy to say it</h3>
-<h3>Inside we both know what's been going on</h3>
-<h3>We know the game and we're gonna play it</h3>
-<h3>And if you ask me how I'm feeling</h3>
-<h3>Don't tell me you're too blind to see</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give, never gonna give</h3>
-<h3>(Give you up)</h3>
-<h3>(Ooh) Never gonna give, never gonna give</h3>
-<h3>(Give you up)</h3>
-<h3>We've known each other for so long</h3>
-<h3>Your heart's been aching but you're too shy to say it</h3>
-<h3>Inside we both know what's been going on</h3>
-<h3>We know the game and we're gonna play it</h3>
-<h3>I just wanna tell you how I'm feeling</h3>
-<h3>Gotta make you understand</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-<h3>Never gonna say goodbye</h3>
-<h3>Never gonna tell a lie and hurt you</h3>
-<h3>Never gonna give you up</h3>
-<h3>Never gonna let you down</h3>
-<h3>Never gonna run around and desert you</h3>
-<h3>Never gonna make you cry</h3>
-
+<h3>Golden rays paint the sleeping sky</h3>
+<h3>The dawn awakens, whispers rise</h3>
+<h3>Shadows retreat as the light grows bold</h3>
+<h3>A canvas of warmth, a sight to behold</h3>
+<h3>The horizon blushes in soft embrace</h3>
+<h3>Morning unfolds with tender grace</h3>
+<h3>Colors of fire, amber, and gold</h3>
+<h3>Stories of dawn are gently retold</h3>
+<h3>The sun ascends, breaking through clouds</h3>
+<h3>Bathing the world in glowing shrouds</h3>
+<h3>Life begins, the earth is alive</h3>
+<h3>A rhythm of light helps all to survive</h3>
+<h3>At twilight's edge, the sun now fades</h3>
+<h3>A quiet peace, no rush, no haste</h3>
+<h3>Crimson streaks stretch across the west</h3>
+<h3>The day prepares for its final rest</h3>
+<h3>The evening hums a lullaby sweet</h3>
+<h3>Cool air descends, the night we meet</h3>
+<h3>Shadows lengthen, the stars arrive</h3>
+<h3>The world exhales, its glow survives</h3>
 
 <script>
-// adjust video frame along scrolling progress
+// Adjust video frame along scrolling progress
 const video = document.getElementById('video');
 
 document.addEventListener('scroll', () => {
     video.removeAttribute("autoplay");
 
-    // scrolling progress
+    // Calculate scrolling progress
     const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
-
     video.currentTime = video.duration * pct;
 
-    // Move lyrics horizontally based on scroll
+    // Move text horizontally based on scroll
     headers.forEach((header, index) => {
-        const scrollFactor = window.scrollY / 10; // Adjust factor to control speed
-        header.style.transform = `translateX(${scrollFactor}px)`; // Moves text
+        const scrollFactor = window.scrollY / 40; // Adjust speed of movement
+        header.style.transform = `translateX(${scrollFactor - 100}%)`; // Move from left (-100%) to right
     });
 });
 
-// select all h3 elements
+// Select all h3 elements
 const headers = document.querySelectorAll('h3');
-const start = 100;  // start position for first line
-const end = 950;    // end position for last line
+const start = 100;  // Start position for first line
+const end = 950;    // End position for last line
 
-const step = (end - start) / (headers.length - 1); // space between headers
+const step = (end - start) / (headers.length - 1); // Space between headers
 
-// vertically distribute the elements
+// Vertically distribute the elements
 headers.forEach((header, index) => {
     const topPosition = start + (index * step);
-    header.style.top = `${topPosition}vh`; // set top position
+    header.style.top = `${topPosition}vh`; // Set top position
 });
 </script>
 </body>
 </html>
+
+

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Animated Canvas - Christmas Theme</title>
+<style>
+    body { 
+        margin: 0; 
+        padding: 0;
+        overflow: hidden;
+        background-color: #001f3d; /* Dunkelblauer Hintergrund für eine festliche Nacht */
+        font-family: 'Arial', sans-serif;
+    }
+
+    canvas {
+        display: block;
+        position: absolute; /* Canvas absolut positioniert, damit es immer oben bleibt */
+        top: 0;
+        left: 0;
+        z-index: 0; /* Canvas ganz unten */
+    }
+
+    /* Stil für die Headline */
+    h1 {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 48px;
+        text-align: center;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+        z-index: 1; /* Headline über dem Canvas */
+        animation: sparkle 1.5s infinite alternate; /* Animation für ein Funkeln */
+    }
+
+    /* Headline Funkeln Animation */
+    @keyframes sparkle {
+        0% {
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+        }
+        100% {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 255, 255, 1);
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>Merry Christmas and Gudden Ruuutsch</h1>
+
+<canvas></canvas>
+
+<script>
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const objects = []; // Store objects (Zuckerstangen, Weihnachtsmänner, Rentiere, Elfen, Geschenke)
+    const snowflakes = []; // Array für Schneeflocken
+
+    // Funktion für zufällige Pastellfarbe
+    function getRandomPastelColor() {
+        const r = Math.floor(Math.random() * 75) + 180;  // Wert zwischen 180 und 255
+        const g = Math.floor(Math.random() * 75) + 180;
+        const b = Math.floor(Math.random() * 75) + 180;
+        return `rgb(${r},${g},${b})`;
+    }
+
+    // Funktion, um Zuckerstange zu zeichnen
+    function drawCandyCane(x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x + 20, y);  // horizontale Linie
+        context.lineTo(x + 20, y + 80);  // vertikale Linie
+        context.lineWidth = 8;
+        context.strokeStyle = getRandomPastelColor();
+        context.stroke();
+        context.lineWidth = 1;
+    }
+
+    // Funktion, um Weihnachtsmann zu zeichnen
+    function drawSanta(x, y) {
+        // Körper
+        context.fillStyle = 'red';
+        context.fillRect(x - 25, y, 50, 60);
+        
+        // Kopf
+        context.beginPath();
+        context.arc(x, y - 30, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'peachpuff';
+        context.fill();
+
+        // Mütze
+        context.beginPath();
+        context.arc(x, y - 40, 20, Math.PI, 2 * Math.PI);
+        context.fillStyle = 'red';
+        context.fill();
+        
+        // Gesicht
+        context.fillStyle = 'black';
+        context.beginPath();
+        context.arc(x - 7, y - 32, 3, 0, 2 * Math.PI);  // Auge links
+        context.arc(x + 7, y - 32, 3, 0, 2 * Math.PI);  // Auge rechts
+        context.fill();
+    }
+
+    // Funktion, um Rentier zu zeichnen
+    function drawReindeer(x, y) {
+        // Körper
+        context.fillStyle = 'brown';
+        context.beginPath();
+        context.arc(x, y, 30, 0, 2 * Math.PI);  // Rentierkopf
+        context.fill();
+
+        // Hörner
+        context.beginPath();
+        context.moveTo(x - 10, y - 20);
+        context.lineTo(x - 30, y - 50);
+        context.moveTo(x + 10, y - 20);
+        context.lineTo(x + 30, y - 50);
+        context.strokeStyle = 'brown';
+        context.lineWidth = 3;
+        context.stroke();
+        
+        // Nase
+        context.beginPath();
+        context.arc(x, y, 6, 0, Math.PI * 2);
+        context.fillStyle = 'red'; // Rote Nase
+        context.fill();
+    }
+
+    // Funktion, um Elf zu zeichnen
+    function drawElf(x, y) {
+        // Körper
+        context.fillStyle = 'green';
+        context.fillRect(x - 15, y, 30, 40);
+        
+        // Kopf
+        context.beginPath();
+        context.arc(x, y - 15, 12, 0, 2 * Math.PI);
+        context.fillStyle = 'peachpuff';
+        context.fill();
+
+        // Mütze
+        context.beginPath();
+        context.moveTo(x - 12, y - 27);
+        context.lineTo(x + 12, y - 27);
+        context.lineTo(x, y - 40);
+        context.closePath();
+        context.fillStyle = 'red';
+        context.fill();
+    }
+
+    // Funktion, um Geschenk zu zeichnen
+    function drawGift(x, y) {
+        // Geschenkbox
+        context.fillStyle = 'red';
+        context.fillRect(x - 20, y - 20, 40, 40);
+
+        // Geschenkband
+        context.strokeStyle = 'gold';
+        context.lineWidth = 3;
+        context.beginPath();
+        context.moveTo(x - 20, y);
+        context.lineTo(x + 20, y);
+        context.moveTo(x, y - 20);
+        context.lineTo(x, y + 20);
+        context.stroke();
+    }
+
+    // Schneeflocken Klasse
+    class Snowflake {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 4 + 1; // Schneeflocken Größe
+            this.speed = Math.random() * 1 + 0.2; // Geschwindigkeit
+            this.alpha = Math.random() * 0.5 + 0.3; // Transparenz
+        }
+
+        draw() {
+            context.beginPath();
+            context.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+            context.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;  // Weiße Schneeflocken
+            context.fill();
+        }
+
+        update() {
+            this.y += this.speed; // Bewegung nach unten
+            if (this.y > canvas.height) {
+                this.y = -this.size;  // Schneeflocke oben wieder erscheinen lassen
+            }
+        }
+    }
+
+    // Zufällige Schneeflocken erzeugen
+    function generateSnowflakes() {
+        for (let i = 0; i < 100; i++) {
+            snowflakes.push(new Snowflake());
+        }
+    }
+
+    // Click-Event: Neue Zuckerstange, Weihnachtsmann, Rentier, Elf oder Geschenk hinzufügen
+    canvas.addEventListener('click', (event) => {
+        addObject(event.clientX, event.clientY);
+    });
+
+    // Initiale Eigenschaften eines neuen Objekts setzen
+    function addObject(x, y) {
+        const shapes = ['candycane', 'santa', 'reindeer', 'elf', 'gift'];
+        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+
+        const obj = {
+            x: x,
+            y: y,
+            dx: Math.random() * 5, // zufällige horizontale Geschwindigkeit
+            dy: Math.random() * 5, // zufällige vertikale Geschwindigkeit
+            shape: randomShape  // Zufällige Form (Zuckerstange, Weihnachtsmann, Rentier, Elf, Geschenk)
+        };
+        objects.push(obj);
+    }
+
+    // Die Objekte (Zuckerstangen, Weihnachtsmänner, Rentiere, Elfen, Geschenke) animieren
+    function animate() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Schnee animieren
+        snowflakes.forEach(snowflake => {
+            snowflake.update();
+            snowflake.draw();
+        });
+
+        // Animation der Objekte (Zuckerstangen, Weihnachtsmänner, Rentiere, Elfen, Geschenke)
+        objects.forEach((obj) => {
+            // Position aktualisieren
+            obj.x += obj.dx;
+            obj.y += obj.dy;
+
+            // Abprallen von den Wänden und Formänderung
+            if (obj.x < 0 || obj.x > canvas.width) {
+                obj.dx *= -1;
+                changeShape(obj);  // Form ändern, wenn der Rand erreicht wird
+            }
+            if (obj.y < 0 || obj.y > canvas.height) {
+                obj.dy *= -1;
+                changeShape(obj);  // Form ändern, wenn der Rand erreicht wird
+            }
+
+            // Objekt zeichnen
+            if (obj.shape === 'candycane') {
+                drawCandyCane(obj.x, obj.y);
+            } else if (obj.shape === 'santa') {
+                drawSanta(obj.x, obj.y);
+            } else if (obj.shape === 'reindeer') {
+                drawReindeer(obj.x, obj.y);
+            } else if (obj.shape === 'elf') {
+                drawElf(obj.x, obj.y);
+            } else if (obj.shape === 'gift') {
+                drawGift(obj.x, obj.y);
+            }
+        });
+
+        // Weiterhin die Animation laufen lassen
+        requestAnimationFrame(animate);
+    }
+
+    // Form nach Kollision ändern
+    function changeShape(obj) {
+        const shapes = ['candycane', 'santa', 'reindeer', 'elf', 'gift'];
+        obj.shape = shapes[Math.floor(Math.random() * shapes.length)];
+    }
+
+    generateSnowflakes(); // Schneeflocken generieren
+    animate(); // Animation starten
+</script>
+
+</body>
+</html>
