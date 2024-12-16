@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Editable SVG - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+
+svg {
+    width: 100vw;
+    height: 100vh;
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg"></svg>
+
+<script>
+    const svg = document.querySelector('svg');
+
+    let selectedShape = null; // shape being dragged or resized
+    let offsetX, offsetY; // offsets for dragging
+
+    svg.addEventListener('click', (event) => {
+        if (event.target.tagName === 'circle' || event.target.tagName === 'rect' || event.target.tagName === 'polygon') return; // Avoid creating shapes on existing ones
+        createShape(event.clientX, event.clientY);
+    });
+
+    function createShape(x, y) {
+        const shapeType = ['circle', 'rect', 'triangle'][Math.floor(Math.random() * 3)];
+        
+        switch (shapeType) {
+            case 'circle':
+                createCircle(x, y);
+                break;
+            case 'rect':
+                createRectangle(x, y);
+                break;
+            case 'triangle':
+                createTriangle(x, y);
+                break;
+        }
+    }
+
+    function createCircle(x, y) {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', y);
+        circle.setAttribute('r', 10 + Math.random() * 100);
+        circle.setAttribute('fill', getRandomColor());
+        circle.setAttribute('cursor', 'pointer');
+        svg.appendChild(circle);
+
+        addDragBehavior(circle);
+    }
+
+    function createRectangle(x, y) {
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const width = 20 + Math.random() * 150;
+        const height = 20 + Math.random() * 150;
+        rect.setAttribute('x', x - width / 2);
+        rect.setAttribute('y', y - height / 2);
+        rect.setAttribute('width', width);
+        rect.setAttribute('height', height);
+        rect.setAttribute('fill', getRandomColor());
+        rect.setAttribute('cursor', 'pointer');
+        svg.appendChild(rect);
+
+        addDragBehavior(rect);
+    }
+
+    function createTriangle(x, y) {
+        const size = 30 + Math.random() * 120;
+        const points = [
+            `${x},${y - size / 2}`,
+            `${x - size / 2},${y + size / 2}`,
+            `${x + size / 2},${y + size / 2}`
+        ].join(' ');
+        const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        triangle.setAttribute('points', points);
+        triangle.setAttribute('fill', getRandomColor());
+        triangle.setAttribute('cursor', 'pointer');
+        svg.appendChild(triangle);
+
+        addDragBehavior(triangle);
+    }
+
+    function addDragBehavior(shape) {
+        shape.addEventListener('mousedown', (event) => {
+            selectedShape = shape;
+            if (shape.tagName === 'circle') {
+                offsetX = event.clientX - parseFloat(shape.getAttribute('cx'));
+                offsetY = event.clientY - parseFloat(shape.getAttribute('cy'));
+            } else if (shape.tagName === 'rect') {
+                offsetX = event.clientX - parseFloat(shape.getAttribute('x'));
+                offsetY = event.clientY - parseFloat(shape.getAttribute('y'));
+            } else if (shape.tagName === 'polygon') {
+                offsetX = event.clientX;
+                offsetY = event.clientY;
+            }
+        });
+    }
+
+    svg.addEventListener('mousemove', (event) => {
+        if (!selectedShape) return;
+
+        if (selectedShape.tagName === 'circle') {
+            const x = event.clientX - offsetX;
+            const y = event.clientY - offsetY;
+            selectedShape.setAttribute('cx', x);
+            selectedShape.setAttribute('cy', y);
+        } else if (selectedShape.tagName === 'rect') {
+            const x = event.clientX - offsetX;
+            const y = event.clientY - offsetY;
+            selectedShape.setAttribute('x', x);
+            selectedShape.setAttribute('y', y);
+        } else if (selectedShape.tagName === 'polygon') {
+            const dx = event.clientX - offsetX;
+            const dy = event.clientY - offsetY;
+            const points = selectedShape.getAttribute('points').split(' ').map(point => {
+                const [px, py] = point.split(',').map(Number);
+                return `${px + dx},${py + dy}`;
+            }).join(' ');
+            selectedShape.setAttribute('points', points);
+            offsetX = event.clientX;
+            offsetY = event.clientY;
+        }
+    });
+
+    svg.addEventListener('mouseup', () => { selectedShape = null; });
+    svg.addEventListener('mouseleave', () => { selectedShape = null; });
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+</body>
+</html>

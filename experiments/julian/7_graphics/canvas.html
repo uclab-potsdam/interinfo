@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Canvas - Graphics - Interactive Information</title>
+<style>
+body { 
+    margin: 0; padding: 0;
+}
+</style>
+</head>
+<body>
+
+<canvas></canvas>
+
+<script>
+const canvas = document.querySelector('canvas');
+const context = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// click to draw marks
+canvas.addEventListener('click', (event) => {
+    drawCircle(event.clientX, event.clientY);
+});
+
+// draw circle at a given position
+function drawCircle(x, y) {
+    context.beginPath();
+    context.arc(x, y, 10+Math.random()*100, 0, 2 * Math.PI);
+    context.fillStyle = "black"
+    context.fill();
+}
+
+</script>
+</body>
+</html>

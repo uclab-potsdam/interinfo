@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive SVG</title>
+<style>
+
+body { margin: 0; padding: 0; background: teal; } 
+svg { width: 100vw; height: 100vh; cursor: crosshair; }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg"></svg> <!-- SVG container where shapes will be drawn -->
+<script>
+// Reference to the SVG container
+const svg = document.querySelector('svg');
+// Array to store points clicked by the user
+let points = [], previewPath, cursorLine;
+
+// Event listener for 'click' on the SVG
+// When the user clicks on the SVG container, a new point is added, and a circle is drawn at the click location
+svg.addEventListener('click', ({ clientX: x, clientY: y }) => {
+  points.push({ x, y }); // Store the coordinates of the clicked point
+  createSVG('circle', { cx: x, cy: y, r: 2, fill: 'LightGoldenRodYellow' }); // Draw a small circle at the clicked point
+  updatePath(); // Update the preview path showing the lines between points
+  if (points.length >= 5) finalizeShape(); // Finalize shape once 5 points are added
+});
+
+// Event listener for 'mousemove' on the SVG
+// When the mouse moves, a line from the last clicked point to the current mouse position is drawn
+svg.addEventListener('mousemove', ({ clientX: x, clientY: y }) => {
+  if (points.length) { // Only show preview line if points exist
+    const { x: x1, y: y1 } = points.at(-1); // Get the last clicked point
+    cursorLine = cursorLine || createSVG('line', { stroke: 'LightGoldenRodYellow', 'stroke-width': 1 }); // Create a line if not already created
+    setAttrs(cursorLine, { x1, y1, x2: x, y2: y }); // Update the line's coordinates to follow the cursor
+  }
+});
+
+// Function to update or create the path that previews the shape
+function updatePath() {
+  // Create a path string that connects all points clicked by the user
+  const d = points.map((p, i) => `${i ? 'L' : 'M'}${p.x},${p.y}`).join(' ');
+  // Create the path if it doesn't exist, or update the existing one
+  previewPath = previewPath || createSVG('path', { stroke: 'LightGoldenRodYellow', 'stroke-width': 2, fill: 'none' });
+  previewPath.setAttribute('d', d); // Set the path's "d" attribute to the updated coordinates
+}
+
+// Function to finalize the shape when the user has clicked 5 points
+function finalizeShape() {
+  // Create the final shape by connecting all points and closing the path with 'Z'
+  createSVG('path', {
+    d: points.map((p, i) => `${i ? 'L' : 'M'}${p.x},${p.y}`).join(' ') + ' Z',
+    fill: randomColor(), // Fill the shape with a random color
+    stroke: 'LightGoldenRodYellow', // Stroke color for the shape
+    'stroke-width': 2, // Set the stroke width
+  });
+  reset(); // Reset the state for the next shape
+}
+
+// Helper function to create and append an SVG element
+function createSVG(tag, attrs) {
+  const el = document.createElementNS('http://www.w3.org/2000/svg', tag); // Create the SVG element
+  setAttrs(el, attrs); // Set the attributes for the element
+  svg.appendChild(el); // Append the element to the SVG container
+  return el;
+}
+
+// Helper function to set multiple attributes on an SVG element
+function setAttrs(el, attrs) {
+  Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value)); // Loop through all attributes and set them on the element
+}
+
+// Reset the drawing state after a shape is finalized
+function reset() {
+  points = []; // Clear the points array
+  [previewPath, cursorLine].forEach(el => el?.remove()); // Remove the preview path and cursor line from the SVG
+  previewPath = cursorLine = null; // Reset the references
+}
+
+// Generate a random color for the fill of the shape
+function randomColor() {
+  return `hsl(${Math.random() * 360}, 100%, 75%)`; // Return a random color in HSL format
+}
+</script>
+</body>
+</html>
