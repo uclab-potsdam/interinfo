@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Drawing Instrument</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        canvas {
+            border: none;
+            background-color: #fff;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="drawingCanvas" width="800" height="600"></canvas>
+    <button id="refreshButton">Refresh Canvas</button>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        const refreshButton = document.getElementById('refreshButton');
+
+        // Function to draw shapes on the canvas
+        function drawShape(x, y) {
+            const shapeType = Math.floor(Math.random() * 3); // 0 = circle, 1 = square, 2 = triangle
+            const color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            ctx.fillStyle = color;
+
+            switch (shapeType) {
+                case 0: // Circle
+                    ctx.beginPath();
+                    ctx.arc(x, y, 20, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                case 1: // Square
+                    ctx.fillRect(x - 15, y - 15, 30, 30);
+                    break;
+                case 2: // Triangle
+                    ctx.beginPath();
+                    ctx.moveTo(x, y - 20);
+                    ctx.lineTo(x - 20, y + 20);
+                    ctx.lineTo(x + 20, y + 20);
+                    ctx.closePath();
+                    ctx.fill();
+                    break;
+            }
+        }
+
+        // Event listener for drawing shapes on mouse move
+        canvas.addEventListener('mousemove', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            drawShape(x, y);
+        });
+
+        // Function to refresh (clear) the canvas
+        function refreshCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+        }
+
+        // Event listener for the refresh button
+        refreshButton.addEventListener('click', refreshCanvas);
+    </script>
+</body>
+</html>
