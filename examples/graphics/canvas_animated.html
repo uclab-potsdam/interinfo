@@ -1,73 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Animated Canvas - Graphics - Interactive Information</title>
-<style>
-body { 
-    margin: 0; padding: 0;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Canvas - Graphics - Interactive Information</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-
 <canvas></canvas>
 
 <script>
     const canvas = document.querySelector('canvas');
     const context = canvas.getContext('2d');
 
+    // Set canvas to full window size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const circles = []; // store circles for animation
+    const circles = []; // Array to store circles for animation
 
-    // click to add circle
+    // Add a new circle when the user clicks on the canvas
     canvas.addEventListener('click', (event) => {
-        addCircle(event.clientX, event.clientY);        
+        addCircle(event.clientX, event.clientY);
     });
 
-    // set initial properties of new circle
+    // Function to create and add a new circle
     function addCircle(x, y) {
         const circle = {
             x: x,
             y: y,
             radius: 20 + Math.random() * 30,
-            color: "black",
-            dx: Math.random() * 5, // random horizontal speed
-            dy: Math.random() * 5, // random vertical speed
+            color: `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`, // Random color
+            dx: (Math.random() - 0.5) * 6, // Random horizontal speed
+            dy: (Math.random() - 0.5) * 6, // Random vertical speed
         };
         circles.push(circle);
     }
 
-    // animate the circles
+    // Function to animate the circles
     function animate() {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         circles.forEach((circle) => {
-            // update position
+            // Update circle position
             circle.x += circle.dx;
             circle.y += circle.dy;
 
-            // bounce off walls
+            // Bounce off canvas edges
             if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
-                circle.dx *= -1;
+                circle.dx *= -1; // Reverse horizontal direction
             }
             if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
-                circle.dy *= -1;
+                circle.dy *= -1; // Reverse vertical direction
             }
 
-            // draw the circle
+            // Draw the circle
             context.beginPath();
-            context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+            context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
             context.fillStyle = circle.color;
             context.fill();
         });
-        // keep looping the animation
-        requestAnimationFrame(animate); // 
+
+        // Request the next frame
+        requestAnimationFrame(animate);
     }
 
-    animate(); // start animation loop
+    animate(); // Start the animation loop
 </script>
 </body>
 </html>
