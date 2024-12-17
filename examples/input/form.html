@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Form - Input - Interactive Information</title>
+<style>
+body { 
+    font-family: sans-serif;
+    max-width: 20em;
+    margin: auto;
+    font-size: calc( 1vw + 1vh);
+    background-color: #ECECEC;
+}
+
+form > label { display: block; text-align: right; vertical-align: middle;}
+form > input, form > select { height: 1.75em; }
+legend { text-align: right; }
+
+main {
+    top: 5em;
+    position: absolute;
+    xbackground-color: white;
+    padding: 2em;
+}
+
+h1 { margin: 0 0 1em 0; text-align: center;}
+
+form {    
+    width: 20em;
+    display: grid;
+    gap: 1em .5em;
+    grid-template-columns: .35fr .65fr;
+    align-items: center;
+}
+
+
+
+input:last-of-type {
+    grid-column: 2/3;
+    font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+
+<main>
+<h1>Join us!</h1>
+
+<form>
+<!-- <form action="target" method="post"> -->
+
+<label for="name">Name</label>
+<input type="text" name="name" id="name" placeholder="enter your name here">
+
+<label for="email">Email</label>
+<input type="email" name="email" id="email" >
+
+<label for="phone">Phone</label>
+<input type="tel" name="phone" id="phone" >
+
+<label for="date">Birthdate</label>
+<input type="date" id="date" name="date">
+
+<label for="color">Color</label>
+<input type="color" id="color" name="color">
+
+<label for="mood">Mood</label>
+<div>☹️ <input type="range" id="mood" name="mood" min="0" max="10"> 🥳</div>
+
+<label>Drink</label>
+<fieldset>
+    <label for="coffee">☕️</label> <input type="radio" id="coffee" name="drink" value="coffee">  
+    <label for="tea">🍵</label> <input type="radio" id="tea" name="drink" value="tea">  
+    <label for="none">❌</label> <input type="radio" id="none" name="drink" value="none" checked>
+</fieldset>
+
+<label for="pet">Pet</label>
+
+<select name="pet" id="pet">
+  <option value="">Do you have pets?</option>
+  <option value="dog">Dog</option>
+  <option value="cat">Cat</option>
+  <option value="hamster">Hamster</option>
+  <option value="parrot">Parrot</option>
+  <option value="spider">Spider</option>
+  <option value="goldfish">Goldfish</option>
+</select>
+
+<label for="newsletter">Newsletter</label>
+<input type="checkbox" id="newsletter" name="newsletter">
+
+<label for="comment">Comment</label>
+<textarea id="comment" name="comment"></textarea>
+
+<input type="reset" value="Reset">
+<input type="submit" value="Sign up!">
+
+</form>
+
+</main>
+
+<script>
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    // do not perform submission to server
+    event.preventDefault();
+
+    // get data from all input elements
+    const data = Object.fromEntries(new FormData(this));
+
+    console.log(data);
+});
+
+</script>
+</body>
+</html>
