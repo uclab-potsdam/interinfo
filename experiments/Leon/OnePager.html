@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeitleiste mit Scrollbaren Inhalten</title>
+    <style>
+        /* Basis-Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+
+        /* Container für die Zeitleiste und den Inhalt */
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1400px;
+            padding: 20px;
+        }
+
+        /* Styling für die Zeitleiste */
+        .timeline {
+            width: 30%;
+            position: relative;
+            padding-right: 40px;
+            border-right: 6px solid red;
+        }
+
+        .timeline h2 {
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .timeline .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            cursor: pointer;
+        }
+
+        .timeline .date {
+            font-size: 1.5em;
+            color: #333;
+            margin-right: 20px;
+            width: 80px;
+            text-align: right;
+        }
+
+        .timeline .date:hover {
+            color: red;
+        }
+
+        /* Quadrate rechts von den Jahreszahlen */
+        .timeline .square {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            border: 2px solid #999;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .timeline .square:hover {
+            transform: scale(1.05);
+            border-color: red;
+        }
+
+        /* Styling für die großen Inhaltstafeln */
+        .content {
+            width: 70%;
+            padding-left: 40px;
+        }
+
+        .content-panel {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 1.2em;
+
+            /* Maximale Höhe und vertikales Scrollen für große Inhalte */
+            max-height: 500px; /* z. B. auf 500px beschränkt */
+            overflow-y: auto;  /* aktiviert vertikales Scrollen */
+        }
+
+        .content-panel.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Zeitleiste -->
+        <div class="timeline">
+            <h2>Zeitleiste</h2>
+            <div class="timeline-item" onclick="showContent(1980)">
+                <div class="date">1980</div>
+                <div class="square">1980</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(1990)">
+                <div class="date">1990</div>
+                <div class="square">1990</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(2000)">
+                <div class="date">2000</div>
+                <div class="square">2000</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(2010)">
+                <div class="date">2010</div>
+                <div class="square">2010</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(2020)">
+                <div class="date">2020</div>
+                <div class="square">2020</div>
+            </div>
+        </div>
+
+        <!-- Inhalte für jedes Jahrzehnt -->
+        <div class="content">
+            <div id="content-1980" class="content-panel">
+                <h3>1980</h3>
+                <p>Informationen und Ereignisse der 1980er Jahre.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat quam vel orci ultricies, a laoreet urna vehicula. Nulla facilisi. Mauris vel justo dolor. Vivamus venenatis ultricies urna, a interdum dolor volutpat ut. Donec auctor ac odio id ullamcorper. Curabitur sit amet lectus vitae magna consequat dignissim.</p>
+                <p>Fusce at ipsum nec nisi vestibulum vehicula. Phasellus varius malesuada libero, eget ultricies nisi feugiat sit amet. Nulla facilisi. Duis a magna ac ligula dictum interdum. Integer efficitur risus nec metus ullamcorper vestibulum. Nullam suscipit ante in turpis ultrices faucibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat quam vel orci ultricies, a laoreet urna vehicula. Nulla facilisi. Mauris vel justo dolor. Vivamus venenatis ultricies urna, a interdum dolor volutpat ut. Donec auctor ac odio id ullamcorper. Curabitur sit amet lectus vitae magna consequat dignissim.</p>
+                <p>Fusce at ipsum nec nisi vestibulum vehicula. Phasellus varius malesuada libero, eget ultricies nisi feugiat sit amet. Nulla facilisi. Duis a magna ac ligula dictum interdum. Integer efficitur risus nec metus ullamcorper vestibulum. Nullam suscipit ante in turpis ultrices faucibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat quam vel orci ultricies, a laoreet urna vehicula. Nulla facilisi. Mauris vel justo dolor. Vivamus venenatis ultricies urna, a interdum dolor volutpat ut. Donec auctor ac odio id ullamcorper. Curabitur sit amet lectus vitae magna consequat dignissim.</p>
+                <p>Fusce at ipsum nec nisi vestibulum vehicula. Phasellus varius malesuada libero, eget ultricies nisi feugiat sit amet. Nulla facilisi. Duis a magna ac ligula dictum interdum. Integer efficitur risus nec metus ullamcorper vestibulum. Nullam suscipit ante in turpis ultrices faucibus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat quam vel orci ultricies, a laoreet urna vehicula. Nulla facilisi. Mauris vel justo dolor. Vivamus venenatis ultricies urna, a interdum dolor volutpat ut. Donec auctor ac odio id ullamcorper. Curabitur sit amet lectus vitae magna consequat dignissim.</p>
+                <p>Fusce at ipsum nec nisi vestibulum vehicula. Phasellus varius malesuada libero, eget ultricies nisi feugiat sit amet. Nulla facilisi. Duis a magna ac ligula dictum interdum. Integer efficitur risus nec metus ullamcorper vestibulum. Nullam suscipit ante in turpis ultrices faucibus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat quam vel orci ultricies, a laoreet urna vehicula. Nulla facilisi. Mauris vel justo dolor. Vivamus venenatis ultricies urna, a interdum dolor volutpat ut. Donec auctor ac odio id ullamcorper. Curabitur sit amet lectus vitae magna consequat dignissim.</p>
+                <p>Fusce at ipsum nec nisi vestibulum vehicula. Phasellus varius malesuada libero, eget ultricies nisi feugiat sit amet. Nulla facilisi. Duis a magna ac ligula dictum interdum. Integer efficitur risus nec metus ullamcorper vestibulum. Nullam suscipit ante in turpis ultrices faucibus.</p>
+            </div>
+            <div id="content-1990" class="content-panel">
+                <h3>1990</h3>
+                <p>Informationen und Ereignisse der 1990er Jahre.</p>
+                <p>Beispieltext für 1990: Aenean tincidunt nisl ut quam aliquet, a cursus ligula vestibulum. Cras vehicula mauris vel massa gravida, eget sagittis felis lacinia.</p>
+            </div>
+            <div id="content-2000" class="content-panel">
+                <h3>2000</h3>
+                <p>Informationen und Ereignisse der 2000er Jahre.</p>
+                <p>Beispieltext für 2000: Proin at libero eu purus vehicula faucibus. In tempor risus nec lacus laoreet, ac pretium mi tincidunt.</p>
+            </div>
+            <div id="content-2010" class="content-panel">
+                <h3>2010</h3>
+                <p>Informationen und Ereignisse der 2010er Jahre.</p>
+                <p>Beispieltext für 2010: Nulla facilisi. Phasellus tincidunt dolor at dolor cursus, in mollis eros aliquet.</p>
+            </div>
+            <div id="content-2020" class="content-panel">
+                <h3>2020</h3>
+                <p>Informationen und Ereignisse der 2020er Jahre.</p>
+                <p>Beispieltext für 2020: Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funktion zum Anzeigen der Inhalte bei Klick auf ein Quadrat
+        function showContent(year) {
+            // Alle Inhalte ausblenden
+            const panels = document.querySelectorAll('.content-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // Das ausgewählte Jahr anzeigen
+            const selectedPanel = document.getElementById('content-' + year);
+            selectedPanel.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

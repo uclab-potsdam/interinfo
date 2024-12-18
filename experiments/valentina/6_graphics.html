@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive SVG Path Creator</title>
+<style>
+body { 
+    margin: 0; 
+    padding: 0;
+    font-family: Lucida Console;
+    display: flex; /* Make the body a flex container */
+    height: 100vh;
+}
+
+header {
+    background-color: #003975;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    font-size: 2.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin: 10px 0 0;
+}
+
+.sidebar {
+    width: 150px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.color-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #ccc;
+}
+
+.color-button.selected {
+    border: 4px solid black;
+}
+
+.reset-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #003975;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.reset-button:hover {
+    background-color: #002144;
+}
+
+.main {
+    flex: 1; /* Take remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+svg {
+    flex: 1;
+    width: 100%; /* Ensure full width */
+    height: 100%; /* Ensure full height */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
+
+circle {
+    fill: #007BFF;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="color-button" style="background-color: rgba(0, 123, 255, 0.5);" data-color="rgba(0, 123, 255, 0.5)"></div>
+    <div class="color-button" style="background-color: rgba(255, 0, 0, 0.5);" data-color="rgba(255, 0, 0, 0.5)"></div>
+    <div class="color-button" style="background-color: rgba(0, 255, 0, 0.5);" data-color="rgba(0, 255, 0, 0.5)"></div>
+    <div class="color-button" style="background-color: rgba(255, 255, 0, 0.5);" data-color="rgba(255, 255, 0, 0.5)"></div>
+    <div class="color-button" style="background-color: rgba(128, 0, 128, 0.5);" data-color="rgba(128, 0, 128, 0.5)"></div>
+    <button class="reset-button">Reset</button>
+</div>
+
+<div class="main">
+    <header>
+        Interactive SVG Path Creator
+        <p>Click on the canvas to draw shapes. Use the colors on the left to choose your stroke and fill color.</p>
+    </header>
+    <svg xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<script>
+    const svg = document.querySelector('svg');
+    const colorButtons = document.querySelectorAll('.color-button');
+    const resetButton = document.querySelector('.reset-button');
+    let points = [];
+    let currentPath = null;
+    const pointRadius = 5;
+    let firstPointElement = null;
+    let currentColor = 'rgba(0, 123, 255, 0.5)'; // Default color
+
+    // Add event listener to color buttons
+    colorButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove "selected" class from all buttons
+            colorButtons.forEach(btn => btn.classList.remove('selected'));
+            // Add "selected" class to the clicked button
+            button.classList.add('selected');
+            // Update current color
+            currentColor = button.getAttribute('data-color');
+        });
+    });
+
+    // Function to create a new path
+    function createPath() {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', ''); // Path data
+        path.setAttribute('stroke', currentColor); // Stroke is the current color
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('fill', 'none'); // No fill initially
+        svg.appendChild(path);
+        return path;
+    }
+
+    // Add click event listener to draw points and paths
+    svg.addEventListener('click', (event) => {
+        // Ignore clicks on the first point to handle its click separately
+        if (event.target.tagName === 'circle') return;
+
+        // Get the bounding box of the SVG element
+        const rect = svg.getBoundingClientRect();
+        const x = event.clientX - rect.left; // Adjust X coordinate
+        const y = event.clientY - rect.top;  // Adjust Y coordinate
+
+        // For the first click, add a circle and start the path
+        if (points.length === 0) {
+            firstPointElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            firstPointElement.setAttribute('cx', x);
+            firstPointElement.setAttribute('cy', y);
+            firstPointElement.setAttribute('r', pointRadius);
+            svg.appendChild(firstPointElement);
+
+            // Add a click event listener to the first point
+            firstPointElement.addEventListener('click', closePath);
+        }
+
+        // Add the point to the points array
+        points.push({ x, y });
+
+        // Draw or update the path
+        if (!currentPath) {
+            currentPath = createPath();
+        }
+        updatePath();
+    });
+
+    // Function to close the path
+    function closePath() {
+        if (!currentPath || points.length < 2) return;
+
+        // Explicitly connect back to the first point
+        const firstX = points[0].x;
+        const firstY = points[0].y;
+        const d = currentPath.getAttribute('d') + ` L${firstX},${firstY} Z`;
+        currentPath.setAttribute('d', d);
+
+        // Add the selected fill color when the path is closed
+        currentPath.setAttribute('fill', currentColor);
+        currentPath.setAttribute('stroke', currentColor); // Stroke matches fill color
+
+        // Reset for the next path
+        points = [];
+        currentPath = null;
+        firstPointElement = null;
+    }
+
+    // Function to update the path's "d" attribute
+    function updatePath() {
+        if (points.length === 0) return;
+        const d = points.map((point, index) => 
+            index === 0 
+                ? `M${point.x},${point.y}` // Move to the first point
+                : `L${point.x},${point.y}` // Draw line to subsequent points
+        ).join(' ');
+        currentPath.setAttribute('d', d);
+    }
+
+    // Reset button event listener
+    resetButton.addEventListener('click', () => {
+        // Clear all elements in the SVG
+        svg.innerHTML = '';
+        // Reset variables
+        points = [];
+        currentPath = null;
+        firstPointElement = null;
+    });
+</script>
+
+</body>
+</html>

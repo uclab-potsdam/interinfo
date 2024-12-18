@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Canvas</title>
+<style>
+body {
+    margin: 0; 
+    padding: 0;
+    overflow: hidden; /* Verhindert Scrollbars */
+}
+canvas {
+    display: block; /* Entfernt unerwünschte Ränder */
+}
+.controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border:none;
+    color: grey;
+    border-radius: 15px;
+}
+
+button.active {
+    background-color: #007BFF;
+    color: white;
+    border-color: #0056b3;
+}
+</style>
+</head>
+<body>
+
+<div class="controls">
+    <button id="normalCircles" class="active">Normale Bunte Kreise</button>
+    <button id="rippleCircles">Ripple-Effekt Kreise</button>
+</div>
+
+<canvas></canvas>
+
+<script>
+const canvas = document.querySelector('canvas');
+const context = canvas.getContext('2d');
+let currentMode = 'normal'; // Default mode
+
+// Set canvas dimensions
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Generate random color
+function getRandomColor() {
+    return `hsl(${Math.random() * 360}, 100%, 50%)`;
+}
+
+// Generate random size
+function getRandomSize() {
+    return 10 + Math.random() * 50; // Size between 10 and 60
+}
+
+// Click to draw circles based on the current mode
+canvas.addEventListener('click', (event) => {
+    if (currentMode === 'normal') {
+        drawCircle(event.clientX, event.clientY);
+    } else if (currentMode === 'ripple') {
+        drawCircle(event.clientX, event.clientY);
+        createRippleEffect(event.clientX, event.clientY);
+    }
+});
+
+// Draw a circle at a given position
+function drawCircle(x, y) {
+    const size = getRandomSize();
+    context.beginPath();
+    context.arc(x, y, size, 0, 2 * Math.PI);
+    context.fillStyle = getRandomColor();
+    context.fill();
+}
+
+// Create ripple effect with smaller circles
+function createRippleEffect(x, y) {
+    const rippleCount = 5;
+    for (let i = 0; i < rippleCount; i++) {
+        setTimeout(() => {
+            context.beginPath();
+            context.arc(x, y, getRandomSize() * (i + 1), 0, 2 * Math.PI);
+            context.strokeStyle = getRandomColor();
+            context.lineWidth = 2;
+            context.stroke();
+        }, i * 100); // Ripple delay
+    }
+}
+
+// Switch between modes using buttons
+const normalButton = document.getElementById('normalCircles');
+const rippleButton = document.getElementById('rippleCircles');
+
+normalButton.addEventListener('click', () => {
+    currentMode = 'normal';
+    updateActiveButton(normalButton);
+});
+
+rippleButton.addEventListener('click', () => {
+    currentMode = 'ripple';
+    updateActiveButton(rippleButton);
+});
+
+// Update the active button's style
+function updateActiveButton(activeButton) {
+    document.querySelectorAll('button').forEach(button => {
+        button.classList.remove('active');
+    });
+    activeButton.classList.add('active');
+}
+
+// Resize canvas dynamically
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>

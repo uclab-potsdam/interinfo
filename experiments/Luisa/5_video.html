@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumping Dot Video</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .dot {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            border-radius: 50%;
+            position: absolute;
+            animation: jump 2s infinite ease-in-out;
+            cursor: pointer;
+        }
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-50px);
+            }
+        }
+        .video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .video-container iframe {
+            width: 80%;
+            height: 80%;
+            border: none;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dot"></div>
+
+    <div class="video-container">
+        <button class="close-btn">Close</button>
+        <iframe src="https://www.youtube.com/embed/KCovIdUjK2k?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        const dot = document.querySelector('.dot');
+        const videoContainer = document.querySelector('.video-container');
+        const closeButton = document.querySelector('.close-btn');
+
+        dot.addEventListener('click', () => {
+            videoContainer.style.display = 'flex';
+        });
+
+        closeButton.addEventListener('click', () => {
+            videoContainer.style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>

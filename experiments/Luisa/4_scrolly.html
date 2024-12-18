@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollytelling Nature</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .scrollytelling-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .scrollytelling-section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .scrollytelling-section.visible h2 {
+            opacity: 1;
+        }
+        .scrollytelling-section:nth-child(1) {
+            background-color: #d4edda;
+        }
+        .scrollytelling-section:nth-child(2) {
+            background-color: #cce5ff;
+        }
+        .scrollytelling-section:nth-child(3) {
+            background-color: #f8d7da;
+        }
+        .scrollytelling-section:nth-child(4) {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Naturefacts</h1>
+    </header>
+
+    <div id="section1" class="scrollytelling-section">
+        <h2>Die Natur ist unser Zuhause.</h2>
+    </div>
+
+    <div id="section2" class="scrollytelling-section">
+        <h2>Wälder reinigen die Luft und speichern CO2.</h2>
+    </div>
+
+    <div id="section3" class="scrollytelling-section">
+        <h2>Ozeane beherbergen die größte Artenvielfalt der Erde.</h2>
+    </div>
+
+    <div id="section4" class="scrollytelling-section">
+        <h2>Wir müssen nachhaltiger mit Ressourcen umgehen.</h2>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.scrollytelling-section');
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    section.querySelector('h2').style.opacity = 1;
+                } else {
+                    section.querySelector('h2').style.opacity = 0;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
