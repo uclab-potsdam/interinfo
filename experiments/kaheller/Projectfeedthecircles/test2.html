@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bouncing Circles with Black Dot</title>
+    
+    <!-- Google Fonts link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jersey+20&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: white; /* Initial background color */
+            font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font globally */
+        }
+
+        canvas {
+            display: block;
+            background-color: white; /* Initial canvas background */
+        }
+
+        /* Styling for the headline */
+        h1 {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jersey 20', sans-serif; /* Apply Jersey 20 font to the headline */
+            font-size: 48px;
+            color: black;
+            margin: 0;
+            z-index: 10;
+        }
+
+        #info-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            color: white;
+            padding: 10px 20px; /* Padding inside the box */
+            font-size: 24px;
+            border-radius: 10px; /* Rounded corners */
+            z-index: 10;
+        }
+
+        /* Counter box for the colors eaten */
+        #counter {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            color: white;
+            padding: 15px 30px; /* Reduced padding for a smaller box */
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: auto;
+            min-width: 350px; /* Ensures a minimum width */
+        }
+
+        
+        .color-triangle {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        /* Styling for the count number */
+        .color-count {
+            font-size: 20px;
+            margin-right: 20px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Headline -->
+    <h1>FEED THE CIRCLE</h1>
+
+    <!-- Counter Box -->
+    <div id="counter"></div>
+
+    <div id="info-box">Collect them all and learn something fun about canvas!</div>
+
+    <canvas></canvas>
+
+    <script>
+        const canvas = document.querySelector('canvas');
+        const context = canvas.getContext('2d');
+        const counterBox = document.getElementById('counter');
+
+        // Set canvas size
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+
+        const circles = []; 
+        const colorCount = {}; 
+
+        
+        const circleColors = [
+            "#6fffe9", "#5bc0be", "#3a506b", "#1c2541", "#533747" // New color palette
+        ];
+
+        // Initialize the color count for each color to 0
+        circleColors.forEach(color => {
+            colorCount[color] = 0;
+        });
+
+        // Initialize the counter box with triangles and count
+        function initializeCounter() {
+            counterBox.innerHTML = ''; // Clear counter box
+            
+            circleColors.forEach(color => {
+                // Create the triangle
+                const triangle = document.createElement('div');
+                triangle.classList.add('color-triangle');
+                triangle.style.borderBottom = `20px solid ${color}`;
+
+                // Create the count
+                const countText = document.createElement('span');
+                countText.classList.add('color-count');
+                countText.textContent = '0';  // Initial count starts at 0
+
+                // Add to the counter box
+                const colorEntry = document.createElement('div');
+                colorEntry.style.display = 'flex';
+                colorEntry.style.alignItems = 'center';
+                colorEntry.appendChild(triangle);
+                colorEntry.appendChild(countText);
+                counterBox.appendChild(colorEntry);
+            });
+        }
+
+        // Add a new colored circle on click
+        canvas.addEventListener('click', (event) => {
+            addCircle(event.clientX, event.clientY);
+        });
+
+        function addCircle(x, y) {
+            const color = randomColor();
+            circles.push({
+                x: x,
+                y: y,
+                radius: 20 + Math.random() * 20,
+                color: color,
+                dx: (Math.random() - 0.5) * 3,
+                dy: (Math.random() - 0.5) * 3
+            });
+        }
+
+        function randomColor() {
+            return circleColors[Math.floor(Math.random() * circleColors.length)];
+        }
+
+        function circlesCollide(c1, c2) {
+            const distance = Math.hypot(c1.x - c2.x, c1.y - c2.y);
+            return distance < c1.radius + c2.radius;
+        }
+
+        // Resolve collision with velocity adjustment
+        function resolveCollision(c1, c2) {
+            const dx = c1.x - c2.x;
+            const dy = c1.y - c2.y;
+            const distance = Math.hypot(dx, dy);
+
+            if (distance === 0) return; // Avoid division by zero
+
+            // Normalize the collision vector
+            const nx = dx / distance;
+            const ny = dy / distance;
+
+            // Relative velocity
+            const vx = c1.dx - c2.dx;
+            const vy = c1.dy - c2.dy;
+
+            // Velocity along the collision normal
+            const dotProduct = vx * nx + vy * ny;
+
+            if (dotProduct > 0) return; // Prevent double resolution
+
+            // Apply velocity reflection
+            const impulse = (2 * dotProduct) / (1 + 1); // Assuming equal mass
+
+            c1.dx -= impulse * nx;
+            c1.dy -= impulse * ny;
+            c2.dx += impulse * nx;
+            c2.dy += impulse * ny;
+
+            // Push circles apart to avoid overlap
+            const overlap = c1.radius + c2.radius - distance;
+            const correction = overlap / 2;
+
+            c1.x += correction * nx;
+            c1.y += correction * ny;
+            c2.x -= correction * nx;
+            c2.y -= correction * ny;
+        }
+
+        // Remove circles when the black dot collides with them
+        function checkBlackDotCollisions() {
+            for (let i = circles.length - 1; i >= 0; i--) {
+                if (circlesCollide(blackDot, circles[i])) {
+                    const removedColor = circles[i].color; // Capture the color
+                    circles.splice(i, 1); // Remove the circle
+                    colorCount[removedColor]++; // Increase the count for that color
+                    updateCounter(); // Update the counter display
+                    updateBackgroundColor(removedColor); // Change background color to the color of the eaten circle
+                }
+            }
+        }
+
+        // Update counter display
+        function updateCounter() {
+            const colorEntries = counterBox.children;
+            circleColors.forEach((color, index) => {
+                const count = colorCount[color];
+                const countText = colorEntries[index].children[1]; // Get the count span
+                countText.textContent = count; // Update the count text
+            });
+        }
+
+        // Update canvas background color
+        function updateBackgroundColor(color) {
+            canvas.style.backgroundColor = color;
+        }
+
+        // Independent black dot
+        const blackDot = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 15,
+            color: "black",
+            dx: (Math.random() - 0.5) * 4,
+            dy: (Math.random() - 0.5) * 4
+        };
+
+        function moveCircles() {
+            circles.forEach((circle, index) => {
+                circle.x += circle.dx;
+                circle.y += circle.dy;
+
+                // Bounce off walls
+                if (circle.x - circle.radius < 0 || circle.x + circle.radius > canvas.width) {
+                    circle.dx *= -1;
+                }
+                if (circle.y - circle.radius < 0 || circle.y + circle.radius > canvas.height) {
+                    circle.dy *= -1;
+                }
+
+                // Check for collisions with other circles
+                for (let j = index + 1; j < circles.length; j++) {
+                    if (circlesCollide(circle, circles[j])) {
+                        resolveCollision(circle, circles[j]);
+                    }
+                }
+            });
+        }
+
+        function moveBlackDot() {
+            blackDot.x += blackDot.dx;
+            blackDot.y += blackDot.dy;
+
+            if (blackDot.x - blackDot.radius < 0 || blackDot.x + blackDot.radius > canvas.width) {
+                blackDot.dx *= -1;
+            }
+            if (blackDot.y - blackDot.radius < 0 || blackDot.y + blackDot.radius > canvas.height) {
+                blackDot.dy *= -1;
+            }
+        }
+
+        function animate() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Move and check black dot
+            moveBlackDot();
+            checkBlackDotCollisions();
+
+            // Move colored circles
+            moveCircles();
+
+            // Draw black dot
+            context.beginPath();
+            context.arc(blackDot.x, blackDot.y, blackDot.radius, 0, Math.PI * 2);
+            context.fillStyle = blackDot.color;
+            context.fill();
+
+            // Draw colored circles
+            circles.forEach(circle => {
+                context.beginPath();
+                context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+                context.fillStyle = circle.color;
+                context.fill();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize counter and start animation
+        initializeCounter();
+        animate();
+    </script>
+</body>
+</html>
+
+
+
+
