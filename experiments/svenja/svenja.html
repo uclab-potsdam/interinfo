@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popover Guide</title>
+    <style>
+        /* Basic styles for layout and popover elements */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        section {
+            padding: 20px;
+        }
+        .popover {
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: none;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .popover-trigger:hover + .popover,
+        .popover-trigger:focus + .popover {
+            display: block;
+        }
+        /* Add more styles as needed */
+
+    body {
+        font-family: 'Playfair Display', serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f3f0;
+        color: #3e3e3e;
+    }
+    section {
+        padding: 20px;
+        border-bottom: 1px solid #ebdcd3;
+    }
+    h1, h2 {
+        color: #3e3e3e;
+    }
+    .popover {
+        background-color: #fff7f2;
+        border: 1px solid #ebdcd3;
+        padding: 10px;
+        display: none;
+        z-index: 10;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    .popover-trigger {
+        background-color: #e2c9c2;
+        color: #3e3e3e;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .popover-trigger:hover {
+        background-color: #d1b0a8;
+    }
+    pre, code {
+        background-color: #fff7f2;
+        padding: 10px;
+        border-radius: 5px;
+    }
+</style>
+
+    </style>
+</head>
+<body>
+    <!-- Einleitung -->
+    <section id="introduction">
+        <h1>Was ist ein Popover?</h1>
+        <p>Ein Popover ist ein kleines Overlay, das zusätzliche Informationen oder Interaktionen anzeigt.</p>
+    </section>
+
+    <!-- Bestandteile -->
+    <section id="components">
+        <h2>Bestandteile eines Popover</h2>
+        <p>Trigger, Inhalt, und Positionierung.</p>
+        <button class="popover-trigger">Zeige Popover</button>
+        <div class="popover">
+            <p>Das ist der Inhalt eines Popovers!</p>
+        </div>
+    </section>
+
+    <!-- Verwendungsszenarien -->
+    <section id="usage">
+        <h2>Verwendungsszenarien</h2>
+        <p>Tooltips, Formulare, Benachrichtigungen.</p>
+        <button class="popover-trigger">Formular Popover</button>
+        <div class="popover">
+            <form>
+                <label for="email">E-Mail:</label>
+                <input type="email" id="email" name="email">
+                <button type="submit">Absenden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Interaktive Demo -->
+    <section id="demo">
+        <h2>Interaktive Demo</h2>
+        <p>Klicken Sie auf die Buttons, um verschiedene Popovers zu sehen.</p>
+        <button class="popover-trigger">Tooltip Beispiel</button>
+        <div class="popover">
+            <p>Hier ist ein Tooltip!</p>
+        </div>
+    </section>
+
+    <!-- Codebeispiele -->
+    <section id="code-examples">
+        <h2>Codebeispiele</h2>
+        <pre>
+            <code>
+                &lt;button class="popover-trigger"&gt;Zeige Popover&lt;/button&gt;
+                &lt;div class="popover"&gt;
+                    &lt;p&gt;Das ist der Inhalt eines Popovers!&lt;/p&gt;
+                &lt;/div&gt;
+            </code>
+        </pre>
+    </section>
+
+    <!-- Best Practices -->
+    <section id="best-practices">
+        <h2>Best Practices</h2>
+        <p>Popovers sollten kurz und prägnant sein, nicht überladen und zugänglich für alle Benutzer.</p>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz">
+        <h2>Quiz</h2>
+        <p>Beantworten Sie Fragen zu Popovers, um Ihr Wissen zu testen!</p>
+        <!-- Quiz-Elemente hier hinzufügen -->
+    </section>
+
+    <script>
+        // Optional: JavaScript für interaktive Elemente hinzufügen
+    </script>
+</body>
+</html>
