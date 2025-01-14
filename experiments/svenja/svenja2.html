@@ -12,6 +12,11 @@
             background-color: #f7f3f0;
             color: #3e3e3e;
             scroll-behavior: smooth;
+            font-size: calc( 1vw + 1vh );
+        }
+
+        button {
+            font-size: 1em;
         }
 
         nav {
@@ -112,10 +117,33 @@
             border-radius: 8px;
             display: block;
         }
+
+.tooltip-trigger {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip-content {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.tooltip-trigger:hover .tooltip-content {
+    display: block;
+}
     </style>
 </head>
 <body>
-
+    
 <nav>
     <ul>
         <li><a href="#a">Popover</a></li>
@@ -124,6 +152,7 @@
         <li><a href="#d">Demo</a></li>
         <li><a href="#e">Code</a></li>
         <li><a href="#f">Practice</a></li>
+        <li><a href="#g">Responsive Design</a></li>
     </ul>
 </nav>
 
@@ -178,6 +207,11 @@
 <section id="f">
     <h2>Best Practices</h2>
     <p>Popovers sollten kurz und prägnant sein, nicht überladen und zugänglich für alle Benutzer.</p>
+</section>
+
+<section id="g">
+ <h2>  <p>Was ist <span class="tooltip-trigger">Responsive Design<span class="tooltip-content">Ein Ansatz, der sicherstellt, dass eine Website auf allen Geräten gut aussieht.</span></span>?</p></h2>
+
 </section>
 
 <script>
