@@ -1,63 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Images of a haunted solar system - Interactive Information</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haunted Solar System</title>
+  <style>
+    body {
+      background-color: black; /* Solid black background */
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Hide scrollbars */
+    }
 
-<style>
+    figure {
+      margin: 20px;
+      text-align: center;
+      position: absolute;
+      animation: float 6s infinite ease-in-out;
+    }
 
-img {
-    width: 100px;
-}
+    img {
+      width: 120px;
+      height: auto; /* Ensure proportions stay intact */
+      border-radius: 50%;
+      background: none; /* Remove any background box appearance */
+      box-shadow: 0 0 15px 5px rgba(255, 0, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.8); /* Glowing pink effect */
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-</style>
+    figcaption {
+      font-size: 1.5rem;
+      color: #ffccff; /* Eerie purple color */
+      text-shadow: 0 0 10px #ff00ff;
+      font-weight: bold;
+    }
+
+    img:hover {
+      transform: scale(1.2); /* Enlarge planets on hover */
+      box-shadow: 0 0 25px 10px rgba(255, 0, 255, 0.8), 0 0 40px rgba(255, 0, 255, 1);
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(-10px);
+      }
+      50% {
+        transform: translateY(10px);
+      }
+    }
+
+    @keyframes moveLeftRight {
+      0% {
+        transform: translateX(-15px);
+      }
+      50% {
+        transform: translateX(15px);
+      }
+      100% {
+        transform: translateX(-15px);
+      }
+    }
+
+    /* Alternate planet movement (up-down vs left-right) */
+    figure:nth-child(1) { top: 10%; left: 10%; animation: float 6s infinite ease-in-out; }
+    figure:nth-child(2) { top: 20%; left: 50%; animation: moveLeftRight 8s infinite ease-in-out; }
+    figure:nth-child(3) { top: 40%; left: 20%; animation: float 5s infinite ease-in-out; }
+    figure:nth-child(4) { top: 50%; left: 70%; animation: moveLeftRight 7s infinite ease-in-out; }
+    figure:nth-child(5) { top: 70%; left: 30%; animation: float 4s infinite ease-in-out; }
+    figure:nth-child(6) { top: 80%; left: 60%; animation: moveLeftRight 6s infinite ease-in-out; }
+    figure:nth-child(7) { top: 15%; left: 80%; animation: float 7s infinite ease-in-out; }
+    figure:nth-child(8) { top: 65%; left: 90%; animation: moveLeftRight 9s infinite ease-in-out; }
+
+    /* Add subtle stars in the background */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Stars_background.jpg/1280px-Stars_background.jpg') repeat;
+      background-size: cover;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
-
-    
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg" alt="Planet Mercury">
     <figcaption>Mercury</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/PIA23791-Venus-RealAndEnhancedContrastViews-20200608_%28cropped%29.jpg" alt="Planet Venus">
     <figcaption>Venus</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg" alt="Planet Earth">
     <figcaption>Earth</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg" alt="Planet Mars">
     <figcaption>Mars</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg" alt="Planet Jupiter">
     <figcaption>Jupiter</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg" alt="Planet Saturn">
     <figcaption>Saturn</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg" alt="Planet Uranus">
     <figcaption>Uranus</figcaption>
-</figure>
+  </figure>
 
-<figure>
+  <figure>
     <img src="https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg" alt="Planet Neptune">
     <figcaption>Neptune</figcaption>
-</figure>
+  </figure>
 
-<script>
+  <script>
 
-</script>
+    // Interactive hover to pause planet animation
+    const figures = document.querySelectorAll('figure');
+    figures.forEach((figure) => {
+      figure.addEventListener('mouseenter', () => {
+        figure.style.animationPlayState = 'paused'; // Pause float animation on hover
+      });
 
+      figure.addEventListener('mouseleave', () => {
+        figure.style.animationPlayState = 'running'; // Resume float animation
+      });
+    });
+  </script>
 </body>
 </html>

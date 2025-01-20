@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bar - Navigation - Interactive Information</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: sans-serif;
+      scroll-behavior: smooth;
+      font-size: calc(1vh + 1vw);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #333;
+      color: white;
+      padding: 1em 0;
+      z-index: 2;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 1em;      
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5em 1em;
+      border-radius: 0.25em;
+    }
+
+    nav ul li a:hover {
+      background: #555;
+    }
+
+    h1 { margin: 4em 0; text-align: center; }
+
+    section {
+      height: 100vh;
+      padding: 3em;
+      box-sizing: border-box;
+    }
+    
+
+    #a { background: #eee; }
+    #b { background: #ddd; }
+    #c { background: #bbb; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="#a">Section A</a></li>
+      <li><a href="#b">Section B</a></li>
+      <li><a href="#c">Section C</a></li>
+    </ul>
+  </nav>
+
+  <h1>A page with three sections</h1>
+
+  <section id="a">
+    <h2>Section A</h2>
+    <p>This is the content of Section A.</p>
+  </section>
+
+  <section id="b">
+    <h2>Section B</h2>
+    <p>This is the content of Section B.</p>
+  </section>
+
+  <section id="c">
+    <h2>Section C</h2>
+    <p>This is the content of Section C.</p>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Keys - Input - Interactive Information</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;        
+        font-family: sans-serif;
+    }
+
+    div {
+        position: absolute;
+        font-size: 10rem;
+        color: black;
+        font-weight: bold;        
+        transition: all 10s ease-out;
+        transform: translate(-50%, -50%);
+    }
+</style>
+</head>
+<body>
+
+<script>
+document.addEventListener('keydown', (event) => {
+    // which key was pressed
+    const key = event.key; 
+
+    // skipping shift, control, alt, etc.
+    if (key.length !== 1) return;
+
+    // create a new div element to display the key
+    const div = document.createElement('div');
+    div.textContent = key;
+
+    // random position within the viewport
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+
+    div.style.left = x+"px";
+    div.style.top = y+"px";
+
+    document.body.appendChild(div);
+
+    // fade-out after adding the element
+    setTimeout(() => { 
+        div.style.opacity = '0';
+        div.style.transform = 'translate(-50%, -50%) scale(0.1)';
+    }, 0);
+
+    // remove div after 5 seconds
+    setTimeout(() => { div.remove(); }, 10000);
+});
+</script>
+
+</body>
+</html>

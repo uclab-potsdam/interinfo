@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>Museum of Memes</title>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+        <style>
+            body {
+                margin: 0;
+                line-height: normal;
+                background-image: url('background.png');
+                background-size: cover;
+                background-repeat: repeat;
+                background-position: top;
+                font-size: 2vw;
+                color: #000;
+                font-family: Inter;
+            }
+
+            /* Alignments for the sections of the page */
+
+            alignment-container {
+                display: flex;
+                margin-top: 1em;
+                margin-bottom: 3em;
+            }
+
+            alignment-container.right {
+                justify-content: space-between;
+            }
+
+            alignment-container.center {
+                justify-content: center;
+            }
+
+            /* Blocks that contain the content */
+
+            content-container {
+                box-shadow: 0.3em 0.3em 0.3em 0.35em rgba(0, 0, 0, 0.25);
+                backdrop-filter: blur(0.3em);
+                background-color: rgba(255, 255, 255, 0.7);
+                display: flex;
+                flex-direction: column;
+                padding: 1em 3em;
+            }
+
+            content-container.side {
+                width: 60%;
+                align-items: flex-start;
+                justify-content: flex-start;
+                box-sizing: border-box;
+            }
+
+            content-container.left {
+                border-radius: 0em 1em 1em 0em;
+            }
+
+            content-container.right {
+                border-radius: 1em 0em 0em 1em;
+            }
+
+            content-container.center {
+                width: 60%;
+                height: 23em;
+                align-items: center;
+                justify-content: flex-start;
+                box-sizing: border-box;
+                border-radius: 1em;
+            }
+
+            content-container.wide {
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Meme-Explaination */
+
+            .meme-explaination-frame {
+                width: 95%;
+                position: relative;
+                display: flex;
+                align-items: center;
+                object-fit: cover;
+                margin: 1em;
+            }
+
+            .explaination-meme-image {
+                z-index: 0;
+                position: relative;
+                width: 100%;
+            }
+
+            .explaination-meme-text {
+                z-index: 1;
+                position: absolute;
+                font-family: 'Impact', sans-serif;
+                top: 20%;
+                left: 25%;
+                font-size: 3vw;
+                transform: translate(-50%, -50%);
+                color: white;
+                text-shadow:
+                    0.05em 0.05em 0em black,
+                    -0.05em -0.05em 0em black,
+                    0.05em -0.05em 0em black,
+                    -0.05em 0.05em 0em black,
+                    0em 0em 0.2em rgba(0, 0, 0, 0.8);
+                cursor: default;
+            }
+
+            /* Meme-Timeline */
+
+            era-button {
+                box-shadow: -0.02em 0.02em 0.02em #fff inset, 0.05em -0.05em 0.05em 0.05em rgba(42, 129, 192, 0.5) inset;
+                backdrop-filter: blur(2em);
+                border-radius: 1em;
+                background: linear-gradient(259deg, rgba(37, 115, 174, 0.1), rgba(228, 246, 252, 0.1));
+                width: 100%;
+                height: 2em;
+                margin: 0.5em 0.2em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+
+            era-button:hover {
+                background: linear-gradient(259deg, rgba(37, 115, 174, 0.5), rgba(223, 247, 255, 0.5));
+            }
+
+            era-button:active {
+                box-shadow: 0.02em -0.02em 0.02em #fff inset, -0.05em 0.05em 0.05em 0.05em rgba(42, 129, 192, 0.5) inset;
+            }
+
+            era-button.active {
+                box-shadow: 0.02em -0.02em 0.02em #fff inset, -0.05em 0.05em 0.05em 0.05em rgba(42, 129, 192, 0.5) inset;
+            }
+
+            .meme-gallery {
+                width: 30%;
+                margin-right: 10%;
+            }
+
+            .meme-example {
+                width: 45%;
+                margin: 1%;
+                transition: width 1s ease-in-out;
+                cursor: pointer;
+            }
+
+            .meme-example.active {
+                width: 90%;
+            }
+
+            .meme-example.inactive {
+                width: 0%;
+                margin: 0%;
+            }
+
+            /* Meme-Quiz */
+
+            answer-button {
+                box-shadow: -0.02em 0.02em 0.02em #fff inset, 0.05em -0.05em 0.05em 0.05em rgba(42, 129, 192, 0.5) inset;
+                backdrop-filter: blur(2em);
+                border-radius: 20em;
+                background: linear-gradient(259deg, rgba(37, 115, 174, 0.1), rgba(228, 246, 252, 0.1));
+                width: calc(100%-5em);
+                height: 3em;
+                margin: 0.8em 0em;
+                padding: 0.5em 2.5em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5vw;
+                cursor: pointer;
+            }
+
+            answer-button:hover {
+                background: linear-gradient(259deg, rgba(37, 115, 174, 0.5), rgba(223, 247, 255, 0.5));
+            }
+
+            answer-button:active {
+                box-shadow: 0.02em -0.02em 0.02em #fff inset, -0.05em 0.05em 0.05em 0.05em rgba(42, 129, 192, 0.5) inset;
+            }
+
+            answer-button.result {
+                width: 80%;
+                margin-top: 7em;
+                visibility: collapse;
+            }
+
+            div.result {
+                visibility: collapse;
+                align-items: center;
+            }
+
+            .rickroll {
+                z-index: 1;
+                width: 90%;
+                position: absolute;
+                left: 5%;
+                bottom: 3.2em;
+                /* visibility: hidden; */ /* hide the rickroll to see the actual result */
+            }
+
+            .real-result {
+                z-index: 0;
+                position: relative;
+                width: 95%;
+                flex-direction: row;
+                display: flex;
+                margin: 2em 0em;
+            }
+
+            .result-meme {
+                width: 40%;
+                height: fit-content;
+            }
+
+            .result-text {
+                width: 50%;
+                text-align: left;
+                margin-left: 1em;
+            }
+
+            /* likely to be a smart phone browser */
+            @media (max-width: 1000px) and (min-resolution: 250dpi) and (orientation: portrait) {
+                body {
+                    font-size: 3vw;
+                }
+                .era-container {
+                    display:block;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <alignment-container>
+            <content-container class="wide">
+                <b style="font-size: 5vw">Museum of Memes</b>
+            </content-container>
+        </alignment-container>
+
+        <alignment-container>
+            <content-container class="side left">
+                <b>What is a Meme?</b>
+                <p>A meme is like the internet's
+                    version of a contagious laugh—an image, video, or
+                    phrase that mutates, evolves, and spreads faster
+                    than a sneeze at a crowded party. It’s the digital
+                    equivalent of an
+                    inside joke that everyone gets (or pretends to).</p>
+                <p>Whether it’s a cat demanding
+                    lasagna, a doge saying "such wow," or an awkward
+                    penguin perfectly capturing your social fails, memes
+                    are how the internet collectively screams, "Same!"
+                    in one beautifully chaotic visual language.</p>
+
+            </content-container>
+        </alignment-container>
+
+        <alignment-container class="right">
+            <div></div>
+            <content-container class="side right">
+                <b>Anatomy of a Meme</b>
+                <p>The anatomy of a meme is a
+                    chaotic masterpiece of humor and relatability.
+                    At its core, there’s the image or video, often
+                    absurd or hilariously out of context, paired
+                    with the caption—snappy text in shouty Impact
+                    font (white with black outline) or newer
+                    alternatives like Arial or Comic Sans. Layouts
+                    vary, from single panels to multi-panel
+                    "mini-comics," building a joke or absurd
+                    narrative.</p>
+                <p>Blurry, pixelated visuals?
+                    Comedy gold. Clean edits? Still funny. Bonus
+                    points for random emojis, bad cropping, or
+                    cursed energy. It’s a perfectly unhinged blend
+                    of visuals, text, and vibe that hits you with
+                    instant internet joy.</p>
+            </content-container>
+        </alignment-container>
+
+        <alignment-container>
+            <content-container class="wide">
+                <div class="meme-explaination-frame">
+                    <div style="width: 50%">
+                        <div class="explaination-meme-text" id="explainationMemeText">
+                            Hover-Animations
+                        </div>
+                        <img class="explaination-meme-image" id="explainationMemeImage"
+                            src="spongebobMeme.jpg" alt="Spongebob with a rainbow Meme">
+                    </div>
+                    <div style="width: 5%"></div>
+                    <div id="explainationText" style="width: 45%">
+                        A meme is a dynamic combo of two main elements: the image and the text. The image sets the mood, evoking an emotional or relatable reaction, while the text refines the meaning and delivers the punchline. Together, they create a perfect storm of humor. But here's the twist: the image usually works on its own, but the text often depends on it.
+                        <br>
+                        Hover to learn more!
+                    </div>
+                </div>
+            </content-container>
+        </alignment-container>
+
+        <alignment-container>
+            <content-container class="wide">
+                <div style="width: 90%">
+                    <div style="display: flex">
+                        <era-button id="y0">1990s</era-button>
+                        <era-button id="y1">2000s</era-button>
+                        <era-button id="y2">2010s</era-button>
+                        <era-button id="y3">2020s</era-button>
+                    </div>
+
+                    <hr style="width: 100%">
+
+                    <div style="display: flex">
+                        <div class="meme-gallery" id="memeGallery">
+                            <img id="m0" class="meme-example inactive" src="rickroll.jpg" alt="This is a placeholder">
+                            <img id="m1" class="meme-example inactive" src="rickroll.jpg" alt="This is a placeholder">
+                            <img id="m2" class="meme-example inactive" src="rickroll.jpg" alt="This is a placeholder">
+                            <img id="m3" class="meme-example inactive" src="rickroll.jpg" alt="This is a placeholder">
+                        </div>
+                        <p id="memeEra" style="width: 60%"><b>Choose your Era!</b></p>
+                    </div>
+
+                </div>
+            </content-container>
+        </alignment-container>
+        <alignment-container class="center">
+            <div></div>
+            <content-container class="center">
+                <b>What Meme am I?</b>
+                <i>lets find out with a little quizz...</i>
+                <div id="question" style="margin: 1em 0em">Choose a Drink</div>
+                <div id="answers" style="width:80%">
+                    <answer-button id="a0">Water</answer-button>
+                    <answer-button id="a1">Beer</answer-button>
+                    <answer-button id="a2">Energy Drink</answer-button>
+                    <answer-button id="a3">Gasoline</answer-button>
+                </div> 
+                <answer-button class="result" id="showResults">Results</answer-button>
+                <div class="result" id="result">
+                    <div class="rickroll">
+                        <video id= "rickroll" style="width: 100%">
+                            <source src="rickroll.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="real-result" id="realResult">
+                        <img class="result-meme" id="resultImage" src="rickroll.jpg" alt="This is a placeholder">
+                        <div class="result-text" id="resultText"></div>
+                    </div>
+                </div>
+            </content-container>
+            <div></div>
+        </alignment-container>
+
+        <script>
+
+        // This Part is for the Meme-Explaination
+
+        // Get the elements that can be hovered and the text field that has to be changed
+        const memeText = document.getElementById('explainationMemeText');
+        const memeImage = document.getElementById('explainationMemeImage');
+        const explainationText = document.getElementById('explainationText');
+
+        // Set the explaination texts here
+        const noHover = "A meme is a dynamic combo of two main elements: the image and the text. The image sets the mood, evoking an emotional or relatable reaction, while the text refines the meaning and delivers the punchline. Together, they create a perfect storm of humor. But here's the twist: the image usually works on its own, but the text often depends on it. Hover to learn more!";
+        const hoverImage = "The Image: The Foundation The image is the heart of the meme. It’s what grabs your attention first—whether it’s a funny face, an iconic scene, or an absurd situation. Even without the text, a good meme image can spark recognition or evoke a universal emotion. Think of Distracted Boyfriend—you don’t need the caption to understand that it’s about distraction and choice. It’s the power of visual humor—people can immediately understand the vibe without words.";
+        const hoverText = "The Text: The Punchline Text gives an image specific meaning, often adding humor. In \"This Is Fine,\" the dog in a burning room is relatable, but the text makes the absurdity clear. Without the image, \"This is fine\" lacks impact, as the image anchors the text to its humorous context.";
+
+        // Hovering over the image changes the text on the right
+        memeImage.addEventListener('mouseenter', function() {
+            explainationText.textContent = hoverImage;
+        });
+
+        // Leaving the image changes the text on the right
+        memeImage.addEventListener('mouseleave', function() {
+            explainationText.textContent = noHover;
+        });
+
+        // Hovering over the text on the image changes the text on the right
+        memeText.addEventListener('mouseenter', function() {
+            explainationText.textContent = hoverText;
+        });
+
+        // Leaving the text means you are hovering the image again and changes the text accordingly
+        memeText.addEventListener('mouseleave', function() {
+            explainationText.textContent = hoverImage;
+        });
+
+        //----------------------------------------------------------------------------
+        // This Part is for the "Meme Eras"
+
+        // Get the elements for choosing the era and the gallery and texts that have to be changed
+        const eraButtons = document.querySelectorAll('era-button');
+        const eraText = document.getElementById('memeEra');
+        const eraGallery = document.getElementById('memeGallery');
+
+        //Remember the currently chosen era
+        let currentEra = 4;
+
+        //Set the texts and pictures for each era
+        const generalTexts = ["<b> 90 - The Dawn of Memes </b> <br> The OG meme era, where jokes spread through email chains, forums, and early message boards. Think Dancing Baby, bad MS Paint art, and ASCII art—basic, but revolutionary for the time. Memes were slow and niche, living mostly in nerdy corners of the web.", 
+                                "<b> 2000s: The Rise of Image Macros </b> <br> The rise of image macros and meme generators! Lolcats (“I Can Haz Cheezburger”), Rage Comics, and Rickrolling took over, fueled by forums like 4chan and Reddit. Memes became more accessible, visual, and widely shared as broadband and social media grew", 
+                                "<b> 2010s: The Golden Age of Memes </b> <br> With social platforms like Instagram, Twitter, and Vine, memes exploded in speed and variety. Relatable, absurd, and viral, this era gave us Shrek memes, Distracted Boyfriend, and Doges. Humor leaned into surreal, self-referential, and niche cultures.", 
+                                "<b> 2020s: The Era of Chaos and Remixing </b> <br> Hyper-fast, meta, and weird. TikTok drives meme trends with short, creative videos, while Gen Z humor thrives on chaos and irony. Memes now blend formats (text, video, remixing), and humor often feels like an inside joke to those in the know (\"Corecore\", Amogus, or the constant use of random emojis). It’s a constantly shifting, digital free-for-all!", 
+                                "Choose your Era!"];
+        const memeExamples = [[["https://upload.wikimedia.org/wikipedia/en/c/ce/DancingBaby.jpg", "<b>Dancing Baby (1996)</b> <br> One of the earliest viral sensations, the Dancing Baby showcased a 3D-animated infant performing a cha-cha-style dance. This quirky animation, often played with the song “Hooked on a Feeling” was widely shared via email chains and television. This Meme marked  the arrival of viral digital content.", "Dancing Baby (1996)"], ["https://static.giga.de/wp-content/uploads/2015/10/all-your-base-belong-to-us-fc80008042ffff_840x472.jpg", "<b>All Your Base Are Belong to Us (1998)</b> <br> \"Translation Fail, Humor Win\". What happens when you take a Japanese video game, run it through a hasty English translation, and unleash it onto the internet? You get the magnificently nonsensical phrase, \"All Your Base Are Belong to Us.\" Gamers latched onto this absurdity, and soon, it was everywhere: in Photoshop edits, music videos, and even protest signs. This meme represents the chaotic, unpolished charm of early internet culture—proof that sometimes, mistakes are the real heroes.", "All Your Base Are Belong to Us (1998)"], ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0awWqvjU1gkgiCXmTLOYywI1uv6micPNoLQ&", "<b>Hampster Dance (1998)</b> <br> Picture this: an entire webpage of adorable, pixelated hamsters dancing frantically to a sped-up song from Disney’s Robin Hood. Sounds simple, right? Yet this whimsical creation became one of the internet's first viral sensations. Schools, workplaces, and coffee shops echoed with its delightful absurdity, proving that sometimes, all you need to brighten your day is a hamster groove.", "Hampster Dance"], ["https://images-cdn.9gag.com/photo/argWK2V_700b.jpg", "<b>Mr. T Ate My Balls (1998)</b> <br> Long before memes were sleek and corporate-friendly, there was \"Mr. T Ate My Balls.\" This bizarre series of webpages featured crudely edited images of the A-Team star with captions proclaiming his voracious appetite for meatballs. Part absurdism, part parody, this meme reflected the freewheeling, anything-goes spirit of the '90s internet. It’s chaotic, strange, and utterly unforgettable—kind of like Mr. T himself.", "Mr. T Ate My Balls (1998)"], ["", "", "alttext"]],
+                                [["https://upload.wikimedia.org/wikipedia/en/0/04/Badgers_Badgers.gif", "<b>Badger Badger Badger (2003)</b> <br> Step into the hypnotic world of Badger Badger Badger, where a looped animation of dancing badgers chants their own name, interrupted occasionally by an ominous snake. Why? Nobody knows. And that’s the point. This meme, created by animator Jonti Picking, exemplifies the quirky, low-budget charm of early viral content. Visitors can press a button to make the chant loop endlessly. You’ve been warned.", "Badger Badger Badger (2003)"], ["https://media.tenor.com/7MDEZqdTp5IAAAAM/dancing-dance.gif", "<b>Peanut Butter Jelly Time (2002)</b> <br> This internet gem features a pixelated banana wiggling joyfully to a song about peanut butter and jelly sandwiches. It was silly, repetitive, and utterly captivating—much like most things on the internet circa 2002. Often shared as a cheerful distraction, Peanut Butter Jelly Time represents the internet’s ability to turn the mundane into the magical.", "Peanut Butter Jelly Time (2002)"], ["https://miro.medium.com/v2/resize:fit:1400/1*4oSQOg49I_LRlVUWpgbubg.jpeg", "<b>Numa Numa (2004)</b> <br> Gary Brolsma didn’t set out to change the internet. Armed with only a webcam and a catchy Romanian pop song (Dragostea Din Tei), he lip-synced and danced his heart out, creating what would become one of the first viral YouTube videos. Numa Numa was a celebration of uninhibited joy and unpolished creativity—a reminder that the best content comes from simply having fun.", "Numa Numa (2004)"], ["https://media.tenor.com/x8v1oNUOmg4AAAAM/rickroll-roll.gif", "<b>Rickrolling (2007)</b> <br> You click on a link, expecting a cool article or helpful tutorial. Instead, you’re greeted by Rick Astley’s Never Gonna Give You Up. Congratulations, you’ve been Rickrolled. This internet prank took off in the late 2000s, turning Rick Astley’s 1987 hit into a beloved internet joke. Does that make you paranoid about clicking anything on this website...?", "Rickrolling (2007)"], ["", "", "alttext"]],
+                                [["https://upload.wikimedia.org/wikipedia/en/b/be/Disloyal_man_with_his_girlfriend_looking_at_another_girl.jpg", "<b>Distracted Boyfriend (2017)</b> <br>  This now-infamous stock photo tells a relatable story in a single frame: a man turning to ogle another woman while his girlfriend fumes beside him. It quickly became a canvas for all sorts of distractions—everything from procrastination to corporate rivalries.", "Distracted Boyfriend (2017)"], ["https://imgflip.com/s/meme/Mocking-Spongebob.jpg", "<b>Mocking SpongeBob (2017)</b> <br> \"I’m Not Mocking You!\" This image of SpongeBob bent over and mocking someone’s words in a sarcastic tone has been a go-to for internet users looking to channel their inner sass. The exhibit invites you to step into SpongeBob’s shoes and recreate the pose for yourself. Remember: mocking is an art, not a science.", "Mocking SpongeBob (2017)"], ["https://upload.wikimedia.org/wikipedia/en/1/1f/WomanYellingAtACat_meme.jpg", "<b>Woman Yelling at a Cat (2019)</b> <br> On one side, you have an angry Real Housewives star pointing furiously. On the other, a baffled cat sitting calmly at a dinner table. Together, they capture the internet’s love of surreal humor.", "Woman Yelling at a Cat (2019)"], ["https://media.npr.org/assets/img/2023/01/14/this-is-fine_custom-b7c50c845a78f5d7716475a92016d52655ba3115.jpg?s=1100&c=85&f=jpeg", "<b>This Is Fine (2013)</b> <br> A dog sits in a room engulfed in flames, calmly sipping coffee and saying, “This is fine.” This comic by KC Green became a cultural touchstone for modern existential humor of a new generation.", "This Is Fine (2013)"], ["", "", "alttext"]],
+                                [["https://www.rnd.de/resizer/v2/WWW2HHUZJZB5TLVQTPKKOW56TY.png?auth=dcf5cf86918dd680b941b4c5df0c6ca9e3801f7b014117b40f9710382b9a8980&quality=70&focal=654%2C291&width=1441&height=1441", "<b>Skibidi Toilet (2023)</b> <br> What do you get when you mix human heads popping out of toilets, a catchy Timbaland track, and pure internet absurdity? You get Skibidi Toilet, the viral sensation. Created by the mysterious mastermind DaFuq!?Boom!, this YouTube series had kids humming “Skibidi Dop Dop Dop” while adults scratched their heads wondering what on Earth was happening. By the end of 2023, it wasn’t just a meme—it was an empire. Don’t be surprised if your plumber knows the tune.", "Skibidi Toilet (2023)"], ["https://media.tenor.com/FvPPBYzU27UAAAAM/cop-cop-slide.gif", "<b>Boston Cop Slide (2023)</b> <br> \"The Officer Went Down... Literally\" Police officers are supposed to protect, serve, and sometimes… go viral sliding face-first out of playground equipment. In 2023, a Boston cop took an accidental joyride down a slide, and the internet collectively lost it. Was it the slow build-up? The dramatic exit? The absolute commitment to unintentional comedy? What a masterpiece. <br> <i>(*helmet not included)</i>", "Boston Cop Slide (2023)"], ["https://cdn-useast1.kapwing.com/static/templates/little-miss-meme-template-full-a990da6c.webp", "<b>Little Miss Meme (2022)</b> <br> Move over, Mr. Happy—there’s a new trend in town. In 2022, the internet took the sweet, innocent Little Miss and Mr. Men characters and gave them a spicy twist. Suddenly, Little Miss Overthinker and Mr. Always Late were calling us out—and we loved it. Created by Instagram user @juulpuppy, these pastel personalities gave us a chance to laugh at our own flaws. <br> <i>Don’t worry, Little Miss Skims Through Museum Descriptions, we see you.</i>", "Little Miss Meme (2022)"], ["https://static01.nyt.com/images/2021/01/26/multimedia/26xp-photog/26xp-photog-mediumSquareAt3X.jpg", "<b>Bernie Sanders’ Mittens (2021)</b> <br> The year was 2021. The setting? The U.S. presidential inauguration. But forget about the speeches and pomp—Bernie Sanders stole the show with his cozy parka, massive mittens, and unmistakable “get this over with” posture. Naturally, the internet couldn’t resist. Within hours, Bernie was photoshopped into Star Wars, historical events, and even your grandma’s knitting circle. <br> <i>(Spoiler: the mittens raised money for charity, because Bernie.)</i>", "Bernie Sanders’ Mittens (2021)"], ["", "", "alttext"]]];
+        
+        //When clicking on one of the era buttons, the text is changed to the default-era-text and the pictures are set and none is highlighted
+        eraButtons.forEach(
+            year => year.addEventListener("click",
+                event => {
+                    currentEra = year.id[1];
+                    eraText.innerHTML = generalTexts[currentEra];
+                    for (let i = 0; i < 4; i++){
+                        eraGallery.children[i].src = memeExamples[currentEra][i][0];
+                        eraGallery.children[i].alt = memeExamples[currentEra][i][2];
+                        eraGallery.children[i].classList.remove("active");
+                        eraGallery.children[i].classList.remove("inactive");
+                    }
+                    eraButtons.forEach(button => {button.classList.remove("active");});
+                    year.classList.add("active");
+                }
+            )
+        );
+
+        //When clicking on a picture in the gallery, it is highlighted (increased size while the others disappear) and a specific text is shown
+        //When clicking on a highlighted picture, it decreases size and goes back to the gallery-view with the default-era-text
+        document.querySelectorAll('.meme-example').forEach(
+            img => img.addEventListener("click",
+                event => {
+                    let chosenMeme = img.id[1];
+                    if (img.classList.contains("active")){
+                        img.classList.remove("active");
+                        for (meme of eraGallery.children){
+                            meme.classList.remove("inactive");
+                        }
+                        eraText.innerHTML = generalTexts[currentEra];
+                    } else {
+                        for (meme of eraGallery.children){
+                            if (meme.id[1] != chosenMeme){
+                                meme.classList.add("inactive");
+                            } else {           
+                                meme.classList.add("active");
+                            }
+                        }
+                        eraText.innerHTML = memeExamples[currentEra][chosenMeme][1];
+                    }
+                }
+            )
+        );
+
+        //----------------------------------------------------------------------------
+            // This Part is for the "What Meme am I?"
+
+            /*
+                Depending on wich answer is given you collect points for the matching result.
+                In the end you are shown the result you collected the most points for.
+                If multiple results have the same score, one is chosen randomly.
+            */
+
+            // Get the text for the question, the buttons for the answer and the needed elements for displaying the result
+            const question = document.getElementById('question');
+            const answers = document.getElementById('answers');
+            const resultButton = document.getElementById('showResults');
+            const resultDiv = document.getElementById('result');
+            const resultImage = document.getElementById('resultImage');
+            const resultText = document.getElementById('resultText');
+            const rickroll = document.getElementById('rickroll');
+            
+            // Set initial round-counter
+            let round = 0;
+            let scores = [0, 0, 0, 0];
+
+            // Set the questions, answers and possible results. 
+            // Each answer also has a possible result assigned, relating to the results position in the result_list
+            let question_list = ["Choose a drink", "What are most likely doing at a party?", "Whats your relationship with the internet like?", "How do you greet people?", "How do you navigate awkward family meetings?"];
+            let answer_list = [[["Water", 1], ["Arguing about pineapple on pizza", 3], ["I mainly share my life with my friends on facebook", 2], ["I avoid eye contact and pretend not to know them", 0], ["I usually have a fun time", 2]],
+                                [["Beer", 2], ["Picking fights with security", 0], ["I get sucked into rabbit holes every other day", 1], ["With a warm hug!", 3], ["I just stay home", 0]],
+                                [["Energy Drink", 3], ["Plotting how to leave asap", 2], ["You know, i start beef on twitter", 3], ["By shaking their hand", 2], ["Starting a fight by mentioning that I thing basic human rights are pretty neat", 3]],
+                                [["Gasoline", 0], ["Can't talk, lost the person I came here with", 1], ["I grew up here without parental supervision", 0], ["I avoid their name all cost, idk who greets me half the time...", 1], ["I'm glued to my phone. Not gonna be a part of that shitshow", 1]]];
+            let result_list = [["harold.jpg", "Congrats, you are 'Hide The Pain Harold'! <br> You’re either an edgelord or in need of therapy. Either way, get better soon.", "alttext"], 
+                                ["https://media.wired.com/photos/59a459d3b345f64511c5e3d4/master/pass/MemeLoveTriangle_297886754.jpg", "Congrats, you are the 'Distracted Boyfriend'! <br> Undiagnosed but pretty sure something’s off. Gee, poor one. Maybe find a healthy way to cope, getting sucked into online rabbit holes and agruments is the opposite of that, my dear. Feeling called out already?", "alttext"], 
+                                ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXdIRdfp62iEKI1LZHq3236FWXM8xH6lvFFg&s", "Congrats, you are 'Nyan Cat'! <br> Rawr XD Please, PLEASE grow up and touch grass. Monster Energy is not a balanced diet. You’re stuck in 2013 and I’m sure, some people love you for it. But a caffine addiction and dyed hair is not a character trait...", "alttext"], 
+                                ["https://static01.nyt.com/images/2010/06/14/business/sub-jp-burger-2/sub-jp-burger-2-popup.jpg?quality=75&auto=webp&disable=upscale", "Congrats, you are 'Can I Has Cheezeburger?' <br> Oh well. I Think I’ve heard your knees squeek. Some one’s getting old. Just like this meme, you’re at least from the 90s. Oldie but a goldie, I’m pretty sure literally no one hates you.", "alttext"]]
+
+            // Switches the question and answers to the next round or shows the result, if all rounds are played
+            function nextRound(){
+                round ++;
+                // Uses the length of the questions list to check if there are more rounds to be played
+                if (round < question_list.length){ 
+                    question.innerHTML = question_list[round];
+                    for (let i = 0; i < 4; i++){
+                        answers.children[i].innerHTML = answer_list[i][round][0];
+                    }
+                } else { //shows a show result button
+                    resultButton.style.visibility = "visible";
+                    question.style.visibility="collapse";
+                    answers.style.visibility="collapse";
+                    
+                }
+            }
+
+            //increases the count for the result related to the given answer
+            function processScore(givenAnswer){
+                scores[answer_list[givenAnswer][round][1]] += 1;
+            }
+
+            //calculate the endresult according to the rules explained above
+            function giveResult(){
+                highestScore = 0;
+                for (let i = 0; i < scores.length; i++){ 
+                    if (scores[i] > highestScore){
+                        highestScore = scores[i];
+                    }
+                }
+                let possibleResults = [];
+                for (let i = 0; i < scores.length; i++){ 
+                    if (scores[i] == highestScore){
+                        possibleResults.push(i);
+                    }
+                }
+                let resultNumber = possibleResults[Math.floor(Math.random() * possibleResults.length)];
+                return result_list[resultNumber];
+            }
+
+            //When clicking on an answer, the score is changed accordingly and the next round is initiated
+            for (button of answers.children){
+                button.addEventListener("click", function(){
+                    processScore(this.id[1]);
+                    nextRound();
+                })
+            }
+
+            //When clicking on the result-button, the result is calculated, set and revealed, showing both the real result of the quiz and a rickroll above it
+            resultButton.addEventListener('click', function(){
+                let calculatedResult = giveResult();
+                resultButton.style.visibility = "collapse";
+                resultImage.src = calculatedResult[0];
+                resultText.innerHTML = calculatedResult[1];
+                resultImage.alt = calculatedResult[2];
+                rickroll.play();
+                resultDiv.style.visibility = "visible";
+            })
+            
+        </script>
+
+    </body>
+</html>

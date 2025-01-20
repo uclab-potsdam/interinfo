@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hamburger - Navigation - Interactive Information</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: sans-serif;
+      scroll-behavior: smooth;
+      font-size: calc(1vh + 1vw);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #333;
+      color: white;
+      z-index: 2;
+      padding: 1em 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap; 
+      max-height: none;
+    }
+
+    nav ul li {
+      margin: 0 1em;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5em 1em;
+      border-radius: 0.25em;
+    }
+
+    nav ul li a:hover {
+      background: #555;
+    }
+
+    .hamburger {
+      padding: 0 .25em;
+      display: none;
+      cursor: pointer;
+      position: absolute;
+      right: 1em;
+      top: 1em;
+      background: #333;
+
+    }
+
+    .hamburger div {
+      width: 2em;
+      height: .2em;
+      background: white;
+      margin: .4em 0;
+      transition: all 0.5s;
+    }
+
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(.4em, .4em);
+    }
+
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(.4em, -.4em);
+    }
+
+    @media (max-width: 1000px) and (orientation: portrait) {
+      
+      body {
+        font-size: calc(1.5vh + 1.5vw);
+      }
+
+      nav {
+        width: unset;
+        right: 0;
+        padding: 0;
+      }
+
+      nav ul {
+        margin-right: 3em;  
+        flex-direction: column;
+        overflow: hidden;
+        max-height: 0;
+      }
+
+      nav ul.active {
+        padding: 1em 0;
+        max-height: unset;
+      }
+
+      nav ul li {
+        margin: .5em 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+
+    h1 {
+      margin: 4em 0;
+      text-align: center;
+    }
+
+    section {
+      height: 100vh;
+      padding: 3em;
+      box-sizing: border-box;
+    }
+
+    #a { background: #eee; }
+    #b { background: #ddd; }
+    #c { background: #bbb; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul>
+      <li><a href="#a">Section A</a></li>
+      <li><a href="#b">Section B</a></li>
+      <li><a href="#c">Section C</a></li>
+    </ul>
+  </nav>
+
+  <h1>A page with three sections</h1>
+
+  <section id="a">
+    <h2>Section A</h2>
+    <p>This is the content of Section A.</p>
+  </section>
+
+  <section id="b">
+    <h2>Section B</h2>
+    <p>This is the content of Section B.</p>
+  </section>
+
+  <section id="c">
+    <h2>Section C</h2>
+    <p>This is the content of Section C.</p>
+  </section>
+
+  <script>
+    function toggleMenu() {     
+      document.querySelector('nav ul').classList.toggle('active');
+      document.querySelector('.hamburger').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
