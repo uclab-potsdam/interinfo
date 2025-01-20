@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Typography one pager project </title>
+
+
+<style> 
+
+:root{
+  --bg-color: #120A8F;
+  --color1: rgb(255, 255, 255);
+  --font1: 'Roboto', sans-serif;
+}
+
+@font-face {
+  font-family: 'RobotoItalic'; /* Nom que tu donnes à ta police */
+  src: url('./RobotoCondensed-Italic.ttf') format('ttf');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+body, header {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  color: blueviolet;
+  background-color: var(--bg-color); /* Ajoute une couleur de fond pour la visibilité */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: aliceblue;
+}
+
+
+
+textarea {
+  width: 100%; /* Occupe 100% de la largeur de son conteneur parent */
+  max-width: 87%;
+  margin: 10vw;
+}
+
+#text-sample {
+      color: var(--color1);
+      background-color: #120A8F;
+      margin: 20px;
+      padding: 20px;
+      margin-top: 10vh;
+      font-family: var(--font1);
+      
+
+    }
+
+    /* Appliquer un style lorsque la case est cochée */
+    #italic-box:checked ~ #text-sample {
+      color: brown;
+      background-color: aliceblue;
+    }
+
+.box-container {
+  font-family: var(--font1);
+
+}
+
+/*style des cases à cocher*/
+
+
+
+</style> 
+</head>
+
+<body>
+
+    <!-- header -------------------------------------------------------------------------------->
+  <header>
+    Mon header
+  </header>
+
+<div class="main-container">
+
+  <!-- text area ------------------------------------------------------------------------------>
+  <section class="textarea"> 
+  <textarea id="text-sample" class="textarea" name="textarea" rows="4" cols="50" >Type, tick and play !</textarea>
+  </section>
+
+  <br>
+
+  <!-- Cases à cocher ------------------------------------------------------------------------------------------>
+
+  <section class="box-container">
+
+    <div class="it-med-bo">
+  <input type="checkbox" id="italic-box" name="Italic" value="Italic">
+  <label for="italic-box"> Italic </label>
+
+  <input type="checkbox" id="medium-box" name="Medium" value="Medium">
+  <label for="bold-box"> Medium </label>
+
+  <input type="checkbox" id="bold-box" name="Bold" value="Bold">
+  <label for="bold-box"> Bold </label>
+    </div>
+
+    <div class="fonts"> 
+      <input type="checkbox" id="font1-box" name="font1" value="font1">
+      <label for="font1-box"> Font1 </label>
+
+      <input type="checkbox" id="font2-box" name="font2" value="font2">
+      <label for="font2-box"> Font2 </label>
+
+      <input type="checkbox" id="font3-box" name="font3" value="font3">
+      <label for="font3-box"> Font3 </label>
+
+    </div>
+  </div>
+</div>
+
+</body>
+
+<script> 
+
+  const checkbox = document.getElementById('italic-box');
+  const textarea = document.getElementById('text-sample');
+
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      textarea.style.color = 'brown';
+      textarea.style.backgroundColor = 'aliceblue';
+      textarea.style.fontFamily = 'RobotoItalic';
+    } else {
+      textarea.style.color = '';
+      textarea.style.backgroundColor = '';
+    }
+  });
+
+
+</script>
+
+</html>
