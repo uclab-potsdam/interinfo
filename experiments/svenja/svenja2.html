@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popover Guide</title>
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f3f0;
+            color: #3e3e3e;
+            scroll-behavior: smooth;
+            font-size: calc( 1vw + 1vh );
+        }
+
+        button {
+            font-size: 1em;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #333;
+            color: white;
+            padding: 1em 0;
+            z-index: 10;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 1em;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            border-radius: 0.25em;
+        }
+
+        nav ul li a:hover {
+            background: #555;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5em);
+            left: 0;
+            background: #300252;
+            list-style: none;
+            padding: 0.5em 0;
+            border-radius: 0.25em;
+            box-shadow: 0 4px 6px #18002a;
+        }
+
+        nav ul li:hover ul {
+            display: block;
+        }
+
+        section {
+            padding: 5em 2em;
+            background: #f6ecfd;
+            border-bottom: 1px solid #ebdcd3;
+        }
+
+        h1, h2 {
+            color: #000647;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .popover {
+            background-color: #fff7f2;
+            border: 1px solid #ebdcd3;
+            padding: 10px;
+            display: none;
+            z-index: 20;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: absolute;
+        }
+
+        .popover-trigger {
+            background-color: #fcd8fb;
+            color: #190140;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+        }
+
+        .popover-trigger:hover {
+            background-color: #d1a8c5;
+        }
+
+        pre, code {
+            background-color: #fff2f9;
+            padding: 10px;
+            border-radius: 8px;
+            display: block;
+        }
+
+.tooltip-trigger {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip-content {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.tooltip-trigger:hover .tooltip-content {
+    display: block;
+}
+    </style>
+</head>
+<body>
+    
+<nav>
+    <ul>
+        <li><a href="#a">Popover</a></li>
+        <li><a href="#b">Bestandteile</a></li>
+        <li><a href="#c">Verwendung</a></li>
+        <li><a href="#d">Demo</a></li>
+        <li><a href="#e">Code</a></li>
+        <li><a href="#f">Practice</a></li>
+        <li><a href="#g">Responsive Design</a></li>
+    </ul>
+</nav>
+
+<section id="a">
+    <h1>Was ist ein Popover?</h1>
+    <p>Ein Popover ist ein kleines Overlay, das zusätzliche Informationen oder Interaktionen anzeigt.</p>
+</section>
+
+<section id="b">
+    <h2>Bestandteile eines Popover</h2>
+    <p>Trigger, Inhalt, und Positionierung.</p>
+    <button class="popover-trigger">Zeige Popover</button>
+    <div class="popover">
+        <p>Das ist der Inhalt eines Popovers!</p>
+    </div>
+</section>
+
+<section id="c">
+    <h2>Verwendungsszenarien</h2>
+    <p>Tooltips, Formulare, Benachrichtigungen.</p>
+    <button class="popover-trigger">Formular Popover</button>
+    <div class="popover">
+        <form>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email">
+            <button type="submit">Absenden</button>
+        </form>
+    </div>
+</section>
+
+<section id="d">
+    <h2>Interaktive Demo</h2>
+    <p>Klicken Sie auf die Buttons, um verschiedene Popovers zu sehen.</p>
+    <button class="popover-trigger">Tooltip Beispiel</button>
+    <div class="popover">
+        <p>Hier ist ein Tooltip!</p>
+    </div>
+</section>
+
+<section id="e">
+    <h2>Codebeispiele</h2>
+    <pre>
+        <code>
+            &lt;button class="popover-trigger"&gt;Zeige Popover&lt;/button&gt;
+            &lt;div class="popover"&gt;
+                &lt;p&gt;Das ist der Inhalt eines Popovers!&lt;/p&gt;
+            &lt;/div&gt;
+        </code>
+    </pre>
+</section>
+
+<section id="f">
+    <h2>Best Practices</h2>
+    <p>Popovers sollten kurz und prägnant sein, nicht überladen und zugänglich für alle Benutzer.</p>
+</section>
+
+<section id="g">
+ <h2>  <p>Was ist <span class="tooltip-trigger">Responsive Design<span class="tooltip-content">Ein Ansatz, der sicherstellt, dass eine Website auf allen Geräten gut aussieht.</span></span>?</p></h2>
+
+</section>
+
+<script>
+    document.querySelectorAll('.popover-trigger').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const popover = event.target.nextElementSibling;
+            if (popover.style.display === 'block') {
+                popover.style.display = 'none';
+            } else {
+                document.querySelectorAll('.popover').forEach(p => p.style.display = 'none');
+                popover.style.display = 'block';
+            }
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.classList.contains('popover-trigger')) {
+            document.querySelectorAll('.popover').forEach(p => p.style.display = 'none');
+        }
+    });
+</script>
+
+</body>
+</html>
