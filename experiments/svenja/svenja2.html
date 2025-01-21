@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popover and Toaster Guide</title>
+    <title>Popover Guide</title>
     <style>
         body {
             font-family: 'Playfair Display', serif;
             margin: 0;
             padding: 0;
-            background-color: #f7f3f0;
+            background-color: #f3f1ef;
             color: #3e3e3e;
             scroll-behavior: smooth;
-            font-size: calc(1vw + 1vh);
         }
 
         nav {
@@ -24,6 +23,7 @@
             color: white;
             padding: 1em 0;
             z-index: 10;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         nav ul {
@@ -43,6 +43,7 @@
             text-decoration: none;
             padding: 0.5em 1em;
             border-radius: 0.25em;
+            transition: background-color 0.3s ease;
         }
 
         nav ul li a:hover {
@@ -51,31 +52,55 @@
 
         section {
             padding: 5em 2em;
-            background: #f6ecfd;
-            border-bottom: 1px solid #ebdcd3;
+            background: linear-gradient(145deg, #f5f5f5, #e0e0e0);
+            border-bottom: 1px solid #dcdcdc;
+            margin: 2em 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(145deg, #eaeaea, #d6d6d6);
         }
 
         h1, h2 {
-            color: #000647;
+            color: #444;
             text-align: center;
+            margin-bottom: 1em;
         }
 
         p {
             text-align: center;
+            font-size: 1.1em;
+            line-height: 1.6;
         }
 
         .popover {
-            background-color: #fff7f2;
-            border: 1px solid #ebdcd3;
-            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #dcdcdc;
+            padding: 15px;
             display: none;
             z-index: 20;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             position: absolute;
-            top: 50px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .popover-trigger {
@@ -85,12 +110,15 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            display: inline-block;
-            margin: 10px;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .popover-trigger:hover {
             background-color: #d1a8c5;
+            transform: translateY(-2px);
         }
 
         pre, code {
@@ -98,19 +126,7 @@
             padding: 10px;
             border-radius: 8px;
             display: block;
-        }
-
-        .toaster {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #333;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: none;
-            z-index: 30;
+            margin: 1em 0;
         }
     </style>
 </head>
@@ -124,9 +140,13 @@
         <li><a href="#d">Demo</a></li>
         <li><a href="#e">Code</a></li>
         <li><a href="#f">Practice</a></li>
-        <li><a href="#g">Responsive Design</a></li>
     </ul>
 </nav>
+
+<section id="a">
+    <h1>Was ist ein Popover?</h1>
+    <p>Ein Popover ist ein kleines Overlay, das zusätzliche Informationen oder Interaktionen anzeigt.</p>
+</section>
 
 <section id="b">
     <h2>Bestandteile eines Popover</h2>
@@ -137,14 +157,44 @@
     </div>
 </section>
 
-<section id="toaster-section">
-    <h2>Toaster Notification</h2>
-    <button id="show-toaster">Zeige Toaster</button>
+<section id="c">
+    <h2>Verwendungsszenarien</h2>
+    <p>Tooltips, Formulare, Benachrichtigungen.</p>
+    <button class="popover-trigger">Formular Popover</button>
+    <div class="popover">
+        <form>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email">
+            <button type="submit">Absenden</button>
+        </form>
+    </div>
 </section>
 
-<div class="toaster" id="toaster">
-    Das ist eine Toaster-Nachricht!
-</div>
+<section id="d">
+    <h2>Interaktive Demo</h2>
+    <p>Klicken Sie auf die Buttons, um verschiedene Popovers zu sehen.</p>
+    <button class="popover-trigger">Tooltip Beispiel</button>
+    <div class="popover">
+        <p>Hier ist ein Tooltip!</p>
+    </div>
+</section>
+
+<section id="e">
+    <h2>Codebeispiele</h2>
+    <pre>
+        <code>
+            &lt;button class="popover-trigger"&gt;Zeige Popover&lt;/button&gt;
+            &lt;div class="popover"&gt;
+                &lt;p&gt;Das ist der Inhalt eines Popovers!&lt;/p&gt;
+            &lt;/div&gt;
+        </code>
+    </pre>
+</section>
+
+<section id="f">
+    <h2>Best Practices</h2>
+    <p>Popovers sollten kurz und prägnant sein, nicht überladen und zugänglich für alle Benutzer.</p>
+</section>
 
 <script>
     document.querySelectorAll('.popover-trigger').forEach(button => {
@@ -163,14 +213,6 @@
         if (!event.target.classList.contains('popover-trigger')) {
             document.querySelectorAll('.popover').forEach(p => p.style.display = 'none');
         }
-    });
-
-    document.getElementById('show-toaster').addEventListener('click', () => {
-        const toaster = document.getElementById('toaster');
-        toaster.style.display = 'block';
-        setTimeout(() => {
-            toaster.style.display = 'none';
-        }, 3000);
     });
 </script>
 
