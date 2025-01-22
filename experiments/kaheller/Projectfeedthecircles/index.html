@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Circles with Black Dot</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Jersey+20&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <button id="reload-button" aria-label="Reload the game" title="Reload Game"></button>
+
+    <!-- Headline -->
+    <h1>FEED THE CIRCLE</h1>
+
+    <!-- Counter Box -->
+    <div id="counter" aria-live="polite" role="status">
+        <!-- Default content to ensure proper layout -->
+        
+        <div class="color-block">
+            <div class="color-triangle" style="border-top-color: red;"></div>
+            <span class="color-count">0</span>
+        </div>
+        <div class="color-block">
+            <div class="color-triangle" style="border-top-color: green;"></div>
+            <span class="color-count">0</span>
+        </div>
+        <div class="color-block">
+            <div class="color-triangle" style="border-top-color: blue;"></div>
+            <span class="color-count">0</span>
+        </div>
+        <div class="color-block">
+            <div class="color-triangle" style="border-top-color: yellow;"></div>
+            <span class="color-count">0</span>
+        </div>
+        <div class="color-block">
+            <div class="color-triangle" style="border-top-color: purple;"></div>
+            <span class="color-count">0</span>
+        </div>
+    </div>
+
+    <!-- Info Box -->
+    <div id="info-box" tabindex="0">
+        Collect them all and learn something fun about canvas!
+    </div>
+
+    <!-- Additional Box -->
+    <div id="extra-box" tabindex="0">
+        Collect five cicles of each colour by making them collide with the black dot to receive information about the topic of canvas!
+    </div>
+
+    <!-- Canvas Element -->
+    <canvas aria-label="Interactive game canvas" role="img"></canvas>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
