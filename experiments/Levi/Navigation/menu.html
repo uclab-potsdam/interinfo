@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu - Navigation - Interactive Information</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: sans-serif;
+      scroll-behavior: smooth;
+      font-size: calc(1vh + 1vw);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #333;
+      color: white;
+      padding: 1em 0;
+      z-index: 2;
+    }
+    
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 1em;
+      position: relative;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5em 1em;
+      border-radius: 0.25em;
+    }
+
+    nav ul li a:hover {
+      background: #555;
+    }
+
+    nav ul li ul {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.5em);
+      left: 0;
+      background: #333;
+      list-style: none;
+      padding: 0.5em 0;
+      margin: 0;
+      border-radius: 0.25em;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul li:hover ul {
+      display: block;
+    }
+
+    nav ul li ul li {
+      margin: 0;
+    }
+
+    nav ul li ul li a {
+      display: block;
+      white-space: nowrap;
+      padding: 0.5em 1em;
+    }
+
+    nav ul li ul li a:hover {
+      background: #444;
+    }
+
+    h1 { margin: 4em 0; text-align: center; }
+    h3 { padding-top: 3em; }
+
+    section {
+      height: 100vh;
+      padding: 3em;
+      box-sizing: border-box;
+    }
+
+    #a { background: #eee; }
+    #b { background: #ddd; }
+    #c { background: #bbb; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="#a">Section A</a>
+        <ul>
+          <li><a href="#a1">Subsection A1</a></li>
+          <li><a href="#a2">Subsection A2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#b">Section B</a>
+        <ul>
+          <li><a href="#b1">Subsection B1</a></li>
+          <li><a href="#b2">Subsection B2</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#c">Section C</a>
+        <ul>
+          <li><a href="#c1">Subsection C1</a></li>
+          <li><a href="#c2">Subsection C2</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <h1>A page with sections and subsections</h1>
+
+  <section id="a">
+    <h2>Section A</h2>
+    <h3 id="a1">Subsection A1</h3>
+    <p>This is the content of Subsection A1.</p>
+    <h3 id="a2">Subsection A2</h3>
+    <p>This is the content of Subsection A2.</p>
+  </section>
+
+  <section id="b">
+    <h2>Section B</h2>
+    <h3 id="b1">Subsection B1</h3>
+    <p>This is the content of Subsection B1.</p>
+    <h3 id="b2">Subsection B2</h3>
+    <p>This is the content of Subsection B2.</p>
+  </section>
+
+  <section id="c">
+    <h2>Section C</h2>
+    <h3 id="c1">Subsection C1</h3>
+    <p>This is the content of Subsection C1.</p>
+    <h3 id="c2">Subsection C2</h3>
+    <p>This is the content of Subsection C2.</p>
+  </section>
+
+</body>
+</html>

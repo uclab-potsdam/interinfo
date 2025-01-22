@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Timeline with Scrollable Content</title>
+    <style>
+        /* Existing CSS... */
+        
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1400px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .timeline {
+            width: 30%;
+            position: relative;
+            padding-right: 40px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .timeline .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 40px 0;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        .timeline .date {
+            font-size: 1.5em;
+            color: #333;
+            margin-right: 20px;
+            width: 80px;
+            text-align: right;
+        }
+
+        .timeline .square {
+            width: 10vh;
+            height: 10vh;
+            background-color: #FFFFFF;
+            border: 2px solid #999;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .timeline .square:hover {
+            transform: scale(1.1);
+            background-color: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+
+        .content {
+            width: 70%;
+            padding-left: 40px;
+        }
+
+        .content-panel {
+            display: none;
+            background-color: #f0f0f0;
+            border: 2px solid #333;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-height: 600px;
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .content-panel.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline .circle {
+            width: 10vh;
+            height: 10vh;
+            background-color: #FFFFFF;
+            border: 2px solid #999;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .timeline .circle:hover {
+            transform: scale(1.1);
+            background-color: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+        
+        .timeline .hexagon {
+            width: 10vh;
+            height: 10vh;
+            background-color: #FFFFFF;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            border: 2px solid #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .timeline .hexagon:hover {
+            transform: scale(1.1);
+            background-color: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+
+        /* Style for the Webdesign section */
+        .content-panel#content-webdesign {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #f3e1e1);
+            border: 2px solid #e91e63;
+            font-family: 'Georgia', serif;
+            color: #FFFFFF;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+            max-height: 600px;
+            overflow-y: auto;
+            font-size: 1.2em;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .content-panel#content-webdesign:hover {
+            box-shadow: 0 12px 24px rgba(233, 30, 99, 0.6);
+            transform: translateY(-5px) rotate(-1deg);
+        }
+
+        .content-panel#content-webdesign h2 {
+            font-size: 2.5em;
+            color: #e91e63;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #e91e63;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            animation: text-glow 1.5s ease-in-out infinite alternate;
+        }
+
+        .content-panel#content-webdesign p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .content-panel#content-webdesign img {
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #e91e63;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .content-panel#content-webdesign img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0px rgba(233, 30, 99, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(233, 30, 99, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 0px rgba(233, 30, 99, 0.4);
+            }
+        }
+
+        @keyframes text-glow {
+            from {
+                text-shadow: 0 0 5px #e91e63, 0 0 10px #e91e63, 0 0 15px #e91e63;
+            }
+            to {
+                text-shadow: 0 0 10px #ff80ab, 0 0 20px #ff80ab, 0 0 30px #ff80ab;
+            }
+        }
+
+        /* #s1980 - Specific Styles for 1980 Section */
+        #s1980 .content-panel {
+            font-family: 'Georgia', serif;
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        /* #s1980 - Headers and Paragraphs */
+        #s1980 .content-panel h2, #s1980 .content-panel h3 {
+            font-size: 2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        #s1980 .content-panel p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        #s1980 .content-panel img {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border: 2px solid #999;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        /* 1990: detaillierter Stil */
+        #s1990 .content-panel {
+            background-color: #FFFFFF;
+            border: 2px solid #007acc;
+            padding: 30px;
+            font-family: 'Georgia', serif; /* Ästhetische Schriftart */
+            font-size: 1.3em;
+            color: #333;
+            line-height: 1.8;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            max-height: 600px;
+        }
+
+        #s1990 .content-panel h2 {
+            font-size: 2.2em;
+            color: #000000;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        #s1990 .content-panel p {
+            margin-bottom: 20px;
+        }
+
+        #s1990 .content-panel p span.highlight {
+            color: #005bb5;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        #s1990 .content-panel img {
+            max-width: 100%;
+            border: 2px solid #ccc;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        /* #s2000 - Specific Styles for 2000 Section */
+        #s2000 .content-panel {
+            font-family: 'Georgia', serif;
+            color: white;
+            font-size: 1.2em;
+            background-image: url('wood.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #999;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        #s2000 .content-panel p {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        #s2000 .content-panel img {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border: 2px solid #999;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        #s2000 .content-panel img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Card Layout for 2000 Section */
+        #s2000 .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            position: relative;
+            margin-top: 20px;
+        }
+
+        #s2000 .card {
+            width: 180px;
+            height: 280px;
+            transition: transform 0.6s ease-in-out;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            cursor: pointer;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #s2000 .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #s2000 .card:hover .card-inner, #s2000 .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        #s2000 .card-front, #s2000 .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1em;
+            padding: 10px;
+            box-sizing: border-box;
+            flex-direction: column;
+        }
+
+        #s2000 .card-front {
+            background: url('Karte.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+        }
+
+        #s2000 .card-back {
+            background-color: #f9f9f9;
+            color: #333;
+            transform: rotateY(180deg);
+        }
+
+        /* #s2010 - Specific Styles for 2010 Section */
+
+        #s2010 .sky {
+    transform: translateZ(-35px) scale(4); /* Sky is furthest back */
+    position: absolute;
+    height: 120%;
+    width: 120%;
+    top: -10%;
+    left: -10%;
+    object-fit: cover;
+    z-index: -4;
+}
+
+#s2010 .sun {
+    position: absolute;
+    top: -165px;
+    left: -100px;
+    width: 50px;
+    height: 80px;
+    transform: translateZ(-25px) scale(3);
+    object-fit: cover;
+    z-index: -3;
+}
+
+#s2010 .background {
+    transform: translateZ(-20px) scale(2.5); /* Mountain moves slower than trees */
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+#s2010 .foreground {
+    transform: translateZ(-5px) scale(0.5); /* Trees are closer to the viewer */
+    position: absolute;
+    height: 120%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+#s2010 .title {
+    font-size: 7rem;
+    color: white;
+    text-shadow: 0 0 5px black;
+    z-index: 0;
+}
+
+#s2010 section {
+    font-size: 2rem;
+    padding: 2rem;
+    background-color: #333;
+    color: white;
+    z-index: 1;
+}
+
+
+
+        /* New CSS for 2010 Parallax */
+        #s2010 .wrapper {
+    height: 100vh;
+    overflow-y: auto; /* This allows scrolling */
+    overflow-x: hidden;
+    perspective: 10px;
+}
+
+#s2010 .content-panel {
+    overflow: auto; /* Ensure this is set to allow scrolling only within the panel */
+    height: 100vh;  /* Ensure the height is set so only the content panel scrolls */
+}
+
+
+        #s2010 header {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            transform-style: preserve-3d;
+            z-index: -1;
+        }
+
+        #s2010 .background {
+            transform: translateZ(-10px) scale(2);
+        }
+
+        #s2010 .foreground {
+            transform: translateZ(-5px) scale(1.5);
+        }
+
+        #s2010 .background,
+        #s2010 .foreground {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        #s2010 .title {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 5px black;
+        }
+
+        #s2010 section {
+            font-size: 2rem;
+            padding: 2rem;
+            background-color: #1a5509;
+            color: white;
+        }
+
+        /* #s2020 - Specific Styles for 2020 Section */
+        
+        #s2020 .content-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 0, 255, 0.2) 25%, transparent 25%),
+                        linear-gradient(225deg, rgba(128, 57, 57, 0.2) 25%, transparent 25%),
+                        linear-gradient(45deg, rgba(73, 44, 44, 0.2) 25%, transparent 25%),
+                        linear-gradient(315deg, rgba(45, 3, 255, 0.2) 25%, #f0f0f0 25%);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 0, 25px -25px, 0px 25px;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        #s2020 .content-panel h2 {
+            font-size: 3em;
+            color: #444;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #s2020 .content-panel p {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 1em;
+        }
+
+        #s2020 .content-panel button {
+            padding: 20px 50px;
+            font-size: 1em;
+            text-align: center;
+            margin-top: 30px;
+            cursor: pointer;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            align-self: center;
+        }
+
+        #s2020 .content-panel button:hover {
+            background-color: #666;
+            transform: translateY(-3px);
+        }
+
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        .dark-mode .content-panel {
+            background-color: #1e1e1e;
+            border-color: #444;
+        }
+
+        .dark-mode .content-panel h2,
+        .dark-mode .content-panel p {
+            color: #f5f5f5;
+        }
+
+        
+        .dark-mode #s2020 .content-panel button {
+            background-color: #bbbbbb;
+            color: #333;
+        }
+
+        .dark-mode #s2020 .content-panel button:hover {
+            background-color: #999;
+        }
+
+        .dark-mode #s2000 .card-front {
+            background: #444;
+            color: #f5f5f5;
+        }
+
+        .dark-mode #s2000 .card-back {
+            background-color: #555;
+            color: #f5f5f5;
+        }
+        
+/* General Dark Mode Styles for all content panels except 2000 */
+.dark-mode .content-panel {
+    background-color: #1e1e1e !important;
+    border-color: #444 !important;
+    color: #f5f5f5 !important;
+    font-family: 'Georgia', serif !important;
+    font-size: 1.2em;
+    line-height: 1.6;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Specific exclusion for 2000 */
+.dark-mode #content-2000 {
+    background-color: initial !important; /* Use the original styling */
+    border-color: initial !important;
+    color: initial !important;
+    background-image: url('wood.jpg') !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.dark-mode .content-panel h2, .dark-mode .content-panel p {
+    color: #f5f5f5 !important;
+}
+
+/* Keep the existing dark mode styles for buttons */
+.dark-mode #s2020 .content-panel button {
+    background-color: #bbbbbb !important;
+    color: #333 !important;
+}
+
+.dark-mode #s2020 .content-panel button:hover {
+    background-color: #999 !important;
+}
+
+/* Specific Dark Mode Styles for the 2010 section's text field */
+.dark-mode #s2010 section {
+    background-color: #2e2e2e !important;  /* Dark gray */
+    color: #f5f5f5 !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure the container background is transparent or matches dark mode */
+body.dark-mode .container {
+    background-color: transparent; /* Remove any background color */
+}
+
+body.dark-mode {
+    background-color: #121212; /* General dark mode background for the body */
+}
+
+/* Dark Mode Styles for Timeline */
+body.dark-mode .timeline {
+    background-color: transparent; /* Ensure the timeline background is transparent */
+    color: #f5f5f5;
+}
+
+body.dark-mode .timeline .timeline-item {
+    background-color: transparent; /* Ensure timeline items have no background */
+    border-color: #444;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark-mode .timeline .circle,
+body.dark-mode .timeline .square,
+body.dark-mode .timeline .hexagon {
+    background-color: #333; /* Darker background for shapes */
+    color: #f5f5f5;
+    border-color: #666;
+}
+
+body.dark-mode .timeline .circle:hover,
+body.dark-mode .timeline .square:hover,
+body.dark-mode .timeline .hexagon:hover {
+    background-color: #e91e63;
+    color: #fff;
+    border-color: #e91e63;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Timeline -->
+       
+        <div class="timeline">
+            <div class="timeline-item" onclick="showContent('webdesign')">
+                <div class="date"></div>
+                <div class="circle">Webdesign</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(1980)">
+                <div class="date"></div>
+                <div class="square">1980</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(1990)">
+                <div class="date"></div>
+                <div class="square">1990</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(2000)">
+                <div class="date"></div>
+                <div class="square">2000</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(2010)">
+                <div class="date"></div>
+                <div class="square">2010</div>
+            </div>
+            <div class="timeline-item" onclick="showContent(2020)">
+                <div class="date"></div>
+                <div class="square">2020</div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <section id="swebdesign">
+            <div id="content-webdesign" class="content-panel">
+                <h2>The Evolution of Web Design</h2>
+                <p>The journey of web design began in the early 1990s with simple text-based sites, where minimal HTML was the norm. As the internet expanded, so did the need for more engaging and visually appealing web pages.</p>
+                <p>In the late 1990s, the introduction of CSS allowed designers to separate content from presentation, offering more control over the look and feel of websites. This era saw the rise of table-based layouts, which, despite their limitations, were a significant improvement over previous methods.</p>
+                <p>The early 2000s marked a pivotal point with the adoption of JavaScript and Flash, enabling interactive content and animations. This period witnessed the birth of dynamic websites that could respond to user interactions, paving the way for modern web applications.</p>
+                <p>As mobile devices became ubiquitous, responsive design emerged as a critical aspect of web design. Frameworks like Bootstrap and Flexbox helped designers create flexible layouts that adapt to different screen sizes, ensuring a consistent user experience across devices.</p>
+                <p>Today, web design is not just about aesthetics but also about functionality, accessibility, and performance. Modern tools like React and Angular facilitate the development of single-page applications, while design systems ensure brand consistency and streamline the design process.</p>
+                <p>The future of web design looks promising with the advent of technologies like artificial intelligence and virtual reality, which are poised to redefine how users interact with digital content.</p>
+            </div>
+        </section>
+
+        <section id="s1980">
+            <div id="content-1980" class="content-panel">
+                <h2>1980 - Hypercard</h2>
+                <p>1980 marked a year of technological shifts as Apple introduced Hypercard, a revolutionary program allowing users to create interactive, visual content that was interconnected.</p>
+                <p>With Hypercard, anyone could create simple yet powerful programs without deep programming knowledge. This was a milestone as it brought the concept of hypertext to the public, laying the groundwork for the web as we know it today.</p>
+                <p>Hypercard was a digital experiment significant to the computing world, paving the way for web pages and interactive media development. It was the first example of a user interface based on a linked structure—similar to the later World Wide Web developed in 1990.</p>
+                <p>In many ways, it was a "gem" from early computing history, still admired by tech enthusiasts today. The application relied on simple graphics, ASCII text, and minimal navigation elements compatible with the computers and monitors of the time.</p>
+                <img src="susankareicons.png" alt="Susan Kare Icon">
+                <p>https://winworldpc.com/product/hypercard</p>
+                <p>The software was very popular on early Macintosh computers and influenced many later interactive programs.</p>
+                <img src="hypercard-home.webp" alt="hyper card">
+                <p>https://lowendmac.com/2003/remembering-hypercard/</p>
+            </div>
+        </section>
+
+        <section id="s1990">
+            <div id="content-1990" class="content-panel">
+                <h2>1990 - World Wide Web</h2>
+                <p>Das Jahr 1990 war ein <span class="highlight" onclick="showTooltip(this, 'Ein bedeutender Fortschritt in der Technologie.')">Meilenstein</span> der digitalen Revolution. Tim Berners-Lee stellte das <span class="highlight" onclick="showTooltip(this, 'Das globale Netzwerk für den Austausch von Hypertext-Dokumenten.')">World Wide Web</span> vor.</p>
+                <p>Das World Wide Web machte Informationen zugänglicher als je zuvor. Es führte zu einem globalen Netz, das Menschen, Unternehmen und Ideen miteinander verbindet. In den folgenden Jahren wurden <span class="highlight" onclick="showTooltip(this, 'Hypertext Markup Language - die Basis von Webseiten.')">HTML</span>, <span class="highlight" onclick="showTooltip(this, 'Uniform Resource Locator - die Adresse einer Webseite.')">URLs</span> und <span class="highlight" onclick="showTooltip(this, 'Hypertext Transfer Protocol - ermöglicht die Übertragung von Daten im Web.')">HTTP</span> zum Standard, wodurch Webseiten weltweit erstellt und aufgerufen werden konnten.</p>
+                <p>Das Design von Webseiten in dieser Ära war minimalistisch, mit Fokus auf Funktionalität. Klare Strukturen, einfache Farbpaletten und grundlegende Typografie waren die Regel. Gleichzeitig legte das frühe Web den Grundstein für <span class="highlight" onclick="showTooltip(this, 'Moderne Techniken wie Responsive Design und CSS.')">moderne Webdesign-Techniken</span>, wie wir sie heute kennen.</p>
+                <p>Die Vision des World Wide Web war es, Informationen für jeden Menschen auf der Welt zugänglich zu machen. Diese Idee hat bis heute Bestand und beeinflusst, wie Technologien für Kommunikation und Wissen entwickelt werden.</p>
+            </div>
+        </section>
+
+        <section id="s2000">
+            <div id="content-2000" class="content-panel">
+                <h2>2000 - From Static to Dynamic</h2>
+                <p>The 2000s saw a significant evolution in web technology, transitioning from static HTML pages to dynamic, server-driven content. Technologies like PHP, AJAX, and databases like MySQL enabled developers to create web applications that were interactive and responsive to user inputs.</p>
+                <div class="card-container" id="cardContainer">
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front"></div>
+                            <div class="card-back">
+                                <p>Hover Effect: Enhances user interaction by providing visual feedback when users hover over elements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front"></div>
+                            <div class="card-back">
+                                <p>Special Feature: Creates an engaging experience, making the interface feel more dynamic and responsive.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" onclick="flipCard(this)">
+                        <div class="card-inner">
+                            <div class="card-front"></div>
+                            <div class="card-back">
+                                <p>Why It's Unique: Offers immediate feedback and emphasizes elements, effectively guiding user attention.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="s2010">
+            <div id="content-2010" class="content-panel">
+                <div class="wrapper">
+                    <header>
+                        <img src="Sky.jpg" class="sky" alt="Sky Background">
+                        <img src="Sun.png" class="sun" alt="Sun">
+                        <img src="Mountain.png" class="background" alt="Mountain Background">
+                        <img src="Trees.png" class="foreground" alt="Trees Foreground">
+                        <h1 class="title">2010 - Parallax Effect </h1>
+                    </header>
+                    <section>
+                        <h2>2010 - Parallax Effect Introduction</h2>
+                        <p>The year 2010 marked a significant evolution in web design with the emergence of the parallax effect. This technique utilizes various layers moving at different speeds to create an illusion of depth, making websites more dynamic and engaging.</p>
+                        <p>The parallax effect was initially popularized in video games and soon found its way into web design, enhancing user experience through visually appealing interactions. Websites began to adopt this technique to guide users' attention and create a narrative journey through scrolling.</p>
+                        <p>Incorporating parallax effects requires careful consideration of performance and accessibility. Designers must ensure that animations do not hinder user experience on slower devices and remain accessible to users with disabilities.</p>
+                        <p>Beyond aesthetics, the parallax effect offers practical benefits in storytelling and data visualization. By leveraging depth and movement, designers can highlight important content and create memorable user experiences.</p>
+                        <p>As web development continues to evolve, the parallax effect remains a powerful tool in a designer's arsenal, offering endless possibilities for creativity and innovation.</p>
+                    </section>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+        
+        
+
+        <section id="s2020">
+            <div id="content-2020" class="content-panel">
+                <h2>2020 - Embracing Dark Mode</h2>
+                <p>The year 2020 saw the widespread adoption of Dark Mode across various platforms and applications. It offers a sleek, modern look while reducing eye strain in low-light environments.</p>
+                <p>Dark Mode not only enhances visual ergonomics but also helps in conserving battery life on OLED screens. The trend has become a staple in UI design, offering users the choice to toggle between light and dark themes based on their preference.</p>
+                <button id="darkModeToggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+            </div>
+        </section>
+
+        <!-- Javascript Code -->
+        <script>
+            function showContent(year) {
+                const allContent = document.querySelectorAll('.content-panel');
+                allContent.forEach(content => content.classList.remove('active'));
+
+                const contentId = '#content-' + year;
+                const content = document.querySelector(contentId);
+                if (content) {
+                    content.classList.add('active');
+                } else {
+                    console.error(`Inhaltsabschnitt für ${year} nicht gefunden.`);
+                }
+                
+                if (year === 2000) {
+                    animateCards();
+                }
+            }
+
+            function flipCard(card) {
+                card.classList.toggle('flipped');
+            }
+
+            function animateCards() {
+                const container = document.getElementById('cardContainer');
+                let cards = Array.from(container.children);
+                const cardWidth = 180;
+                const spacing = 40; // Space between cards
+
+                // Shuffle cards array
+                cards = shuffleArray(cards);
+
+                cards.forEach((card, index) => {
+                    const offset = (index - 1) * (cardWidth + spacing); // Calculate offset for each card
+
+                    // Set initial stacked position
+                    card.style.transform = `translateX(-50%) translateY(${index * 10}px)`; // Set initial stacked position
+
+                    // Animate to final spread position
+                    setTimeout(() => {
+                        card.style.transform = `translateX(calc(-50% + ${offset}px))`; // Animate to final spread position
+                    }, 500 + index * 100); // Stagger the animation timing
+                });
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            // Function to show a tooltip with the given message
+            function showTooltip(element, message) {
+                // Check if a tooltip already exists and remove it
+                const existingTooltip = document.querySelector('.tooltip');
+                if (existingTooltip) {
+                    existingTooltip.remove();
+                }
+
+                // Create a new tooltip element
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.innerText = message;
+                
+                // Style the tooltip
+                tooltip.style.position = 'absolute';
+                tooltip.style.backgroundColor = '#333';
+                tooltip.style.color = '#fff';
+                tooltip.style.padding = '5px 10px';
+                tooltip.style.borderRadius = '5px';
+                tooltip.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.2)';
+                tooltip.style.zIndex = '1000';
+
+                // Append the tooltip to the body
+                document.body.appendChild(tooltip);
+
+                // Position the tooltip near the element
+                const rect = element.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + window.scrollX}px`;
+                tooltip.style.top = `${rect.bottom + window.scrollY}px`;
+
+                // Remove the tooltip when clicking elsewhere
+                document.addEventListener('click', function removeTooltip(event) {
+                    if (!tooltip.contains(event.target) && !element.contains(event.target)) {
+                        tooltip.remove();
+                        document.removeEventListener('click', removeTooltip);
+                    }
+                });
+            }
+
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+            }
+        </script>
+    </div>
+</body>
+</html>

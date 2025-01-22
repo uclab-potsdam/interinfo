@@ -3,12 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Scroll - Media - Interactive Information</title>
+            
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&display=swap');
+
     body {
         margin: 0;
         height: 1000vh; /* Make the page scrollable */
-        background-color: black;
-        font-family: sans-serif;
+        background-color: #6868AC; /* Retro background color */
+        font-family: 'Lobster Two', serif;
         position: relative;
     }
 
@@ -36,7 +40,13 @@
     }
 
     h1, h2, h3 { 
-        color: rgb(179, 54, 246);  
+        color: color: #F9f1cc; /* Primary color of the text */
+    text-shadow: -2px 2px 0 #FFB650, /* Orange shadow */
+                 -4px 4px 0 #FF80BF, /* Pink shadow */
+                 -6px 6px 0 #6868AC; /* Dark blue shadow */
+    transform: skewX(-10deg); /* Skew the text on the X-axis */
+    transition: all 0.5s ease; /* Smooth transition for hover effects */
+    z-index: 2; /* Ensures text is layered above any potential background or border */ 
         position: absolute;
         text-align: center;
         width: 100%;
@@ -47,53 +57,42 @@
     h2 { font-size: 2.5em; top: 20vh; }
 
     h3 {
-        color: rgb(84, 221, 194);
+        color: #F9f1cc; /* Primary color of the text */
+    text-shadow: -2px 2px 0 #FFB650, /* Orange shadow */
+                 -4px 4px 0 #FF80BF, /* Pink shadow */
+                 -6px 6px 0 #6868AC; /* Dark blue shadow */
+    transform: skewX(-10deg); /* Skew the text on the X-axis */
+    transition: all 0.5s ease; /* Smooth transition for hover effects */
+    z-index: 2; /* Ensures text is layered above any potential background or border */
         font-size: 2em;
         position: absolute;
         text-align: center;
         width: 100%;
-        animation: wave 2s infinite ease-in-out;
+        opacity: 0; /* Start hidden */
+      transform: translateY(50px) scale(0.8); /* Start off-screen and scaled down */
+      transition: opacity 0.8s ease, transform 0.8s ease; /* Smooth animation */
     }
 
-    @keyframes wave {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        25% {
-            transform: translateY(-10px);
-        }
-        50% {
-            transform: translateY(10px);
-        }
-        75% {
-            transform: translateY(-10px);
-        }
+    /* Active headers: fully visible and in place */
+    h3.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
 
-    /* Staggered Animation for Individual Text Lines */
-    .wave-text {
-        position: absolute;
-    }
 
-    .wave-text:nth-child(1) { animation-delay: 0s; }
-    .wave-text:nth-child(2) { animation-delay: 0.1s; }
-    .wave-text:nth-child(3) { animation-delay: 0.2s; }
-    .wave-text:nth-child(4) { animation-delay: 0.3s; }
-    .wave-text:nth-child(5) { animation-delay: 0.4s; }
-    .wave-text:nth-child(6) { animation-delay: 0.5s; }
 </style>
 </head>
 <body>
 
 <div class="video-container">
     <!-- Video 1 -->
-    <video id="video" autoplay loop muted playsinline>
+    <video id="video1" loop muted playsinline>
         <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <!-- Video 2 (Black and White) -->
-    <video autoplay loop muted playsinline class="grayscale">
+    <video id="video2" loop muted playsinline class="grayscale">
         <source src="https://fhpcloud.fh-potsdam.de/s/cQCaBpTMfxfEgFJ/download/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -103,14 +102,138 @@
 <h2>Rick Astley</h2>
 
 <!-- Lyrics with Wave Animation -->
-<h3 class="wave-text">We're no strangers to love</h3>
-<h3 class="wave-text">You know the rules and so do I</h3>
-<h3 class="wave-text">A full commitment's what I'm thinking of</h3>
-<h3 class="wave-text">You wouldn't get this from any other guy</h3>
-<h3 class="wave-text">I just wanna tell you how I'm feeling</h3>
-<h3 class="wave-text">Gotta make you understand</h3>
+<h3>We're no strangers to love</h3>
+<h3>You know the rules and so do I</h3>
+<h3>A full commitment's what I'm thinking of</h3>
+<h3>You wouldn't get this from any other guy</h3>
+<h3>I just wanna tell you how I'm feeling</h3>
+<h3>Gotta make you understand</h3>
+<h3>Never gonna give you up</h3>
+<h3>Never gonna let you down</h3>
+<h3>Never gonna run around and desert you</h3>
+<h3>Never gonna make you cry</h3>
+<h3>Never gonna say goodbye</h3>
+<h3>Never gonna tell a lie and hurt you</h3>
+<h3>We've known each other for so long</h3>
+<h3>Your heart's been aching but you're too shy to say it</h3>
+<h3>Inside we both know what's been going on</h3>
+<h3>We know the game and we're gonna play it</h3>
+<h3>And if you ask me how I'm feeling</h3>
+<h3>Don't tell me you're too blind to see</h3>
+<h3>Never gonna give you up</h3>
+<h3>Never gonna let you down</h3>
+<h3>Never gonna run around and desert you</h3>
+<h3>Never gonna make you cry</h3>
+<h3>Never gonna say goodbye</h3>
+<h3>Never gonna tell a lie and hurt you</h3>
+<h3>Never gonna give you up</h3>
+<h3>Never gonna let you down</h3>
+<h3>Never gonna run around and desert you</h3>
+<h3>Never gonna make you cry</h3>
+<h3>Never gonna say goodbye</h3>
+<h3>Never gonna tell a lie and hurt you</h3>
+<h3>Never gonna give, never gonna give</h3>
+<h3>(Give you up)</h3>
+<h3>(Ooh) Never gonna give, never gonna give</h3>
+<h3>(Give you up)</h3>
+<h3>We've known each other for so long</h3>
+<h3>Your heart's been aching but you're too shy to say it</h3>
+<h3>Inside we both know what's been going on</h3>
+<h3>We know the game and we're gonna play it</h3>
+<h3>I just wanna tell you how I'm feeling</h3>
+<h3>Gotta make you understand</h3>
+<h3>Never gonna give you up</h3>
+<h3>Never gonna let you down</h3>
+<h3>Never gonna run around and desert you</h3>
+<h3>Never gonna make you cry</h3>
+<h3>Never gonna say goodbye</h3>
+<h3>Never gonna tell a lie and hurt you</h3>
+<h3>Never gonna give you up</h3>
+<h3>Never gonna let you down</h3>
+<h3>Never gonna run around and desert you</h3>
+<h3>Never gonna make you cry</h3>
+<h3>Never gonna say goodbye</h3>
+<h3>Never gonna tell a lie and hurt you</h3>
+<h3>Never gonna give you up</h3>
+<h3>Never gonna let you down</h3>
+<h3>Never gonna run around and desert you</h3>
+<h3>Never gonna make you cry</h3>
 
 
 
+<script>
+    // Ensure both videos start simultaneously
+    const video1 = document.getElementById('video1');
+    const video2 = document.getElementById('video2');
+
+    const playVideosInSync = () => {
+        video1.play();
+        video2.play();
+    };
+
+    // Wait until both videos are loaded
+    Promise.all([
+        new Promise(resolve => video1.oncanplaythrough = resolve),
+        new Promise(resolve => video2.oncanplaythrough = resolve)
+    ]).then(() => {
+        video1.currentTime = 0;
+        video2.currentTime = 0;
+        playVideosInSync();
+    });
+
+    // If videos are paused, synchronize their play state
+    [video1, video2].forEach(video => {
+        video.addEventListener('pause', () => {
+            video1.pause();
+            video2.pause();
+        });
+
+        video.addEventListener('play', () => {
+            playVideosInSync();
+        });
+    });
+
+    // adjust video frame along scrolling progress
+const video = document.getElementById('video');
+
+document.addEventListener('scroll', () => {
+    video.removeAttribute("autoplay");
+
+    // scrolling progress
+    const pct = (window.scrollY / (document.documentElement.scrollHeight - document.documentElement.clientHeight));
+
+    video.currentTime = video.duration * pct;
+});
+
+
+// select all h3 elements
+const headers = document.querySelectorAll('h3');
+const start = 100;  // start position for first line
+const end = 950;    // end position for last line
+const step = (end - start) / (headers.length - 1); // space between headers
+
+// vertically distribute the elements
+headers.forEach((header, index) => {
+    const topPosition = start + (index * step);
+    header.style.top = `${topPosition}vh`; // set top position
+});
+
+// Scroll listener for activating animations
+window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY; // Current scroll position
+      const windowHeight = window.innerHeight; // Height of the visible area
+
+      headers.forEach((header) => {
+        const headerTop = header.getBoundingClientRect().top; // Position relative to the viewport
+
+        // Activate headers when they enter the viewport
+        if (headerTop < windowHeight && headerTop > 0) {
+          header.classList.add('active');
+        } else {
+          header.classList.remove('active');
+        }
+      });
+    });
+</script>
 </body>
 </html>
