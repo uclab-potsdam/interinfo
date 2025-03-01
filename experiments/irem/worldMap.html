@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Map of the European language family</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        body {
+            /* General styles for the body */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Map container */
+        #map {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        /* Picker card for language family legend(mobil and web) */
+        @media (max-width: 768px) {
+            .picker-card {
+                width: 90%;
+                height: auto;
+                max-height: 220px;
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .hologram-box {
+                width: 180px;
+                max-width: 70%;
+                padding: 10px;
+            }
+
+            .hologram-box img {
+                width: 80px;
+            }
+
+            .info-box {
+                width: 90%;
+                max-width: 320px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .speak-btn {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .picker-card {
+                font-size: 10px;
+                max-height: 180px;
+            }
+
+            .hologram-box {
+                width: 150px;
+                max-width: 80%;
+            }
+
+            .info-box {
+                width: 90%;
+                max-width: 280px;
+                font-size: 12px;
+            }
+
+            .speak-btn {
+                font-size: 12px;
+                padding: 6px;
+            }
+        }
+        .picker-card {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.9);
+            padding-bottom: 5px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 60%;
+            max-width: 768px;
+            max-height: 220px;
+            z-index: 10;
+            text-align: center;
+        }
+
+        /* Hologram effect for country details */
+        .hologram-box {
+            position: absolute;
+            background: rgba(0, 255, 255, 0.05);
+            /* Şeffaf mavi ton */
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            display: none;
+            width: 200px;
+            max-width: 60%;
+            backdrop-filter: blur(8px);
+            transform-origin: bottom;
+            animation: hologramGlow 2s infinite alternate ease-in-out;
+        }
+
+        /* Üçgensel ışık efekti */
+        .hologram-box::before {
+            content: "";
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 150px;
+            background: conic-gradient(from 180deg at 50% 100%,
+                    rgba(0, 255, 255, 0.3),
+                    rgba(0, 255, 255, 0.1),
+                    transparent);
+            filter: blur(15px);
+            pointer-events: none;
+        }
+
+        /* Hafif parlayan efekt */
+        @keyframes hologramGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            }
+        }
+
+        .hologram-box img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive styles for smaller screens */
+        @media (max-width: 768px) {
+            .hologram-box {
+                width: 200px;
+                padding: 15px;
+            }
+
+            .hologram-box img {
+                width: 80px;
+            }
+        }
+
+
+        .info-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            z-index: 20;
+            text-align: center;
+            color: white;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .language-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            justify-content: center;
+        }
+
+        .color-box {
+            width: 15px;
+            display: flex;
+            flex-direction: column;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: #1e1e1e !important;
+            color: white !important;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .leaflet-popup-tip {
+            background: #1e1e1e !important;
+        }
+
+        .speak-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .picker-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e0ea17;
+            /* Altın Sarısı */
+            text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8);
+            margin-bottom: 5px;
+        }
+
+        .info-box {
+            position: absolute;
+            bottom: auto;
+            left: auto;
+            right: 60px;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 250px;
+            z-index: 20;
+            text-align: left;
+            color: white;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 3px 7px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <!-- Picker card for language families -->
+    <div class="picker-card" id="picker-card">
+        <h1 class="picker-title">🌍 Language Map</h1>
+        <h3>European Language Families</h3>
+        <div id="language-list"></div>
+    </div>
+
+
+    <!-- Yeni Bilgi Kartı (Sağ Üst Köşe) -->
+    <div id="info-box" class="info-box" style="display: none;">
+        <button class="close-btn" onclick="closeInfoBox()">X</button>
+        <h3 id="info-title"></h3>
+        <p id="info-content"></p>
+    </div>
+    <!-- Hologram info box that appears on hover -->
+    <div id="hologram-info" class="hologram-box">
+        <button class="close-btn" onclick="closeHologram()">X</button>
+        <h3 id="hologram-title"></h3>
+        <img id="hologram-flag" src="" alt="Bayrak">
+        <p id="hologram-language"></p>
+        <img id="hologram-map" class="hologram-map" src="" alt="Ülke Haritası">
+    </div>
+
+
+
+    <script>
+        // Initialize Leaflet map
+        const map = L.map('map').setView([50, 10], 4);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
+        }).addTo(map);
+        // Language families and their colors
+        const languageFamilies = {
+            "Indo-European": "#FF5733",
+            "Altaic": "#3366FF",
+            "Uralic": "#FFD700",
+            "Kartvelian": "#4CAF50"
+        };
+        // Function to retrieve language codes for speech synthesis
+        function getLanguageCode(language) {
+            const languageCodes = {
+                "German": "de-DE",
+                "French": "fr-FR",
+                "Russian": "ru-RU",
+                "Turkish": "tr-TR",
+                "English": "en-GB",
+                "Italian": "it-IT",
+                "Spanish": "es-ES",
+                "Dutch": "nl-NL",
+                "Polish": "pl-PL",
+                "Hungarian": "hu-HU",
+                "Georgian": "ka-GE"
+            };
+
+            return languageCodes[language] || "auto";
+        }
+        document.getElementById("info-box").addEventListener("click", closeInfoBox);
+
+        // Function to show the info box with speaker count in a list format
+        function showInfoBox(language) {
+            document.getElementById('info-title').innerText = `${language.name} (${language.branch})`;
+
+            document.getElementById('info-content').innerHTML = `
+        <ul>
+            <li><strong>Language Family:</strong> ${language.family}</li>
+            <li><strong>Branch:</strong> ${language.branch}</li>
+            <li><strong>Spoken by:</strong> ~${language.speakers} million people</li>
+        </ul>
+    `;
+
+            document.getElementById('info-box').style.display = 'block';
+        }
+
+        function closeInfoBox() {
+            document.getElementById('info-box').style.display = 'none';
+
+
+        }
+        // List of languages and their details
+        const languages = [
+            { name: "German", country: "Germany", family: "Indo-European", branch: "West Germanic", latlng: [51, 10], hello: "Hallo", speakers: 76 },
+            { name: "French", country: "France", family: "Indo-European", branch: "Western Romance", latlng: [46, 2], hello: "Bonjour", speakers: 80 },
+            { name: "Russian", country: "Russia", family: "Indo-European", branch: "East Slavic", latlng: [55, 37], hello: "Здравствуйте", speakers: 258 },
+            { name: "Turkish", country: "Turkey", family: "Altaic", branch: "Oghuz Turkic", latlng: [39, 35], hello: "Merhaba", speakers: 88 },
+            { name: "English", country: "England", family: "Indo-European", branch: "West Germanic", latlng: [51.5, -0.12], hello: "Hello", speakers: 1500 },
+            { name: "Italian", country: "Italy", family: "Indo-European", branch: "Western Romance", latlng: [41.9, 12.5], hello: "Ciao", speakers: 67 },
+            { name: "Spanish", country: "Spain", family: "Indo-European", branch: "Western Romance", latlng: [40.4, -3.7], hello: "Hola", speakers: 496 },
+            { name: "Dutch", country: "Netherlands", family: "Indo-European", branch: "West Germanic", latlng: [52.3, 4.9], hello: "Hallo", speakers: 23 },
+            { name: "Polish", country: "Poland", family: "Indo-European", branch: "West Slavic", latlng: [52.2, 21], hello: "Cześć", speakers: 45 },
+            { name: "Hungarian", country: "Hungary", family: "Uralic", branch: "Ugric", latlng: [47.1, 19.5], hello: "Szia", speakers: 13 },
+            { name: "Georgian", country: "Georgia", family: "Kartvelian", branch: "South Caucasian", latlng: [42, 43.4], hello: "გამარჯობა", speakers: 4 }
+        ];
+
+
+
+        const languageList = document.getElementById('language-list');
+
+        Object.keys(languageFamilies).forEach(family => {
+            const div = document.createElement('div');
+            div.className = 'language-item';
+            div.innerHTML = `<div class='color-box' style='flex-direction= column; background:${languageFamilies[family]}'></div> ${family} languages family`;
+            languageList.appendChild(div);
+        });
+        // Adding markers for languages
+        languages.forEach(lang => {
+            const marker = L.circleMarker(lang.latlng, {
+                radius: 8,
+                color: 'white',
+                fillColor: languageFamilies[lang.family],
+                fillOpacity: 0.8
+            }).addTo(map);
+
+            marker.on('click', () => {
+                showInfoBox(lang); // **Infobox Açılıyor**
+            });
+
+        });
+
+
+        function speak(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang || "auto";
+
+            if (lang === "ka-GE" && !voices.some(voice => voice.lang === "ka-GE")) {
+                console.warn("Gürcüce ses desteği bulunamadı, İngilizce kullanılıyor.");
+                utterance.lang = "en-GB"; // İngilizce alternatif
+            } else {
+                utterance.lang = lang;
+            }
+
+            speechSynthesis.speak(utterance);
+        }
+
+    </script>
+    <script>
+        // Function to show hologram on hover
+        function showHologram(lang, event) {
+            clearTimeout(closeTimeout);
+            const hologramBox = document.getElementById('hologram-info');
+            const mapContainer = document.getElementById('map');
+
+            // Bilgileri güncelle
+            document.getElementById('hologram-title').innerText = lang.country;
+            document.getElementById('hologram-language').innerText = `Language Family: ${lang.family}`;
+            document.getElementById('hologram-flag').src = `https://flagcdn.com/w320/${getCountryCode(lang.country)}.png`;
+            document.getElementById('hologram-map').src = `maps/${getCountryMapFileName(lang.country)}`;
+            // Bilgi kutusunu aç
+            hologramBox.style.display = 'block';
+
+
+            let posX = event.containerPoint.x + 20;
+            let posY = event.containerPoint.y - (hologramBox.offsetHeight / 2);
+
+            // **Mobil cihazlar için merkezi konumlandırma**
+            if (window.innerWidth < 768) {
+                posX = window.innerWidth / 2 - (hologramBox.offsetWidth / 2);
+                posY = window.innerHeight / 2 - (hologramBox.offsetHeight / 2);
+            }
+
+            // **Ekran sınırlarını kontrol etme**
+            if (posX + hologramBox.offsetWidth > mapContainer.clientWidth) {
+                posX = event.containerPoint.x - hologramBox.offsetWidth - 20;
+            }
+            if (posY < 10) {
+                posY = 10;
+            }
+            if (posY + hologramBox.offsetHeight > mapContainer.clientHeight) {
+                posY = mapContainer.clientHeight - hologramBox.offsetHeight - 10;
+            }
+
+            hologramBox.style.left = `${posX}px`;
+            hologramBox.style.top = `${posY}px`;
+        }
+
+        // Function to get flag codes of countries
+        function getCountryCode(country) {
+            const countryCodes = {
+                "Germany": "de",
+                "France": "fr",
+                "Russia": "ru",
+                "Turkey": "tr",
+                "England": "gb",
+                "Italy": "it",
+                "Spain": "es",
+                "Netherlands": "nl",
+                "Poland": "pl",
+                "Hungary": "hu",
+                "Georgia": "ge"
+            };
+
+            return countryCodes[country] || "xx";
+        }
+
+        // Function to get map file names of countries
+        function getCountryMapFileName(country) {
+            const countryMapNames = {
+                "Germany": "germany map.png",
+                "France": "france map.png",
+                "Turkey": "turkey map.png",
+                "Russia": "russia map.png",
+                "Netherlands": "netherlands map.png",
+                "Italy": "italy map.png",
+                "Poland": "poland map.png",
+                "Spain": "spain map.png",
+                "England": "england map.png",
+                "Hungary": "hungary map.png",
+                "Georgia": "georgia map.png"
+            };
+
+            return countryMapNames[country] || "default.png";
+        }
+
+
+
+        let closeTimeout;
+        // Function to close hologram
+        function closeHologram() {
+            closeTimeout = setTimeout(() => {
+                document.getElementById('hologram-info').style.display = 'none';
+            }, 500); // 0.5 saniye beklet
+        }
+
+
+
+        languages.forEach(lang => {
+            const marker = L.circleMarker(lang.latlng, {
+                radius: 8,
+                color: 'white',
+                fillColor: languageFamilies[lang.family],
+                fillOpacity: 0.8
+            }).addTo(map);
+
+            const popupContent = `<strong>${lang.name}</strong><br>Ülke: ${lang.country}<br><em>Merhaba: ${lang.hello}</em><br>
+        <button class='speak-btn' onclick='speak("${lang.hello}", "${getLanguageCode(lang.name)}")'>Speak</button>`;
+
+
+            marker.on('mouseover', (event) => {
+                showHologram(lang, event);
+            });
+
+            marker.on('mouseout', () => {
+                closeHologram();
+            });
+            marker.on('click', (event) => {
+                showInfoBox(lang);
+                speak(lang.hello, getLanguageCode(lang.name));
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
